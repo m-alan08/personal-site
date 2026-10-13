@@ -12,3 +12,5 @@
 - Astro CLI telemetry is disabled in the npm scripts. Its first build attempted a preferences write outside the workspace; disabling telemetry fixes this without modifying the system. An initial formatting attempt preceded completed installation and was rerun successfully after npm install finished.
 
 - Open Graph previews are deterministic SVG compositions rasterized locally to 1200 by 630 PNGs by Sharp during Astro static generation. They use system sans-serif at build time, with no network services or browser runtime. Sharp is a direct build dependency rather than relying on Astro transitive internals.
+
+- Browser QA uses the installed Chrome with a fresh temporary profile via playwright-core, and axe is injected only into the audit page. No audit code ships to visitors. Full keyboard and viewport assertions supplement automated accessibility scans. No browsers or global packages are installed.

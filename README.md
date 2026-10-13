@@ -71,3 +71,7 @@ The Portfolio checks workflow runs `npm ci`, lint, format verification, and buil
 ## Internal links
 
 `npm run build` also runs `npm run check:links`. The dependency-free checker validates all generated HTML links, asset references, share-image URLs, sitemap URLs, and local fragment targets against files in `dist/`. It honors the configured base path and fails on missing targets or empty references. External URLs are verified separately during QA; they are not fetched by the offline build check.
+
+## Browser verification
+
+After a build, start `npm run preview -- --host 127.0.0.1 --port 4322`, then run `npm run audit:browser`. The audit uses an installed Chrome browser with a fresh temporary profile; it does not download a browser or use your existing browsing profile. Set `CHROME_PATH` if Chrome is installed elsewhere, and `QA_ORIGIN` if preview uses another origin. It checks every route at 360px, 768px, and 1280px in light and dark mode with axe, keyboard, overflow, script, metadata, reduced-motion, and print assertions. Reports and screenshots stay in ignored `reports/`. Browser tooling is development-only.

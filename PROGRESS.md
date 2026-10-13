@@ -20,7 +20,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] GitHub Actions checks
 - [x] Automated internal link checks
 - [x] Accessible interaction and print polish
-- [ ] Full accessibility pass
+- [x] Full accessibility pass
 - [ ] Mobile Lighthouse pass
 - [ ] Cleanup and responsive color-scheme verification
 
@@ -92,3 +92,9 @@ The first link-check run caught Astro generating a /404/ metadata URL while the 
 ### Interaction and print polish
 
 Internal link checks committed as ef9cff1. Added a keyboard-visible skip link, clear hover and focus feedback, context in project-note link names, smooth scrolling only when motion is allowed, and readable print output with external URLs. The first GitHub Actions run completed successfully.
+
+### Accessibility and browser verification
+
+Interaction polish committed as 07cd669. A production Chrome audit passed all 48 combinations: 8 pages, 3 widths (360px, 768px, 1280px), and both system color schemes. Zero axe WCAG/best-practice violations, overflow, console errors, or executable production scripts. Heading order, landmarks, keyboard order, focus, 44px hit areas, skip link, unique metadata, JSON-LD, reduced motion, and print assertions passed. Minimum link widths were adjusted to 44px. Light and dark screenshots were generated for every combination; desktop and mobile home screenshots were visually reviewed.
+
+Both configured external destinations (GitHub profile and quantrl-fetch repository) returned HTTP 200. Negative internal-link tests correctly rejected a missing file, a missing fragment, and an empty href using isolated temporary build copies. Reports are local in ignored reports/.

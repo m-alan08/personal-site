@@ -8,7 +8,7 @@ const currentPath = Astro.url.pathname;
   <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-2 px-6 py-5 sm:px-10">
     <a
       href={localPath()}
-      class="inline-flex min-h-11 items-center text-lg font-semibold tracking-tight"
+      class="inline-flex min-h-11 min-w-11 items-center text-lg font-semibold tracking-tight"
       aria-current={currentPath === localPath() ? "page" : undefined}
     >
       {site.name}
@@ -23,7 +23,7 @@ const currentPath = Astro.url.pathname;
           aria-current={
             currentPath.startsWith(localPath(item.path)) ? "page" : undefined
           }
-          class="inline-flex min-h-11 items-center text-base text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none aria-[current=page]:font-semibold aria-[current=page]:text-ink"
+          class="inline-flex min-h-11 min-w-11 items-center text-base text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none aria-[current=page]:font-semibold aria-[current=page]:text-ink"
         >
           {item.label}
         </a>
