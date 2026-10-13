@@ -42,3 +42,55 @@ body {
   background: var(--accent);
   color: var(--canvas);
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+    --canvas: #ffffff;
+    --surface: #ffffff;
+    --ink: #000000;
+    --muted: #000000;
+    --accent: #000000;
+    --line: #777777;
+  }
+  header,
+  footer {
+    display: none;
+  }
+  body {
+    font-size: 12pt;
+  }
+  main {
+    max-width: none;
+    padding: 0;
+  }
+  article,
+  aside {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  a[href^="https://"]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    overflow-wrap: anywhere;
+  }
+  a {
+    text-decoration: underline;
+  }
+}

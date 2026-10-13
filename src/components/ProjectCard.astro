@@ -14,7 +14,12 @@ const { project, heading: Heading = "h2" } = Astro.props;
   <div>
     <p class="font-medium text-accent">{project.ownership}</p>
     <Heading class="mt-2 text-2xl font-semibold leading-snug tracking-tight">
-      {project.title}
+      <a
+        href={localPath(`projects/${project.slug}/`)}
+        class="inline-block min-h-11 py-1 transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+      >
+        {project.title}
+      </a>
     </Heading>
     <p class="mt-3 text-muted">{project.status}</p>
   </div>
@@ -36,6 +41,7 @@ const { project, heading: Heading = "h2" } = Astro.props;
     <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
       <TextLink href={localPath(`projects/${project.slug}/`)}>
         {labels.readNotes}
+        <span class="sr-only">: {project.title}</span>
       </TextLink>
       {project.repository ? (
         <TextLink href={project.repository}>{labels.repository}</TextLink>

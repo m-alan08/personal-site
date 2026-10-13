@@ -19,7 +19,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Person and website JSON-LD
 - [x] GitHub Actions checks
 - [x] Automated internal link checks
-- [ ] Accessible interaction and print polish
+- [x] Accessible interaction and print polish
 - [ ] Full accessibility pass
 - [ ] Mobile Lighthouse pass
 - [ ] Cleanup and responsive color-scheme verification
@@ -88,3 +88,7 @@ Structured data committed as 0b032ab. A read-only GitHub Actions workflow instal
 CI workflow committed as 688e2d9. The offline build now validates generated pages, asset URLs, share images, sitemap entries, and fragment targets without another dependency. CI inherits the check through npm run build.
 
 The first link-check run caught Astro generating a /404/ metadata URL while the actual output is 404.html. The shared layout now points the non-indexed error page metadata at its real static file, and the check is rerun before this step is committed.
+
+### Interaction and print polish
+
+Internal link checks committed as ef9cff1. Added a keyboard-visible skip link, clear hover and focus feedback, context in project-note link names, smooth scrolling only when motion is allowed, and readable print output with external URLs. The first GitHub Actions run completed successfully.
