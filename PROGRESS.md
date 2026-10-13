@@ -1,6 +1,12 @@
 # Progress
 
-Implementation in progress. No deployment has been performed. Lighthouse has not run yet.
+Both requested implementation phases are complete and pushed directly to main. The static site has eight pages, seven indexable routes, verified project content, a resume fallback, generated share images, structured data, CI, and offline link checks. AGENTS.md is unchanged.
+
+Real mobile Lighthouse 13.5.0 scores on every indexed page: **Performance 100, Accessibility 100, Best Practices 100, SEO 100**. These are local production-preview measurements. The intentionally noindex 404 is excluded from SEO scoring and included in browser QA.
+
+Final checks passed: build with zero errors, warnings, and hints; lint with zero warnings; Prettier format verification; 141 internal references across eight pages; and all 48 page/viewport/color combinations with zero axe violations, horizontal overflow, executable site scripts, or console errors. The latest implementation CI run passed. Maximum non-image page weight is 24,572 bytes before compression. Cleanup and link centralization preserved all 19 audited production files byte for byte.
+
+Not deployed, as instructed. Email, X, resume PDF, and an identifiable armlab repository URL remain missing; the pages handle these gaps. The canonical origin is provisional. Next task: supply these owner inputs, confirm the host, and authorize deployment separately.
 
 ## Phase 1
 
@@ -116,3 +122,43 @@ The documented alternate build inputs were tested with a temporary .example orig
 ### Central link review
 
 Cleanup committed as fe7436d and its CI completed successfully. Final source review moved repeated internal route, asset, social, and repository fragment construction into links.ts so Astro markup consumes central link data throughout. No visitor-facing content or routes change. Output hashes are verified against the Lighthouse build before this refactor is committed.
+
+## Final command results
+
+- `npm install`: passed, lockfile current, zero reported vulnerabilities.
+- `npm run dev`: passed, local home page returned HTTP 200 at the printed URL.
+- `npm run build`: passed, strict Astro and TypeScript checks had zero errors, warnings, or hints; eight static HTML pages and seven share images were emitted; internal checks passed.
+- `npm run preview`: passed, production preview served all routes for browser and Lighthouse audits.
+- `npm run lint`: passed with zero warnings.
+- `npm run format`: passed; original AGENTS.md was excluded deliberately.
+- `npm run format:check`: passed on the final source and documents.
+- `npm run check:links`: passed, 141 references with sitemap, image, asset, and fragment validation.
+- `npm run audit:browser`: passed twice across the full 48-combination matrix, including the final cleaned source.
+- `npm run audit:lighthouse`: final pass was 100 in all four categories on all seven indexed routes.
+- Alternate root-base build and default-base restoration: passed with unchanged final output hashes.
+- External GitHub destinations: HTTP 200 for both configured URLs.
+- Source text audit and attachment comparison: passed, no comments or em dashes in source, and AGENTS.md exactly matches the original attachment.
+- GitHub Actions: implementation commit 8cc4b2e passed [Portfolio checks](https://github.com/m-alan08/personal-site/actions/runs/38327703822).
+
+## Commits pushed during this run
+
+- `12d56d8` chore: scaffold Astro and quality tooling
+- `a106268` feat: add shared layout and system color themes
+- `277047a` feat: add verified portfolio copy and project data
+- `01f2ebc` feat: build the core portfolio pages
+- `6113e90` feat: add static SEO metadata and discovery files
+- `e72e2aa` fix: add Node types for strict build configuration
+- `a4a01ef` docs: document setup and static site maintenance
+- `87f4b1b` feat: generate project detail pages from project data
+- `8f71046` feat: add resume page with a missing-file fallback
+- `f8df1ca` feat: generate Open Graph preview images at build time
+- `0b032ab` feat: add person and website structured data
+- `688e2d9` ci: check install lint format and build on main
+- `ef9cff1` test: validate internal links during the static build
+- `07cd669` style: polish keyboard motion and print behavior
+- `42b6b5d` test: audit accessibility and responsive page behavior
+- `67d5c79` test: measure mobile Lighthouse scores for indexed pages
+- `fe7436d` chore: remove unused fields and verify final site quality
+- `8cc4b2e` refactor: centralize portfolio route and social links
+
+The final summary is committed separately as `docs: record final website checks and completion`. Its hash is the final main HEAD; the preceding implementation commits are listed above.
