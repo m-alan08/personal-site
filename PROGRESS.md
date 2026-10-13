@@ -16,7 +16,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Project detail pages
 - [x] Resume page and missing-file fallback
 - [x] Build-time Open Graph images
-- [ ] Person and website JSON-LD
+- [x] Person and website JSON-LD
 - [ ] GitHub Actions checks
 - [ ] Automated internal link checks
 - [ ] Accessible interaction and print polish
@@ -74,3 +74,7 @@ Project details committed as 87f4b1b. Resume navigation is visible and the page 
 ### Open Graph images
 
 Resume committed as 8f71046. Every indexed route has a locally generated 1200 by 630 PNG. Shared route data drives both sitemap and image generation, including new projects. Head tags include image dimensions and alt text for Open Graph and Twitter.
+
+### Structured data
+
+Share images committed as f8df1ca. Indexed pages emit a linked Person, WebSite, and WebPage graph using only verified name, GitHub, academic affiliation, and research topics. Missing email and X are excluded. JSON is escaped for safe embedding and is data, not executable client JavaScript.

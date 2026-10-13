@@ -3,6 +3,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { site } from "../content/site";
 import "../styles/global.css";
+import { structuredData } from "../data/structuredData";
 import { sharePages } from "../data/routes";
 import { localPath } from "../data/links";
 interface Props {
@@ -22,6 +23,13 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
 <!doctype html>
 <html lang="en">
   <head>
+    {!noindex && Astro.site && (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={structuredData(Astro.site, canonical, pageTitle, description)}
+      />
+    )}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
