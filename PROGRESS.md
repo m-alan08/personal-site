@@ -9,7 +9,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Verified data and copy
 - [x] Home, projects, about, contact, and 404
 - [x] SEO, favicon, sitemap, robots
-- [ ] Setup README
+- [x] Setup README
 
 ## Phase 2
 
@@ -58,3 +58,7 @@ Core pages committed as 01f2ebc. Each page has a unique title and description, c
 ### SEO type-check correction
 
 SEO commit 6113e90 was pushed before a completed checker result was inspected. The checker reported two missing-process type errors in hosting.ts. A direct import alone still lacked Node declarations; adding @types/node resolves the strict type errors. All later commits gate Git operations in the same command sequence as successful build, lint, and format checks. No history is rewritten.
+
+### README and phase 1 handoff
+
+SEO type correction committed as e72e2aa with all checks passing. README documents setup, all required commands, content maintenance, static output, and provisional canonical configuration. npm run dev served the home page successfully at http://127.0.0.1:4321/personal-site/. Phase 1 implementation is complete; deployment and missing owner inputs remain the explicit exceptions. Phase 2 follows after this step is pushed.
