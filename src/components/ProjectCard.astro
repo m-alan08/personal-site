@@ -1,6 +1,7 @@
 ---
 import type { Project } from "../data/projects";
 import { labels } from "../content/site";
+import { localPath } from "../data/links";
 import TextLink from "./TextLink.astro";
 interface Props {
   project: Project;
@@ -32,7 +33,10 @@ const { project, heading: Heading = "h2" } = Astro.props;
         ))}
       </ul>
     )}
-    <div class="mt-4">
+    <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+      <TextLink href={localPath(`projects/${project.slug}/`)}>
+        {labels.readNotes}
+      </TextLink>
       {project.repository ? (
         <TextLink href={project.repository}>{labels.repository}</TextLink>
       ) : (

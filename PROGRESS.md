@@ -13,7 +13,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 
 ## Phase 2
 
-- [ ] Project detail pages
+- [x] Project detail pages
 - [ ] Resume page and missing-file fallback
 - [ ] Build-time Open Graph images
 - [ ] Person and website JSON-LD
@@ -62,3 +62,7 @@ SEO commit 6113e90 was pushed before a completed checker result was inspected. T
 ### README and phase 1 handoff
 
 SEO type correction committed as e72e2aa with all checks passing. README documents setup, all required commands, content maintenance, static output, and provisional canonical configuration. npm run dev served the home page successfully at http://127.0.0.1:4321/personal-site/. Phase 1 implementation is complete; deployment and missing owner inputs remain the explicit exceptions. Phase 2 follows after this step is pushed.
+
+### Project detail pages
+
+Phase 1 handoff committed as a4a01ef. Project routes, notes, source provenance, contribution panels, and the sitemap derive from projects.ts. Both ownership labels remain explicit. Adding a project requires one data entry.
