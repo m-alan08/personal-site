@@ -8,7 +8,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Base layout, navigation, footer, system color preference
 - [x] Verified data and copy
 - [x] Home, projects, about, contact, and 404
-- [ ] SEO, favicon, sitemap, robots
+- [x] SEO, favicon, sitemap, robots
 - [ ] Setup README
 
 ## Phase 2
@@ -50,3 +50,7 @@ Layout committed as a106268. Centralized copy, labels, empty personal fields, pr
 ### V1 pages
 
 Verified data committed as 277047a. Five pages compose shared components; ProjectCard reads projects.ts. Empty email and X fields are omitted from social links, and contact explains the missing email. Team ownership is prominent.
+
+### SEO
+
+Core pages committed as 01f2ebc. Each page has a unique title and description, canonical and Open Graph URL, Twitter metadata, favicon, generated sitemap.xml, and robots.txt. The 404 is noindex and excluded from the sitemap. Canonicals target a provisional GitHub Pages URL; no host was configured or deployed.
