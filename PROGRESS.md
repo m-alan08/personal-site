@@ -54,3 +54,7 @@ Verified data committed as 277047a. Five pages compose shared components; Projec
 ### SEO
 
 Core pages committed as 01f2ebc. Each page has a unique title and description, canonical and Open Graph URL, Twitter metadata, favicon, generated sitemap.xml, and robots.txt. The 404 is noindex and excluded from the sitemap. Canonicals target a provisional GitHub Pages URL; no host was configured or deployed.
+
+### SEO type-check correction
+
+SEO commit 6113e90 was pushed before a completed checker result was inspected. The checker reported two missing-process type errors in hosting.ts. A direct import alone still lacked Node declarations; adding @types/node resolves the strict type errors. All later commits gate Git operations in the same command sequence as successful build, lint, and format checks. No history is rewritten.
