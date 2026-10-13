@@ -8,7 +8,6 @@ export interface Project {
   scope: string;
   technology: string[];
   repository: string;
-  simulationOnly: boolean;
   writeup: string[];
   sourceNote: string;
 }
@@ -33,7 +32,6 @@ export const projects: Project[] = [
       "HER",
     ],
     repository: "https://github.com/m-alan08/quantrl-fetch",
-    simulationOnly: true,
     writeup: [
       "This project asks how far a policy's actor network can be reduced in precision before its control behavior suffers. The experiments use a simulated Fetch robot arm, rather than hardware.",
       "I implemented Soft Actor-Critic and Hindsight Experience Replay in PyTorch. The README reports completed fp32 FetchReach baselines and a written and tested quantization module. Quantization evaluation results are still pending.",
@@ -54,7 +52,6 @@ export const projects: Project[] = [
       "My part is policy ideas and implementation for RL post-training. The broader robot arm project is a team effort.",
     technology: [],
     repository: "",
-    simulationOnly: false,
     writeup: [
       "This is a team robot arm project referred to as armlab. My contribution is RL post-training policy ideas and implementation.",
       "These notes describe my part of the work. They do not claim ownership of the arm, the broader system, or the team's results.",

@@ -16,3 +16,5 @@
 - Browser QA uses the installed Chrome with a fresh temporary profile via playwright-core, and axe is injected only into the audit page. No audit code ships to visitors. Full keyboard and viewport assertions supplement automated accessibility scans. No browsers or global packages are installed.
 
 - Lighthouse runs sequentially with real mobile settings against production preview to avoid competing browser workloads. The 404 stays noindex; SEO scores are reported for the seven indexable routes, while all eight routes receive the full accessibility and responsive audit. Charset is the first head element after Lighthouse identified its prior ordering.
+
+- Final cleanup removes only unused data properties. Production output hashes are identical before and after cleanup, so the final Lighthouse reports describe exactly the shipped static output. Root-host and GitHub Pages base paths were both build-tested locally; no deployment or host settings were changed. The configured app project list did not resolve armlab, so its link remains empty.

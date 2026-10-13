@@ -22,7 +22,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Accessible interaction and print polish
 - [x] Full accessibility pass
 - [x] Mobile Lighthouse pass
-- [ ] Cleanup and responsive color-scheme verification
+- [x] Cleanup and responsive color-scheme verification
 
 ## Missing inputs and skipped work
 
@@ -104,3 +104,11 @@ Both configured external destinations (GitHub profile and quantrl-fetch reposito
 Accessibility tooling committed as 42b6b5d. Initial Lighthouse 13.5.0 scores on all seven indexed routes were Performance 100, Accessibility 100, Best Practices 96, and SEO 100. Lighthouse flagged the charset declaration after JSON-LD; charset is now the first head element and the full mobile audit is rerunning. The noindex 404 is covered by browser QA rather than misleading SEO scoring.
 
 Final Lighthouse 13.5.0 results: all seven indexed pages scored 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO. Mobile emulation was 412 by 823 at 1.75 device scale, simulated 150ms RTT, 1638.4 Kbps throughput, and 4x CPU slowdown. These are real local production-preview scores, not measurements of a deployed host. Every page had zero measured CLS. Full JSON and HTML reports are in reports/lighthouse/.
+
+### Final cleanup in progress
+
+Lighthouse tooling and the charset fix committed as 67d5c79. Removed unused copy fields and an unused simulation flag; simulation limitations remain explicit in project descriptions. All direct dependencies have a build, type, format, lint, image, or requested audit purpose. TypeScript is pinned to the already installed 6.0.3 for consistency with the other exact tooling versions. AGENTS.md remains byte-for-byte identical to the supplied attachment.
+
+Final cleanup verification passed: the full 48-combination browser audit passed again after cleanup. Every one of the 19 production files was byte-for-byte identical to the final 100-score Lighthouse build. The largest page is 10,512 bytes of HTML plus 14,060 bytes of shared CSS (24,572 bytes before compression, excluding images), below the 200KB limit. There are no executable JavaScript files in dist/. Source comments and em dashes are absent, the original AGENTS.md comparison passed, and npm install reported zero vulnerabilities.
+
+The documented alternate build inputs were tested with a temporary .example origin and a root base path. Canonicals, navigation, share images, sitemap, and all internal links passed. The default GitHub Pages build was restored and all production hashes matched the audited output. This test changed no hosting settings. The configured app projects were also inspected and did not identify an armlab repository.

@@ -14,8 +14,6 @@ export const site = {
   focus: ["Policy precision in simulation", "RL post-training for robot arms"],
   selectedProjects: "Selected projects",
   allProjects: "All projects",
-  aboutHeading: "A little background",
-  aboutLink: "More about me",
 };
 
 export const navigation = [
@@ -41,7 +39,6 @@ export const labels = {
   source: "Source and scope",
   readme: "Project README",
   readNotes: "Read project notes",
-  simulation: "Simulation only",
 };
 
 export const pages = {
