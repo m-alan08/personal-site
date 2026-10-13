@@ -7,7 +7,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Scaffold, tooling, scripts
 - [x] Base layout, navigation, footer, system color preference
 - [x] Verified data and copy
-- [ ] Home, projects, about, contact, and 404
+- [x] Home, projects, about, contact, and 404
 - [ ] SEO, favicon, sitemap, robots
 - [ ] Setup README
 
@@ -46,3 +46,7 @@ Scaffold committed as 12d56d8. Shared head tags, responsive header and footer, f
 ### Verified data
 
 Layout committed as a106268. Centralized copy, labels, empty personal fields, project ownership, simulation limitations, and source provenance. quantrl-fetch README revision fdb626677cc99cfdc891e52c6d184668057a4dab informed the solo project. No pending quantization results are presented as completed.
+
+### V1 pages
+
+Verified data committed as 277047a. Five pages compose shared components; ProjectCard reads projects.ts. Empty email and X fields are omitted from social links, and contact explains the missing email. Team ownership is prominent.

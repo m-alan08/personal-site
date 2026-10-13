@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import TextLink from "../components/TextLink.astro";
+import { pages } from "../content/site";
+import { localPath } from "../data/links";
+---
+
+<BaseLayout
+  title={pages.notFound.title}
+  description={pages.notFound.meta}
+  noindex
+>
+  <PageIntro
+    title={pages.notFound.title}
+    description={pages.notFound.description}
+  />
+  <TextLink href={localPath()}>{pages.notFound.home}</TextLink>
+</BaseLayout>

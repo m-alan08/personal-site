@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import { pages } from "../content/site";
+import { links } from "../data/links";
+---
+
+<BaseLayout title={pages.contact.title} description={pages.contact.meta}>
+  <PageIntro
+    title={pages.contact.title}
+    description={pages.contact.description}
+  />
+  <div class="max-w-reading space-y-4">
+    {!links.email && <p>{pages.contact.missingEmail}</p>}
+    <p class="text-muted">{pages.contact.githubText}</p>
+    <SocialLinks />
+  </div>
+</BaseLayout>

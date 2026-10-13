@@ -1,0 +1,14 @@
+---
+import { projects } from "../data/projects";
+import ProjectCard from "./ProjectCard.astro";
+interface Props {
+  heading?: "h2" | "h3";
+}
+const { heading = "h2" } = Astro.props;
+---
+
+<div>
+  {projects.map((project) => (
+    <ProjectCard project={project} heading={heading} />
+  ))}
+</div>

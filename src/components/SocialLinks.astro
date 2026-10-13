@@ -1,0 +1,23 @@
+---
+import { labels } from "../content/site";
+import { links } from "../data/links";
+import TextLink from "./TextLink.astro";
+const socialLinks = [
+  { label: labels.github, href: links.github },
+  {
+    label: labels.x,
+    href: links.xHandle
+      ? `https://x.com/${links.xHandle.replace(/^@/, "")}`
+      : "",
+  },
+  { label: labels.email, href: links.email ? `mailto:${links.email}` : "" },
+].filter((link) => link.href);
+---
+
+<ul class="flex flex-wrap gap-x-7 gap-y-2" role="list">
+  {socialLinks.map((link) => (
+    <li>
+      <TextLink href={link.href}>{link.label}</TextLink>
+    </li>
+  ))}
+</ul>

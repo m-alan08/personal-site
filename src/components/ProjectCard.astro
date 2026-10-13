@@ -1,0 +1,43 @@
+---
+import type { Project } from "../data/projects";
+import { labels } from "../content/site";
+import TextLink from "./TextLink.astro";
+interface Props {
+  project: Project;
+  heading?: "h2" | "h3";
+}
+const { project, heading: Heading = "h2" } = Astro.props;
+---
+
+<article class="grid gap-6 border-t border-line py-9 md:grid-cols-[1fr_2fr] md:gap-12">
+  <div>
+    <p class="font-medium text-accent">{project.ownership}</p>
+    <Heading class="mt-2 text-2xl font-semibold leading-snug tracking-tight">
+      {project.title}
+    </Heading>
+    <p class="mt-3 text-muted">{project.status}</p>
+  </div>
+  <div>
+    <p class="text-xl font-medium leading-snug">{project.question}</p>
+    <p class="mt-4 max-w-reading">{project.summary}</p>
+    <p class="mt-3 max-w-reading text-muted">{project.scope}</p>
+    {project.technology.length > 0 && (
+      <ul
+        class="mt-5 flex flex-wrap gap-2"
+        aria-label={labels.technology}
+        role="list"
+      >
+        {project.technology.map((tool) => (
+          <li class="rounded-sm bg-surface px-3 py-1 text-base">{tool}</li>
+        ))}
+      </ul>
+    )}
+    <div class="mt-4">
+      {project.repository ? (
+        <TextLink href={project.repository}>{labels.repository}</TextLink>
+      ) : (
+        <p class="text-muted">{labels.repositoryMissing}</p>
+      )}
+    </div>
+  </div>
+</article>

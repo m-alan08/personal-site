@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import ProjectList from "../components/ProjectList.astro";
+import { pages } from "../content/site";
+---
+
+<BaseLayout title={pages.projects.title} description={pages.projects.meta}>
+  <PageIntro
+    title={pages.projects.title}
+    description={pages.projects.description}
+  />
+  <ProjectList />
+</BaseLayout>
