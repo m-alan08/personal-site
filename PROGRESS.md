@@ -162,3 +162,23 @@ Cleanup committed as fe7436d and its CI completed successfully. Final source rev
 - `8cc4b2e` refactor: centralize portfolio route and social links
 
 The final summary is committed separately as `docs: record final website checks and completion`. Its hash is the final main HEAD; the preceding implementation commits are listed above.
+
+## Round 2
+
+Goal: add verified hackathon projects and case studies, refine the dark portfolio, and prove quality through screenshots, keyboard tests, accessibility and mobile Lighthouse.
+
+- [x] Read AGENTS and the full round-two request; inspect the current checkout.
+- [x] Confirm both hackathon repositories are public and resolve their renamed URLs.
+- [x] Dark foundation, lazy keyboard command palette, npm test and CI tests.
+- [ ] Four projects in one data shape with verified case-study sections and diagrams.
+- [ ] Home hackathon section and Projects timeline/filter.
+- [ ] Illustrative hero and lazy force-directed connection graph.
+- [ ] Three complete screenshot and critique passes at 360px, 768px and 1280px.
+- [ ] Throttled interaction checks, accessibility, links and mobile Lighthouse >=95.
+- [ ] Final cleanup, full checks, summary and push.
+
+### Foundation in progress
+
+Added a dark-only palette and lazy native-dialog command navigation. Smoke tests use existing Playwright tooling, serve built output locally and check every page, one h1, browser errors, keyboard open/close, filtering and restored focus. Existing CI will install its test browser and run npm test after build. No new dependencies or deployment changes.
+
+Foundation validation: build, lint, format check and all 8 Playwright smoke tests passed. Mobile Lighthouse on all 7 indexed routes scored 100 in Performance, Accessibility, Best Practices and SEO. The initial preview used a localhost-only binding; explicit IPv4 loopback hosts resolved the readiness and audit failure. No product error remained.

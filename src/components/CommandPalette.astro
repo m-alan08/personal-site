@@ -1,0 +1,74 @@
+---
+import { palette, navigation } from "../content/site";
+import { projects } from "../data/projects";
+import { localLinks, localPath, projectLink } from "../data/links";
+const entries = [
+  { label: palette.home, href: localLinks.home },
+  ...navigation.map((item) => ({
+    label: item.label,
+    href: localPath(item.path),
+  })),
+  ...projects.map((project) => ({
+    label: project.title,
+    href: projectLink(project.slug),
+  })),
+];
+---
+
+<dialog id="command-palette" aria-labelledby="palette-title">
+  <div class="flex items-center justify-between gap-4">
+    <h2 id="palette-title" class="text-xl font-semibold">
+      {palette.title}
+    </h2>
+    <button
+      type="button"
+      data-palette-close
+      class="min-h-11 min-w-11 px-3 text-accent"
+    >
+      {palette.close}
+    </button>
+  </div>
+  <label for="palette-query" class="mt-5 block text-muted">
+    {palette.search}
+  </label>
+  <input
+    id="palette-query"
+    type="search"
+    autocomplete="off"
+    class="mt-2 min-h-11 w-full rounded-md border border-line bg-canvas px-3 text-ink"
+  />
+  <ul class="mt-4" role="list">
+    {entries.map((entry) => (
+      <li data-palette-entry>
+        <a
+          href={entry.href}
+          class="flex min-h-11 rounded-md px-3 py-2 hover:bg-canvas"
+        >
+          {entry.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p data-palette-empty hidden role="status" class="mt-4 text-muted">
+    {palette.empty}
+  </p>
+</dialog>
+<script>
+  const openPalette = async (event: Event) => {
+    const { open } = await import("../scripts/palette");
+    open(
+      event.currentTarget instanceof HTMLElement
+        ? event.currentTarget
+        : document.activeElement,
+    );
+  };
+  document
+    .querySelector<HTMLButtonElement>("[data-palette-open]")
+    ?.addEventListener("click", openPalette);
+  document.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+      event.preventDefault();
+      void openPalette(event);
+    }
+  });
+</script>

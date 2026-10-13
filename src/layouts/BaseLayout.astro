@@ -1,5 +1,6 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
+import CommandPalette from "../components/CommandPalette.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { site } from "../content/site";
 import "../styles/global.css";
@@ -36,7 +37,7 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
     )}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark" />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{pageTitle}</title>
     <link rel="canonical" href={canonical} />
@@ -79,5 +80,6 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
       <slot />
     </main>
     <SiteFooter />
+    <CommandPalette />
   </body>
 </html>

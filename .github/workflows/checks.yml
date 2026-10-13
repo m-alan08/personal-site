@@ -34,3 +34,7 @@ jobs:
         run: npm run format:check
       - name: Build static site
         run: npm run build
+      - name: Install test browser
+        run: npx playwright-core install --with-deps chromium
+      - name: Smoke test every page
+        run: npm test

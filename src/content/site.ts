@@ -82,3 +82,13 @@ export const pages = {
     home: "Return home",
   },
 };
+
+export const palette = {
+  trigger: "Find a page",
+  shortcut: "Ctrl or Command K",
+  title: "Find a page",
+  search: "Search pages and projects",
+  close: "Close",
+  empty: "No matching pages.",
+  home: "Home",
+};

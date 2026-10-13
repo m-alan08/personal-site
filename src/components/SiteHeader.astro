@@ -1,5 +1,5 @@
 ---
-import { navigation, site, labels } from "../content/site";
+import { navigation, site, labels, palette } from "../content/site";
 import { localPath, localLinks } from "../data/links";
 const currentPath = Astro.url.pathname;
 ---
@@ -29,5 +29,18 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
     </nav>
+    <button
+      type="button"
+      data-palette-open
+      aria-haspopup="dialog"
+      aria-controls="command-palette"
+      class="inline-flex min-h-11 items-center gap-3 rounded-md border border-line px-3 text-muted transition-colors hover:border-accent hover:text-ink motion-reduce:transition-none"
+    >
+      {palette.trigger}
+      <kbd aria-hidden="true" class="text-sm">
+        ⌘ K
+      </kbd>
+      <span class="sr-only">{palette.shortcut}</span>
+    </button>
   </div>
 </header>

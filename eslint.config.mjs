@@ -5,9 +5,16 @@ import astro from "eslint-plugin-astro";
 export default [
   { ignores: ["dist/**", ".astro/**", "node_modules/**", "reports/**"] },
   {
-    files: ["scripts/browser-audit.mjs"],
+    files: ["scripts/*.mjs", "src/scripts/*.ts"],
     languageOptions: {
       globals: {
+        HTMLElement: "readonly",
+        HTMLButtonElement: "readonly",
+        HTMLDialogElement: "readonly",
+        Event: "readonly",
+        IntersectionObserver: "readonly",
+        requestAnimationFrame: "readonly",
+        performance: "readonly",
         document: "readonly",
         window: "readonly",
         getComputedStyle: "readonly",

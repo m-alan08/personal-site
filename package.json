@@ -15,7 +15,8 @@
     "format:check": "prettier --check .",
     "check:links": "node scripts/check-links.mjs",
     "audit:browser": "node scripts/browser-audit.mjs",
-    "audit:lighthouse": "node scripts/lighthouse-audit.mjs"
+    "audit:lighthouse": "node scripts/lighthouse-audit.mjs",
+    "test": "node scripts/smoke-test.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
