@@ -2,16 +2,14 @@ export const site = {
   name: "Alan Mozhoor",
   title: "Alan Mozhoor | Reinforcement learning and AI/ML",
   description:
-    "Alan Mozhoor's reinforcement learning and robotics projects, with simulation work, project notes, and source code.",
+    "Alan Mozhoor's reinforcement learning, robotics, matching and cybersecurity projects, with case studies, clear team roles and source code.",
   introduction: "Reinforcement learning and AI/ML at Georgia Tech.",
   bio: [
     "I'm a Georgia Tech student focused on AI/ML, reinforcement learning, and research.",
-    "My work includes quantization-aware RL in simulation and RL post-training ideas and implementation for a team robot arm project.",
+    "My work spans quantization-aware RL in simulation, robot arm post-training, and team hackathon projects in matching and cybersecurity.",
   ],
   footer: "Reinforcement learning, robotics, and research.",
   skip: "Skip to content",
-  focusHeading: "What I'm working on",
-  focus: ["Policy precision in simulation", "RL post-training for robot arms"],
   selectedProjects: "Selected projects",
   allProjects: "All projects",
 };
@@ -32,13 +30,9 @@ export const labels = {
   repository: "View repository",
   repositoryMissing: "Repository link is not available yet.",
   technology: "Tools and methods",
-  technologyMissing: "A verified technology list is not available yet.",
   projectNotes: "Project notes",
-  contribution: "My contribution",
   backToProjects: "Back to projects",
   source: "Source and scope",
-  readme: "Project README",
-  readNotes: "Read project notes",
 };
 
 export const pages = {
@@ -51,10 +45,10 @@ export const pages = {
   about: {
     title: "About",
     description:
-      "I'm Alan, a Georgia Tech student working on reinforcement learning and AI/ML.",
+      "I build and study systems in reinforcement learning, matching, and security.",
     meta: "About Alan Mozhoor, a Georgia Tech student focused on AI/ML, reinforcement learning, and research.",
     workHeading: "My work",
-    work: "In my solo project, I study how low-bit precision affects a policy for a simulated Fetch robot arm. In the team robot arm project, my contribution is RL post-training policy ideas and implementation.",
+    work: "In my solo project, I study how low-bit precision affects a policy for a simulated Fetch robot arm. In the team robot arm project, my contribution is RL post-training policy ideas and implementation. For Constellation, I owned matching, ranking, and match explanations. For ZeroDay Arena, I led security workflows, agents, and the main application.",
     workLink: "Explore the projects",
   },
   contact: {
@@ -98,6 +92,7 @@ export const caseStudy = {
   role: "My role and contributions",
   approach: "The approach",
   stack: "Stack",
+  team: "Team",
   lessons: "What I learned",
   limitations: "Limitations and status",
   status: "Project status",

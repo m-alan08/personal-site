@@ -55,6 +55,79 @@ try {
         4,
       );
     }
+    if (path === server.paths[0]) {
+      await page.waitForFunction(
+        () =>
+          document.querySelector("[data-policy-hero]").dataset.ready === "true",
+      );
+      const edges = await page
+        .locator("[data-policy-weight]")
+        .evaluateAll((elements) =>
+          elements.map((element) => element.getAttribute("opacity")),
+        );
+      await page.locator('[data-policy-bits="2"]').click();
+      assert.equal(
+        await page
+          .locator('[data-policy-bits="2"]')
+          .getAttribute("aria-pressed"),
+        "true",
+      );
+      assert.notDeepEqual(
+        await page
+          .locator("[data-policy-weight]")
+          .evaluateAll((elements) =>
+            elements.map((element) => element.getAttribute("opacity")),
+          ),
+        edges,
+      );
+    }
+    if (path.endsWith("/constellation/")) {
+      assert.equal(await page.locator("[data-connection-graph]").count(), 1);
+      await page.locator("[data-connection-graph]").scrollIntoViewIfNeeded();
+      await page.waitForFunction(
+        () =>
+          document.querySelector("[data-connection-graph]").dataset.ready ===
+          "true",
+      );
+      const node = page.locator('[data-graph-node="0"]');
+      const initialPosition = await node.getAttribute("transform");
+      await page.locator('[data-graph-select="0"]').focus();
+      await page.keyboard.press("Space");
+      assert.equal(
+        await page
+          .locator('[data-graph-select="0"]')
+          .getAttribute("aria-pressed"),
+        "true",
+      );
+      assert.match(
+        await page.locator("[data-graph-status]").textContent(),
+        /Node A: 2 illustrative connections/,
+      );
+      assert.match(
+        await page.locator("[data-graph-status]").textContent(),
+        /Linked examples: B, C/,
+      );
+      assert.match(
+        await page.locator("#connection-graph-edges").textContent(),
+        /Example A connects to Example C/,
+      );
+      await page.keyboard.press("ArrowRight");
+      assert.notEqual(await node.getAttribute("transform"), initialPosition);
+      await page.locator("[data-graph-reset]").click();
+      assert.equal(await node.getAttribute("transform"), initialPosition);
+      const box = await node.boundingBox();
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(
+        box.x + box.width / 2 + 15,
+        box.y + box.height / 2 + 10,
+        { steps: 4 },
+      );
+      await page.mouse.up();
+      assert.notEqual(await node.getAttribute("transform"), initialPosition);
+      await page.locator("[data-graph-reset]").click();
+      assert.equal(await node.getAttribute("transform"), initialPosition);
+    }
     await page.locator("[data-palette-open]").focus();
     await page.keyboard.press("Control+k");
     await page.waitForFunction(

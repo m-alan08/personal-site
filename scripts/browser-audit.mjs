@@ -1,30 +1,38 @@
 import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { chromium } from "playwright-core";
+import { browserOptions, pagePaths } from "./test-server.mjs";
 
 const require = createRequire(import.meta.url);
 const axePath = require.resolve("axe-core/axe.min.js");
 const origin = process.env.QA_ORIGIN || "http://127.0.0.1:4322";
-const browser = await chromium.launch({
-  headless: true,
-  executablePath:
-    process.env.CHROME_PATH ||
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-});
-const sitemap = await readFile("dist/sitemap.xml", "utf8");
-const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
-  (match) => new URL(match[1]).pathname,
-);
-paths.push(`${paths[0]}404.html`);
-await mkdir("reports/screenshots", { recursive: true });
+const pass = process.env.QA_PASS || "final";
+const schemes =
+  process.env.QA_SCHEMES === "both" ? ["dark", "light"] : ["dark"];
+const browser = await chromium.launch(browserOptions());
+const paths = await pagePaths();
+const directory = `reports/screenshots/${pass}`;
+await mkdir(directory, { recursive: true });
 const results = [];
 const failures = [];
 const descriptions = new Set();
 const titles = new Set();
-
+const tags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"];
+async function scan(page, label) {
+  const audit = await page.evaluate(
+    async (values) =>
+      window.axe.run(document, { runOnly: { type: "tag", values } }),
+    tags,
+  );
+  assert.equal(
+    audit.violations.length,
+    0,
+    `${label}: ${JSON.stringify(audit.violations.map((violation) => ({ id: violation.id, nodes: violation.nodes.map((node) => node.target) })))}`,
+  );
+}
 try {
-  for (const colorScheme of ["light", "dark"]) {
+  for (const colorScheme of schemes) {
     for (const width of [360, 768, 1280]) {
       const context = await browser.newContext({
         viewport: { width, height: 900 },
@@ -32,27 +40,42 @@ try {
         reducedMotion: "reduce",
       });
       const page = await context.newPage();
-      const consoleErrors = [];
-      page.on("pageerror", (error) => consoleErrors.push(error.message));
-      page.on("console", (message) => {
-        if (message.type() === "error") consoleErrors.push(message.text());
-      });
       for (const path of paths) {
         const label = `${path} ${width}px ${colorScheme}`;
+        const errors = [];
+        const errorListener = (error) => errors.push(error.message);
+        const consoleListener = (message) => {
+          if (message.type() === "error") errors.push(message.text());
+        };
+        page.on("pageerror", errorListener);
+        page.on("console", consoleListener);
         try {
           const response = await page.goto(`${origin}${path}`, {
             waitUntil: "networkidle",
           });
-          assert.ok(
-            response && response.status() === 200,
-            `${label}: page did not load`,
-          );
+          assert.equal(response.status(), 200, `${label}: response`);
+          const graph = page.locator("[data-connection-graph]");
+          if (await graph.count()) {
+            await graph.scrollIntoViewIfNeeded();
+            await page.waitForFunction(
+              () =>
+                document.querySelector("[data-connection-graph]").dataset
+                  .ready === "true",
+            );
+            await page.evaluate(() => window.scrollTo(0, 0));
+          }
           const state = await page.evaluate(() => {
-            const headings = [
-              ...document.querySelectorAll("h1,h2,h3,h4,h5,h6"),
-            ].map((element) => Number(element.tagName.slice(1)));
-            const links = [...document.querySelectorAll("a")]
-              .filter((element) => !element.classList.contains("sr-only"))
+            const headings = [...document.querySelectorAll("h1,h2,h3,h4,h5,h6")]
+              .filter((element) => !element.closest("dialog"))
+              .map((element) => Number(element.tagName.slice(1)));
+            const targets = [
+              ...document.querySelectorAll("a,button,input,summary"),
+            ]
+              .filter(
+                (element) =>
+                  element.getBoundingClientRect().width > 1 &&
+                  element.getBoundingClientRect().height > 1,
+              )
               .map((element) => {
                 const rect = element.getBoundingClientRect();
                 return {
@@ -61,15 +84,9 @@ try {
                   height: rect.height,
                 };
               });
-            const metadata = [
-              ...document.querySelectorAll(
-                'script[type="application/ld+json"]',
-              ),
-            ].map((element) => JSON.parse(element.textContent));
             return {
               headings,
-              links,
-              metadata,
+              targets,
               title: document.title,
               description: document.querySelector('meta[name="description"]')
                 .content,
@@ -78,33 +95,36 @@ try {
               language: document.documentElement.lang,
               overflow:
                 document.documentElement.scrollWidth > window.innerWidth,
-              scripts: document.querySelectorAll(
-                'script:not([type="application/ld+json"])',
-              ).length,
               background: getComputedStyle(document.body).backgroundColor,
               fontSize: getComputedStyle(document.body).fontSize,
               scrollBehavior: getComputedStyle(document.documentElement)
                 .scrollBehavior,
+              scripts: [...document.querySelectorAll("script[src]")].map(
+                (script) => script.src,
+              ),
+              structured: document.querySelector(
+                'script[type="application/ld+json"]',
+              )?.textContent,
               noindex:
                 document
                   .querySelector('meta[name="robots"]')
                   ?.content.includes("noindex") ?? false,
             };
           });
-          assert.equal(state.h1, 1, `${label}: h1 count`);
-          assert.equal(state.main, 1, `${label}: main count`);
+          assert.equal(state.h1, 1);
+          assert.equal(state.main, 1);
           assert.equal(state.language, "en");
-          assert.equal(state.scripts, 0, `${label}: executable script`);
-          assert.equal(state.overflow, false, `${label}: horizontal overflow`);
-          assert.equal(state.fontSize, "16px");
-          assert.equal(
-            state.scrollBehavior,
-            "auto",
-            `${label}: reduced-motion scrolling`,
-          );
+          assert.equal(state.overflow, false, `${label}: overflow`);
           assert.equal(
             state.background,
-            colorScheme === "light" ? "rgb(255, 255, 255)" : "rgb(23, 37, 43)",
+            "rgb(16, 21, 30)",
+            `${label}: dark-only theme`,
+          );
+          assert.equal(state.fontSize, "16px");
+          assert.equal(state.scrollBehavior, "auto");
+          assert.ok(
+            state.scripts.every((source) => new URL(source).origin === origin),
+            `${label}: external scripts`,
           );
           assert.ok(
             state.headings.every((heading, index) =>
@@ -115,107 +135,130 @@ try {
             `${label}: heading order`,
           );
           assert.ok(
-            state.links.every(
-              (link) => link.width >= 43.9 && link.height >= 43.9,
+            state.targets.every(
+              (target) => target.width >= 43.9 && target.height >= 43.9,
             ),
-            `${label}: undersized links: ${JSON.stringify(state.links.filter((link) => link.width < 43.9 || link.height < 43.9))}`,
+            `${label}: undersized targets ${JSON.stringify(state.targets.filter((target) => target.width < 43.9 || target.height < 43.9))}`,
           );
-          if (width === 360 && colorScheme === "light") {
-            assert.ok(!titles.has(state.title), `${label}: duplicate title`);
-            assert.ok(
-              !descriptions.has(state.description),
-              `${label}: duplicate description`,
-            );
+          if (width === 360 && colorScheme === schemes[0]) {
+            assert.ok(!titles.has(state.title));
+            assert.ok(!descriptions.has(state.description));
             titles.add(state.title);
             descriptions.add(state.description);
           }
-          if (!state.noindex)
+          if (!state.noindex) {
+            const data = JSON.parse(state.structured)["@graph"];
             assert.ok(
-              state.metadata[0]["@graph"].some(
-                (item) => item["@type"] === "Person",
-              ) &&
-                state.metadata[0]["@graph"].some(
-                  (item) => item["@type"] === "WebSite",
-                ),
+              data.some((item) => item["@type"] === "Person") &&
+                data.some((item) => item["@type"] === "WebSite"),
             );
+          }
           await page.keyboard.press("Tab");
           assert.equal(
             await page.locator(":focus").textContent(),
             "Skip to content",
-            `${label}: first keyboard stop`,
+            `${label}: first stop`,
           );
-          assert.ok(
+          assert.notEqual(
             await page
               .locator(":focus")
-              .evaluate(
-                (element) => getComputedStyle(element).outlineStyle !== "none",
-              ),
-            `${label}: focus outline`,
+              .evaluate((element) => getComputedStyle(element).outlineStyle),
+            "none",
           );
           await page.keyboard.press("Enter");
           assert.equal(
             await page.locator(":focus").getAttribute("id"),
             "main-content",
-            `${label}: skip target`,
           );
           await page.goto(`${origin}${path}`, { waitUntil: "networkidle" });
-          const expectedOrder = await page
-            .locator("a")
-            .evaluateAll((elements) => elements.map((element) => element.href));
-          for (const href of expectedOrder) {
+          if (await graph.count()) {
+            await graph.scrollIntoViewIfNeeded();
+            await page.waitForFunction(
+              () =>
+                document.querySelector("[data-connection-graph]").dataset
+                  .ready === "true",
+            );
+            await page.evaluate(() => window.scrollTo(0, 0));
+          }
+          const focusables = await page
+            .locator("a[href],button:not([disabled]),input,summary")
+            .evaluateAll((elements) =>
+              elements
+                .filter(
+                  (element) =>
+                    !element.closest("dialog:not([open])") &&
+                    element.getBoundingClientRect().width > 0 &&
+                    element.getBoundingClientRect().height > 0,
+                )
+                .map((element, index) => {
+                  element.dataset.auditFocus = String(index);
+                  return String(index);
+                }),
+            );
+          for (const index of focusables) {
             await page.keyboard.press("Tab");
             assert.equal(
-              await page
-                .locator(":focus")
-                .getAttribute("href")
-                .then((value) => new URL(value, `${origin}${path}`).href),
-              href,
+              await page.locator(":focus").getAttribute("data-audit-focus"),
+              index,
               `${label}: keyboard order`,
             );
+            assert.notEqual(
+              await page
+                .locator(":focus")
+                .evaluate((element) => getComputedStyle(element).outlineStyle),
+              "none",
+            );
           }
-          await page.locator("body").click({ position: { x: 1, y: 1 } });
+          await page.locator("[data-palette-open]").focus();
+          await page.keyboard.press("Control+k");
+          await page.waitForFunction(
+            () => document.querySelector("#command-palette").open,
+          );
           await page.addScriptTag({ path: axePath });
-          const audit = await page.evaluate(async () =>
-            window.axe.run(document, {
-              runOnly: {
-                type: "tag",
-                values: [
-                  "wcag2a",
-                  "wcag2aa",
-                  "wcag21a",
-                  "wcag21aa",
-                  "best-practice",
-                ],
-              },
-            }),
+          await scan(page, `${label} palette open`);
+          await page.keyboard.press("Tab");
+          assert.ok(
+            await page
+              .locator(":focus")
+              .evaluate((element) => Boolean(element.closest("dialog"))),
           );
-          assert.equal(
-            audit.violations.length,
-            0,
-            `${label}: axe violations: ${JSON.stringify(audit.violations.map((violation) => ({ id: violation.id, nodes: violation.nodes.map((node) => node.target) })))}`,
+          await page.keyboard.press("Escape");
+          assert.ok(
+            await page
+              .locator("[data-palette-open]")
+              .evaluate((element) => element === document.activeElement),
           );
+          await scan(page, label);
+          await page.locator("body").click({ position: { x: 1, y: 1 } });
+          await page.evaluate(() => window.scrollTo(0, 0));
+          const slug =
+            path === paths[0]
+              ? "home"
+              : path
+                  .slice(paths[0].length)
+                  .replaceAll("/", "-")
+                  .replace(/-$/, "");
           await page.screenshot({
-            path: `reports/screenshots/${path === paths[0] ? "home" : path.replaceAll("/", "-")}-${width}-${colorScheme}.png`,
+            path: `${directory}/${slug}-${width}-${colorScheme}.png`,
             fullPage: true,
           });
+          assert.deepEqual(errors, [], `${label}: console errors`);
           results.push({
             path,
             width,
             colorScheme,
-            violations: 0,
-            headings: state.headings,
-            links: state.links.length,
+            axeViolations: 0,
             overflow: false,
+            keyboard: "pass",
+            palette: "pass",
           });
+          console.log(`PASS ${label}`);
         } catch (error) {
           failures.push({ label, error: error.message });
         }
+        page.off("pageerror", errorListener);
+        page.off("console", consoleListener);
       }
-      assert.equal(
-        consoleErrors.length,
-        0,
-        `Browser errors: ${consoleErrors.join("; ")}`,
-      );
       await context.close();
     }
   }
@@ -229,18 +272,13 @@ try {
     "smooth",
   );
   await page.emulateMedia({ media: "print", colorScheme: "dark" });
-  assert.equal(
-    await page
-      .locator("header")
-      .evaluate((element) => getComputedStyle(element).display),
-    "none",
-  );
-  assert.equal(
-    await page
-      .locator("footer")
-      .evaluate((element) => getComputedStyle(element).display),
-    "none",
-  );
+  for (const selector of ["header", "footer"])
+    assert.equal(
+      await page
+        .locator(selector)
+        .evaluate((element) => getComputedStyle(element).display),
+      "none",
+    );
   assert.equal(
     await page
       .locator("body")
@@ -249,10 +287,12 @@ try {
   );
   await page.close();
   await writeFile(
-    "reports/browser-audit.json",
+    `reports/browser-audit-${pass}.json`,
     JSON.stringify(
       {
         testedAt: new Date().toISOString(),
+        origin,
+        pass,
         results,
         failures,
         print: "pass",
@@ -264,7 +304,7 @@ try {
   );
   assert.equal(failures.length, 0, JSON.stringify(failures, null, 2));
   console.log(
-    `Browser audit passed: ${results.length} page/viewport/color combinations; zero axe violations, horizontal overflow, executable scripts, or console errors. Keyboard order, focus, skip link, reduced motion, metadata, and print checks passed.`,
+    `Browser audit passed: ${results.length} combinations; dark theme, contrast, keyboard order, palette, skip link, reduced motion, metadata, targets and print.`,
   );
 } finally {
   await browser.close();

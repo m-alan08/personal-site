@@ -19,12 +19,12 @@ const lines = (text: string) =>
   }, []);
 ---
 
-<figure class="surface rounded-xl p-5 sm:p-7">
+<figure class="surface rounded-xl p-4 sm:p-6">
   <figcaption id={`${id}-title`} class="mb-5 text-lg font-semibold">
     {diagram.title}
   </figcaption>
   <svg
-    viewBox={`0 0 360 ${height}`}
+    viewBox={`0 0 320 ${height}`}
     class="mx-auto w-full max-w-sm"
     role="img"
     aria-labelledby={`${id}-title ${id}-description`}
@@ -34,7 +34,7 @@ const lines = (text: string) =>
       <g transform={`translate(0 ${index * 104})`}>
         {index > 0 && (
           <path
-            d="M180 -20v16m-5 -5 5 5 5 -5"
+            d="M160 -20v16m-5 -5 5 5 5 -5"
             fill="none"
             stroke="var(--accent)"
             stroke-width="2"
@@ -43,7 +43,7 @@ const lines = (text: string) =>
         <rect
           x="2"
           y="2"
-          width="356"
+          width="316"
           height="80"
           rx="8"
           fill="var(--canvas)"
@@ -58,7 +58,7 @@ const lines = (text: string) =>
             x="20"
             y={54 + lineIndex * 18}
             fill="var(--muted)"
-            font-size="16"
+            font-size="18"
           >
             {line}
           </text>

@@ -1,6 +1,6 @@
 ---
 import type { Project } from "../data/projects";
-import { labels } from "../content/site";
+import { labels, caseStudy } from "../content/site";
 import { projectLink } from "../data/links";
 import TextLink from "./TextLink.astro";
 interface Props {
@@ -12,7 +12,7 @@ const { project, heading: Heading = "h2" } = Astro.props;
 
 <article
   data-project-category={project.category}
-  class="surface flex flex-col justify-between gap-6 rounded-xl p-6 sm:p-8"
+  class="surface flex flex-col gap-6 rounded-xl p-6 sm:p-8"
 >
   <div>
     <p class="font-medium text-accent">{project.ownership}</p>
@@ -43,7 +43,7 @@ const { project, heading: Heading = "h2" } = Astro.props;
     )}
     <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
       <TextLink href={projectLink(project.slug)}>
-        {labels.readNotes}
+        {caseStudy.read}
         <span class="sr-only">: {project.title}</span>
       </TextLink>
       {project.repository ? (

@@ -1,0 +1,98 @@
+---
+import { policySketch } from "../data/illustrations";
+import { hero } from "../content/illustrations";
+---
+
+<figure data-policy-hero class="surface rounded-2xl p-6 sm:p-8">
+  <figcaption id="policy-title" class="text-lg font-semibold">
+    {hero.title}
+  </figcaption>
+  <p id="policy-description" class="mt-2 text-muted">
+    {hero.description}
+  </p>
+  <svg
+    viewBox="0 0 320 270"
+    role="img"
+    aria-labelledby="policy-title policy-description"
+    class="my-5 max-h-64 w-full"
+  >
+    {policySketch.edges.map((edge) => {
+      const from = policySketch.nodes[edge.from];
+      const to = policySketch.nodes[edge.to];
+      return (
+        <line
+          x1={from.x}
+          y1={from.y}
+          x2={to.x}
+          y2={to.y}
+          stroke="var(--accent)"
+          stroke-width={1 + edge.weight * 2}
+          opacity={0.2 + edge.weight * 0.5}
+          data-policy-weight={edge.weight}
+        />
+      );
+    })}
+    {policySketch.nodes.map((node) => (
+      <g>
+        <circle
+          cx={node.x}
+          cy={node.y}
+          r="12"
+          fill="var(--canvas)"
+          stroke="var(--accent)"
+          stroke-width="2"
+        />
+        <circle cx={node.x} cy={node.y} r="4" fill="var(--accent)" />
+      </g>
+    ))}
+    <g fill="var(--muted)" font-size="16">
+      <text x="38" y="256" text-anchor="middle">
+        {hero.input}
+      </text>
+      <text x="160" y="256" text-anchor="middle">
+        {hero.hidden}
+      </text>
+      <text x="282" y="256" text-anchor="middle">
+        {hero.output}
+      </text>
+    </g>
+  </svg>
+  <fieldset>
+    <legend class="text-muted">{hero.control}</legend>
+    <div class="mt-3 grid grid-cols-4 gap-2">
+      {[2, 4, 8, 32].map((bits) => (
+        <button
+          type="button"
+          disabled
+          data-policy-bits={bits}
+          aria-pressed={bits === 8}
+          class="min-h-11 min-w-11 rounded-md border border-[var(--control)] px-3 hover:border-accent aria-pressed:bg-accent aria-pressed:text-canvas"
+        >
+          {bits}
+        </button>
+      ))}
+    </div>
+  </fieldset>
+  <p
+    class="mt-3 text-accent"
+    role="status"
+    data-policy-status
+    data-template={hero.status}
+  >
+    {hero.status.replace("{bits}", "8")}
+  </p>
+  <p class="mt-3 text-muted">{hero.disclaimer}</p>
+</figure>
+<script>
+  const element = document.querySelector<HTMLElement>("[data-policy-hero]");
+  if (element) {
+    const observer = new IntersectionObserver(async (entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        observer.disconnect();
+        const { initialize } = await import("../scripts/policy-hero");
+        initialize(element);
+      }
+    });
+    observer.observe(element);
+  }
+</script>

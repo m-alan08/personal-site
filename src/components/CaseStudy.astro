@@ -1,6 +1,7 @@
 ---
+import ConnectionGraph from "./ConnectionGraph.astro";
 import type { Project } from "../data/projects";
-import { caseStudy, labels } from "../content/site";
+import { caseStudy, labels, site } from "../content/site";
 import TextLink from "./TextLink.astro";
 import ArchitectureDiagram from "./ArchitectureDiagram.astro";
 interface Props {
@@ -37,7 +38,7 @@ const { project } = Astro.props;
       <TextLink href={project.devpost}>{caseStudy.devpost}</TextLink>
     )}
   </div>
-  <div class="mt-10 grid gap-10 border-t border-line pt-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-16">
+  <div class="mt-10 grid gap-10 border-t border-line pt-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_400px]">
     <div class="min-w-0 space-y-10">
       <section>
         <h2 class="text-2xl font-semibold tracking-tight">
@@ -88,12 +89,21 @@ const { project } = Astro.props;
             </ul>
           </>
         )}
+        {project.event && project.event.teammates.length > 0 && (
+          <>
+            <h3 class="mt-6 font-semibold">{caseStudy.team}</h3>
+            <p class="mt-3 text-muted">
+              {[site.name, ...project.event.teammates].join(", ")}
+            </p>
+          </>
+        )}
       </section>
       {project.diagram && (
         <ArchitectureDiagram diagram={project.diagram} slug={project.slug} />
       )}
     </aside>
   </div>
+  {project.interactive === "connections" && <ConnectionGraph />}
   <section class="mt-12 rounded-xl border-l-2 border-accent bg-surface p-6 sm:p-8">
     <h2 class="text-2xl font-semibold tracking-tight">
       {caseStudy.limitations}

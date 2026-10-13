@@ -15,6 +15,7 @@
   --muted: #b2bed0;
   --accent: #9dc7ff;
   --line: #354358;
+  --control: #61728a;
 }
 
 body {
@@ -130,5 +131,35 @@ dialog::backdrop {
   *::after {
     animation-duration: 0s !important;
     transition-duration: 0s !important;
+  }
+}
+
+[data-graph-node][data-selected="true"] circle:nth-child(2) {
+  fill: var(--accent);
+}
+[data-graph-node][data-selected="true"] text {
+  fill: var(--canvas);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .surface {
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+  [data-policy-hero]:focus-within,
+  [data-connection-graph]:focus-within {
+    box-shadow: 0 0 32px rgb(157 199 255 / 10%);
+  }
+}
+@media print {
+  dialog,
+  [data-palette-open],
+  [data-policy-hero] fieldset,
+  [data-connection-graph] button {
+    display: none;
+  }
+  .surface {
+    background: white;
+    box-shadow: none;
   }
 }

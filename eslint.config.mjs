@@ -15,6 +15,7 @@ export default [
         IntersectionObserver: "readonly",
         requestAnimationFrame: "readonly",
         performance: "readonly",
+        PerformanceObserver: "readonly",
         document: "readonly",
         window: "readonly",
         getComputedStyle: "readonly",

@@ -8,7 +8,7 @@ interface Props {
 const { heading = "h2", entries = projects } = Astro.props;
 ---
 
-<div class="grid gap-6 md:grid-cols-2">
+<div class="grid items-start gap-6 md:grid-cols-2">
   {entries.map((project) => (
     <ProjectCard project={project} heading={heading} />
   ))}

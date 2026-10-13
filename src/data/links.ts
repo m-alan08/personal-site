@@ -31,7 +31,3 @@ export function projectLink(slug: string): string {
 export function shareImageLink(slug: string): string {
   return localPath(`og/${slug}.png`);
 }
-
-export function repositoryReadme(repository: string): string {
-  return `${repository}#readme`;
-}

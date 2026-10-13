@@ -1,0 +1,133 @@
+---
+import { connectionSample } from "../data/illustrations";
+import { graph } from "../content/illustrations";
+---
+
+<section
+  class="surface mt-12 rounded-xl p-6 sm:p-8"
+  data-connection-graph
+  data-sample={JSON.stringify(connectionSample)}
+  aria-labelledby="connection-graph-heading"
+>
+  <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+    <div>
+      <h2
+        id="connection-graph-heading"
+        class="text-2xl font-semibold tracking-tight"
+      >
+        {graph.title}
+      </h2>
+      <p
+        id="connection-graph-description"
+        class="mt-4 max-w-reading text-muted"
+      >
+        {graph.description}
+      </p>
+      <p id="connection-graph-instructions" class="mt-4 text-muted">
+        {graph.instructions}
+      </p>
+      <div
+        role="group"
+        aria-label={graph.controls}
+        aria-describedby="connection-graph-instructions"
+        class="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4"
+      >
+        {connectionSample.nodes.map((node, index) => (
+          <button
+            type="button"
+            disabled
+            data-graph-select={index}
+            aria-pressed="false"
+            aria-label={graph.nodeLabel
+              .replace("{id}", node.id)
+              .replace("{topic}", node.topic)}
+            class="min-h-11 rounded-md border border-[var(--control)] px-3 hover:border-accent aria-pressed:bg-accent aria-pressed:text-canvas"
+          >
+            {graph.example.replace("{id}", node.id)}
+          </button>
+        ))}
+      </div>
+      <button
+        type="button"
+        disabled
+        data-graph-reset
+        class="mt-4 min-h-11 rounded-md border border-[var(--control)] px-4 text-accent hover:border-accent"
+      >
+        {graph.reset}
+      </button>
+    </div>
+    <div class="flex min-w-0 flex-col justify-center">
+      <svg
+        viewBox="0 0 320 300"
+        role="img"
+        aria-label={graph.svgLabel}
+        aria-describedby="connection-graph-description connection-graph-edges"
+        class="mx-auto w-full max-w-md touch-none"
+      >
+        <desc id="connection-graph-edges">
+          {connectionSample.edges
+            .map(([from, to]) =>
+              graph.edge
+                .replace("{from}", connectionSample.nodes[from].id)
+                .replace("{to}", connectionSample.nodes[to].id),
+            )
+            .join(" ")}
+        </desc>
+        {connectionSample.edges.map(([from, to]) => (
+          <line
+            data-graph-edge
+            x1={connectionSample.nodes[from].x}
+            y1={connectionSample.nodes[from].y}
+            x2={connectionSample.nodes[to].x}
+            y2={connectionSample.nodes[to].y}
+            stroke="var(--accent)"
+            stroke-width="1.5"
+            opacity="0.45"
+          />
+        ))}
+        {connectionSample.nodes.map((node, index) => (
+          <g
+            data-graph-node={index}
+            transform={`translate(${node.x} ${node.y})`}
+            class="cursor-grab"
+          >
+            <circle r="28" fill="transparent" />
+            <circle
+              r="18"
+              fill="var(--canvas)"
+              stroke="var(--accent)"
+              stroke-width="2"
+            />
+            <text text-anchor="middle" y="6" font-size="17" fill="var(--ink)">
+              {node.id}
+            </text>
+          </g>
+        ))}
+      </svg>
+      <p
+        class="mt-4 min-h-14 text-muted"
+        role="status"
+        data-graph-status
+        data-template={graph.status}
+        data-initial={graph.initial}
+      >
+        {graph.initial}
+      </p>
+    </div>
+  </div>
+</section>
+<script>
+  const element = document.querySelector<HTMLElement>(
+    "[data-connection-graph]",
+  );
+  if (element) {
+    const observer = new IntersectionObserver(async (entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        observer.disconnect();
+        const { initialize } = await import("../scripts/connection-graph");
+        initialize(element);
+      }
+    });
+    observer.observe(element);
+  }
+</script>

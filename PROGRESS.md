@@ -172,9 +172,9 @@ Goal: add verified hackathon projects and case studies, refine the dark portfoli
 - [x] Dark foundation, lazy keyboard command palette, npm test and CI tests.
 - [x] Four projects in one data shape with verified case-study sections; three sourced diagrams and one documented missing-source exception.
 - [x] Home hackathon section and Projects timeline/filter.
-- [ ] Illustrative hero and lazy force-directed connection graph.
-- [ ] Three complete screenshot and critique passes at 360px, 768px and 1280px.
-- [ ] Throttled interaction checks, accessibility, links and mobile Lighthouse >=95.
+- [x] Illustrative hero and lazy force-directed connection graph.
+- [x] Three complete screenshot and critique passes at 360px, 768px and 1280px.
+- [x] Throttled interaction checks, accessibility, links and mobile Lighthouse >=95.
 - [ ] Final cleanup, full checks, summary and push.
 
 ### Foundation in progress
@@ -192,3 +192,33 @@ Missing fields: email, X handle and resume PDF remain empty. No verified Constel
 Added a compact hackathon timeline to Home and a progressively enhanced Hackathons filter to Projects. Default content shows all four projects without requiring JavaScript. Filter code loads on first use, announces the result count and retains keyboard focus. Share images now use the dark site palette.
 
 Content validation: 10 page smoke tests, strict build, lint, formatting and 293 internal references passed. All 9 indexed pages scored 100 in each mobile Lighthouse category. A direct filter check caught missing research category markers; fixed them and added an all-to-hackathons-to-all regression test. Foundation CI 1965e9a passed.
+
+### Illustrative interactions and visual review
+
+Content and case studies pushed as 2c97f6a. Added the lazy policy precision sketch and a tiny force-directed Constellation graph. Both explicitly use invented sample data. The graph offers selection, keyboard movement, pointer drag, reset, live status and a labeled SVG. Computation stops after a bounded layout solve; no continuous animation is used. Visual review and throttled measurements follow.
+
+### Visual pass 1
+
+Completed all 30 screenshots: all 10 pages at 360px, 768px and 1280px. Inspected the page matrix and full home and Constellation captures. Contrast, headings, keyboard order, palette, skip link, 44px targets, reduced motion and print checks passed with zero axe violations. The label fix initially sat inside the command rejected by the review timeout and therefore did not run; applied it separately and confirmed the corrected built labels before the successful rerun.
+
+Critique and changes for pass 2: the mobile header used three rows; made it two. Research cards had unequal empty spaces from bottom alignment; now content starts consistently. At 768px the last hero precision button wrapped; made a four-column control row and reduced the oversized sketch. Case-study pipelines were too small in the desktop sidebar; widened it and enlarged SVG text. Short utility-page intros now have a consistent structural rule. About copy now reflects all four projects without repeating its introductory sentence.
+
+### Visual pass 2
+
+All 30 captures and accessibility assertions passed again. Reviewed the full matrix of all pages at all widths. The refined header, single-row controls and larger pipeline text resolved pass-one findings. One formatting check caught the new interaction audit file during overlapping tool work; formatted it separately and confirmed its check. No failed commit was pushed.
+
+Critique and changes for pass 3: unequal research content still stretched a large empty panel; cards now keep natural heights. Increased control boundary contrast independently of decorative dividers. The favicon now matches the blue site accent. Added the verified Constellation team list to the case-study sidebar, and removed obsolete focus copy, old labels and an unused README URL helper. Updated README for dark-only behavior, small lazy modules, smoke tests, CI and reproducible audit commands.
+
+Throttled Chrome results at 4x CPU, 360px: 20 repetitions per feature per motion preference, no interaction long tasks, stable idle layout. Hero max next-frame time 17.7ms (reduced) and 18.3ms (normal); graph 17.3ms and 17.5ms. Loaded script bodies were 3,102 bytes on Home and 5,207 bytes after the lazy graph loaded. These are local QA measurements, not project results.
+
+### Visual pass 3 and final accessibility review
+
+All 60 combinations passed: every page at all three widths under both system preferences, always displaying the requested dark theme. This completes three full screenshot passes, totaling 120 successful captures. Reviewed the final page matrices; natural card heights, hierarchy and spacing hold across widths. No overflow, keyboard-order failures, console errors or axe violations remained.
+
+Manual contrast calculations: body ink on canvas 16.45:1, secondary ink on surface 8.53:1, accent on surface 9.20:1, and control outlines on surface 3.27:1. Final screen-reader review found that graph selection announced a count but not the linked example letters. Added those neighbors to live status and all ten connections to the SVG description so the graph's information is available without seeing the lines. A final regression matrix and Lighthouse run will cover this last accessibility change.
+
+Final interaction and accessibility regression: all 10 smoke tests and 30 additional production browser combinations passed after the graph description fix. Across the three design passes and final regression there are 150 successful production screenshots. Final 4x CPU measurements: hero maximum next-frame response 17.6ms and graph 17.4ms, no interaction long tasks; graph idle positions stayed stable and its module was absent until scrolled into view. Final loaded JavaScript was 3,102 bytes for Home and 5,315 bytes for the graph page after lazy loading.
+
+Final mobile Lighthouse 13.5.0: Home, Projects, About, Contact, Resume, quantization-aware RL, armlab, Constellation and ZeroDay Arena each scored Performance 100, Accessibility 100, Best Practices 100 and SEO 100. Settings: mobile 412 by 823, 1.75 device scale, simulated 150ms RTT, 1638.4 Kbps throughput and 4x CPU. These measure local production preview, not deployment. The 404 is deliberately noindex and is covered by browser QA.
+
+npm install completed with zero vulnerabilities and no dependency changes. Source audit found zero comments in 48 authored code files and no em dashes. AGENTS remains identical to the supplied attachment. Foundation and content CI runs both passed. Runtime and verification tooling are ready for their gated commit; final summary and CI confirmation follow.
