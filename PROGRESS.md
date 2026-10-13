@@ -170,8 +170,8 @@ Goal: add verified hackathon projects and case studies, refine the dark portfoli
 - [x] Read AGENTS and the full round-two request; inspect the current checkout.
 - [x] Confirm both hackathon repositories are public and resolve their renamed URLs.
 - [x] Dark foundation, lazy keyboard command palette, npm test and CI tests.
-- [ ] Four projects in one data shape with verified case-study sections and diagrams.
-- [ ] Home hackathon section and Projects timeline/filter.
+- [x] Four projects in one data shape with verified case-study sections; three sourced diagrams and one documented missing-source exception.
+- [x] Home hackathon section and Projects timeline/filter.
 - [ ] Illustrative hero and lazy force-directed connection graph.
 - [ ] Three complete screenshot and critique passes at 360px, 768px and 1280px.
 - [ ] Throttled interaction checks, accessibility, links and mobile Lighthouse >=95.
@@ -182,3 +182,13 @@ Goal: add verified hackathon projects and case studies, refine the dark portfoli
 Added a dark-only palette and lazy native-dialog command navigation. Smoke tests use existing Playwright tooling, serve built output locally and check every page, one h1, browser errors, keyboard open/close, filtering and restored focus. Existing CI will install its test browser and run npm test after build. No new dependencies or deployment changes.
 
 Foundation validation: build, lint, format check and all 8 Playwright smoke tests passed. Mobile Lighthouse on all 7 indexed routes scored 100 in Performance, Accessibility, Best Practices and SEO. The initial preview used a localhost-only binding; explicit IPv4 loopback hosts resolved the readiness and audit failure. No product error remained.
+
+### Verified content and case studies
+
+Foundation pushed as 1965e9a. All four projects share typed case-study fields and are generated from projects.ts. Public repo redirects and branch lists resolve Constellation and Omen AI as distinct projects. Constellation's 0.73 baseline and 0.82 logistic-regression AUC are explicitly simulated outcomes; the real-data path was never run. Team roles are visible and the separate simulated RL Defense Lab is credited to the teammate. Existing RL and armlab scope and notes are preserved.
+
+Missing fields: email, X handle and resume PDF remain empty. No verified Constellation or ZeroDay Devpost URL was found in the inspected READMEs and docs, so their fields are empty. ZeroDay's exact event dates, location and teammate name are unknown. armlab still lacks a verified public repository, technology list, documented approach, architecture and personal learning account. Its unknown sections and diagram are omitted rather than fabricated. This is an explicit exception to the requested four architecture diagrams until source documentation is supplied.
+
+Added a compact hackathon timeline to Home and a progressively enhanced Hackathons filter to Projects. Default content shows all four projects without requiring JavaScript. Filter code loads on first use, announces the result count and retains keyboard focus. Share images now use the dark site palette.
+
+Content validation: 10 page smoke tests, strict build, lint, formatting and 293 internal references passed. All 9 indexed pages scored 100 in each mobile Lighthouse category. A direct filter check caught missing research category markers; fixed them and added an all-to-hackathons-to-all regression test. Foundation CI 1965e9a passed.

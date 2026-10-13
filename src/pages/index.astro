@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HackathonTimeline from "../components/HackathonTimeline.astro";
+import { projects } from "../data/projects";
+import { caseStudy } from "../content/site";
 import ProjectList from "../components/ProjectList.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 import TextLink from "../components/TextLink.astro";
@@ -48,6 +51,16 @@ import { localLinks } from "../data/links";
       </h2>
       <TextLink href={localLinks.projects}>{site.allProjects}</TextLink>
     </div>
-    <ProjectList heading="h3" />
+    <ProjectList
+      heading="h3"
+      entries={projects.filter((project) => project.category !== "Hackathon")}
+    />
+  </section>
+  <section class="mt-16" aria-labelledby="hackathons-heading">
+    <h2 id="hackathons-heading" class="text-3xl font-semibold tracking-tight">
+      {caseStudy.hackathons}
+    </h2>
+    <p class="mb-8 mt-4 max-w-reading text-muted">{caseStudy.hackathonIntro}</p>
+    <HackathonTimeline />
   </section>
 </BaseLayout>

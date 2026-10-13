@@ -45,8 +45,8 @@ export const pages = {
   projects: {
     title: "Projects",
     description:
-      "Two lines of work: policy precision in simulation and RL post-training for a team robot arm project.",
-    meta: "Explore Alan Mozhoor's solo quantization-aware RL project and his contribution to a team robot arm project.",
+      "Research, robotics, and hackathon work. Each project names my contribution and the limits of its evidence.",
+    meta: "Explore Alan Mozhoor's RL, robotics, Constellation and ZeroDay Arena case studies, with clear team roles and evidence boundaries.",
   },
   about: {
     title: "About",
@@ -91,4 +91,23 @@ export const palette = {
   close: "Close",
   empty: "No matching pages.",
   home: "Home",
+};
+
+export const caseStudy = {
+  problem: "The problem",
+  role: "My role and contributions",
+  approach: "The approach",
+  stack: "Stack",
+  lessons: "What I learned",
+  limitations: "Limitations and status",
+  status: "Project status",
+  read: "Read case study",
+  devpost: "Devpost",
+  hackathons: "Hackathons",
+  hackathonIntro:
+    "Two team projects built in 36 hours each, with distinct roles and evidence boundaries.",
+  research: "Research and robotics",
+  all: "All projects",
+  filter: "Filter projects",
+  results: "{count} projects shown",
 };

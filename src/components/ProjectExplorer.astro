@@ -1,0 +1,67 @@
+---
+import ProjectList from "./ProjectList.astro";
+import HackathonTimeline from "./HackathonTimeline.astro";
+import { projects } from "../data/projects";
+import { caseStudy } from "../content/site";
+---
+
+<div data-project-explorer>
+  <div
+    role="group"
+    aria-label={caseStudy.filter}
+    class="mb-10 flex flex-wrap gap-3"
+  >
+    <button
+      type="button"
+      disabled
+      data-project-filter="all"
+      aria-pressed="true"
+      class="min-h-11 rounded-md border border-line px-5 text-muted hover:border-accent aria-pressed:bg-accent aria-pressed:text-canvas"
+    >
+      {caseStudy.all}
+    </button>
+    <button
+      type="button"
+      disabled
+      data-project-filter="Hackathon"
+      aria-pressed="false"
+      class="min-h-11 rounded-md border border-line px-5 text-muted hover:border-accent aria-pressed:bg-accent aria-pressed:text-canvas"
+    >
+      {caseStudy.hackathons}
+    </button>
+  </div>
+  <p
+    class="sr-only"
+    role="status"
+    data-project-count
+    data-template={caseStudy.results}
+  >
+    {caseStudy.results.replace("{count}", String(projects.length))}
+  </p>
+  <section data-project-group class="mb-14" aria-labelledby="research-heading">
+    <h2 id="research-heading" class="mb-6 text-2xl font-semibold">
+      {caseStudy.research}
+    </h2>
+    <ProjectList
+      heading="h3"
+      entries={projects.filter((project) => project.category !== "Hackathon")}
+    />
+  </section>
+  <section data-project-group aria-labelledby="hackathons-heading">
+    <h2 id="hackathons-heading" class="mb-6 text-2xl font-semibold">
+      {caseStudy.hackathons}
+    </h2>
+    <HackathonTimeline />
+  </section>
+</div>
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>(
+    "[data-project-filter]",
+  )) {
+    button.disabled = false;
+    button.addEventListener("click", async () => {
+      const { filter } = await import("../scripts/project-filter");
+      filter(button.dataset.projectFilter ?? "all");
+    });
+  }
+</script>

@@ -1,0 +1,60 @@
+---
+import type { Project } from "../data/projects";
+import { projects } from "../data/projects";
+import { caseStudy, labels } from "../content/site";
+import { projectLink } from "../data/links";
+import TextLink from "./TextLink.astro";
+interface Props {
+  heading?: "h2" | "h3";
+  entries?: Project[];
+}
+const {
+  heading: Heading = "h3",
+  entries = projects.filter((project) => project.category === "Hackathon"),
+} = Astro.props;
+---
+
+<ol class="space-y-6" role="list">
+  {entries.map((project) => (
+    <li
+      class="relative border-l border-line pl-6 sm:pl-8"
+      data-project-category={project.category}
+    >
+      <span
+        class="absolute -left-1.5 top-7 h-3 w-3 rounded-full border border-accent bg-canvas"
+        aria-hidden="true"
+      ></span>
+      <article class="surface grid gap-5 rounded-xl p-6 sm:p-8 md:grid-cols-[160px_minmax(0,1fr)] md:gap-10">
+        <div class="text-muted">
+          <p class="font-medium text-accent">
+            {project.event?.name} {project.event?.year}
+          </p>
+          {project.event?.dates && <p class="mt-2">{project.event.dates}</p>}
+          <p class="mt-2">{project.event?.duration}</p>
+          <p class="mt-2">{project.ownership}</p>
+        </div>
+        <div class="min-w-0">
+          <Heading class="text-2xl font-semibold tracking-tight">
+            <a
+              href={projectLink(project.slug)}
+              class="inline-flex min-h-11 items-center hover:text-accent"
+            >
+              {project.title}
+            </a>
+          </Heading>
+          <p class="mt-3 max-w-reading text-muted">{project.summary}</p>
+          <p class="mt-4 max-w-reading">{project.scope}</p>
+          <div class="mt-4 flex flex-wrap gap-x-6">
+            <TextLink href={projectLink(project.slug)}>
+              {caseStudy.read}
+              <span class="sr-only">: {project.title}</span>
+            </TextLink>
+            {project.repository && (
+              <TextLink href={project.repository}>{labels.repository}</TextLink>
+            )}
+          </div>
+        </div>
+      </article>
+    </li>
+  ))}
+</ol>

@@ -1,0 +1,70 @@
+---
+import type { Pipeline } from "../data/projects";
+interface Props {
+  diagram: Pipeline;
+  slug: string;
+}
+const { diagram, slug } = Astro.props;
+const id = `pipeline-${slug}`;
+const height = diagram.nodes.length * 104 - 12;
+const lines = (text: string) =>
+  text.split(" ").reduce<string[]>((result, word) => {
+    if (
+      !result.length ||
+      result[result.length - 1].length + word.length + 1 > 31
+    )
+      result.push(word);
+    else result[result.length - 1] += ` ${word}`;
+    return result;
+  }, []);
+---
+
+<figure class="surface rounded-xl p-5 sm:p-7">
+  <figcaption id={`${id}-title`} class="mb-5 text-lg font-semibold">
+    {diagram.title}
+  </figcaption>
+  <svg
+    viewBox={`0 0 360 ${height}`}
+    class="mx-auto w-full max-w-sm"
+    role="img"
+    aria-labelledby={`${id}-title ${id}-description`}
+  >
+    <desc id={`${id}-description`}>{diagram.description}</desc>
+    {diagram.nodes.map((node, index) => (
+      <g transform={`translate(0 ${index * 104})`}>
+        {index > 0 && (
+          <path
+            d="M180 -20v16m-5 -5 5 5 5 -5"
+            fill="none"
+            stroke="var(--accent)"
+            stroke-width="2"
+          />
+        )}
+        <rect
+          x="2"
+          y="2"
+          width="356"
+          height="80"
+          rx="8"
+          fill="var(--canvas)"
+          stroke="var(--line)"
+        />
+        <rect x="2" y="22" width="3" height="36" rx="1" fill="var(--accent)" />
+        <text x="20" y="32" fill="var(--ink)" font-size="19" font-weight="600">
+          {node.title}
+        </text>
+        {lines(node.detail).map((line, lineIndex) => (
+          <text
+            x="20"
+            y={54 + lineIndex * 18}
+            fill="var(--muted)"
+            font-size="16"
+          >
+            {line}
+          </text>
+        ))}
+      </g>
+    ))}
+  </svg>
+  <p class="mt-5 text-base text-muted">{diagram.note}</p>
+</figure>

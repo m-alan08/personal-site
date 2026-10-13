@@ -10,7 +10,10 @@ interface Props {
 const { project, heading: Heading = "h2" } = Astro.props;
 ---
 
-<article class="grid gap-6 border-t border-line py-9 md:grid-cols-[1fr_2fr] md:gap-12">
+<article
+  data-project-category={project.category}
+  class="surface flex flex-col justify-between gap-6 rounded-xl p-6 sm:p-8"
+>
   <div>
     <p class="font-medium text-accent">{project.ownership}</p>
     <Heading class="mt-2 text-2xl font-semibold leading-snug tracking-tight">

@@ -25,6 +25,36 @@ try {
     });
     assert.equal(response.status(), 200, `${path}: loads`);
     assert.equal(await page.locator("h1").count(), 1, `${path}: one h1`);
+    if (path.endsWith("/projects/")) {
+      assert.equal(
+        await page.locator("[data-project-category]:visible").count(),
+        4,
+      );
+      await page
+        .getByRole("button", { name: "Hackathons", exact: true })
+        .click();
+      await page.waitForFunction(
+        () =>
+          document.querySelectorAll("[data-project-category]:not([hidden])")
+            .length === 2,
+      );
+      assert.equal(
+        await page.locator("[data-project-category]:visible").count(),
+        2,
+      );
+      await page
+        .getByRole("button", { name: "All projects", exact: true })
+        .click();
+      await page.waitForFunction(
+        () =>
+          document.querySelectorAll("[data-project-category]:not([hidden])")
+            .length === 4,
+      );
+      assert.equal(
+        await page.locator("[data-project-category]:visible").count(),
+        4,
+      );
+    }
     await page.locator("[data-palette-open]").focus();
     await page.keyboard.press("Control+k");
     await page.waitForFunction(

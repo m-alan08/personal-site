@@ -2,13 +2,14 @@
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard.astro";
 interface Props {
+  entries?: typeof projects;
   heading?: "h2" | "h3";
 }
-const { heading = "h2" } = Astro.props;
+const { heading = "h2", entries = projects } = Astro.props;
 ---
 
-<div>
-  {projects.map((project) => (
+<div class="grid gap-6 md:grid-cols-2">
+  {entries.map((project) => (
     <ProjectCard project={project} heading={heading} />
   ))}
 </div>
