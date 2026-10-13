@@ -1,0 +1,30 @@
+---
+import { navigation, site } from "../content/site";
+import { localPath } from "../data/links";
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-b border-line">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-2 px-6 py-5 sm:px-10">
+    <a
+      href={localPath()}
+      class="inline-flex min-h-11 items-center text-lg font-semibold tracking-tight"
+      aria-current={currentPath === localPath() ? "page" : undefined}
+    >
+      {site.name}
+    </a>
+    <nav aria-label="Main" class="flex flex-wrap gap-x-5 sm:gap-x-7">
+      {navigation.map((item) => (
+        <a
+          href={localPath(item.path)}
+          aria-current={
+            currentPath.startsWith(localPath(item.path)) ? "page" : undefined
+          }
+          class="inline-flex min-h-11 items-center text-base text-muted hover:text-accent aria-[current=page]:font-semibold aria-[current=page]:text-ink"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

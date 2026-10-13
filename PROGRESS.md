@@ -5,7 +5,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 ## Phase 1
 
 - [x] Scaffold, tooling, scripts
-- [ ] Base layout, navigation, footer, system color preference
+- [x] Base layout, navigation, footer, system color preference
 - [ ] Verified data and copy
 - [ ] Home, projects, about, contact, and 404
 - [ ] SEO, favicon, sitemap, robots
@@ -38,3 +38,7 @@ Entries are updated at each logical step. Each step includes its progress update
 ### Scaffold
 
 Static Astro, Tailwind 4, strict TypeScript, exact Node pin, ESLint, and Prettier are configured. All six requested scripts plus format:check exist. Build, lint, and format verification will gate the commit.
+
+### Base layout
+
+Scaffold committed as 12d56d8. Shared head tags, responsive header and footer, focus visibility, and CSS-only system light/dark colors are in place. All scaffold checks passed with zero build warnings.

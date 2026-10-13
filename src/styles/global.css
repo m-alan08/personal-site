@@ -9,10 +9,36 @@
     "Segoe UI",
     sans-serif;
   color-scheme: light dark;
+  --canvas: #ffffff;
+  --surface: #f4f7f8;
+  --ink: #172b34;
+  --muted: #4c626a;
+  --accent: #12665e;
+  --line: #cbd7db;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #17252b;
+    --surface: #203239;
+    --ink: #edf3f5;
+    --muted: #b5c7ce;
+    --accent: #8cddd1;
+    --line: #4a626c;
+  }
 }
 
 body {
   margin: 0;
   font-size: 1rem;
   line-height: 1.65;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+::selection {
+  background: var(--accent);
+  color: var(--canvas);
 }

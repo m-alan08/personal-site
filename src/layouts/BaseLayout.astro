@@ -1,0 +1,43 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { site } from "../content/site";
+import "../styles/global.css";
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+const { title, description, noindex = false } = Astro.props;
+const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <title>{pageTitle}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="flex min-h-screen flex-col bg-canvas text-ink">
+    <SiteHeader />
+    <main
+      id="main-content"
+      class="mx-auto w-full max-w-6xl flex-1 px-6 pt-14 sm:px-10 sm:pt-20"
+      tabindex="-1"
+    >
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
