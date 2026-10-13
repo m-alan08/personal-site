@@ -1,5 +1,17 @@
 # Progress
 
+Round 2 is implemented and pushed directly to main, with documented content gaps. The dark-only static site has ten pages and nine indexable routes, four case studies in one data shape, verified hackathon roles and sources, a timeline/filter, three sourced SVG pipelines, a lazy illustrative hero and connection graph, keyboard command navigation, and Playwright tests in CI. The original solo RL and armlab facts are preserved. AGENTS.md is unchanged.
+
+Real final mobile Lighthouse 13.5.0 scores on all nine indexed pages: **Performance 100, Accessibility 100, Best Practices 100, SEO 100**. All pages measured zero CLS. These are local production-preview scores; the intentionally noindex 404 is covered by browser accessibility checks.
+
+Final checks passed: strict build with zero errors, warnings or hints; lint; formatting; all ten Playwright smoke tests; 295 internal references; three design screenshot passes plus a final regression, totaling 150 successful captures at 360px, 768px and 1280px. The site stayed dark under both system preferences. Axe, keyboard order, skip link, focus, palette labels, graph descriptions, reduced motion and print checks passed. At 4x CPU, repeated interactions reached the next frame in at most 17.6ms with no interaction long tasks. Conservative maximum page weight is 54,720 bytes excluding images, counting all CSS and JavaScript chunks even when unloaded. All 32 production files match the final audited build.
+
+Missing: email, X handle, resume PDF, verified Devpost URLs, ZeroDay's exact event dates/location/teammate name, and armlab's verified repository, stack, documented approach, lessons and architecture. Those fields stay empty; the armlab diagram is omitted because no source documentation can support it. No facts or diagrams were guessed. No deployment, secrets or repository settings were changed; the canonical host remains provisional. The natural next task is to supply these missing inputs.
+
+Implementation CI passed for c1ed91c: [Portfolio checks](https://github.com/m-alan08/personal-site/actions/runs/38366549057). Decisions and the running log are under Round 2 below. Full local reports are in ignored reports/.
+
+## Initial run summary
+
 Both requested implementation phases are complete and pushed directly to main. The static site has eight pages, seven indexable routes, verified project content, a resume fallback, generated share images, structured data, CI, and offline link checks. AGENTS.md is unchanged.
 
 Real mobile Lighthouse 13.5.0 scores on every indexed page: **Performance 100, Accessibility 100, Best Practices 100, SEO 100**. These are local production-preview measurements. The intentionally noindex 404 is excluded from SEO scoring and included in browser QA.
@@ -175,7 +187,7 @@ Goal: add verified hackathon projects and case studies, refine the dark portfoli
 - [x] Illustrative hero and lazy force-directed connection graph.
 - [x] Three complete screenshot and critique passes at 360px, 768px and 1280px.
 - [x] Throttled interaction checks, accessibility, links and mobile Lighthouse >=95.
-- [ ] Final cleanup, full checks, summary and push.
+- [x] Final cleanup, full checks, summary and push.
 
 ### Foundation in progress
 
@@ -222,3 +234,31 @@ Final interaction and accessibility regression: all 10 smoke tests and 30 additi
 Final mobile Lighthouse 13.5.0: Home, Projects, About, Contact, Resume, quantization-aware RL, armlab, Constellation and ZeroDay Arena each scored Performance 100, Accessibility 100, Best Practices 100 and SEO 100. Settings: mobile 412 by 823, 1.75 device scale, simulated 150ms RTT, 1638.4 Kbps throughput and 4x CPU. These measure local production preview, not deployment. The 404 is deliberately noindex and is covered by browser QA.
 
 npm install completed with zero vulnerabilities and no dependency changes. Source audit found zero comments in 48 authored code files and no em dashes. AGENTS remains identical to the supplied attachment. Foundation and content CI runs both passed. Runtime and verification tooling are ready for their gated commit; final summary and CI confirmation follow.
+
+### Final cleanup and handoff
+
+Interactive polish and verification tooling pushed as c1ed91c. Its CI passed, including the pinned browser install and all generated-page smoke tests. All 32 output files match the final Lighthouse and browser build byte for byte. The conservative 54,720-byte page budget includes every CSS and JavaScript chunk, even those that do not load on that page, and stays below 200KB excluding images. No new dependencies were added. All direct dependencies have an active build, formatting, lint, typing, image or requested audit purpose.
+
+Round 2 commits:
+
+- 1965e9a: feat: add dark navigation and keyboard smoke tests
+- 2c97f6a: feat: add verified hackathon case studies and timeline
+- c1ed91c: feat: add lazy diagrams and refine portfolio layouts
+- Final summary: docs: record round two results and content gaps
+
+Final command results:
+
+- npm install: passed, current lockfile, 485 packages audited, zero vulnerabilities.
+- npm run dev: served HTTP 200 at the explicit loopback URL; the owned server is stopped after QA.
+- npm run preview: served production output for all audits; the owned server is stopped after QA.
+- npm run format and npm run format:check: passed.
+- npm run build: passed with zero errors, warnings or hints; ten pages and nine share images generated; link checks passed.
+- npm run lint: passed with zero warnings.
+- npm test: all ten pages passed, with no browser errors; palette keyboard open/close and focus return passed everywhere. Project filtering and illustrative hero/graph controls also passed.
+- npm run check:links: 295 references passed, including assets, sitemap and fragment targets.
+- npm run audit:browser: three complete design passes and a final regression passed; 150 successful screenshots, zero axe violations or overflow.
+- npm run audit:interactions: hero and graph passed at 4x CPU in both motion preferences, with no interaction long tasks or idle movement.
+- npm run audit:lighthouse: all nine indexed pages scored 100 in each of the four mobile categories.
+- Authored-source audit: no code comments or em dashes; original AGENTS attachment comparison passed.
+
+Remaining limitations are source/content gaps, not failed checks. armlab cannot have a sourced architecture or learning section until its documentation is supplied. No public hosting operation was attempted. A permission-review timeout on one combined QA command was resolved by separating file edits from browser execution and retrying once; no action remains blocked.
