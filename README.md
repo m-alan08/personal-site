@@ -75,3 +75,7 @@ The Portfolio checks workflow runs `npm ci`, lint, format verification, and buil
 ## Browser verification
 
 After a build, start `npm run preview -- --host 127.0.0.1 --port 4322`, then run `npm run audit:browser`. The audit uses an installed Chrome browser with a fresh temporary profile; it does not download a browser or use your existing browsing profile. Set `CHROME_PATH` if Chrome is installed elsewhere, and `QA_ORIGIN` if preview uses another origin. It checks every route at 360px, 768px, and 1280px in light and dark mode with axe, keyboard, overflow, script, metadata, reduced-motion, and print assertions. Reports and screenshots stay in ignored `reports/`. Browser tooling is development-only.
+
+## Mobile Lighthouse
+
+With the production preview running, `npm run audit:lighthouse` audits every indexed route using default mobile emulation and simulated mobile throttling. It writes real JSON and HTML reports in `reports/lighthouse/`, a summary in `reports/lighthouse-summary.json`, and fails if any category scores below 95. The intentionally noindex 404 is excluded from SEO scoring and is covered by the full browser accessibility matrix. Local preview scores do not measure a deployed host. The same `CHROME_PATH` and `QA_ORIGIN` inputs apply.

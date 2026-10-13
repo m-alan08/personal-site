@@ -21,7 +21,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Automated internal link checks
 - [x] Accessible interaction and print polish
 - [x] Full accessibility pass
-- [ ] Mobile Lighthouse pass
+- [x] Mobile Lighthouse pass
 - [ ] Cleanup and responsive color-scheme verification
 
 ## Missing inputs and skipped work
@@ -98,3 +98,9 @@ Internal link checks committed as ef9cff1. Added a keyboard-visible skip link, c
 Interaction polish committed as 07cd669. A production Chrome audit passed all 48 combinations: 8 pages, 3 widths (360px, 768px, 1280px), and both system color schemes. Zero axe WCAG/best-practice violations, overflow, console errors, or executable production scripts. Heading order, landmarks, keyboard order, focus, 44px hit areas, skip link, unique metadata, JSON-LD, reduced motion, and print assertions passed. Minimum link widths were adjusted to 44px. Light and dark screenshots were generated for every combination; desktop and mobile home screenshots were visually reviewed.
 
 Both configured external destinations (GitHub profile and quantrl-fetch repository) returned HTTP 200. Negative internal-link tests correctly rejected a missing file, a missing fragment, and an empty href using isolated temporary build copies. Reports are local in ignored reports/.
+
+### Mobile Lighthouse pass
+
+Accessibility tooling committed as 42b6b5d. Initial Lighthouse 13.5.0 scores on all seven indexed routes were Performance 100, Accessibility 100, Best Practices 96, and SEO 100. Lighthouse flagged the charset declaration after JSON-LD; charset is now the first head element and the full mobile audit is rerunning. The noindex 404 is covered by browser QA rather than misleading SEO scoring.
+
+Final Lighthouse 13.5.0 results: all seven indexed pages scored 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO. Mobile emulation was 412 by 823 at 1.75 device scale, simulated 150ms RTT, 1638.4 Kbps throughput, and 4x CPU slowdown. These are real local production-preview scores, not measurements of a deployed host. Every page had zero measured CLS. Full JSON and HTML reports are in reports/lighthouse/.

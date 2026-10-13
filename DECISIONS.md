@@ -14,3 +14,5 @@
 - Open Graph previews are deterministic SVG compositions rasterized locally to 1200 by 630 PNGs by Sharp during Astro static generation. They use system sans-serif at build time, with no network services or browser runtime. Sharp is a direct build dependency rather than relying on Astro transitive internals.
 
 - Browser QA uses the installed Chrome with a fresh temporary profile via playwright-core, and axe is injected only into the audit page. No audit code ships to visitors. Full keyboard and viewport assertions supplement automated accessibility scans. No browsers or global packages are installed.
+
+- Lighthouse runs sequentially with real mobile settings against production preview to avoid competing browser workloads. The 404 stays noindex; SEO scores are reported for the seven indexable routes, while all eight routes receive the full accessibility and responsive audit. Charset is the first head element after Lighthouse identified its prior ordering.
