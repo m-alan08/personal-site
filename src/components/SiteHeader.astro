@@ -1,5 +1,5 @@
 ---
-import { navigation, site } from "../content/site";
+import { navigation, site, labels } from "../content/site";
 import { localPath } from "../data/links";
 const currentPath = Astro.url.pathname;
 ---
@@ -13,7 +13,10 @@ const currentPath = Astro.url.pathname;
     >
       {site.name}
     </a>
-    <nav aria-label="Main" class="flex flex-wrap gap-x-5 sm:gap-x-7">
+    <nav
+      aria-label={labels.mainNavigation}
+      class="flex flex-wrap gap-x-5 sm:gap-x-7"
+    >
       {navigation.map((item) => (
         <a
           href={localPath(item.path)}

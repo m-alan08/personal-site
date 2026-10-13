@@ -6,7 +6,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 
 - [x] Scaffold, tooling, scripts
 - [x] Base layout, navigation, footer, system color preference
-- [ ] Verified data and copy
+- [x] Verified data and copy
 - [ ] Home, projects, about, contact, and 404
 - [ ] SEO, favicon, sitemap, robots
 - [ ] Setup README
@@ -42,3 +42,7 @@ Static Astro, Tailwind 4, strict TypeScript, exact Node pin, ESLint, and Prettie
 ### Base layout
 
 Scaffold committed as 12d56d8. Shared head tags, responsive header and footer, focus visibility, and CSS-only system light/dark colors are in place. All scaffold checks passed with zero build warnings.
+
+### Verified data
+
+Layout committed as a106268. Centralized copy, labels, empty personal fields, project ownership, simulation limitations, and source provenance. quantrl-fetch README revision fdb626677cc99cfdc891e52c6d184668057a4dab informed the solo project. No pending quantization results are presented as completed.
