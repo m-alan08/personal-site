@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import TextLink from "../components/TextLink.astro";
 import { pages } from "../content/site";
-import { localPath } from "../data/links";
+import { localLinks } from "../data/links";
 import { resumeAvailable, resumeHref } from "../data/resume";
 ---
 
@@ -20,7 +20,7 @@ import { resumeAvailable, resumeHref } from "../data/resume";
         <p class="text-xl font-medium">{pages.resume.missing}</p>
         <p class="mt-4 text-muted">{pages.resume.fallback}</p>
         <div class="mt-5">
-          <TextLink href={localPath("projects/")}>
+          <TextLink href={localLinks.projects}>
             {pages.resume.projectLink}
           </TextLink>
         </div>

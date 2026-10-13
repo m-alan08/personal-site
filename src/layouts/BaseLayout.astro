@@ -5,7 +5,7 @@ import { site } from "../content/site";
 import "../styles/global.css";
 import { structuredData } from "../data/structuredData";
 import { sharePages } from "../data/routes";
-import { localPath } from "../data/links";
+import { localPath, localLinks, shareImageLink } from "../data/links";
 interface Props {
   title: string;
   description: string;
@@ -15,9 +15,9 @@ const { title, description, noindex = false } = Astro.props;
 const sharePage =
   sharePages.find((page) => localPath(page.path) === Astro.url.pathname) ??
   sharePages[0];
-const shareImage = new URL(localPath(`og/${sharePage.slug}.png`), Astro.site);
+const shareImage = new URL(shareImageLink(sharePage.slug), Astro.site);
 const canonical = new URL(
-  noindex ? localPath("404.html") : Astro.url.pathname,
+  noindex ? localLinks.notFound : Astro.url.pathname,
   Astro.site,
 );
 const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
@@ -40,8 +40,8 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
     {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{pageTitle}</title>
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={localPath("favicon.svg")} />
-    <link rel="sitemap" href={localPath("sitemap.xml")} />
+    <link rel="icon" type="image/svg+xml" href={localLinks.favicon} />
+    <link rel="sitemap" href={localLinks.sitemap} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:image" content={shareImage.href} />
     <meta property="og:image:width" content="1200" />
@@ -65,7 +65,7 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
   </head>
   <body class="flex min-h-screen flex-col bg-canvas text-ink">
     <a
-      href="#main-content"
+      href={localLinks.skip}
       class="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-accent focus:px-4 focus:py-3 focus:text-canvas"
     >
       {site.skip}

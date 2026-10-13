@@ -4,7 +4,7 @@ import ProjectList from "../components/ProjectList.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 import TextLink from "../components/TextLink.astro";
 import { site } from "../content/site";
-import { localPath } from "../data/links";
+import { localLinks } from "../data/links";
 ---
 
 <BaseLayout title={site.name} description={site.description}>
@@ -46,7 +46,7 @@ import { localPath } from "../data/links";
       >
         {site.selectedProjects}
       </h2>
-      <TextLink href={localPath("projects/")}>{site.allProjects}</TextLink>
+      <TextLink href={localLinks.projects}>{site.allProjects}</TextLink>
     </div>
     <ProjectList heading="h3" />
   </section>

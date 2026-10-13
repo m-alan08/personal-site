@@ -1,7 +1,7 @@
 ---
 import type { Project } from "../data/projects";
 import { labels } from "../content/site";
-import { localPath } from "../data/links";
+import { projectLink } from "../data/links";
 import TextLink from "./TextLink.astro";
 interface Props {
   project: Project;
@@ -15,7 +15,7 @@ const { project, heading: Heading = "h2" } = Astro.props;
     <p class="font-medium text-accent">{project.ownership}</p>
     <Heading class="mt-2 text-2xl font-semibold leading-snug tracking-tight">
       <a
-        href={localPath(`projects/${project.slug}/`)}
+        href={projectLink(project.slug)}
         class="inline-block min-h-11 py-1 transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
       >
         {project.title}
@@ -39,7 +39,7 @@ const { project, heading: Heading = "h2" } = Astro.props;
       </ul>
     )}
     <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
-      <TextLink href={localPath(`projects/${project.slug}/`)}>
+      <TextLink href={projectLink(project.slug)}>
         {labels.readNotes}
         <span class="sr-only">: {project.title}</span>
       </TextLink>

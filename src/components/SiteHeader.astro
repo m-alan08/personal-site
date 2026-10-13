@@ -1,15 +1,15 @@
 ---
 import { navigation, site, labels } from "../content/site";
-import { localPath } from "../data/links";
+import { localPath, localLinks } from "../data/links";
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="border-b border-line">
   <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-2 px-6 py-5 sm:px-10">
     <a
-      href={localPath()}
+      href={localLinks.home}
       class="inline-flex min-h-11 min-w-11 items-center text-lg font-semibold tracking-tight"
-      aria-current={currentPath === localPath() ? "page" : undefined}
+      aria-current={currentPath === localLinks.home ? "page" : undefined}
     >
       {site.name}
     </a>

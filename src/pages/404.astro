@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import TextLink from "../components/TextLink.astro";
 import { pages } from "../content/site";
-import { localPath } from "../data/links";
+import { localLinks } from "../data/links";
 ---
 
 <BaseLayout
@@ -15,5 +15,5 @@ import { localPath } from "../data/links";
     title={pages.notFound.title}
     description={pages.notFound.description}
   />
-  <TextLink href={localPath()}>{pages.notFound.home}</TextLink>
+  <TextLink href={localLinks.home}>{pages.notFound.home}</TextLink>
 </BaseLayout>

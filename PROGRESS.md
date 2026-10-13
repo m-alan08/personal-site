@@ -112,3 +112,7 @@ Lighthouse tooling and the charset fix committed as 67d5c79. Removed unused copy
 Final cleanup verification passed: the full 48-combination browser audit passed again after cleanup. Every one of the 19 production files was byte-for-byte identical to the final 100-score Lighthouse build. The largest page is 10,512 bytes of HTML plus 14,060 bytes of shared CSS (24,572 bytes before compression, excluding images), below the 200KB limit. There are no executable JavaScript files in dist/. Source comments and em dashes are absent, the original AGENTS.md comparison passed, and npm install reported zero vulnerabilities.
 
 The documented alternate build inputs were tested with a temporary .example origin and a root base path. Canonicals, navigation, share images, sitemap, and all internal links passed. The default GitHub Pages build was restored and all production hashes matched the audited output. This test changed no hosting settings. The configured app projects were also inspected and did not identify an armlab repository.
+
+### Central link review
+
+Cleanup committed as fe7436d and its CI completed successfully. Final source review moved repeated internal route, asset, social, and repository fragment construction into links.ts so Astro markup consumes central link data throughout. No visitor-facing content or routes change. Output hashes are verified against the Lighthouse build before this refactor is committed.

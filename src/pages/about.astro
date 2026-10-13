@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import TextLink from "../components/TextLink.astro";
 import { pages, site } from "../content/site";
-import { localPath } from "../data/links";
+import { localLinks } from "../data/links";
 ---
 
 <BaseLayout title={pages.about.title} description={pages.about.meta}>
@@ -19,7 +19,7 @@ import { localPath } from "../data/links";
     </h2>
     <p class="mt-4">{pages.about.work}</p>
     <div class="mt-4">
-      <TextLink href={localPath("projects/")}>{pages.about.workLink}</TextLink>
+      <TextLink href={localLinks.projects}>{pages.about.workLink}</TextLink>
     </div>
   </section>
 </BaseLayout>

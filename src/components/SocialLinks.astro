@@ -1,17 +1,15 @@
 ---
 import { labels } from "../content/site";
-import { links, localPath } from "../data/links";
+import { links, localLinks, optionalLinks } from "../data/links";
 import TextLink from "./TextLink.astro";
 const socialLinks = [
-  { label: labels.resume, href: localPath("resume/") },
+  { label: labels.resume, href: localLinks.resume },
   { label: labels.github, href: links.github },
   {
     label: labels.x,
-    href: links.xHandle
-      ? `https://x.com/${links.xHandle.replace(/^@/, "")}`
-      : "",
+    href: optionalLinks.x,
   },
-  { label: labels.email, href: links.email ? `mailto:${links.email}` : "" },
+  { label: labels.email, href: optionalLinks.email },
 ].filter((link) => link.href);
 ---
 
