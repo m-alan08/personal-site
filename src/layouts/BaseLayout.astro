@@ -3,6 +3,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { site } from "../content/site";
 import "../styles/global.css";
+import { sharePages } from "../data/routes";
 import { localPath } from "../data/links";
 interface Props {
   title: string;
@@ -10,6 +11,10 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description, noindex = false } = Astro.props;
+const sharePage =
+  sharePages.find((page) => localPath(page.path) === Astro.url.pathname) ??
+  sharePages[0];
+const shareImage = new URL(localPath(`og/${sharePage.slug}.png`), Astro.site);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
 ---
@@ -27,11 +32,23 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
     <link rel="icon" type="image/svg+xml" href={localPath("favicon.svg")} />
     <link rel="sitemap" href={localPath("sitemap.xml")} />
     <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={shareImage.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={`${sharePage.title} | ${site.name}`}
+    />
+    <meta name="twitter:image" content={shareImage.href} />
+    <meta
+      name="twitter:image:alt"
+      content={`${sharePage.title} | ${site.name}`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={site.name} />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
   </head>

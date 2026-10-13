@@ -15,7 +15,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 
 - [x] Project detail pages
 - [x] Resume page and missing-file fallback
-- [ ] Build-time Open Graph images
+- [x] Build-time Open Graph images
 - [ ] Person and website JSON-LD
 - [ ] GitHub Actions checks
 - [ ] Automated internal link checks
@@ -70,3 +70,7 @@ Phase 1 handoff committed as a4a01ef. Project routes, notes, source provenance, 
 ### Resume fallback
 
 Project details committed as 87f4b1b. Resume navigation is visible and the page checks the configured local PDF at build time. No download link is emitted for an empty field or missing file. resumeFile, xHandle, and email remain empty.
+
+### Open Graph images
+
+Resume committed as 8f71046. Every indexed route has a locally generated 1200 by 630 PNG. Shared route data drives both sitemap and image generation, including new projects. Head tags include image dimensions and alt text for Open Graph and Twitter.
