@@ -17,7 +17,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Resume page and missing-file fallback
 - [x] Build-time Open Graph images
 - [x] Person and website JSON-LD
-- [ ] GitHub Actions checks
+- [x] GitHub Actions checks
 - [ ] Automated internal link checks
 - [ ] Accessible interaction and print polish
 - [ ] Full accessibility pass
@@ -78,3 +78,7 @@ Resume committed as 8f71046. Every indexed route has a locally generated 1200 by
 ### Structured data
 
 Share images committed as f8df1ca. Indexed pages emit a linked Person, WebSite, and WebPage graph using only verified name, GitHub, academic affiliation, and research topics. Missing email and X are excluded. JSON is escaped for safe embedding and is data, not executable client JavaScript.
+
+### CI workflow
+
+Structured data committed as 0b032ab. A read-only GitHub Actions workflow installs from the lockfile, lints, checks formatting, and builds on every push to main. The official actions are pinned to verified release commit hashes. No deployment workflow or repository settings were changed.

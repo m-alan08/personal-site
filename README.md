@@ -63,3 +63,7 @@ Work directly on main as instructed in `AGENTS.md`. Run build, lint, and format 
 ## Resume
 
 When the actual PDF is available, place it at `public/resume.pdf` and set `resumeFile` to `"resume.pdf"` in `links.ts`. The resume page only shows the download link when the configured PDF exists inside public/. Otherwise it shows a clear fallback and a link to projects. Email and X remain omitted until their fields are filled.
+
+## Continuous integration
+
+The Portfolio checks workflow runs `npm ci`, lint, format verification, and build for every push to main and for pull requests. It has read-only contents permission and does not deploy. Official checkout v7.0.1 and setup-node v7.1.0 are pinned to their verified commit hashes. Node comes from `.nvmrc`.
