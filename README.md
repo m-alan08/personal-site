@@ -67,3 +67,7 @@ When the actual PDF is available, place it at `public/resume.pdf` and set `resum
 ## Continuous integration
 
 The Portfolio checks workflow runs `npm ci`, lint, format verification, and build for every push to main and for pull requests. It has read-only contents permission and does not deploy. Official checkout v7.0.1 and setup-node v7.1.0 are pinned to their verified commit hashes. Node comes from `.nvmrc`.
+
+## Internal links
+
+`npm run build` also runs `npm run check:links`. The dependency-free checker validates all generated HTML links, asset references, share-image URLs, sitemap URLs, and local fragment targets against files in `dist/`. It honors the configured base path and fails on missing targets or empty references. External URLs are verified separately during QA; they are not fetched by the offline build check.

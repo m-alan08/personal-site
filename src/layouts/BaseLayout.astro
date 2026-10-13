@@ -16,7 +16,10 @@ const sharePage =
   sharePages.find((page) => localPath(page.path) === Astro.url.pathname) ??
   sharePages[0];
 const shareImage = new URL(localPath(`og/${sharePage.slug}.png`), Astro.site);
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = new URL(
+  noindex ? localPath("404.html") : Astro.url.pathname,
+  Astro.site,
+);
 const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
 ---
 

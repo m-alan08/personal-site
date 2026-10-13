@@ -18,7 +18,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 - [x] Build-time Open Graph images
 - [x] Person and website JSON-LD
 - [x] GitHub Actions checks
-- [ ] Automated internal link checks
+- [x] Automated internal link checks
 - [ ] Accessible interaction and print polish
 - [ ] Full accessibility pass
 - [ ] Mobile Lighthouse pass
@@ -82,3 +82,9 @@ Share images committed as f8df1ca. Indexed pages emit a linked Person, WebSite, 
 ### CI workflow
 
 Structured data committed as 0b032ab. A read-only GitHub Actions workflow installs from the lockfile, lints, checks formatting, and builds on every push to main. The official actions are pinned to verified release commit hashes. No deployment workflow or repository settings were changed.
+
+### Internal links
+
+CI workflow committed as 688e2d9. The offline build now validates generated pages, asset URLs, share images, sitemap entries, and fragment targets without another dependency. CI inherits the check through npm run build.
+
+The first link-check run caught Astro generating a /404/ metadata URL while the actual output is 404.html. The shared layout now points the non-indexed error page metadata at its real static file, and the check is rerun before this step is committed.
