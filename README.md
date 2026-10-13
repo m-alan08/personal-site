@@ -59,3 +59,7 @@ For GitHub Pages project hosting, keep the default base path and serve the conte
 ## Maintenance
 
 Work directly on main as instructed in `AGENTS.md`. Run build, lint, and format checks before committing or pushing. Pull with rebase before every push and never force push. Keep changes small, log decisions in `DECISIONS.md`, and update `PROGRESS.md` at each step.
+
+## Resume
+
+When the actual PDF is available, place it at `public/resume.pdf` and set `resumeFile` to `"resume.pdf"` in `links.ts`. The resume page only shows the download link when the configured PDF exists inside public/. Otherwise it shows a clear fallback and a link to projects. Email and X remain omitted until their fields are filled.

@@ -1,8 +1,9 @@
 ---
 import { labels } from "../content/site";
-import { links } from "../data/links";
+import { links, localPath } from "../data/links";
 import TextLink from "./TextLink.astro";
 const socialLinks = [
+  { label: labels.resume, href: localPath("resume/") },
   { label: labels.github, href: links.github },
   {
     label: labels.x,

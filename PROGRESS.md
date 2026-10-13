@@ -14,7 +14,7 @@ Implementation in progress. No deployment has been performed. Lighthouse has not
 ## Phase 2
 
 - [x] Project detail pages
-- [ ] Resume page and missing-file fallback
+- [x] Resume page and missing-file fallback
 - [ ] Build-time Open Graph images
 - [ ] Person and website JSON-LD
 - [ ] GitHub Actions checks
@@ -66,3 +66,7 @@ SEO type correction committed as e72e2aa with all checks passing. README documen
 ### Project detail pages
 
 Phase 1 handoff committed as a4a01ef. Project routes, notes, source provenance, contribution panels, and the sitemap derive from projects.ts. Both ownership labels remain explicit. Adding a project requires one data entry.
+
+### Resume fallback
+
+Project details committed as 87f4b1b. Resume navigation is visible and the page checks the configured local PDF at build time. No download link is emitted for an empty field or missing file. resumeFile, xHandle, and email remain empty.

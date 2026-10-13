@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import TextLink from "../components/TextLink.astro";
+import { pages } from "../content/site";
+import { localPath } from "../data/links";
+import { resumeAvailable, resumeHref } from "../data/resume";
+---
+
+<BaseLayout title={pages.resume.title} description={pages.resume.meta}>
+  <PageIntro
+    title={pages.resume.title}
+    description={pages.resume.description}
+  />
+  <div class="max-w-reading">
+    {resumeAvailable ? (
+      <TextLink href={resumeHref}>{pages.resume.download}</TextLink>
+    ) : (
+      <>
+        <p class="text-xl font-medium">{pages.resume.missing}</p>
+        <p class="mt-4 text-muted">{pages.resume.fallback}</p>
+        <div class="mt-5">
+          <TextLink href={localPath("projects/")}>
+            {pages.resume.projectLink}
+          </TextLink>
+        </div>
+      </>
+    )}
+  </div>
+</BaseLayout>

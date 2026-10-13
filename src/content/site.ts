@@ -22,6 +22,7 @@ export const navigation = [
   { label: "Projects", path: "projects/" },
   { label: "About", path: "about/" },
   { label: "Contact", path: "contact/" },
+  { label: "Resume", path: "resume/" },
 ];
 
 export const labels = {
