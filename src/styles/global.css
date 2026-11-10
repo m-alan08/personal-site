@@ -40,6 +40,11 @@ body {
   outline-offset: 4px;
   border-radius: 2px;
 }
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
 ::selection {
   background: var(--ink);
   color: var(--canvas);
