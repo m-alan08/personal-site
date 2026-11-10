@@ -3,7 +3,7 @@ import type { GetStaticPaths } from "astro";
 import { projects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { labels } from "../../content/site";
-import { localLinks } from "../../data/links";
+import { sectionLink } from "../../data/sections";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CaseStudy from "../../components/CaseStudy.astro";
 import TextLink from "../../components/TextLink.astro";
@@ -19,8 +19,8 @@ const { project } = Astro.props;
 ---
 
 <BaseLayout title={project.title} description={project.summary}>
-  <div class="mb-6">
-    <TextLink href={localLinks.projects}>{labels.backToProjects}</TextLink>
-  </div>
+  <p class="mb-8 text-sm">
+    <TextLink href={sectionLink("projects")}>{labels.backToProjects}</TextLink>
+  </p>
   <CaseStudy project={project} />
 </BaseLayout>

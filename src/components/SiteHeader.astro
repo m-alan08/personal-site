@@ -1,46 +1,32 @@
 ---
-import { navigation, site, labels, palette } from "../content/site";
-import { localPath, localLinks } from "../data/links";
-const currentPath = Astro.url.pathname;
+import { site, labels } from "../content/site";
+import { localLinks } from "../data/links";
+import { sections, sectionLink } from "../data/sections";
+const isHome = Astro.url.pathname === localLinks.home;
 ---
 
-<header class="border-b border-line">
-  <div class="mx-auto grid max-w-6xl grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2 md:grid-cols-[auto_1fr_auto] md:gap-x-8 px-6 py-5 sm:px-10">
+<header class="mx-auto w-full max-w-4xl px-6 pt-6 sm:px-10 sm:pt-8">
+  <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-1">
     <a
       href={localLinks.home}
-      class="inline-flex min-h-11 min-w-11 items-center text-lg font-semibold tracking-tight"
-      aria-current={currentPath === localLinks.home ? "page" : undefined}
+      class="inline-flex min-h-11 items-center font-medium tracking-tight text-ink"
+      aria-current={isHome ? "page" : undefined}
     >
       {site.name}
     </a>
-    <nav
-      aria-label={labels.mainNavigation}
-      class="col-span-2 row-start-2 flex flex-wrap justify-between gap-x-3 md:col-span-1 md:col-start-2 md:row-start-1 md:justify-center md:gap-x-7"
-    >
-      {navigation.map((item) => (
-        <a
-          href={localPath(item.path)}
-          aria-current={
-            currentPath.startsWith(localPath(item.path)) ? "page" : undefined
-          }
-          class="inline-flex min-h-11 min-w-11 items-center text-base text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none aria-[current=page]:font-semibold aria-[current=page]:text-ink"
-        >
-          {item.label}
-        </a>
-      ))}
+    <nav aria-label={labels.mainNavigation} class="-mx-2">
+      <ul class="flex flex-wrap" role="list">
+        {sections.map((section) => (
+          <li>
+            <a
+              href={isHome ? `#${section.id}` : sectionLink(section.id)}
+              class="inline-flex min-h-11 min-w-11 items-center justify-center px-2 text-sm text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+            >
+              {section.label}
+            </a>
+          </li>
+        ))}
+      </ul>
     </nav>
-    <button
-      type="button"
-      data-palette-open
-      aria-haspopup="dialog"
-      aria-controls="command-palette"
-      class="col-start-2 row-start-1 inline-flex min-h-11 items-center gap-2 md:col-start-3 md:gap-3 rounded-md border border-[var(--control)] px-3 text-muted transition-colors hover:border-accent hover:text-ink motion-reduce:transition-none"
-    >
-      {palette.trigger}
-      <kbd aria-hidden="true" class="text-sm">
-        ⌘ K
-      </kbd>
-      <span class="sr-only">{palette.shortcut}</span>
-    </button>
   </div>
 </header>

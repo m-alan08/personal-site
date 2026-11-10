@@ -4,11 +4,11 @@ export default {
       maxWidth: { reading: "68ch" },
       colors: {
         canvas: "var(--canvas)",
+        surface: "var(--surface)",
         ink: "var(--ink)",
         muted: "var(--muted)",
-        accent: "var(--accent)",
         line: "var(--line)",
-        surface: "var(--surface)",
+        control: "var(--control)",
       },
     },
   },

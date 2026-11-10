@@ -1,0 +1,35 @@
+---
+interface Entry {
+  title: string;
+  meta?: string;
+  summary: string;
+  href?: string;
+}
+interface Props {
+  entries: Entry[];
+}
+const { entries } = Astro.props;
+---
+
+<ul class="divide-y divide-line" role="list">
+  {entries.map((entry) => (
+    <li class="py-6 first:pt-0 last:pb-0">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-6">
+        <h3 class="font-medium leading-snug tracking-tight">
+          {entry.href ? (
+            <a
+              href={entry.href}
+              class="inline-flex min-h-11 items-center underline decoration-control decoration-1 underline-offset-[5px] transition-colors duration-150 hover:decoration-ink motion-reduce:transition-none"
+            >
+              {entry.title}
+            </a>
+          ) : (
+            entry.title
+          )}
+        </h3>
+        {entry.meta && <p class="text-sm text-muted">{entry.meta}</p>}
+      </div>
+      <p class="mt-2 max-w-reading text-muted">{entry.summary}</p>
+    </li>
+  ))}
+</ul>

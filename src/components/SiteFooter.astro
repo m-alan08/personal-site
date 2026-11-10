@@ -1,16 +1,13 @@
 ---
-import { site, labels } from "../content/site";
-import { links } from "../data/links";
+import { site } from "../content/site";
+const year = new Date().getFullYear();
 ---
 
-<footer class="mt-20 border-t border-line print:mt-8">
-  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-6 py-8 sm:px-10">
-    <p class="max-w-reading text-muted">{site.footer}</p>
-    <a
-      href={links.github}
-      class="inline-flex min-h-11 min-w-11 items-center font-medium text-accent underline decoration-1 underline-offset-4"
-    >
-      {labels.github}
-    </a>
+<footer class="mx-auto mt-8 w-full max-w-4xl px-6 sm:px-10">
+  <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-line py-8 text-sm text-muted">
+    <p>
+      © {year} {site.name}
+    </p>
+    <p>{site.footer}</p>
   </div>
 </footer>

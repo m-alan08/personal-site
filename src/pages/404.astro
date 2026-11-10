@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageIntro from "../components/PageIntro.astro";
 import TextLink from "../components/TextLink.astro";
 import { pages } from "../content/site";
 import { localLinks } from "../data/links";
@@ -11,9 +10,11 @@ import { localLinks } from "../data/links";
   description={pages.notFound.meta}
   noindex
 >
-  <PageIntro
-    title={pages.notFound.title}
-    description={pages.notFound.description}
-  />
-  <TextLink href={localLinks.home}>{pages.notFound.home}</TextLink>
+  <h1 class="text-3xl font-medium tracking-tight sm:text-4xl">
+    {pages.notFound.title}
+  </h1>
+  <p class="mt-5 max-w-reading text-muted">{pages.notFound.description}</p>
+  <p class="mt-4">
+    <TextLink href={localLinks.home}>{pages.notFound.home}</TextLink>
+  </p>
 </BaseLayout>

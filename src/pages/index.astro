@@ -1,60 +1,36 @@
 ---
-import InteractiveHero from "../components/InteractiveHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HackathonTimeline from "../components/HackathonTimeline.astro";
-import { projects } from "../data/projects";
-import { caseStudy } from "../content/site";
 import ProjectList from "../components/ProjectList.astro";
+import Section from "../components/Section.astro";
 import SocialLinks from "../components/SocialLinks.astro";
-import TextLink from "../components/TextLink.astro";
 import { site } from "../content/site";
-import { localLinks } from "../data/links";
+import { sectionLabel } from "../data/sections";
 ---
 
-<BaseLayout title={site.name} description={site.description}>
-  <section
-    class="grid gap-10 pb-16 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-12 md:pb-24"
-    aria-labelledby="intro-heading"
-  >
-    <div>
-      <h1
-        id="intro-heading"
-        class="text-5xl font-semibold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
-      >
-        {site.name}
-      </h1>
-      <p class="mt-5 max-w-reading text-xl text-muted">{site.introduction}</p>
-      <div class="mt-6 max-w-reading space-y-3">
-        {site.bio.map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
-      </div>
-      <div class="mt-6">
-        <SocialLinks />
-      </div>
+<BaseLayout title={site.title} description={site.description}>
+  <section aria-labelledby="intro-heading" class="pb-16 sm:pb-20">
+    <h1
+      id="intro-heading"
+      class="text-4xl font-medium tracking-tight sm:text-5xl"
+    >
+      {site.name}
+    </h1>
+    <p class="mt-5 max-w-reading text-lg text-muted">{site.introduction}</p>
+    <div class="mt-6">
+      <SocialLinks />
     </div>
-    <InteractiveHero />
   </section>
-  <section aria-labelledby="projects-heading">
-    <div class="mb-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-2">
-      <h2
-        id="projects-heading"
-        class="text-2xl font-semibold tracking-tight sm:text-3xl"
-      >
-        {site.selectedProjects}
-      </h2>
-      <TextLink href={localLinks.projects}>{site.allProjects}</TextLink>
+  <Section id="about" title={sectionLabel("about")}>
+    <div class="max-w-reading space-y-4">
+      {site.bio.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
     </div>
-    <ProjectList
-      heading="h3"
-      entries={projects.filter((project) => project.category !== "Hackathon")}
-    />
-  </section>
-  <section class="mt-16" aria-labelledby="hackathons-heading">
-    <h2 id="hackathons-heading" class="text-3xl font-semibold tracking-tight">
-      {caseStudy.hackathons}
-    </h2>
-    <p class="mb-8 mt-4 max-w-reading text-muted">{caseStudy.hackathonIntro}</p>
-    <HackathonTimeline />
-  </section>
+  </Section>
+  <Section id="projects" title={sectionLabel("projects")}>
+    <ProjectList />
+  </Section>
+  <Section id="contact" title={sectionLabel("contact")}>
+    <SocialLinks />
+  </Section>
 </BaseLayout>
