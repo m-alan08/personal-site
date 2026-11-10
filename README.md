@@ -40,7 +40,7 @@ The scripts disable Astro CLI telemetry and use POSIX environment syntax, suppor
 - `src/content/site.ts`: site metadata, section labels, and shared labels.
 - `src/data/sections.ts`: home page section order used by navigation.
 - `src/data/redirects.ts`: legacy `/about/`, `/contact/`, `/resume/` and `/projects/` redirects to home page anchors.
-- `src/data/links.ts`: GitHub, X, LinkedIn, email, optional resume file, and the derived `socialLinks` list.
+- `src/data/links.ts`: GitHub, X, LinkedIn, personal and Georgia Tech email, resume file, and the derived `socialLinks` list.
 - `src/data/projects.ts`: the uniform project shape, categories, events, case studies, ownership, verified tools, diagrams, and sources.
 - `src/data/hosting.ts`: provisional canonical origin and base path.
 - `src/components/`: shared Astro components.
@@ -70,7 +70,7 @@ Redesign work goes through a branch and pull request against main, not direct pu
 
 ## Resume
 
-When the actual PDF is available, place it at `public/resume.pdf` and set `resumeFile` to `"resume.pdf"` in `links.ts`. The contact links only include the resume when the configured PDF exists inside public/. Any link field set to an empty string is omitted.
+The resume is `public/resume.pdf`, configured by `resumeFile` in `links.ts`. To replace it, overwrite the PDF. The contact links only include the resume when the configured PDF exists inside public/. Any link field set to an empty string is omitted.
 
 ## Continuous integration
 

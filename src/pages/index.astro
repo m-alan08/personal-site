@@ -61,7 +61,8 @@ const other = ordered.filter((project) => project.featured === false);
       ))}
     </div>
     <p class="mt-6 text-sm text-muted">
-      {profile.education.school} · {profile.education.field}
+      {profile.education.school} · {profile.education.field} ·{" "}
+      {profile.education.graduation}
     </p>
   </Section>
   <Section id="projects" title={sectionLabel("projects")}>

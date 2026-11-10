@@ -2,6 +2,7 @@
 import type { Project } from "../data/projects";
 import { labels, caseStudy } from "../content/site";
 import { projectLink } from "../data/links";
+import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
 interface Props {
   project: Project;
@@ -10,11 +11,7 @@ const { project } = Astro.props;
 const meta = [project.ownership, project.event?.name, project.status].filter(
   Boolean,
 );
-const external = project.links?.length
-  ? project.links
-  : project.repository
-    ? [{ label: labels.repository, href: project.repository }]
-    : [];
+const external = externalLinks(project);
 ---
 
 <article class="py-8 first:pt-0 last:pb-0">

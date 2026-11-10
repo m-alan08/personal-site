@@ -1,12 +1,14 @@
 ---
 import type { Project } from "../data/projects";
 import { caseStudy, labels, site } from "../content/site";
+import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
 import CaseStudySection from "./CaseStudySection.astro";
 interface Props {
   project: Project;
 }
 const { project } = Astro.props;
+const links = externalLinks(project);
 const meta = [
   project.ownership,
   project.event &&
@@ -38,18 +40,13 @@ const facts = [
     {project.title}
   </h1>
   <p class="mt-5 text-lg text-muted">{project.summary}</p>
-  {(project.repository || project.devpost) && (
+  {links.length > 0 && (
     <ul class="mt-4 flex flex-wrap gap-x-6" role="list">
-      {project.repository && (
+      {links.map((link) => (
         <li>
-          <TextLink href={project.repository}>{labels.repository}</TextLink>
+          <TextLink href={link.href}>{link.label}</TextLink>
         </li>
-      )}
-      {project.devpost && (
-        <li>
-          <TextLink href={project.devpost}>{caseStudy.devpost}</TextLink>
-        </li>
-      )}
+      ))}
     </ul>
   )}
   <dl class="mt-10 grid gap-x-8 gap-y-4 border-t border-line pt-8 text-sm sm:grid-cols-[8rem_minmax(0,1fr)]">
