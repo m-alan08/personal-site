@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SocialIcons from "../components/SocialIcons.astro";
 import portrait from "../assets/portrait.jpg";
 import EntryList from "../components/EntryList.astro";
+import HyphenSafeText from "../components/HyphenSafeText.astro";
 import InterestGrid from "../components/InterestGrid.astro";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
@@ -44,10 +45,12 @@ const other = orderedProjects.filter((project) => project.featured === false);
           {profile.name}
         </h1>
         <p class="mt-6 max-w-reading text-lg leading-relaxed">
-          {profile.headline}
+          <HyphenSafeText text={profile.headline} />
         </p>
         {profile.intro.map((paragraph) => (
-          <p class="mt-4 max-w-reading text-muted">{paragraph}</p>
+          <p class="mt-4 max-w-reading text-muted">
+            <HyphenSafeText text={paragraph} />
+          </p>
         ))}
         <div class="mt-5">
           <SocialIcons />
@@ -81,7 +84,9 @@ const other = orderedProjects.filter((project) => project.featured === false);
             <dt class="text-xs uppercase tracking-[0.2em] text-accent">
               {item.label}
             </dt>
-            <dd class="mt-2 text-sm leading-relaxed">{item.text}</dd>
+            <dd class="mt-2 text-sm leading-relaxed">
+              <HyphenSafeText text={item.text} />
+            </dd>
           </div>
         ))}
       </dl>
@@ -90,7 +95,9 @@ const other = orderedProjects.filter((project) => project.featured === false);
   <Section id="about" title={sectionLabel("about")}>
     <div class="max-w-reading space-y-4">
       {profile.about.map((paragraph) => (
-        <p>{paragraph}</p>
+        <p>
+          <HyphenSafeText text={paragraph} />
+        </p>
       ))}
     </div>
     <p class="mt-6 text-sm text-muted">
