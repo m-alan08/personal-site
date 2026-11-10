@@ -1,0 +1,14 @@
+---
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+const words = text.split(" ");
+---
+
+{words.map((word, index) => (
+  <>
+    {index > 0 && " "}
+    {word.includes("-") ? <span class="whitespace-nowrap">{word}</span> : word}
+  </>
+))}

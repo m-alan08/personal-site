@@ -3,6 +3,7 @@ import type { Project } from "../data/projects";
 import { projectLink } from "../data/links";
 import { labels } from "../content/site";
 import ArrowIcon from "./ArrowIcon.astro";
+import HyphenSafeText from "./HyphenSafeText.astro";
 interface Props {
   previous?: Project;
   next?: Project;
@@ -27,7 +28,7 @@ const { previous, next } = Astro.props;
         {labels.previousProject}
       </span>
       <span class="mt-2 font-medium leading-snug group-hover:text-accent">
-        {previous.title}
+        <HyphenSafeText text={previous.title} />
       </span>
     </a>
   )}
@@ -41,7 +42,7 @@ const { previous, next } = Astro.props;
         <ArrowIcon class="ml-1.5 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
       </span>
       <span class="mt-2 font-medium leading-snug group-hover:text-accent">
-        {next.title}
+        <HyphenSafeText text={next.title} />
       </span>
     </a>
   )}
