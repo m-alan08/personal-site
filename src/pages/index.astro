@@ -29,8 +29,13 @@ const other = orderedProjects.filter((project) => project.featured === false);
   <section aria-labelledby="intro-heading" class="pb-16 sm:pb-20">
     <div class="grid gap-10 sm:grid-cols-[minmax(0,1fr)_15rem] sm:gap-12">
       <div class="min-w-0">
-        <p class="text-balance text-xs uppercase tracking-[0.2em] text-accent">
-          {profile.tagline}
+        <p class="text-xs uppercase tracking-[0.2em] text-accent">
+          {profile.tagline.split(" · ").map((part, index) => (
+            <>
+              {index > 0 && " · "}
+              <span class="whitespace-nowrap">{part}</span>
+            </>
+          ))}
         </p>
         <h1
           id="intro-heading"
