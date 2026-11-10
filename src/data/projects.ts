@@ -153,8 +153,7 @@ export const projects: Project[] = [
     question: "Can an agent show that a fix actually works?",
     ownership: "Team project",
     status: "In development; submitted to Y Combinator",
-    scope:
-      "Team project. I contribute to the backend, tests, and release integration.",
+    scope: "Team project. I'm one of the team's contributors.",
     technology: [
       "Python",
       "FastAPI",
@@ -171,7 +170,7 @@ export const projects: Project[] = [
     ],
     sourceNote:
       "Based on the public README and Alan's description, checked on November 10, 2026. Ari AI is a team project; this page describes only Alan's part.",
-    role: "I contribute to the backend, tests, and release integration. Adam Issac and other teammates build the project with me.",
+    role: "I'm one of the team's contributors. Adam Issac and other teammates build the project with me.",
     problem:
       "Vulnerability scanners produce findings, not proof. Developers need to know whether an exploit is real and whether a proposed fix closes it before they merge anything.",
     approach: [
@@ -215,7 +214,7 @@ export const projects: Project[] = [
         kind: "repository",
       },
     ],
-    contribution: "Backend, tests, and release integration.",
+    contribution: "One of the team's contributors.",
     featured: true,
     order: 2,
   },

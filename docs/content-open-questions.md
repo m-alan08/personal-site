@@ -11,7 +11,7 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 
 ## Projects
 
-- Ari AI: confirm your exact role or title, which hackathon the project started at and when, and which parts you built. The current copy, "backend, tests, and release integration", is based on commit history. Also confirm the demo at `https://ari-ai-lake.vercel.app` should be linked. The YC wording describes only a submission.
+- Ari AI: confirm your exact role or title, which hackathon the project started at and when, and which parts you built. The current copy only says "I'm one of the team's contributors" until you confirm. Also confirm the demo at `https://ari-ai-lake.vercel.app` should be linked. The YC wording describes only a submission.
 - Ari AI and Omen AI: confirm whether Ari AI grew out of Omen AI from Hacklanta. They are listed as separate projects for now.
 - Omen AI / ZeroDay Arena: the repository is private, so the repository and source links were removed. Confirm the demo at `https://omen-ai-security.vercel.app` should be linked, and give Hacklanta dates and location if you want them shown.
 - Robot arm project (`psamin/robotfpga`): confirm it is fine to link the team repository and to describe your work as the SGS teacher pipeline for SmolVLA post-training. Confirm the project name to show, since it is currently "Robot arm RL post-training" with slug `armlab`.
