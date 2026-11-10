@@ -10,6 +10,7 @@
     "Segoe UI",
     sans-serif;
   color-scheme: dark;
+  scrollbar-color: var(--control) var(--canvas);
   --canvas: #0c0c0d;
   --chrome: #161618;
   --surface: #141416;
