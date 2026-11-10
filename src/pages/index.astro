@@ -27,7 +27,7 @@ const other = orderedProjects.filter((project) => project.featured === false);
 
 <BaseLayout title={site.name} description={site.description}>
   <section aria-labelledby="intro-heading" class="pb-16 sm:pb-20">
-    <div class="grid gap-10 sm:grid-cols-[minmax(0,1fr)_15rem] sm:gap-12">
+    <div class="grid gap-10 sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-12 lg:grid-cols-[minmax(0,1fr)_15rem]">
       <div class="min-w-0">
         <p class="text-xs uppercase tracking-[0.2em] text-accent">
           {profile.tagline.split(" · ").map((part, index) => (
@@ -39,7 +39,7 @@ const other = orderedProjects.filter((project) => project.featured === false);
         </p>
         <h1
           id="intro-heading"
-          class="mt-4 font-display text-5xl leading-none tracking-tight sm:text-6xl md:text-7xl"
+          class="mt-4 font-display text-5xl leading-none tracking-tight md:text-6xl lg:text-7xl"
         >
           {profile.name}
         </h1>
@@ -53,7 +53,7 @@ const other = orderedProjects.filter((project) => project.featured === false);
           <SocialIcons />
         </div>
       </div>
-      <div class="relative order-first w-48 self-start sm:order-last sm:mt-3 sm:w-60">
+      <div class="relative order-first w-48 self-start sm:order-last sm:mt-3 sm:w-48 lg:w-60">
         <div
           aria-hidden="true"
           class="absolute inset-0 translate-x-2.5 translate-y-2.5 rounded-xl border-2 border-accent"
