@@ -1,0 +1,23 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+interface Props {
+  href: string;
+  title: string;
+}
+const { href, title } = Astro.props;
+const words = title.split(" ");
+const lastWord = words.pop();
+---
+
+<a
+  href={href}
+  class="group -my-3 inline-flex min-h-11 items-center py-3 transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+>
+  <span>
+    {words.join(" ")}{" "}
+    <span class="whitespace-nowrap">
+      {lastWord}
+      <ArrowIcon class="ml-1.5 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
+    </span>
+  </span>
+</a>

@@ -5,7 +5,7 @@ import { projectLink } from "../data/links";
 import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
 import ProjectImage from "./ProjectImage.astro";
-import ArrowIcon from "./ArrowIcon.astro";
+import ArrowLink from "./ArrowLink.astro";
 interface Props {
   project: Project;
 }
@@ -17,8 +17,6 @@ const external = externalLinks(project);
 const images = [project.image, ...(project.gallery ?? [])]
   .filter((image) => image !== undefined)
   .slice(0, 2);
-const titleWords = project.title.split(" ");
-const lastTitleWord = titleWords.pop();
 ---
 
 <article
@@ -29,18 +27,7 @@ const lastTitleWord = titleWords.pop();
 >
   <div class="min-w-0">
     <h3 class="text-lg font-medium leading-snug tracking-tight">
-      <a
-        href={projectLink(project.slug)}
-        class="group -my-3 inline-flex min-h-11 items-center py-3 transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
-      >
-        <span>
-          {titleWords.join(" ")}{" "}
-          <span class="whitespace-nowrap">
-            {lastTitleWord}
-            <ArrowIcon class="ml-1.5 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
-          </span>
-        </span>
-      </a>
+      <ArrowLink href={projectLink(project.slug)} title={project.title} />
     </h3>
     <p class="mt-1 text-sm text-muted">{meta.join(" · ")}</p>
     <p class="mt-3 max-w-reading">{project.summary}</p>
