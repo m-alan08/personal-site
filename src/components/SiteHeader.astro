@@ -3,10 +3,20 @@ import { site, labels } from "../content/site";
 import { localLinks } from "../data/links";
 import { sections, sectionLink } from "../data/sections";
 const isHome = Astro.url.pathname === localLinks.home;
+import { containerWidth } from "../data/layout";
+interface Props {
+  wide: boolean;
+}
+const { wide } = Astro.props;
 ---
 
 <header class="w-full border-b border-transparent sm:sticky sm:top-0 sm:z-40 sm:border-line/60 sm:bg-chrome/85 sm:backdrop-blur-md">
-  <div class="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-between gap-x-8 gap-y-1 px-6 pt-6 sm:px-10 sm:py-2">
+  <div
+    class:list={[
+      "mx-auto flex w-full flex-wrap items-center justify-between gap-x-8 gap-y-1 px-6 pt-6 sm:px-10 sm:py-2",
+      containerWidth(wide),
+    ]}
+  >
     <a
       href={localLinks.home}
       class="inline-flex min-h-11 items-center font-display text-lg italic tracking-tight text-ink"

@@ -1,7 +1,7 @@
 ---
 import type { Project } from "../data/projects";
 import { labels, caseStudy } from "../content/site";
-import { projectLink } from "../data/links";
+import { projectAnchor, projectLink } from "../data/links";
 import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
 import ProjectImage from "./ProjectImage.astro";
@@ -21,9 +21,11 @@ const images = [project.image, ...(project.gallery ?? [])]
 ---
 
 <article
+  id={projectAnchor(project.slug)}
   class:list={[
-    "grid gap-5 py-8 first:pt-0 last:pb-0",
-    images.length > 0 && "lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-8",
+    "grid scroll-mt-8 gap-5 py-8 first:pt-0 last:pb-0 sm:scroll-mt-20",
+    images.length > 0 &&
+      "lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:gap-10",
   ]}
 >
   <div class="min-w-0">
@@ -69,7 +71,7 @@ const images = [project.image, ...(project.gallery ?? [])]
       {images.map((image) => (
         <ProjectImage
           image={image}
-          sizes="(min-width: 1024px) 16rem, 50vw"
+          sizes="(min-width: 1280px) 22rem, (min-width: 1024px) 16rem, 50vw"
           class="transition-colors duration-150 group-hover:border-muted motion-reduce:transition-none"
         />
       ))}

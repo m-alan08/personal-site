@@ -3,9 +3,16 @@ import { site } from "../content/site";
 import { localLinks } from "../data/links";
 import ArrowIcon from "./ArrowIcon.astro";
 const year = new Date().getFullYear();
+import { containerWidth } from "../data/layout";
+interface Props {
+  wide: boolean;
+}
+const { wide } = Astro.props;
 ---
 
-<footer class="mx-auto mt-8 w-full max-w-4xl px-6 sm:px-10">
+<footer
+  class:list={["mx-auto mt-8 w-full px-6 sm:px-10", containerWidth(wide)]}
+>
   <div class="flex items-center justify-between gap-8 border-t border-line py-8 text-sm text-muted">
     <div class="flex flex-col gap-x-8 gap-y-1 lg:flex-row">
       <p>
