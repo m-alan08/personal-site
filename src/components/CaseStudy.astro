@@ -21,10 +21,8 @@ const fullSizeImages = await Promise.all(
 );
 const meta = [
   project.ownership,
-  project.event &&
-    [project.event.name, project.event.year, project.event.duration]
-      .filter(Boolean)
-      .join(" "),
+  project.event?.name,
+  project.event?.duration,
 ].filter(Boolean);
 const facts = [
   { term: caseStudy.status, detail: project.status },
