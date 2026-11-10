@@ -1,6 +1,6 @@
 # Alan Mozhoor's personal website
 
-A static, light-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and system fonts, with a system serif stack for headings. The site ships no client JavaScript, third-party scripts, embeds, analytics, or tracking.
+A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and system fonts. The site ships no client JavaScript, third-party scripts, embeds, analytics, or tracking.
 
 ## Setup
 
@@ -82,7 +82,7 @@ The Portfolio checks workflow runs `npm ci`, lint, format verification, build, a
 
 ## Browser verification
 
-After a build, start `npm run preview -- --host 127.0.0.1 --port 4322`, then run `npm run audit:browser`. The audit uses an installed Chrome browser with a fresh temporary profile; it does not download a browser or use your existing browsing profile. Set `CHROME_PATH` if Chrome is installed elsewhere, and `QA_ORIGIN` if preview uses another origin. It checks every route at 360px, 768px, and 1280px with axe, keyboard order, skip link, overflow, metadata, control sizes, reduced-motion and print assertions. The theme is always light. Set `QA_SCHEMES=both` to verify it under both system preferences and `QA_PASS=pass-name` to retain a separate screenshot matrix. Reports and screenshots stay in ignored `reports/`. Browser tooling is development-only.
+After a build, start `npm run preview -- --host 127.0.0.1 --port 4322`, then run `npm run audit:browser`. The audit uses an installed Chrome browser with a fresh temporary profile; it does not download a browser or use your existing browsing profile. Set `CHROME_PATH` if Chrome is installed elsewhere, and `QA_ORIGIN` if preview uses another origin. It checks every route at 360px, 768px, and 1280px with axe, keyboard order, skip link, overflow, metadata, control sizes, reduced-motion and print assertions. The theme is always dark. Set `QA_SCHEMES=both` to verify it under both system preferences and `QA_PASS=pass-name` to retain a separate screenshot matrix. Reports and screenshots stay in ignored `reports/`. Browser tooling is development-only.
 
 ## Mobile Lighthouse
 

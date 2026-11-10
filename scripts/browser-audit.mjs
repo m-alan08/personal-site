@@ -9,7 +9,7 @@ const axePath = require.resolve("axe-core/axe.min.js");
 const origin = process.env.QA_ORIGIN || "http://127.0.0.1:4322";
 const pass = process.env.QA_PASS || "final";
 const schemes =
-  process.env.QA_SCHEMES === "both" ? ["light", "dark"] : ["light"];
+  process.env.QA_SCHEMES === "both" ? ["dark", "light"] : ["dark"];
 const browser = await chromium.launch(browserOptions());
 const paths = await pagePaths();
 const directory = `reports/screenshots/${pass}`;
@@ -107,8 +107,8 @@ try {
           assert.equal(state.overflow, false, `${label}: overflow`);
           assert.equal(
             state.background,
-            "rgb(245, 244, 240)",
-            `${label}: light-only theme`,
+            "rgb(12, 12, 13)",
+            `${label}: dark-only theme`,
           );
           assert.equal(state.fontSize, "16px");
           assert.equal(state.scrollBehavior, "auto");
@@ -232,7 +232,7 @@ try {
     ),
     "smooth",
   );
-  await page.emulateMedia({ media: "print", colorScheme: "light" });
+  await page.emulateMedia({ media: "print", colorScheme: "dark" });
   for (const selector of ["header", "footer"])
     assert.equal(
       await page
@@ -265,7 +265,7 @@ try {
   );
   assert.equal(failures.length, 0, JSON.stringify(failures, null, 2));
   console.log(
-    `Browser audit passed: ${results.length} combinations; light theme, contrast, keyboard order, skip link, reduced motion, metadata, targets and print.`,
+    `Browser audit passed: ${results.length} combinations; dark theme, contrast, keyboard order, skip link, reduced motion, metadata, targets and print.`,
   );
 } finally {
   await browser.close();
