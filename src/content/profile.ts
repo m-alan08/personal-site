@@ -106,7 +106,7 @@ export const experience: Experience[] = [
     organization: "Ari AI",
     period: "2026 to present",
     summary:
-      "An AI security engineering project that started during a hackathon and kept going. I contribute to the backend, tests, and release integration. Ari AI was submitted to Y Combinator; that is an application, not an acceptance, investment, or endorsement.",
+      "An AI security engineering project that started during a hackathon and kept going. I'm one of the team's contributors. Ari AI was submitted to Y Combinator; that is an application, not an acceptance, investment, or endorsement.",
     href: "https://ari-ai-lake.vercel.app",
   },
   {
