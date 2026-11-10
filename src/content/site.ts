@@ -57,6 +57,7 @@ export const pages = {
       "This page isn't here. You can return home or browse my projects.",
     meta: "The requested page was not found on Alan Mozhoor's portfolio.",
     home: "Return home",
+    projects: "Browse projects",
   },
 };
 
