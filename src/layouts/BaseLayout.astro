@@ -1,4 +1,5 @@
 ---
+import MomentumScroll from "../components/MomentumScroll.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { site } from "../content/site";
@@ -80,5 +81,6 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
       <slot />
     </main>
     <SiteFooter />
+    <MomentumScroll />
   </body>
 </html>
