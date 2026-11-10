@@ -19,16 +19,18 @@ const { entries } = Astro.props;
           {entry.href ? (
             <a
               href={entry.href}
-              class="inline-flex min-h-11 items-center underline decoration-accent decoration-1 underline-offset-[5px] transition-colors duration-150 hover:decoration-ink motion-reduce:transition-none"
+              class="inline-flex min-h-11 items-center -my-3 py-3 underline decoration-accent decoration-1 underline-offset-[5px] transition-colors duration-150 hover:decoration-ink motion-reduce:transition-none"
             >
               {entry.title}
             </a>
           ) : (
-            <span class="inline-flex min-h-11 items-center">{entry.title}</span>
+            <span class="inline-flex min-h-11 items-center -my-3 py-3">
+              {entry.title}
+            </span>
           )}
         </h3>
         {entry.meta && (
-          <p class="text-sm tabular-nums text-muted">{entry.meta}</p>
+          <p class="mt-1 text-sm tabular-nums text-muted">{entry.meta}</p>
         )}
       </div>
       <p class="mt-2 max-w-reading text-muted">{entry.summary}</p>
