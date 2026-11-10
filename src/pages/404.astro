@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TextLink from "../components/TextLink.astro";
 import { pages } from "../content/site";
 import { localLinks } from "../data/links";
+import { sectionLink } from "../data/sections";
 ---
 
 <BaseLayout
@@ -14,7 +15,14 @@ import { localLinks } from "../data/links";
     {pages.notFound.title}
   </h1>
   <p class="mt-5 max-w-reading text-muted">{pages.notFound.description}</p>
-  <p class="mt-4">
-    <TextLink href={localLinks.home}>{pages.notFound.home}</TextLink>
-  </p>
+  <ul class="mt-4 flex flex-wrap gap-x-6" role="list">
+    <li>
+      <TextLink href={localLinks.home}>{pages.notFound.home}</TextLink>
+    </li>
+    <li>
+      <TextLink href={sectionLink("projects")}>
+        {pages.notFound.projects}
+      </TextLink>
+    </li>
+  </ul>
 </BaseLayout>
