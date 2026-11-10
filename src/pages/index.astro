@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SocialIcons from "../components/SocialIcons.astro";
 import portrait from "../assets/portrait.jpg";
 import EntryList from "../components/EntryList.astro";
+import InterestGrid from "../components/InterestGrid.astro";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
 import SocialLinks from "../components/SocialLinks.astro";
@@ -110,7 +111,7 @@ const other = ordered.filter((project) => project.featured === false);
   </Section>
   <Section id="research" title={sectionLabel("research")}>
     <p class="mb-8 max-w-reading text-muted">{researchNote}</p>
-    <EntryList entries={researchInterests} />
+    <InterestGrid entries={researchInterests} />
   </Section>
   <Section id="writing" title={sectionLabel("writing")}>
     <p class="mb-8 max-w-reading text-muted">{writing.intro}</p>
