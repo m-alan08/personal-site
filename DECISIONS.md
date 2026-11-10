@@ -39,3 +39,13 @@
 
 - Manual graph accessibility review adds linked example letters to live selection status and a complete connection description to the SVG. This exposes the same sample relationships to screen readers without claiming real data. Use a distinct control-border token to meet non-text contrast while retaining quieter structural dividers.
 - Final QA uses production preview for scoring and the page matrix, with the dev server also started and checked. Both system preferences must render dark. Screen reader labels, native-dialog focus trapping, DOM keyboard order, reduced motion, print and all route metadata are checked alongside axe. CI uses the same built-page smoke suite.
+
+## Round 3: minimal redesign
+
+- Goal: a minimal, single-page technical homepage. This request supersedes Round 2's dark technical portfolio direction and the old direct-to-main workflow. Work happens on `redesign/integration` and lands through a pull request against main. AGENTS.md is unchanged.
+- Keep Astro, Tailwind CSS, strict TypeScript, static output, the content model, SEO metadata, JSON-LD, sitemap, share images, link checker, smoke tests, browser audit and Lighthouse audit.
+- Remove the command palette, policy precision hero, connection graph, project filter, hackathon timeline, SVG pipeline diagrams, page transitions, gradient surfaces, glow and the blue accent. They conflict with the request for restraint and no excessive interactive widgets. Their client scripts and the interaction audit go with them. The site now ships no client JavaScript.
+- Design tokens: canvas #0c0c0d, surface #141416, ink #ececea, muted #9b9b9f, line #242427, control #4a4a4f. System sans-serif, a 68ch reading width, a narrow left label column for section headings on wide screens, and thin dividers between sections and entries. Links are underlined; hover only changes underline or text color.
+- One page with About, Projects, Research interests, Writing, Experience and Contact sections. Project case studies stay at `/projects/<slug>/` because they hold detailed, sourced project information. `/about/`, `/contact/`, `/resume/` and `/projects/` become static redirects to home page anchors so existing links keep working.
+- Content is owned by a separate content agent on `content/structured-copy` and merged here after fact-checking by a QA agent. Inferred claims, such as an exact Ari AI role, are replaced with neutral wording. Private or unavailable repositories are not linked. Remaining questions for Alan are in `docs/content-open-questions.md`.
+- `uniqueFeature` is a `null` placeholder for one future interactive component. Nothing is designed or rendered for it yet; it will become its own home page section.

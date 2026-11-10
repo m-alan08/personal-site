@@ -54,20 +54,10 @@ try {
             waitUntil: "networkidle",
           });
           assert.equal(response.status(), 200, `${label}: response`);
-          const graph = page.locator("[data-connection-graph]");
-          if (await graph.count()) {
-            await graph.scrollIntoViewIfNeeded();
-            await page.waitForFunction(
-              () =>
-                document.querySelector("[data-connection-graph]").dataset
-                  .ready === "true",
-            );
-            await page.evaluate(() => window.scrollTo(0, 0));
-          }
           const state = await page.evaluate(() => {
-            const headings = [...document.querySelectorAll("h1,h2,h3,h4,h5,h6")]
-              .filter((element) => !element.closest("dialog"))
-              .map((element) => Number(element.tagName.slice(1)));
+            const headings = [
+              ...document.querySelectorAll("h1,h2,h3,h4,h5,h6"),
+            ].map((element) => Number(element.tagName.slice(1)));
             const targets = [
               ...document.querySelectorAll("a,button,input,summary"),
             ]
@@ -117,7 +107,7 @@ try {
           assert.equal(state.overflow, false, `${label}: overflow`);
           assert.equal(
             state.background,
-            "rgb(16, 21, 30)",
+            "rgb(12, 12, 13)",
             `${label}: dark-only theme`,
           );
           assert.equal(state.fontSize, "16px");
@@ -171,22 +161,12 @@ try {
             "main-content",
           );
           await page.goto(`${origin}${path}`, { waitUntil: "networkidle" });
-          if (await graph.count()) {
-            await graph.scrollIntoViewIfNeeded();
-            await page.waitForFunction(
-              () =>
-                document.querySelector("[data-connection-graph]").dataset
-                  .ready === "true",
-            );
-            await page.evaluate(() => window.scrollTo(0, 0));
-          }
           const focusables = await page
             .locator("a[href],button:not([disabled]),input,summary")
             .evaluateAll((elements) =>
               elements
                 .filter(
                   (element) =>
-                    !element.closest("dialog:not([open])") &&
                     element.getBoundingClientRect().width > 0 &&
                     element.getBoundingClientRect().height > 0,
                 )
@@ -209,25 +189,7 @@ try {
               "none",
             );
           }
-          await page.locator("[data-palette-open]").focus();
-          await page.keyboard.press("Control+k");
-          await page.waitForFunction(
-            () => document.querySelector("#command-palette").open,
-          );
           await page.addScriptTag({ path: axePath });
-          await scan(page, `${label} palette open`);
-          await page.keyboard.press("Tab");
-          assert.ok(
-            await page
-              .locator(":focus")
-              .evaluate((element) => Boolean(element.closest("dialog"))),
-          );
-          await page.keyboard.press("Escape");
-          assert.ok(
-            await page
-              .locator("[data-palette-open]")
-              .evaluate((element) => element === document.activeElement),
-          );
           await scan(page, label);
           await page.locator("body").click({ position: { x: 1, y: 1 } });
           await page.evaluate(() => window.scrollTo(0, 0));
@@ -250,7 +212,6 @@ try {
             axeViolations: 0,
             overflow: false,
             keyboard: "pass",
-            palette: "pass",
           });
           console.log(`PASS ${label}`);
         } catch (error) {
@@ -304,7 +265,7 @@ try {
   );
   assert.equal(failures.length, 0, JSON.stringify(failures, null, 2));
   console.log(
-    `Browser audit passed: ${results.length} combinations; dark theme, contrast, keyboard order, palette, skip link, reduced motion, metadata, targets and print.`,
+    `Browser audit passed: ${results.length} combinations; dark theme, contrast, keyboard order, skip link, reduced motion, metadata, targets and print.`,
   );
 } finally {
   await browser.close();

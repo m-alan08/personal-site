@@ -1,22 +1,29 @@
 ---
-import { labels } from "../content/site";
-import { links, localLinks, optionalLinks } from "../data/links";
+import { socialLinks } from "../data/links";
 import TextLink from "./TextLink.astro";
-const socialLinks = [
-  { label: labels.resume, href: localLinks.resume },
-  { label: labels.github, href: links.github },
-  {
-    label: labels.x,
-    href: optionalLinks.x,
-  },
-  { label: labels.email, href: optionalLinks.email },
-].filter((link) => link.href);
+interface Props {
+  detailed?: boolean;
+}
+const { detailed = false } = Astro.props;
 ---
 
-<ul class="flex flex-wrap gap-x-7 gap-y-2" role="list">
-  {socialLinks.map((link) => (
-    <li>
-      <TextLink href={link.href}>{link.label}</TextLink>
-    </li>
-  ))}
-</ul>
+{detailed ? (
+  <dl class="grid gap-x-8 sm:grid-cols-[8rem_minmax(0,1fr)]">
+    {socialLinks.map((link) => (
+      <>
+        <dt class="pt-2.5 text-sm text-muted">{link.label}</dt>
+        <dd class="m-0 mb-1 min-w-0 break-words">
+          <TextLink href={link.href}>{link.display}</TextLink>
+        </dd>
+      </>
+    ))}
+  </dl>
+) : (
+  <ul class="flex flex-wrap gap-x-6" role="list">
+    {socialLinks.map((link) => (
+      <li>
+        <TextLink href={link.href}>{link.label}</TextLink>
+      </li>
+    ))}
+  </ul>
+)}

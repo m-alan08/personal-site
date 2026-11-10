@@ -1,138 +1,104 @@
 ---
-import ConnectionGraph from "./ConnectionGraph.astro";
 import type { Project } from "../data/projects";
 import { caseStudy, labels, site } from "../content/site";
+import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
-import ArchitectureDiagram from "./ArchitectureDiagram.astro";
+import CaseStudySection from "./CaseStudySection.astro";
 interface Props {
   project: Project;
 }
 const { project } = Astro.props;
+const links = externalLinks(project);
+const meta = [
+  project.ownership,
+  project.event &&
+    [project.event.name, project.event.year, project.event.duration]
+      .filter(Boolean)
+      .join(" "),
+].filter(Boolean);
+const facts = [
+  { term: caseStudy.status, detail: project.status },
+  { term: caseStudy.stack, detail: project.technology.join(", ") },
+  {
+    term: caseStudy.team,
+    detail: project.event?.teammates.length
+      ? [site.name, ...project.event.teammates].join(", ")
+      : "",
+  },
+  {
+    term: project.event?.name ?? "",
+    detail: [project.event?.dates, project.event?.location]
+      .filter(Boolean)
+      .join(", "),
+  },
+].filter((fact) => fact.term && fact.detail);
 ---
 
-<article>
-  <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-accent">
-    <p>{project.category}</p>
-    <p>{project.ownership}</p>
-    {project.event && (
-      <p>
-        {project.event.name} {project.event.year} / {project.event.duration}
-      </p>
-    )}
-  </div>
-  <h1 class="mt-4 max-w-reading text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
+<article class="max-w-reading">
+  <p class="text-sm text-muted">{meta.join(" · ")}</p>
+  <h1 class="mt-3 text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
     {project.title}
   </h1>
-  <p class="mt-6 max-w-reading text-xl text-muted">{project.summary}</p>
-  {project.event?.dates && (
-    <p class="mt-4 text-muted">
-      {project.event.dates}
-      {project.event.location && `, ${project.event.location}`}
-    </p>
+  <p class="mt-5 text-lg text-muted">{project.summary}</p>
+  {links.length > 0 && (
+    <ul class="mt-4 flex flex-wrap gap-x-6" role="list">
+      {links.map((link) => (
+        <li>
+          <TextLink href={link.href}>{link.label}</TextLink>
+        </li>
+      ))}
+    </ul>
   )}
-  <div class="mt-8 flex flex-wrap gap-x-6">
-    {project.repository && (
-      <TextLink href={project.repository}>{labels.repository}</TextLink>
-    )}
-    {project.devpost && (
-      <TextLink href={project.devpost}>{caseStudy.devpost}</TextLink>
-    )}
-  </div>
-  <div class="mt-10 grid gap-10 border-t border-line pt-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_400px]">
-    <div class="min-w-0 space-y-10">
-      <section>
-        <h2 class="text-2xl font-semibold tracking-tight">
-          {caseStudy.problem}
-        </h2>
-        <p class="mt-4 max-w-reading text-muted">{project.problem}</p>
-      </section>
-      <section>
-        <h2 class="text-2xl font-semibold tracking-tight">{caseStudy.role}</h2>
-        <p class="mt-4 max-w-reading text-muted">{project.role}</p>
-      </section>
-      {project.approach.length > 0 && (
-        <section>
-          <h2 class="text-2xl font-semibold tracking-tight">
-            {caseStudy.approach}
-          </h2>
-          <div class="mt-4 max-w-reading space-y-4 text-muted">
-            {project.approach.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
-          </div>
-        </section>
-      )}
-      {project.lessons.length > 0 && (
-        <section>
-          <h2 class="text-2xl font-semibold tracking-tight">
-            {caseStudy.lessons}
-          </h2>
-          <ul class="mt-4 max-w-reading list-disc space-y-3 pl-5 text-muted">
-            {project.lessons.map((lesson) => (
-              <li>{lesson}</li>
-            ))}
-          </ul>
-        </section>
-      )}
-    </div>
-    <aside class="min-w-0 space-y-8">
-      <section class="surface rounded-xl p-6">
-        <h2 class="text-lg font-semibold">{caseStudy.status}</h2>
-        <p class="mt-3 text-accent">{project.status}</p>
-        {project.technology.length > 0 && (
-          <>
-            <h3 class="mt-6 font-semibold">{caseStudy.stack}</h3>
-            <ul class="mt-3 flex flex-wrap gap-2" role="list">
-              {project.technology.map((tool) => (
-                <li class="rounded-sm bg-canvas px-2 py-1">{tool}</li>
-              ))}
-            </ul>
-          </>
-        )}
-        {project.event && project.event.teammates.length > 0 && (
-          <>
-            <h3 class="mt-6 font-semibold">{caseStudy.team}</h3>
-            <p class="mt-3 text-muted">
-              {[site.name, ...project.event.teammates].join(", ")}
+  <dl class="mt-10 grid gap-x-8 gap-y-4 border-t border-line pt-8 text-sm sm:grid-cols-[8rem_minmax(0,1fr)]">
+    {facts.map((fact) => (
+      <>
+        <dt class="text-muted">{fact.term}</dt>
+        <dd class="m-0">{fact.detail}</dd>
+      </>
+    ))}
+  </dl>
+  <CaseStudySection title={caseStudy.problem} paragraphs={[project.problem]} />
+  <CaseStudySection title={caseStudy.role} paragraphs={[project.role]} />
+  <CaseStudySection title={caseStudy.approach} paragraphs={project.approach} />
+  {project.diagram && (
+    <section class="mt-12">
+      <h2 class="text-lg font-medium tracking-tight">
+        {project.diagram.title}
+      </h2>
+      <p class="mt-3 text-muted">{project.diagram.description}</p>
+      <ol class="mt-5 space-y-3 border-l border-line pl-5" role="list">
+        {project.diagram.nodes.map((node, index) => (
+          <li>
+            <p>
+              <span class="mr-3 text-sm tabular-nums text-muted">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              {node.title}
             </p>
-          </>
-        )}
-      </section>
-      {project.diagram && (
-        <ArchitectureDiagram diagram={project.diagram} slug={project.slug} />
-      )}
-    </aside>
-  </div>
-  {project.interactive === "connections" && <ConnectionGraph />}
-  <section class="mt-12 rounded-xl border-l-2 border-accent bg-surface p-6 sm:p-8">
-    <h2 class="text-2xl font-semibold tracking-tight">
-      {caseStudy.limitations}
-    </h2>
-    <div class="mt-4 max-w-reading space-y-3 text-muted">
-      {project.limitations.map((paragraph) => (
-        <p>{paragraph}</p>
-      ))}
-    </div>
-  </section>
-  {project.writeup.length > 0 && (
-    <details class="mt-8 border-t border-line py-4">
-      <summary class="min-h-11 cursor-pointer py-2 font-semibold text-accent">
-        {labels.projectNotes}
-      </summary>
-      <div class="max-w-reading space-y-4 py-4 text-muted">
-        {project.writeup.map((paragraph) => (
-          <p>{paragraph}</p>
+            <p class="ml-8 text-sm text-muted">{node.detail}</p>
+          </li>
         ))}
-      </div>
-    </details>
+      </ol>
+      <p class="mt-4 text-sm text-muted">{project.diagram.note}</p>
+    </section>
   )}
-  <section class="mt-12 border-t border-line pt-8">
-    <h2 class="text-xl font-semibold">{labels.source}</h2>
-    <p class="mt-3 max-w-reading text-muted">{project.sourceNote}</p>
-    <div class="mt-4 flex flex-wrap gap-x-6">
-      {project.sources.map((source) => (
-        <TextLink href={source.href}>{source.label}</TextLink>
-      ))}
-    </div>
+  <CaseStudySection title={caseStudy.lessons} paragraphs={project.lessons} />
+  <CaseStudySection
+    title={caseStudy.limitations}
+    paragraphs={project.limitations}
+  />
+  <CaseStudySection title={labels.projectNotes} paragraphs={project.writeup} />
+  <section class="mt-12 border-t border-line pt-8 text-sm">
+    <h2 class="font-medium">{labels.source}</h2>
+    <p class="mt-3 text-muted">{project.sourceNote}</p>
+    {project.sources.length > 0 && (
+      <ul class="mt-2 flex flex-wrap gap-x-6" role="list">
+        {project.sources.map((source) => (
+          <li>
+            <TextLink href={source.href}>{source.label}</TextLink>
+          </li>
+        ))}
+      </ul>
+    )}
   </section>
 </article>

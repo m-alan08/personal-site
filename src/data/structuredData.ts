@@ -1,5 +1,6 @@
 import { site } from "../content/site";
-import { links, localPath } from "./links";
+import { profile, researchInterests } from "../content/profile";
+import { links, localPath, optionalLinks } from "./links";
 
 export function structuredData(
   origin: URL,
@@ -13,22 +14,13 @@ export function structuredData(
     "@id": `${home}#person`,
     name: site.name,
     url: home,
-    sameAs: [
-      links.github,
-      ...(links.xHandle
-        ? [`https://x.com/${links.xHandle.replace(/^@/, "")}`]
-        : []),
-    ],
+    sameAs: [links.github, optionalLinks.x, links.linkedin].filter(Boolean),
     ...(links.email ? { email: `mailto:${links.email}` } : {}),
     affiliation: {
       "@type": "CollegeOrUniversity",
-      name: "Georgia Institute of Technology",
+      name: profile.education.school,
     },
-    knowsAbout: [
-      "Artificial intelligence",
-      "Machine learning",
-      "Reinforcement learning",
-    ],
+    knowsAbout: researchInterests.map((interest) => interest.title),
   };
   const website = {
     "@type": "WebSite",
