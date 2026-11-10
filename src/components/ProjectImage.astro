@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import type { ProjectImage } from "../data/projects";
+interface Props {
+  image: ProjectImage;
+  sizes: string;
+  eager?: boolean;
+  natural?: boolean;
+}
+const { image, sizes, eager = false, natural = false } = Astro.props;
+---
+
+<Image
+  src={image.src}
+  alt={image.alt}
+  widths={[320, 640, 960]}
+  sizes={sizes}
+  format="webp"
+  quality={78}
+  loading={eager ? "eager" : "lazy"}
+  class:list={[
+    "w-full rounded-lg border border-line bg-surface",
+    natural
+      ? "h-auto"
+      : image.fit === "cover"
+        ? "aspect-[16/10] object-cover object-top"
+        : "aspect-[16/10] object-contain p-2",
+  ]}
+/>

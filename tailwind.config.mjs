@@ -2,6 +2,16 @@ export default {
   theme: {
     extend: {
       maxWidth: { reading: "68ch" },
+      fontFamily: {
+        display: [
+          "ui-serif",
+          '"Iowan Old Style"',
+          '"Palatino Linotype"',
+          "Palatino",
+          "Georgia",
+          "serif",
+        ],
+      },
       colors: {
         canvas: "var(--canvas)",
         surface: "var(--surface)",
