@@ -35,6 +35,9 @@ export const labels = {
   technology: "Tools and methods",
   projectNotes: "Project notes",
   backToProjects: "Back to projects",
+  moreProjects: "More projects",
+  previousProject: "Previous",
+  nextProject: "Next",
   source: "Source and scope",
 };
 

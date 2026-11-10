@@ -16,14 +16,13 @@ import {
   writing,
   experience,
 } from "../content/profile";
-import { projects } from "../data/projects";
+import { orderedProjects } from "../data/projects";
 import { projectLink } from "../data/links";
 import { sectionLabel } from "../data/sections";
-const ordered = [...projects].sort(
-  (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity),
+const featured = orderedProjects.filter(
+  (project) => project.featured !== false,
 );
-const featured = ordered.filter((project) => project.featured !== false);
-const other = ordered.filter((project) => project.featured === false);
+const other = orderedProjects.filter((project) => project.featured === false);
 ---
 
 <BaseLayout title={site.name} description={site.description}>
