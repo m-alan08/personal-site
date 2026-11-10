@@ -103,6 +103,7 @@ const other = orderedProjects.filter((project) => project.featured === false);
             meta: project.status,
             summary: project.summary,
             href: projectLink(project.slug),
+            internal: true,
           }))}
         />
       </div>

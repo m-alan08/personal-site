@@ -1,9 +1,11 @@
 ---
+import ArrowLink from "./ArrowLink.astro";
 interface Entry {
   title: string;
   meta?: string;
   summary: string;
   href?: string;
+  internal?: boolean;
 }
 interface Props {
   entries: Entry[];
@@ -16,7 +18,9 @@ const { entries } = Astro.props;
     <li class="py-6 first:pt-0 last:pb-0">
       <div>
         <h3 class="font-medium leading-snug tracking-tight">
-          {entry.href ? (
+          {entry.href && entry.internal ? (
+            <ArrowLink href={entry.href} title={entry.title} />
+          ) : entry.href ? (
             <a
               href={entry.href}
               class="inline-flex min-h-11 items-center -my-3 py-3 underline decoration-accent decoration-1 underline-offset-[5px] transition-colors duration-150 hover:decoration-ink motion-reduce:transition-none"
