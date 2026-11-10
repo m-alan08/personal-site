@@ -10,6 +10,9 @@ interface Props {
 }
 const { project } = Astro.props;
 const links = externalLinks(project);
+const images = [project.image, ...(project.gallery ?? [])].filter(
+  (image) => image !== undefined,
+);
 const meta = [
   project.ownership,
   project.event &&
@@ -50,24 +53,14 @@ const facts = [
       ))}
     </ul>
   )}
-  {(project.figure ?? project.image) && (
-    <div class="mt-8">
-      <ProjectImage
-        image={project.figure ?? project.image!}
-        natural
-        sizes="(min-width: 768px) 68ch, 100vw"
-        eager
-      />
-    </div>
-  )}
-  {project.gallery && (
-    <ul class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3" role="list">
-      {project.gallery.map((image) => (
+  {images.length > 0 && (
+    <ul class="mt-8 grid gap-3 sm:grid-cols-2" role="list">
+      {images.map((image, index) => (
         <li>
           <ProjectImage
             image={image}
-            tile={image.fit === "cover"}
-            sizes="(min-width: 640px) 13rem, 50vw"
+            sizes="(min-width: 640px) 34ch, 100vw"
+            eager={index === 0}
           />
         </li>
       ))}
