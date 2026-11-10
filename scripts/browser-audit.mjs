@@ -162,7 +162,9 @@ try {
           );
           await page.goto(`${origin}${path}`, { waitUntil: "networkidle" });
           const focusables = await page
-            .locator("a[href],button:not([disabled]),input,summary")
+            .locator(
+              'a[href]:not([tabindex="-1"]),button:not([disabled]),input,summary',
+            )
             .evaluateAll((elements) =>
               elements
                 .filter(
