@@ -1,16 +1,10 @@
 import type { ImageMetadata } from "astro";
 import quantrlFetchImage from "../assets/projects/quantrl-fetch.png";
 import quantrlFetchResults from "../assets/projects/quantrl-fetch-results.png";
-import ariAiImage from "../assets/projects/ari-ai.png";
-import quantrlFetchPush from "../assets/projects/quantrl-fetch-push.png";
-import quantrlFetchPushResults from "../assets/projects/quantrl-fetch-push-results.png";
 import ariAiConsole from "../assets/projects/ari-ai-console.png";
 import ariAiDefenseLab from "../assets/projects/ari-ai-defense-lab.png";
-import ariAiPerformance from "../assets/projects/ari-ai-performance.png";
 import constellationImage from "../assets/projects/constellation.png";
 import constellationPoster from "../assets/projects/constellation-poster.png";
-import constellationFeed from "../assets/projects/constellation-feed.png";
-import constellationGraph from "../assets/projects/constellation-graph.png";
 
 export interface ProjectImage {
   src: ImageMetadata;
@@ -134,16 +128,6 @@ export const projects: Project[] = [
         alt: "FetchReach results plot: success rate and final distance against bit width for PTQ, QAT fine-tuning, and QAT from scratch, averaged over 3 training seeds",
         fit: "contain",
       },
-      {
-        src: quantrlFetchPush,
-        alt: "FetchPush simulation comparing a 5-bit post-training quantized policy with a 5-bit policy trained with quantization from scratch",
-        fit: "contain",
-      },
-      {
-        src: quantrlFetchPushResults,
-        alt: "FetchPush results plot: success rate and final distance against bit width for PTQ, QAT fine-tuning, and QAT from scratch",
-        fit: "contain",
-      },
     ],
     title: "Quantization-aware RL for robotic arm control",
     summary:
@@ -197,16 +181,6 @@ export const projects: Project[] = [
       {
         src: ariAiDefenseLab,
         alt: "Ari AI Defense Lab network view replaying a recorded run, with the defender slowing traffic to the API server",
-        fit: "contain",
-      },
-      {
-        src: ariAiPerformance,
-        alt: "Ari AI Defense Lab results: the trained defender lets 7.1% of attacks reach their goal and keeps services up 94.4% of the time",
-        fit: "contain",
-      },
-      {
-        src: ariAiImage,
-        alt: "Ari AI RL defense study figure: paired return differences across seeds and safety tradeoffs on held-out episodes",
         fit: "contain",
       },
     ],
@@ -397,16 +371,6 @@ export const projects: Project[] = [
       {
         src: constellationImage,
         alt: "Constellation app home screen with nearby discovery settings and a suggested introduction",
-        fit: "contain",
-      },
-      {
-        src: constellationFeed,
-        alt: "Constellation feed screen with updates from people in your circle",
-        fit: "contain",
-      },
-      {
-        src: constellationGraph,
-        alt: "Constellation network screen with options to verify a meeting and connection stats",
         fit: "contain",
       },
     ],
