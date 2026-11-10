@@ -8,7 +8,7 @@ const { entries = projects } = Astro.props;
 ---
 
 <div class="divide-y divide-line">
-  {entries.map((project) => (
-    <ProjectCard project={project} />
+  {entries.map((project, index) => (
+    <ProjectCard project={project} number={index + 1} />
   ))}
 </div>

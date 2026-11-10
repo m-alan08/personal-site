@@ -6,7 +6,6 @@ import portrait from "../assets/portrait.jpg";
 import EntryList from "../components/EntryList.astro";
 import HyphenSafeText from "../components/HyphenSafeText.astro";
 import InterestGrid from "../components/InterestGrid.astro";
-import ProjectIndex from "../components/ProjectIndex.astro";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
 import SocialLinks from "../components/SocialLinks.astro";
@@ -19,7 +18,6 @@ import {
   experience,
 } from "../content/profile";
 import { orderedProjects } from "../data/projects";
-import { projectAnchor, projectLink } from "../data/links";
 import { sectionLabel } from "../data/sections";
 const featured = orderedProjects.filter(
   (project) => project.featured !== false,
@@ -106,23 +104,8 @@ const other = orderedProjects.filter((project) => project.featured === false);
       {profile.education.graduation}
     </p>
   </Section>
-  <Section id="projects" title={sectionLabel("projects")}>
-    <ProjectIndex slot="aside" projects={[...featured, ...other]} />
-    <ProjectList entries={featured} />
-    {other.length > 0 && (
-      <div class="mt-10 border-t border-line pt-8">
-        <EntryList
-          entries={other.map((project) => ({
-            id: projectAnchor(project.slug),
-            title: project.title,
-            meta: project.status,
-            summary: project.summary,
-            href: projectLink(project.slug),
-            internal: true,
-          }))}
-        />
-      </div>
-    )}
+  <Section id="projects" title={site.selectedProjects} stacked>
+    <ProjectList entries={[...featured, ...other]} />
   </Section>
   <Section id="research" title={sectionLabel("research")}>
     <p class="mb-8 max-w-reading text-muted">
