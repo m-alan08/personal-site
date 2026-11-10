@@ -1,0 +1,56 @@
+---
+import type { Project } from "../data/projects";
+import { site } from "../content/site";
+import { projectAnchor } from "../data/links";
+import HyphenSafeText from "./HyphenSafeText.astro";
+interface Props {
+  projects: Project[];
+}
+const { projects } = Astro.props;
+---
+
+<p class="mt-5 text-sm leading-relaxed text-muted">{site.projectsIntro}</p>
+<nav aria-label={site.projectIndex} class="mt-8 hidden lg:block">
+  <ol class="border-l border-line" role="list">
+    {projects.map((project, index) => (
+      <li>
+        <a
+          href={`#${projectAnchor(project.slug)}`}
+          data-project-link
+          class="group -ml-px flex min-h-11 items-baseline gap-3 border-l border-transparent py-2.5 pl-4 text-sm leading-snug text-muted transition-colors duration-150 hover:text-ink aria-[current=true]:border-accent aria-[current=true]:text-ink motion-reduce:transition-none"
+        >
+          <span class="text-xs tabular-nums tracking-[0.2em] group-aria-[current=true]:text-accent">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span>
+            <HyphenSafeText text={project.title} />
+          </span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script>
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>("[data-project-link]"),
+  ];
+  const setActive = (id: string) => {
+    for (const link of links) {
+      if (link.hash === `#${id}`) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    }
+  };
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      }
+    },
+    { rootMargin: "-35% 0px -60% 0px" },
+  );
+  for (const link of links) {
+    const target = document.getElementById(link.hash.slice(1));
+    if (target) observer.observe(target);
+  }
+</script>

@@ -14,6 +14,9 @@ export const site = {
   backToTop: "Back to top",
   selectedProjects: "Selected projects",
   allProjects: "All projects",
+  projectsIntro:
+    "Selected work in robotics, machine learning, and software systems.",
+  projectIndex: "Project index",
   sections: {
     about: "About",
     projects: "Projects",

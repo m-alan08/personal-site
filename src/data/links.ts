@@ -82,3 +82,7 @@ export function projectLink(slug: string): string {
 export function shareImageLink(slug: string): string {
   return localPath(`og/${slug}.png`);
 }
+
+export function projectAnchor(slug: string): string {
+  return `project-${slug}`;
+}
