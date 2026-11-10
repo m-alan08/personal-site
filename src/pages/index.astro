@@ -1,10 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import EntryList from "../components/EntryList.astro";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 import { site } from "../content/site";
+import {
+  profile,
+  researchInterests,
+  researchNote,
+  writing,
+  experience,
+} from "../content/profile";
+import { projects } from "../data/projects";
+import { projectLink } from "../data/links";
 import { sectionLabel } from "../data/sections";
+const ordered = [...projects].sort(
+  (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity),
+);
+const featured = ordered.filter((project) => project.featured !== false);
+const other = ordered.filter((project) => project.featured === false);
 ---
 
 <BaseLayout title={site.title} description={site.description}>
@@ -13,24 +28,82 @@ import { sectionLabel } from "../data/sections";
       id="intro-heading"
       class="text-4xl font-medium tracking-tight sm:text-5xl"
     >
-      {site.name}
+      {profile.name}
     </h1>
-    <p class="mt-5 max-w-reading text-lg text-muted">{site.introduction}</p>
+    <p class="mt-6 max-w-reading text-lg leading-relaxed">{profile.headline}</p>
+    {profile.intro.map((paragraph) => (
+      <p class="mt-4 max-w-reading text-muted">{paragraph}</p>
+    ))}
+    <ul
+      class="mt-6 flex max-w-reading flex-wrap gap-x-3 gap-y-1 text-sm text-muted"
+      role="list"
+      aria-label={sectionLabel("research")}
+    >
+      {researchInterests.map((interest, index) => (
+        <li>
+          {interest.title}
+          {index < researchInterests.length - 1 && (
+            <span aria-hidden="true" class="ml-3 text-control">
+              /
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
     <div class="mt-6">
       <SocialLinks />
     </div>
   </section>
   <Section id="about" title={sectionLabel("about")}>
     <div class="max-w-reading space-y-4">
-      {site.bio.map((paragraph) => (
+      {profile.about.map((paragraph) => (
         <p>{paragraph}</p>
       ))}
     </div>
+    <p class="mt-6 text-sm text-muted">
+      {profile.education.school} · {profile.education.field}
+    </p>
   </Section>
   <Section id="projects" title={sectionLabel("projects")}>
-    <ProjectList />
+    <ProjectList entries={featured} />
+    {other.length > 0 && (
+      <div class="mt-10 border-t border-line pt-8">
+        <EntryList
+          entries={other.map((project) => ({
+            title: project.title,
+            meta: project.status,
+            summary: project.summary,
+            href: projectLink(project.slug),
+          }))}
+        />
+      </div>
+    )}
+  </Section>
+  <Section id="research" title={sectionLabel("research")}>
+    <p class="mb-8 max-w-reading text-muted">{researchNote}</p>
+    <EntryList entries={researchInterests} />
+  </Section>
+  <Section id="writing" title={sectionLabel("writing")}>
+    <p class="mb-8 max-w-reading text-muted">{writing.intro}</p>
+    <EntryList
+      entries={writing.links.map((link) => ({
+        title: link.title,
+        summary: link.note,
+        href: link.href,
+      }))}
+    />
+  </Section>
+  <Section id="experience" title={sectionLabel("experience")}>
+    <EntryList
+      entries={experience.map((entry) => ({
+        title: `${entry.role}, ${entry.organization}`,
+        meta: entry.period,
+        summary: entry.summary,
+        href: entry.href,
+      }))}
+    />
   </Section>
   <Section id="contact" title={sectionLabel("contact")}>
-    <SocialLinks />
+    <SocialLinks detailed />
   </Section>
 </BaseLayout>
