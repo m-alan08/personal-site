@@ -54,15 +54,15 @@ All project additions go in `projects.ts`. Do not invent credentials, results, o
 
 ## Static hosting
 
-No deployment or hosting settings have been changed. The default canonical target is provisionally `https://m-alan08.github.io/personal-site/`. This is a configuration choice, not a claim that the site is live there.
+The site is hosted on GitHub Pages at `https://m-alan08.github.io/personal-site/`. The Deploy to GitHub Pages workflow builds `dist/` with the default base path and publishes it on every push to main, or on demand through workflow dispatch. In the repository settings, Pages must use GitHub Actions as its source.
 
-To build for a confirmed host with a root path, supply build-time inputs:
+To build for a different host with a root path, supply build-time inputs:
 
 ```sh
 SITE_URL=https://your-confirmed-host.example SITE_BASE=/ npm run build
 ```
 
-For GitHub Pages project hosting, keep the default base path and serve the contents of `dist/` at `/personal-site/`. For Vercel, build with the confirmed production origin and a root base, then serve `dist/`. Hosting configuration and deployment require a separate owner-authorized task. No backend, server functions, or database is required.
+For Vercel, build with the confirmed production origin and a root base, then serve `dist/`. No backend, server functions, or database is required.
 
 ## Maintenance
 
