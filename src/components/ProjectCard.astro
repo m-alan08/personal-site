@@ -55,10 +55,19 @@ const images = [project.image, ...(project.gallery ?? [])]
     </ul>
   </div>
   {images.length > 0 && (
-    <div class="grid grid-cols-2 gap-3 self-start lg:order-last lg:grid-cols-1">
+    <a
+      href={projectLink(project.slug)}
+      tabindex="-1"
+      aria-hidden="true"
+      class="group grid grid-cols-2 gap-3 self-start lg:order-last lg:grid-cols-1"
+    >
       {images.map((image) => (
-        <ProjectImage image={image} sizes="(min-width: 1024px) 16rem, 50vw" />
+        <ProjectImage
+          image={image}
+          sizes="(min-width: 1024px) 16rem, 50vw"
+          class="transition-colors duration-150 group-hover:border-muted motion-reduce:transition-none"
+        />
       ))}
-    </div>
+    </a>
   )}
 </article>
