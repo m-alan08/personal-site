@@ -19,7 +19,7 @@ export interface Experience {
 
 export const profile = {
   name: "Alan Mozhoor",
-  portraitAlt: "Portrait of Alan Mozhoor on a beach at sunset",
+  portraitAlt: "Headshot of Alan Mozhoor in a navy suit and tie",
   headline:
     "I study mathematics and computer science at Georgia Tech and work on reinforcement learning for robot control.",
   intro: [
