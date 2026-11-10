@@ -15,7 +15,12 @@ const meta = [project.ownership, project.event?.name, project.status].filter(
 const external = externalLinks(project);
 ---
 
-<article class="flex flex-col gap-6 py-10 first:pt-0 last:pb-0">
+<article
+  class:list={[
+    "grid gap-5 py-8 first:pt-0 last:pb-0",
+    project.image && "sm:grid-cols-[minmax(0,1fr)_14rem] sm:gap-8",
+  ]}
+>
   <div class="min-w-0">
     <h3 class="text-lg font-medium leading-snug tracking-tight">
       <a
@@ -51,10 +56,10 @@ const external = externalLinks(project);
     </ul>
   </div>
   {project.image && (
-    <div class="order-first">
+    <div class="sm:order-last">
       <ProjectImage
         image={project.image}
-        sizes="(min-width: 768px) 40rem, 100vw"
+        sizes="(min-width: 640px) 14rem, 100vw"
       />
     </div>
   )}

@@ -27,13 +27,13 @@ const other = ordered.filter((project) => project.featured === false);
 
 <BaseLayout title={site.name} description={site.description}>
   <section aria-labelledby="intro-heading" class="pb-16 sm:pb-20">
-    <div class="grid gap-8 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-10">
-      <div class="w-36 self-start rounded-xl border-2 border-accent bg-surface p-1.5 sm:mt-2 sm:w-44 sm:-rotate-2">
+    <div class="grid gap-8 sm:grid-cols-[15rem_minmax(0,1fr)] sm:gap-10">
+      <div class="w-48 self-start rounded-xl border-2 border-accent bg-surface p-1.5 sm:mt-2 sm:w-60 sm:-rotate-2">
         <Image
           src={portrait}
           alt={profile.portraitAlt}
-          width={176}
-          height={176}
+          width={240}
+          height={240}
           densities={[1, 2]}
           format="webp"
           loading="eager"
