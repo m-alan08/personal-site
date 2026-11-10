@@ -18,7 +18,7 @@ const external = externalLinks(project);
 <article
   class:list={[
     "grid gap-5 py-8 first:pt-0 last:pb-0",
-    project.image && "sm:grid-cols-[minmax(0,1fr)_14rem] sm:gap-8",
+    project.image && "sm:grid-cols-[minmax(0,1fr)_16rem] sm:gap-8",
   ]}
 >
   <div class="min-w-0">
@@ -59,7 +59,7 @@ const external = externalLinks(project);
     <div class="sm:order-last">
       <ProjectImage
         image={project.image}
-        sizes="(min-width: 640px) 14rem, 100vw"
+        sizes="(min-width: 640px) 16rem, 100vw"
       />
     </div>
   )}

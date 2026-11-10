@@ -20,24 +20,30 @@ export interface Experience {
 export const profile = {
   name: "Alan Mozhoor",
   portraitAlt: "Headshot of Alan Mozhoor in a navy suit and tie",
-  kicker: "hey! my name is",
+  tagline: "Math and CS at Georgia Tech · RL for robots",
   headline:
-    "I'm a math and CS student at Georgia Tech, and I spend most of my time teaching robots things with reinforcement learning.",
+    "I'm Alan. I study math and computer science at Georgia Tech, and most of my time goes into getting robots to learn things with reinforcement learning.",
   intro: [
-    "Lately I keep thinking about one question: when a robot has a fast learned controller and a slower planner or VLA model, who should do what? I'm also into making policies small enough to run on real hardware, and I post what I'm learning on X as I go.",
+    "The question I keep chasing: when a robot has a fast learned controller and a slower planner or VLA model on top, which one should make which call? I also like squeezing policies small enough to run on real hardware, and I write about it on X as I go.",
   ],
-  nowLabel: "Right now, I'm:",
-  now: [
-    "Squeezing RL policies down to a few bits in quantrl-fetch. With quantization-aware fine-tuning, a 4-bit actor gets back to 100% success on FetchReach.",
-    "CTO of Ari AI, an AI security system that finds vulnerabilities, reproduces exploits in a sandbox, and checks patches before a developer looks at them.",
-    "Building the RL post-training teacher pipeline for a SmolVLA robot arm policy with my team.",
-    "Running Ascent Math, a math tutoring business I co-founded.",
-  ],
-  previouslyLabel: "Previously, I:",
-  previously: [
-    "Built an AI voice agent at The Pert Group that handles 150+ customer interactions a month.",
-    "Trained a CNN to tell tinea from eczema in skin images at Georgia Southern University, at about 96% validation accuracy.",
-    "Built Constellation at HackGT 13 and started Ari AI at HackATL.",
+  currentLabel: "What I'm working on",
+  current: [
+    {
+      label: "Research",
+      text: "quantrl-fetch, where a 4-bit RL actor gets back to 100% success on FetchReach after quantization-aware fine-tuning.",
+    },
+    {
+      label: "Startup",
+      text: "Ari AI, where I'm CTO. It reproduces exploits in a sandbox and checks patches before a developer looks at them.",
+    },
+    {
+      label: "Team",
+      text: "The RL post-training teacher pipeline for a SmolVLA robot arm policy.",
+    },
+    {
+      label: "Teaching",
+      text: "Ascent Math, a math tutoring business I co-founded.",
+    },
   ],
   about: [
     "Most of my solo work is RL for manipulation. For quantrl-fetch I wrote Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch, then kept cutting the actor's precision to see when a simulated Fetch arm stops working. On FetchPush, a 5-bit actor trained with quantization from the start still hits 96.3%. Go lower and it falls apart fast.",

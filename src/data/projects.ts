@@ -6,6 +6,10 @@ import quantrlFetchPush from "../assets/projects/quantrl-fetch-push.png";
 import quantrlFetchPushResults from "../assets/projects/quantrl-fetch-push-results.png";
 import quantrlFetchReachAblation from "../assets/projects/quantrl-fetch-reach-ablation.png";
 import ariAiV9 from "../assets/projects/ari-ai-v9.png";
+import ariAiConsole from "../assets/projects/ari-ai-console.png";
+import ariAiDefenseLab from "../assets/projects/ari-ai-defense-lab.png";
+import ariAiPerformance from "../assets/projects/ari-ai-performance.png";
+import ariAiSteps from "../assets/projects/ari-ai-steps.png";
 import constellationImage from "../assets/projects/constellation.png";
 import constellationPoster from "../assets/projects/constellation-poster.png";
 import constellationFeed from "../assets/projects/constellation-feed.png";
@@ -199,11 +203,31 @@ export const projects: Project[] = [
   {
     slug: "ari-ai",
     image: {
-      src: ariAiImage,
-      alt: "Ari AI RL defense study figure: paired return differences across seeds and safety tradeoffs on held-out episodes",
-      fit: "contain",
+      src: ariAiConsole,
+      alt: "Ari AI landing page with the headline Find the flaw. Prove the fix. above its seven-stage pipeline from understand to monitor",
+      fit: "cover",
     },
     gallery: [
+      {
+        src: ariAiDefenseLab,
+        alt: "Ari AI Defense Lab network view replaying a recorded run, with the defender slowing traffic to the API server",
+        fit: "contain",
+      },
+      {
+        src: ariAiPerformance,
+        alt: "Ari AI Defense Lab results: the trained defender lets 7.1% of attacks reach their goal and keeps services up 94.4% of the time",
+        fit: "contain",
+      },
+      {
+        src: ariAiSteps,
+        alt: "Ari AI landing page section describing four steps from mapping the attack surface to fixing and proving the fix",
+        fit: "contain",
+      },
+      {
+        src: ariAiImage,
+        alt: "Ari AI RL defense study figure: paired return differences across seeds and safety tradeoffs on held-out episodes",
+        fit: "contain",
+      },
       {
         src: ariAiV9,
         alt: "Ari AI RL defense V9 study: validation score during training across five seeds and held-out return against the incumbent policy",
