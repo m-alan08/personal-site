@@ -2,7 +2,14 @@ import type { ImageMetadata } from "astro";
 import quantrlFetchImage from "../assets/projects/quantrl-fetch.png";
 import quantrlFetchResults from "../assets/projects/quantrl-fetch-results.png";
 import ariAiImage from "../assets/projects/ari-ai.png";
+import quantrlFetchPush from "../assets/projects/quantrl-fetch-push.png";
+import quantrlFetchPushResults from "../assets/projects/quantrl-fetch-push-results.png";
+import quantrlFetchReachAblation from "../assets/projects/quantrl-fetch-reach-ablation.png";
+import ariAiV9 from "../assets/projects/ari-ai-v9.png";
 import constellationImage from "../assets/projects/constellation.png";
+import constellationPoster from "../assets/projects/constellation-poster.png";
+import constellationFeed from "../assets/projects/constellation-feed.png";
+import constellationGraph from "../assets/projects/constellation-graph.png";
 
 export interface ProjectImage {
   src: ImageMetadata;
@@ -57,6 +64,7 @@ export interface Project {
   order?: number;
   image?: ProjectImage;
   figure?: ProjectImage;
+  gallery?: ProjectImage[];
 }
 
 export const projects: Project[] = [
@@ -125,6 +133,28 @@ export const projects: Project[] = [
       alt: "FetchReach results plot: success rate and final distance against bit width for PTQ, QAT fine-tuning, and QAT from scratch, averaged over 3 training seeds",
       fit: "contain",
     },
+    gallery: [
+      {
+        src: quantrlFetchPush,
+        alt: "FetchPush simulation comparing a 5-bit post-training quantized policy with a 5-bit policy trained with quantization from scratch",
+        fit: "contain",
+      },
+      {
+        src: quantrlFetchPushResults,
+        alt: "FetchPush results plot: success rate and final distance against bit width for PTQ, QAT fine-tuning, and QAT from scratch",
+        fit: "contain",
+      },
+      {
+        src: quantrlFetchReachAblation,
+        alt: "FetchReach PTQ ablation: success rate and final distance against bit width depending on whether weights, activations, or both are quantized",
+        fit: "contain",
+      },
+      {
+        src: quantrlFetchImage,
+        alt: "FetchReach simulation comparing a 4-bit post-training quantized policy with a 4-bit quantization-aware fine-tuned policy",
+        fit: "contain",
+      },
+    ],
     title: "Quantization-aware RL for robotic arm control",
     summary:
       "I measure how low an RL policy's actor precision can go before a simulated Fetch robot arm stops completing its task.",
@@ -173,6 +203,13 @@ export const projects: Project[] = [
       alt: "Ari AI RL defense study figure: paired return differences across seeds and safety tradeoffs on held-out episodes",
       fit: "contain",
     },
+    gallery: [
+      {
+        src: ariAiV9,
+        alt: "Ari AI RL defense V9 study: validation score during training across five seeds and held-out return against the incumbent policy",
+        fit: "contain",
+      },
+    ],
     title: "Ari AI",
     category: "Hackathon",
     event: null,
@@ -352,10 +389,27 @@ export const projects: Project[] = [
   {
     slug: "constellation",
     image: {
-      src: constellationImage,
-      alt: "Constellation app home screen with nearby discovery settings and a suggested introduction",
+      src: constellationPoster,
+      alt: "Constellation title card: Real conversations. Real connections. Built at HackGT 13.",
       fit: "cover",
     },
+    gallery: [
+      {
+        src: constellationImage,
+        alt: "Constellation app home screen with nearby discovery settings and a suggested introduction",
+        fit: "cover",
+      },
+      {
+        src: constellationFeed,
+        alt: "Constellation feed screen with updates from people in your circle",
+        fit: "cover",
+      },
+      {
+        src: constellationGraph,
+        alt: "Constellation network screen with options to verify a meeting and connection stats",
+        fit: "cover",
+      },
+    ],
     title: "Constellation",
     category: "Hackathon",
     event: {
@@ -456,7 +510,6 @@ export const projects: Project[] = [
       },
     ],
     contribution: "Matching, ranking models, and match explanations.",
-    featured: false,
     order: 4,
   },
 ];

@@ -19,6 +19,7 @@ export default {
         muted: "var(--muted)",
         line: "var(--line)",
         control: "var(--control)",
+        accent: "var(--accent)",
       },
     },
   },

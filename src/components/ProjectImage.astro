@@ -6,14 +6,21 @@ interface Props {
   sizes: string;
   eager?: boolean;
   natural?: boolean;
+  tile?: boolean;
 }
-const { image, sizes, eager = false, natural = false } = Astro.props;
+const {
+  image,
+  sizes,
+  eager = false,
+  natural = false,
+  tile = false,
+} = Astro.props;
 ---
 
 <Image
   src={image.src}
   alt={image.alt}
-  widths={[320, 640, 960]}
+  widths={[320, 640, 960, 1280]}
   sizes={sizes}
   format="webp"
   quality={78}
@@ -22,8 +29,11 @@ const { image, sizes, eager = false, natural = false } = Astro.props;
     "w-full rounded-lg border border-line bg-surface",
     natural
       ? "h-auto"
-      : image.fit === "cover"
-        ? "aspect-[16/10] object-cover object-top"
-        : "aspect-[16/10] object-contain p-2",
+      : [
+          tile ? "aspect-[4/5]" : "aspect-video",
+          image.fit === "cover"
+            ? "object-cover object-top"
+            : "object-contain p-2",
+        ],
   ]}
 />

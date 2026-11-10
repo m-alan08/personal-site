@@ -9,7 +9,7 @@ const isHome = Astro.url.pathname === localLinks.home;
   <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-1">
     <a
       href={localLinks.home}
-      class="inline-flex min-h-11 items-center font-medium tracking-tight text-ink"
+      class="inline-flex min-h-11 items-center font-display text-lg italic tracking-tight text-ink"
       aria-current={isHome ? "page" : undefined}
     >
       {site.name}
@@ -20,7 +20,7 @@ const isHome = Astro.url.pathname === localLinks.home;
           <li>
             <a
               href={isHome ? `#${section.id}` : sectionLink(section.id)}
-              class="inline-flex min-h-11 min-w-11 items-center justify-center px-2 text-sm text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+              class="inline-flex min-h-11 min-w-11 items-center justify-center px-2 text-sm text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
             >
               {section.label}
             </a>
