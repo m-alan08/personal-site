@@ -1,27 +1,27 @@
 # Content: open questions for Alan
 
-Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/links.ts`, and `src/data/projects.ts`. Everything below is unconfirmed. Until Alan answers, the site either leaves it out or uses the cautious wording described here.
+Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/links.ts`, and `src/data/projects.ts`. The resume is `public/resume.pdf`.
 
-## Contact and links
+## Answered by Alan on November 10, 2026
 
-- Email: `links.email` is set to `alanmozhoor@gmail.com`, the public email on Alan's GitHub profile. Confirm it should appear on the site, or set it to an empty string.
-- Resume: no PDF in the repository. `links.resumeFile` stays empty until one is added under `public/`.
-- X series: the writing section links to the X profile only. Send the URLs of the series or pinned threads to link posts directly.
-- LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, taken from GitHub social accounts. Confirm it is current.
+- Email: show both `alanmozhoor@gmail.com` and `amozhoor7@gatech.edu`.
+- X series: link the profile only for now.
+- Ari AI: Alan is CTO. Link the demo. Contribution details come from his resume.
+- Omen AI / ZeroDay Arena: removed from the site.
+- Ascent: Alan is a founder. His resume lists "Ascent Math (joinascentmath.com), Co-Founder & Head of Engineering, May 2026 to present", which the site uses. The aerospace bio on `ascentskillz/ascentskillz` is not used.
+- Robot arm project: do not link the team repository yet.
+- vla-finetuning-scaling: keep on the site.
+- Resume: supplied by Alan and added as `public/resume.pdf`. Experience entries for The Pert Group LLC and Georgia Southern University come from it.
 
-## Projects
+## Still open
 
-- Ari AI: confirm your exact role or title, which hackathon the project started at and when, and which parts you built. The current copy only says "I'm one of the team's contributors" until you confirm. Also confirm the demo at `https://ari-ai-lake.vercel.app` should be linked. The YC wording describes only a submission.
-- Ari AI and Omen AI: the Ari AI repository says it was built for HackATL, and Omen AI's README says Hacklanta 2026. Confirm whether these are the same event and whether Ari AI grew out of Omen AI. They are listed as separate projects for now.
-- Omen AI / ZeroDay Arena: the repository is private, so the repository and source links were removed. Confirm the demo at `https://omen-ai-security.vercel.app` should be linked, and give Hacklanta dates and location if you want them shown.
-- Robot arm project (`psamin/robotfpga`): confirm it is fine to link the team repository and to describe your work as the SGS teacher pipeline for SmolVLA post-training. Confirm the project name to show, since it is currently "Robot arm RL post-training" with slug `armlab`.
-- quantrl-fetch: results copied from the README on November 10, 2026. Update if Phase 5 starts.
-- vla-finetuning-scaling: shown as planned with no results, and not featured. Confirm you want it listed at all.
-
-## Experience
-
-- Ascent Math Tutoring: listed because Alan named it as entrepreneurial experience. No public source links it to Alan, and `ascentskillz/ascentskillz` has no commits by m-alan08. Confirm your role and title, dates, and a public URL. The page found at `ascentskillz/ascentskillz` has a tutor bio that lists Aerospace Engineering, which does not match your profile, so nothing from that page is used. The role is shown as "Math tutoring" with no period.
-- Other experience: add any jobs, research positions, or teaching roles with dates. None are listed beyond the above.
+- The resume PDF includes a phone number. It is published as is; confirm that is intended.
+- Degree name: the resume says "Bachelor of Science in Mathematics & Computing", while the site says "Mathematics and Computer Science" as Alan asked. Confirm which to show.
+- Resume metrics such as Ascent's automation and conversion percentages and The Pert Group's accuracy figures are not on the site. Add them only if Alan wants them.
+- quantrl-fetch: the resume says QAT sweeps are in progress, but the README reports them done. The site follows the README.
+- X series: add post or thread URLs when available.
+- Robot arm project: add the repository link when Alan approves.
+- LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
 
 ## Unique feature
 
