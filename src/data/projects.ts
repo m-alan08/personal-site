@@ -5,6 +5,8 @@ import ariAiConsole from "../assets/projects/ari-ai-console.png";
 import ariAiDefenseLab from "../assets/projects/ari-ai-defense-lab.png";
 import constellationImage from "../assets/projects/constellation.png";
 import constellationPoster from "../assets/projects/constellation-poster.png";
+import armlabFront from "../assets/projects/armlab-front.jpg";
+import armlabWrist from "../assets/projects/armlab-wrist.jpg";
 
 export interface ProjectImage {
   src: ImageMetadata;
@@ -291,6 +293,18 @@ export const projects: Project[] = [
     devpost: "",
     interactive: "none",
     slug: "armlab",
+    image: {
+      src: armlabFront,
+      alt: "Overhead calibration frame from the team's SO-101 robot arm setup: the arm at the top of a white table, with a medicine bottle in the center and a paper plate on the left",
+      fit: "contain",
+    },
+    gallery: [
+      {
+        src: armlabWrist,
+        alt: "Calibration frame from the SO-101 wrist camera, looking past the open gripper jaws at the white table",
+        fit: "contain",
+      },
+    ],
     title: "Robot arm vision policy: RL post-training",
     summary:
       "On a team robot arm project, I built the success-guided sampling pipeline for RL post-training of a SmolVLA pick-and-place policy in simulation.",
