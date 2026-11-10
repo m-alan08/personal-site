@@ -1,21 +1,28 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { projects } from "../../data/projects";
+import { orderedProjects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { labels } from "../../content/site";
 import { sectionLink } from "../../data/sections";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CaseStudy from "../../components/CaseStudy.astro";
 import TextLink from "../../components/TextLink.astro";
+import ProjectPager from "../../components/ProjectPager.astro";
 export const getStaticPaths = (() =>
-  projects.map((project) => ({
+  orderedProjects.map((project, index) => ({
     params: { slug: project.slug },
-    props: { project },
+    props: {
+      project,
+      previous: orderedProjects[index - 1],
+      next: orderedProjects[index + 1],
+    },
   }))) satisfies GetStaticPaths;
 interface Props {
   project: Project;
+  previous?: Project;
+  next?: Project;
 }
-const { project } = Astro.props;
+const { project, previous, next } = Astro.props;
 ---
 
 <BaseLayout title={project.title} description={project.summary}>
@@ -23,4 +30,5 @@ const { project } = Astro.props;
     <TextLink href={sectionLink("projects")}>{labels.backToProjects}</TextLink>
   </p>
   <CaseStudy project={project} />
+  <ProjectPager previous={previous} next={next} />
 </BaseLayout>

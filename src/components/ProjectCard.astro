@@ -5,6 +5,7 @@ import { projectLink } from "../data/links";
 import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
 import ProjectImage from "./ProjectImage.astro";
+import ArrowIcon from "./ArrowIcon.astro";
 interface Props {
   project: Project;
 }
@@ -32,18 +33,7 @@ const images = [project.image, ...(project.gallery ?? [])]
       >
         <span>
           {project.title}
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 16 16"
-            class="ml-1.5 inline-block size-3.5 -translate-y-px text-accent transition-transform duration-200 group-hover:translate-x-1 group-focus-visible:translate-x-1 motion-reduce:transition-none"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M3 8h9.5M8.5 4l4 4-4 4" />
-          </svg>
+          <ArrowIcon class="ml-1.5 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
         </span>
       </a>
     </h3>

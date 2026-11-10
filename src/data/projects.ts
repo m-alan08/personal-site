@@ -477,3 +477,7 @@ export const projects: Project[] = [
     order: 4,
   },
 ];
+
+export const orderedProjects = [...projects].sort(
+  (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity),
+);
