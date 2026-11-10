@@ -1,6 +1,6 @@
 ---
 interface Props {
-  direction?: "left" | "right";
+  direction?: "left" | "right" | "up";
   class?: string;
 }
 const { direction = "right", class: className } = Astro.props;
@@ -12,6 +12,7 @@ const { direction = "right", class: className } = Astro.props;
   class:list={[
     "inline-block size-3.5 -translate-y-px text-accent transition-transform duration-200 motion-reduce:transition-none",
     direction === "left" && "rotate-180",
+    direction === "up" && "-rotate-90",
     className,
   ]}
   fill="none"
