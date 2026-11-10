@@ -1,17 +1,26 @@
 export const site = {
   name: "Alan Mozhoor",
-  title: "Alan Mozhoor | Reinforcement learning and AI/ML",
+  title: "Alan Mozhoor | Reinforcement learning for robotics",
   description:
-    "Alan Mozhoor's reinforcement learning, robotics, matching and cybersecurity projects, with case studies, clear team roles and source code.",
-  introduction: "Reinforcement learning and AI/ML at Georgia Tech.",
+    "Alan Mozhoor studies mathematics and computer science at Georgia Tech and works on reinforcement learning for robot control, efficient policies, and AI security projects.",
+  introduction:
+    "Mathematics and computer science at Georgia Tech. Reinforcement learning for robot control.",
   bio: [
-    "I'm a Georgia Tech student focused on AI/ML, reinforcement learning, and research.",
-    "My work spans quantization-aware RL in simulation, robot arm post-training, and team hackathon projects in matching and cybersecurity.",
+    "I'm a Georgia Tech student in mathematics and computer science working on reinforcement learning for robot control.",
+    "I'm interested in pairing learned low-level control with higher-level reasoning and planning, and in how inference cost and latency shape what can run on a real robot.",
   ],
-  footer: "Reinforcement learning, robotics, and research.",
+  footer: "Reinforcement learning, robotics, and efficient policies.",
   skip: "Skip to content",
   selectedProjects: "Selected projects",
   allProjects: "All projects",
+  sections: {
+    about: "About",
+    projects: "Projects",
+    research: "Research interests",
+    writing: "Writing",
+    experience: "Experience",
+    contact: "Contact",
+  },
 };
 
 export const navigation = [
@@ -25,6 +34,7 @@ export const labels = {
   mainNavigation: "Main",
   github: "GitHub",
   x: "X",
+  linkedin: "LinkedIn",
   email: "Email me",
   resume: "Resume",
   repository: "View repository",
