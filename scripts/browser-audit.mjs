@@ -256,6 +256,13 @@ try {
     ),
     "smooth",
   );
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.mouse.move(640, 400);
+  await page.mouse.wheel(0, 600);
+  await page.waitForTimeout(80);
+  const gliding = await page.evaluate(() => window.scrollY);
+  assert.ok(gliding > 0 && gliding < 600, `momentum scroll eases: ${gliding}`);
+  await page.waitForFunction(() => window.scrollY === 600);
   await page.emulateMedia({ media: "print", colorScheme: "dark" });
   for (const selector of ["header", "footer"])
     assert.equal(
