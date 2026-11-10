@@ -10,6 +10,11 @@ const { project } = Astro.props;
 const meta = [project.ownership, project.event?.name, project.status].filter(
   Boolean,
 );
+const external = project.links?.length
+  ? project.links
+  : project.repository
+    ? [{ label: labels.repository, href: project.repository }]
+    : [];
 ---
 
 <article class="py-8 first:pt-0 last:pb-0">
@@ -36,13 +41,13 @@ const meta = [project.ownership, project.event?.name, project.status].filter(
         <span class="sr-only">: {project.title}</span>
       </TextLink>
     </li>
-    {project.repository && (
+    {external.map((link) => (
       <li>
-        <TextLink href={project.repository}>
-          {labels.repository}
+        <TextLink href={link.href}>
+          {link.label}
           <span class="sr-only">: {project.title}</span>
         </TextLink>
       </li>
-    )}
+    ))}
   </ul>
 </article>

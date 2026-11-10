@@ -23,13 +23,6 @@ export const site = {
   },
 };
 
-export const navigation = [
-  { label: "Projects", path: "projects/" },
-  { label: "About", path: "about/" },
-  { label: "Contact", path: "contact/" },
-  { label: "Resume", path: "resume/" },
-];
-
 export const labels = {
   mainNavigation: "Main",
   github: "GitHub",
@@ -46,38 +39,6 @@ export const labels = {
 };
 
 export const pages = {
-  projects: {
-    title: "Projects",
-    description:
-      "Research, robotics, and hackathon work. Each project names my contribution and the limits of its evidence.",
-    meta: "Explore Alan Mozhoor's RL, robotics, Constellation and ZeroDay Arena case studies, with clear team roles and evidence boundaries.",
-  },
-  about: {
-    title: "About",
-    description:
-      "I build and study systems in reinforcement learning, matching, and security.",
-    meta: "About Alan Mozhoor, a Georgia Tech student focused on AI/ML, reinforcement learning, and research.",
-    workHeading: "My work",
-    work: "In my solo project, I study how low-bit precision affects a policy for a simulated Fetch robot arm. In the team robot arm project, my contribution is RL post-training policy ideas and implementation. For Constellation, I owned matching, ranking, and match explanations. For ZeroDay Arena, I led security workflows, agents, and the main application.",
-    workLink: "Explore the projects",
-  },
-  contact: {
-    title: "Contact",
-    description: "Find my work and source code on GitHub.",
-    meta: "Contact information and GitHub profile for Alan Mozhoor, a Georgia Tech student working on reinforcement learning.",
-    missingEmail: "My email address is not listed here yet.",
-    githubText: "Browse my projects on GitHub.",
-  },
-  resume: {
-    title: "Resume",
-    description: "A copy of my resume, when available.",
-    meta: "Resume availability and project links for Alan Mozhoor.",
-    download: "Download resume (PDF)",
-    missing: "My resume is not available here yet.",
-    fallback:
-      "You can read about my projects and find their source code while the PDF is unavailable.",
-    projectLink: "View my projects",
-  },
   notFound: {
     title: "Page not found",
     description:
@@ -85,16 +46,6 @@ export const pages = {
     meta: "The requested page was not found on Alan Mozhoor's portfolio.",
     home: "Return home",
   },
-};
-
-export const palette = {
-  trigger: "Find a page",
-  shortcut: "Ctrl or Command K",
-  title: "Find a page",
-  search: "Search pages and projects",
-  close: "Close",
-  empty: "No matching pages.",
-  home: "Home",
 };
 
 export const caseStudy = {
