@@ -71,8 +71,9 @@ try {
   for (const [legacy, id] of Object.entries(legacyRedirects)) {
     const path = `${home}${legacy}/`;
     const page = await browser.newPage();
-    watch(page, path);
-    await page.goto(`${server.origin}${path}`);
+    page.on("pageerror", (error) => errors.push(`${path}: ${error.message}`));
+    const response = await page.goto(`${server.origin}${path}`);
+    assert.equal(response.status(), 200, `${path}: loads`);
     await page.waitForURL(
       (url) => url.pathname === home && url.hash === `#${id}`,
     );
