@@ -28,9 +28,23 @@ const images = [project.image, ...(project.gallery ?? [])]
     <h3 class="text-lg font-medium leading-snug tracking-tight">
       <a
         href={projectLink(project.slug)}
-        class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+        class="group inline-flex min-h-11 items-center transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
       >
-        {project.title}
+        <span>
+          {project.title}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            class="ml-1.5 inline-block size-3.5 -translate-y-px text-accent transition-transform duration-200 group-hover:translate-x-1 group-focus-visible:translate-x-1 motion-reduce:transition-none"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 8h9.5M8.5 4l4 4-4 4" />
+          </svg>
+        </span>
       </a>
     </h3>
     <p class="text-sm text-muted">{meta.join(" · ")}</p>
