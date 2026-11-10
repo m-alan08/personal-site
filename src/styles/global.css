@@ -24,6 +24,8 @@
 
 body {
   margin: 0;
+  background-image: linear-gradient(to bottom, #161618, var(--canvas) 42rem);
+  background-repeat: no-repeat;
   font-size: 1rem;
   line-height: 1.65;
 }
@@ -79,6 +81,7 @@ input {
     display: none;
   }
   body {
+    background-image: none;
     font-size: 11pt;
   }
   main {
