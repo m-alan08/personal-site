@@ -5,16 +5,8 @@ interface Props {
   image: ProjectImage;
   sizes: string;
   eager?: boolean;
-  natural?: boolean;
-  tile?: boolean;
 }
-const {
-  image,
-  sizes,
-  eager = false,
-  natural = false,
-  tile = false,
-} = Astro.props;
+const { image, sizes, eager = false } = Astro.props;
 ---
 
 <Image
@@ -26,14 +18,7 @@ const {
   quality={78}
   loading={eager ? "eager" : "lazy"}
   class:list={[
-    "w-full rounded-lg border border-line bg-surface",
-    natural
-      ? "h-auto"
-      : [
-          tile ? "aspect-[4/5]" : "aspect-video",
-          image.fit === "cover"
-            ? "object-cover object-top"
-            : "object-contain p-2",
-        ],
+    "aspect-video w-full rounded-lg border border-line bg-surface",
+    image.fit === "cover" ? "object-cover object-top" : "object-contain p-2",
   ]}
 />
