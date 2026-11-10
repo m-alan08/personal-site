@@ -153,7 +153,7 @@ export const projects: Project[] = [
     question: "Can an agent show that a fix actually works?",
     ownership: "Team project",
     status: "In development; submitted to Y Combinator",
-    scope: "Team project. I'm one of the team's contributors.",
+    scope: "Team project. I'm the CTO.",
     technology: [
       "Python",
       "FastAPI",
@@ -166,11 +166,11 @@ export const projects: Project[] = [
     writeup: [
       "Ari AI started at HackATL and kept going afterward. It treats a suspected vulnerability as a hypothesis: agents investigate the code, try to reproduce the exploit inside an isolated sandbox, propose a patch, and rerun the reproduction to check that the patch closes it. A developer reviews the evidence and decides whether to accept the fix.",
       "Security tooling that only flags issues leaves the hard work to developers, and a model's claim that a patch works is not evidence. Ari keeps reproduction, patching, and verification as separate steps, and testing is limited to authorized scope.",
-      "Ari AI was submitted to Y Combinator. That is an application, not an acceptance, investment, or endorsement.",
+      "I designed a Double DQN defense policy for the simulated 10-node network defense lab; on 90 held-out simulated episodes it lowers the breach rate from 35.6% for a rule-based baseline to 5.6%. Ari AI was submitted to Y Combinator. That is an application, not an acceptance, investment, or endorsement.",
     ],
     sourceNote:
-      "Based on the public README and Alan's description, checked on November 10, 2026. Ari AI is a team project; this page describes only Alan's part.",
-    role: "I'm one of the team's contributors. Adam Issac and other teammates build the project with me.",
+      "Based on the public README, Alan's description, and his resume, checked on November 10, 2026. Ari AI is a team project; this page describes only Alan's part.",
+    role: "I'm the CTO. I designed the Double DQN defense policy in the simulated defense lab and worked on the multi-agent security pipeline. Adam Issac and other teammates build the project with me.",
     problem:
       "Vulnerability scanners produce findings, not proof. Developers need to know whether an exploit is real and whether a proposed fix closes it before they merge anything.",
     approach: [
@@ -214,26 +214,26 @@ export const projects: Project[] = [
         kind: "repository",
       },
     ],
-    contribution: "One of the team's contributors.",
+    contribution: "CTO: defense policy and security pipeline.",
     featured: true,
     order: 2,
   },
   {
     category: "Robotics",
     event: null,
-    role: "I built the success-guided sampling (SGS) teacher pipeline used for RL post-training.",
+    role: "I built the success-guided sampling (SGS) teacher pipeline used for RL post-training and helped assemble and set up the SO-101 arm.",
     problem:
       "A fine-tuned vision-language-action policy can still fail on parts of a task. RL post-training can help, but only if training spends its effort on the states where the policy fails.",
     approach: [
       "Success-guided sampling: record per-state success and reset training episodes toward the states where the policy struggles, from rest, reaching, stable grasp, and near-goal reset families.",
       "Train a privileged-observation teacher with PPO in JAX on a randomized pick-and-place scene, using MJX and MuJoCo Warp for batched GPU simulation with CPU parity tests.",
-      "Planned: distill the teacher into the fine-tuned SmolVLA policy with DAgger, then evaluate on an SO-101 arm.",
+      "Planned: distill the teacher into the fine-tuned SmolVLA policy with DAgger, then evaluate on the SO-101 arm.",
     ],
     lessons: [
       "Comparisons between SGS and uniform resets need held-out evaluation across seeds with confidence intervals, not single runs.",
     ],
     limitations: [
-      "Team project. Simulation work so far; distillation into SmolVLA and real-arm evaluation are planned. Project-wide results are not claimed here.",
+      "Team project. My post-training work is in simulation so far; distillation into SmolVLA and real-arm evaluation are planned. The team's int8 policy and FPGA results are not my work and are not claimed here.",
     ],
     diagram: {
       title: "SGS post-training plan",
@@ -246,41 +246,29 @@ export const projects: Project[] = [
         { title: "DAgger to SmolVLA", detail: "Planned" },
         { title: "SO-101 evaluation", detail: "Planned" },
       ],
-      note: "Derived from Alan's commits and plan documents. The last two stages are planned.",
+      note: "Derived from Alan's commits and plan documents in the team repository, which is not public on this site yet. The last two stages are planned.",
     },
-    sources: [
-      {
-        label: "Repository README",
-        href: "https://github.com/psamin/robotfpga#readme",
-      },
-    ],
+    sources: [],
     devpost: "",
     interactive: "none",
     slug: "armlab",
-    title: "Robot arm RL post-training",
+    title: "Robot arm vision policy: RL post-training",
     summary:
       "On a team robot arm project, I built the success-guided sampling pipeline for RL post-training of a SmolVLA pick-and-place policy in simulation.",
     question: "Where should post-training spend its effort?",
     ownership: "Team project",
     status: "In progress: teacher pipeline built, distillation planned",
     scope:
-      "My part is the SGS sampler, PPO teacher, simulation environments, and evaluation. The arm hardware and broader system belong to the team.",
+      "My part is the SGS sampler, PPO teacher, simulation environments, evaluation, and helping set up the SO-101 arm. The int8 vision policy and FPGA deployment belong to the team.",
     technology: ["Python", "JAX", "MuJoCo", "MJX", "MuJoCo Warp", "SmolVLA"],
-    repository: "https://github.com/psamin/robotfpga",
+    repository: "",
     writeup: [
       "This is a team robot arm project. My part is the RL post-training pipeline for a fine-tuned SmolVLA pick-and-place policy.",
       "I implemented success-guided sampling in NumPy and JAX, reset families for a randomized pick-and-place scene, a privileged-observation teacher trained with PPO in JAX, batched MJX and MuJoCo Warp environments with CPU parity tests, and held-out evaluation comparing SGS with uniform resets across seeds.",
-      "Distilling the teacher into SmolVLA with DAgger and evaluating on an SO-101 arm are planned. These notes do not claim ownership of the arm, the FPGA work, or the team's results.",
+      "I also helped assemble and set up the SO-101 arm. Distilling the teacher into SmolVLA with DAgger and evaluating on the arm are planned. These notes do not claim the team's int8 vision policy, the FPGA work, or the team's results.",
     ],
     sourceNote:
-      "Based on Alan's commits and the plan documents in the team repository, checked on November 10, 2026.",
-    links: [
-      {
-        label: "Team repository",
-        href: "https://github.com/psamin/robotfpga",
-        kind: "repository",
-      },
-    ],
+      "Based on Alan's resume, his commits, and the plan documents in the team repository, checked on November 10, 2026. The repository is not linked yet at Alan's request.",
     contribution:
       "SGS sampler, PPO teacher, simulation environments, and evaluation.",
     featured: true,
@@ -437,96 +425,5 @@ export const projects: Project[] = [
     contribution: "Matching, ranking models, and match explanations.",
     featured: false,
     order: 4,
-  },
-  {
-    slug: "zeroday-arena",
-    title: "ZeroDay Arena",
-    category: "Hackathon",
-    event: {
-      name: "Hacklanta",
-      year: 2026,
-      dates: "",
-      location: "",
-      duration: "36 hours",
-      teammates: [],
-    },
-    summary:
-      "Also called Omen AI. An autonomous cybersecurity prototype with Red and Blue agents, independent verification, and an owned, isolated lab app.",
-    question: "What counts as proof that a fix works?",
-    ownership: "Team project",
-    status: "Hackathon proof of concept",
-    scope:
-      "I led security, agents, and the application: backend workflows, the agent system, the lab app, and the main frontend. My teammate built the separate RL Defense Lab.",
-    technology: [
-      "Python",
-      "FastAPI",
-      "Pydantic",
-      "SQLite",
-      "NetworkX",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-    ],
-    repository: "",
-    writeup: [],
-    sourceNote:
-      "Alan supplied the event, 36-hour duration, and lead roles. The private repository documentation was checked on October 12, 2026. The source repository is private, so only the demo is linked.",
-    role: "I was Security and Agents lead and Application lead, responsible for backend security workflows, the agent system, the lab app, and the main frontend. I built it with one teammate, who owned the separate RL Defense Lab.",
-    problem:
-      "A suspected vulnerability is not proof, and a proposed patch is not a verified fix. The prototype makes those distinctions visible through an evidence-backed workflow.",
-    approach: [
-      "A deterministic orchestrator dispatches seven specialist Red, Blue, and independent verification roles. Tool allowlists bound each role's authority.",
-      "Red roles investigate and validate suspected weaknesses against Atlas Bank, the team's owned fictional lab app with synthetic customers. Blue roles diagnose and propose candidate fixes in disposable worktrees.",
-      "The independent verifier reruns a trusted test suite. Models may suggest decisions or patches, but trusted tests determine pass or fail. The main frontend keeps hypotheses, lab evidence, and simulator results separate.",
-    ],
-    lessons: [
-      "Separating patch authority from verification authority keeps proposed fixes distinct from evidence. A trusted test suite, rather than an agent's assertion, determines the outcome.",
-      "A simulated defensive policy and a real isolated-lab workflow have different evidence boundaries and need distinct labels.",
-    ],
-    limitations: [
-      "This is an on-demand proof of concept against the owned Atlas Bank lab. It does not continuously monitor real companies or automatically respond in production.",
-      "The separate Double DQN Defense Lab is simulated and was built by my teammate. I do not claim that RL work as my contribution.",
-    ],
-    diagram: {
-      title: "Independent evidence at each boundary",
-      description:
-        "The Next.js frontend calls FastAPI and its deterministic orchestrator. Red roles test the owned lab, Blue roles propose worktree fixes, and an independent auditor retests with trusted criteria.",
-      nodes: [
-        {
-          title: "Main frontend",
-          detail: "Next.js + TypeScript",
-        },
-        {
-          title: "API and orchestrator",
-          detail: "FastAPI + bounded role tools",
-        },
-        {
-          title: "Red validation",
-          detail: "Authorized tests on the owned lab",
-        },
-        {
-          title: "Blue remediation",
-          detail: "Candidate fixes in disposable worktrees",
-        },
-        {
-          title: "Independent verification",
-          detail: "Trusted retests and evidence",
-        },
-      ],
-      note: "Derived from the project's private repository documentation. The teammate's simulated RL Defense Lab is a separate engine, not part of this workflow.",
-    },
-    sources: [],
-    devpost: "",
-    interactive: "none",
-    links: [
-      {
-        label: "Demo",
-        href: "https://omen-ai-security.vercel.app",
-        kind: "demo",
-      },
-    ],
-    contribution: "Security agents, backend workflows, lab app, and frontend.",
-    featured: false,
-    order: 6,
   },
 ];

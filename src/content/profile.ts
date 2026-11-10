@@ -26,12 +26,13 @@ export const profile = {
   ],
   about: [
     "Most of my independent work is reinforcement learning for manipulation. In quantrl-fetch I implemented Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch and measured how far a simulated Fetch arm's actor network can be quantized before control breaks down. On FetchReach, quantization-aware fine-tuning brings a 4-bit actor back to 100% success. On FetchPush, a 5-bit actor trained with quantization from the start reaches 96.3%, and lower precision degrades sharply.",
-    "I also contribute to team projects. On a robot arm project I built the success-guided sampling teacher pipeline for RL post-training of a SmolVLA policy in simulation. On Ari AI I work on a system that investigates vulnerabilities, reproduces exploits in a sandbox, and verifies proposed patches before a developer reviews them.",
+    "I also work on team projects. On a robot arm project I built the success-guided sampling teacher pipeline for RL post-training of a SmolVLA policy in simulation and helped set up the SO-101 arm. I'm CTO of Ari AI, a system that investigates vulnerabilities, reproduces exploits in a sandbox, and verifies proposed patches before a developer reviews them. I also co-founded Ascent Math, a math tutoring business.",
     "The question I keep returning to is how a hierarchical robot system should divide its work: what a fast learned controller handles, what a slower planner or vision-language-action model handles, and how inference cost, latency, and architectural complexity constrain that split. I write about what I'm learning in a public series on X.",
   ],
   education: {
     school: "Georgia Institute of Technology",
     field: "Mathematics and Computer Science",
+    graduation: "Expected May 2029",
   },
 };
 
@@ -95,26 +96,41 @@ export const writing: { intro: string; links: WritingLink[] } = {
 
 export const experience: Experience[] = [
   {
-    role: "Math tutoring",
-    organization: "Ascent Math Tutoring",
-    period: "",
+    role: "Co-founder and head of engineering",
+    organization: "Ascent Math",
+    period: "May 2026 to present",
     summary:
-      "Entrepreneurial work outside my research: a math tutoring business.",
+      "A math tutoring business I co-founded. I built its operations software: scheduling, student and customer records, lead intake, and automated follow-ups.",
+    href: "https://www.joinascentmath.com",
   },
   {
-    role: "Team member",
+    role: "CTO",
     organization: "Ari AI",
-    period: "2026 to present",
+    period: "October 2026 to present",
     summary:
-      "An AI security engineering project that started at HackATL and kept going. I'm one of the team's contributors. Ari AI was submitted to Y Combinator.",
+      "An AI security engineering project that started at HackATL and kept going. I lead the technical work, including the multi-agent security pipeline and the simulated RL defense lab. Ari AI was submitted to Y Combinator.",
     href: "https://ari-ai-lake.vercel.app",
   },
   {
+    role: "Automation developer",
+    organization: "The Pert Group LLC",
+    period: "November 2025 to August 2026",
+    summary:
+      "Built an AI voice agent with Python, Twilio, the OpenAI API, and Make that handles customer inquiries, order intake, and follow-ups, plus the pipeline that turns its output into structured order data with retries and logging.",
+  },
+  {
+    role: "Applied mathematics and machine learning research",
+    organization: "Georgia Southern University",
+    period: "June 2025 to July 2025",
+    summary:
+      "Trained a TensorFlow CNN to tell tinea from circular eczema in skin images, reaching about 96% validation accuracy, and presented the work in a university-hosted research program.",
+  },
+  {
     role: "Hackathon participant",
-    organization: "HackGT 13 and Hacklanta",
+    organization: "HackGT 13 and HackATL",
     period: "2026",
     summary:
-      "Built Constellation at HackGT 13, where I owned matching and ranking, and Omen AI at Hacklanta, where I led the security agents and the application.",
+      "Built Constellation at HackGT 13, where I owned matching and ranking, and started Ari AI at HackATL.",
   },
 ];
 

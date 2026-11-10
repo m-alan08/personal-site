@@ -3,7 +3,8 @@ export const links = {
   xHandle: "alanmozhoor",
   linkedin: "https://www.linkedin.com/in/alan-mozhoor/",
   email: "alanmozhoor@gmail.com",
-  resumeFile: "",
+  schoolEmail: "amozhoor7@gatech.edu",
+  resumeFile: "resume.pdf",
 };
 
 export function localPath(path = ""): string {
@@ -23,6 +24,7 @@ export const localLinks = {
 export const optionalLinks = {
   x: links.xHandle ? `https://x.com/${links.xHandle.replace(/^@/, "")}` : "",
   email: links.email ? `mailto:${links.email}` : "",
+  schoolEmail: links.schoolEmail ? `mailto:${links.schoolEmail}` : "",
 };
 
 export interface SocialLink {
@@ -57,6 +59,12 @@ export const socialLinks: SocialLink[] = (
       label: "Email",
       href: optionalLinks.email,
       display: links.email,
+    },
+    {
+      kind: "email",
+      label: "Georgia Tech email",
+      href: optionalLinks.schoolEmail,
+      display: links.schoolEmail,
     },
     {
       kind: "resume",
