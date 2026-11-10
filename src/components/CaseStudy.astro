@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import type { Project } from "../data/projects";
 import { caseStudy, labels, site } from "../content/site";
 import { externalLinks } from "../data/projectLinks";
@@ -12,6 +13,11 @@ const { project } = Astro.props;
 const links = externalLinks(project);
 const images = [project.image, ...(project.gallery ?? [])].filter(
   (image) => image !== undefined,
+);
+const fullSizeImages = await Promise.all(
+  images.map((image) =>
+    getImage({ src: image.src, format: "webp", quality: 85 }),
+  ),
 );
 const meta = [
   project.ownership,
@@ -57,11 +63,17 @@ const facts = [
     <ul class="mt-8 grid gap-3 sm:grid-cols-2" role="list">
       {images.map((image, index) => (
         <li>
-          <ProjectImage
-            image={image}
-            sizes="(min-width: 640px) 34ch, 100vw"
-            eager={index === 0}
-          />
+          <a
+            href={fullSizeImages[index]?.src}
+            class="group block cursor-zoom-in rounded-lg"
+          >
+            <ProjectImage
+              image={image}
+              sizes="(min-width: 640px) 34ch, 100vw"
+              eager={index === 0}
+              class="transition-colors duration-150 group-hover:border-muted motion-reduce:transition-none"
+            />
+          </a>
         </li>
       ))}
     </ul>
