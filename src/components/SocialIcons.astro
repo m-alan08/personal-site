@@ -33,7 +33,7 @@ const entries = socialLinks.filter(
 );
 ---
 
-<ul class="-ml-2.5 flex flex-wrap items-center gap-1" role="list">
+<ul class="-ml-3 flex flex-wrap items-center gap-1" role="list">
   {entries.map((link) => {
     const icon = icons[link.kind];
     return (
@@ -42,7 +42,7 @@ const entries = socialLinks.filter(
           href={link.href}
           aria-label={link.label}
           title={link.label}
-          class="inline-flex size-11 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+          class="inline-flex size-11 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
         >
           <svg
             aria-hidden="true"
