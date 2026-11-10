@@ -164,7 +164,7 @@ export const projects: Project[] = [
     ],
     repository: "https://github.com/adamissac/ari-ai",
     writeup: [
-      "Ari AI started during a hackathon and kept going afterward. It treats a suspected vulnerability as a hypothesis: agents investigate the code, try to reproduce the exploit inside an isolated sandbox, propose a patch, and rerun the reproduction to check that the patch closes it. A developer reviews the evidence and decides whether to accept the fix.",
+      "Ari AI started at HackATL and kept going afterward. It treats a suspected vulnerability as a hypothesis: agents investigate the code, try to reproduce the exploit inside an isolated sandbox, propose a patch, and rerun the reproduction to check that the patch closes it. A developer reviews the evidence and decides whether to accept the fix.",
       "Security tooling that only flags issues leaves the hard work to developers, and a model's claim that a patch works is not evidence. Ari keeps reproduction, patching, and verification as separate steps, and testing is limited to authorized scope.",
       "Ari AI was submitted to Y Combinator. That is an application, not an acceptance, investment, or endorsement.",
     ],
@@ -314,7 +314,7 @@ export const projects: Project[] = [
     question: "How much does VLA pretraining help with little data?",
     ownership: "Solo project",
     status: "Planned: no experiments run yet",
-    scope: "Experiment design only so far.",
+    scope: "Repository and environment setup in progress; no experiments run.",
     technology: ["Python", "PyTorch", "LIBERO", "SmolVLA", "pi0", "ACT"],
     repository: "https://github.com/m-alan08/vla-finetuning-scaling",
     writeup: [
@@ -470,7 +470,7 @@ export const projects: Project[] = [
     repository: "",
     writeup: [],
     sourceNote:
-      "Alan supplied the event, 36-hour duration, and lead roles. The README and architecture documentation were checked on October 12, 2026. The source repository is private, so only the demo is linked.",
+      "Alan supplied the event, 36-hour duration, and lead roles. The private repository documentation was checked on October 12, 2026. The source repository is private, so only the demo is linked.",
     role: "I was Security and Agents lead and Application lead, responsible for backend security workflows, the agent system, the lab app, and the main frontend. I built it with one teammate, who owned the separate RL Defense Lab.",
     problem:
       "A suspected vulnerability is not proof, and a proposed patch is not a verified fix. The prototype makes those distinctions visible through an evidence-backed workflow.",
@@ -513,7 +513,7 @@ export const projects: Project[] = [
           detail: "Trusted retests and evidence",
         },
       ],
-      note: "Derived from README and architecture/agent-system.md. The teammate's simulated RL Defense Lab is a separate engine, not part of this workflow.",
+      note: "Derived from the project's private repository documentation. The teammate's simulated RL Defense Lab is a separate engine, not part of this workflow.",
     },
     sources: [],
     devpost: "",

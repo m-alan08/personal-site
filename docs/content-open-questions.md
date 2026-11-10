@@ -12,7 +12,7 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 ## Projects
 
 - Ari AI: confirm your exact role or title, which hackathon the project started at and when, and which parts you built. The current copy only says "I'm one of the team's contributors" until you confirm. Also confirm the demo at `https://ari-ai-lake.vercel.app` should be linked. The YC wording describes only a submission.
-- Ari AI and Omen AI: confirm whether Ari AI grew out of Omen AI from Hacklanta. They are listed as separate projects for now.
+- Ari AI and Omen AI: the Ari AI repository says it was built for HackATL, and Omen AI's README says Hacklanta 2026. Confirm whether these are the same event and whether Ari AI grew out of Omen AI. They are listed as separate projects for now.
 - Omen AI / ZeroDay Arena: the repository is private, so the repository and source links were removed. Confirm the demo at `https://omen-ai-security.vercel.app` should be linked, and give Hacklanta dates and location if you want them shown.
 - Robot arm project (`psamin/robotfpga`): confirm it is fine to link the team repository and to describe your work as the SGS teacher pipeline for SmolVLA post-training. Confirm the project name to show, since it is currently "Robot arm RL post-training" with slug `armlab`.
 - quantrl-fetch: results copied from the README on November 10, 2026. Update if Phase 5 starts.
@@ -20,7 +20,7 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 
 ## Experience
 
-- Ascent Math Tutoring: confirm your role and title, dates, and a public URL. The page found at `ascentskillz/ascentskillz` has a tutor bio that lists Aerospace Engineering, which does not match your profile, so none of that page's personal details are used. The role is shown as "Math tutoring" with no period.
+- Ascent Math Tutoring: listed because Alan named it as entrepreneurial experience. No public source links it to Alan, and `ascentskillz/ascentskillz` has no commits by m-alan08. Confirm your role and title, dates, and a public URL. The page found at `ascentskillz/ascentskillz` has a tutor bio that lists Aerospace Engineering, which does not match your profile, so nothing from that page is used. The role is shown as "Math tutoring" with no period.
 - Other experience: add any jobs, research positions, or teaching roles with dates. None are listed beyond the above.
 
 ## Unique feature

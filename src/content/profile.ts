@@ -99,14 +99,14 @@ export const experience: Experience[] = [
     organization: "Ascent Math Tutoring",
     period: "",
     summary:
-      "Entrepreneurial work outside my research: tutoring and practice materials, including worksheets, study guides, and practice sets, for students in grades 7 to 12.",
+      "Entrepreneurial work outside my research: a math tutoring business.",
   },
   {
     role: "Team member",
     organization: "Ari AI",
     period: "2026 to present",
     summary:
-      "An AI security engineering project that started during a hackathon and kept going. I'm one of the team's contributors. Ari AI was submitted to Y Combinator; that is an application, not an acceptance, investment, or endorsement.",
+      "An AI security engineering project that started at HackATL and kept going. I'm one of the team's contributors. Ari AI was submitted to Y Combinator.",
     href: "https://ari-ai-lake.vercel.app",
   },
   {
