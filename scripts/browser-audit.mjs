@@ -74,9 +74,26 @@ try {
                   height: rect.height,
                 };
               });
+            const collapsedSpaces = [...document.querySelectorAll("body *")]
+              .filter((element) =>
+                /flex|grid/.test(getComputedStyle(element).display),
+              )
+              .flatMap((element) =>
+                [...element.childNodes].filter(
+                  (node) =>
+                    node.nodeName === "#text" &&
+                    node.textContent.trim() &&
+                    ((/^\s/.test(node.textContent) &&
+                      node.previousSibling?.nodeType === 1) ||
+                      (/\s$/.test(node.textContent) &&
+                        node.nextSibling?.nodeType === 1)),
+                ),
+              )
+              .map((node) => node.parentElement.textContent.trim());
             return {
               headings,
               targets,
+              collapsedSpaces,
               title: document.title,
               description: document.querySelector('meta[name="description"]')
                 .content,
@@ -109,6 +126,11 @@ try {
             state.background,
             "rgb(12, 12, 13)",
             `${label}: dark-only theme`,
+          );
+          assert.deepEqual(
+            state.collapsedSpaces,
+            [],
+            `${label}: spaces collapsed between flex items`,
           );
           assert.equal(state.fontSize, "16px");
           assert.equal(state.scrollBehavior, "auto");
