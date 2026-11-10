@@ -1,0 +1,121 @@
+export interface ResearchInterest {
+  title: string;
+  summary: string;
+}
+
+export interface WritingLink {
+  title: string;
+  href: string;
+  note: string;
+}
+
+export interface Experience {
+  role: string;
+  organization: string;
+  period: string;
+  summary: string;
+  href?: string;
+}
+
+export const profile = {
+  name: "Alan Mozhoor",
+  headline:
+    "I study mathematics and computer science at Georgia Tech and work on reinforcement learning for robot control.",
+  intro: [
+    "I'm interested in robot systems where a learned low-level controller and a higher-level reasoning or planning layer work together, and in what it takes for those policies to run within real latency and compute budgets.",
+  ],
+  about: [
+    "Most of my independent work is reinforcement learning for manipulation. In quantrl-fetch I implemented Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch and measured how far a simulated Fetch arm's actor network can be quantized before control breaks down. On FetchReach, quantization-aware fine-tuning brings a 4-bit actor back to 100% success. On FetchPush, a 5-bit actor trained with quantization from the start reaches 96.3%, and lower precision degrades sharply.",
+    "I also contribute to team projects. On a robot arm project I built the success-guided sampling teacher pipeline for RL post-training of a SmolVLA policy in simulation. On Ari AI I work on a system that investigates vulnerabilities, reproduces exploits in a sandbox, and verifies proposed patches before a developer reviews them.",
+    "The question I keep returning to is how a hierarchical robot system should divide its work: what a fast learned controller handles, what a slower planner or vision-language-action model handles, and how inference cost, latency, and architectural complexity constrain that split. I write about what I'm learning in a public series on X.",
+  ],
+  education: {
+    school: "Georgia Institute of Technology",
+    field: "Mathematics and Computer Science",
+  },
+};
+
+export const researchNote =
+  "These are directions I'm exploring through independent projects, reading, and public notes. They are not formal research appointments or published results.";
+
+export const researchInterests: ResearchInterest[] = [
+  {
+    title: "Reinforcement learning for robotics",
+    summary:
+      "Off-policy, goal-conditioned methods such as SAC with HER for manipulation, evaluated across seeds with controls that separate the effect of a method from the effect of extra training.",
+  },
+  {
+    title: "Agentic control and hierarchical robotics",
+    summary:
+      "Pairing learned low-level control with higher-level reasoning and planning, and deciding which layer owns which decision.",
+  },
+  {
+    title: "Vision-language-action models",
+    summary:
+      "How pretrained VLA policies such as SmolVLA and pi0 adapt to new tasks from a small number of demonstrations, and which parts of the model to fine-tune or freeze.",
+  },
+  {
+    title: "World models and world-action models",
+    summary:
+      "Models that predict how a scene responds to actions, and whether that prediction is useful for planning or as a training signal for a policy.",
+  },
+  {
+    title: "Reinforcement learning post-training",
+    summary:
+      "Online RL after imitation learning, for example to recover performance lost to quantization or to improve a fine-tuned VLA policy on a specific task.",
+  },
+  {
+    title: "Efficient machine learning systems",
+    summary:
+      "Quantization, smaller architectures, and inference cost, judged by their effect on closed-loop behavior rather than only on offline accuracy.",
+  },
+  {
+    title: "Hardware-aware policy deployment",
+    summary:
+      "Running robot policies within the memory, latency, and precision limits of embedded hardware such as microcontrollers and FPGAs.",
+  },
+];
+
+export const writing: { intro: string; links: WritingLink[] } = {
+  intro:
+    "I document what I'm learning in public. My ongoing X series works through reinforcement learning for robotics: RL algorithms, robot learning, vision-language-action models, world models and world-action models, agentic control, and readings of research papers.",
+  links: [
+    {
+      title: "Learning RL for robotics, on X",
+      href: "https://x.com/alanmozhoor",
+      note: "The ongoing post series on my X profile.",
+    },
+    {
+      title: "quantrl-fetch results and method",
+      href: "https://github.com/m-alan08/quantrl-fetch#key-results",
+      note: "Results tables, method, reproduction steps, and limitations for my quantization-aware RL experiments.",
+    },
+  ],
+};
+
+export const experience: Experience[] = [
+  {
+    role: "Math tutoring",
+    organization: "Ascent Math Tutoring",
+    period: "",
+    summary:
+      "Entrepreneurial work outside my research: tutoring and practice materials, including worksheets, study guides, and practice sets, for students in grades 7 to 12.",
+  },
+  {
+    role: "Team member",
+    organization: "Ari AI",
+    period: "2026 to present",
+    summary:
+      "An AI security engineering project that started during a hackathon and kept going. I contribute to the backend, tests, and release integration. Ari AI was submitted to Y Combinator; that is an application, not an acceptance, investment, or endorsement.",
+    href: "https://ari-ai-lake.vercel.app",
+  },
+  {
+    role: "Hackathon participant",
+    organization: "HackGT 13 and Hacklanta",
+    period: "2026",
+    summary:
+      "Built Constellation at HackGT 13, where I owned matching and ranking, and Omen AI at Hacklanta, where I led the security agents and the application.",
+  },
+];
+
+export const uniqueFeature = null;
