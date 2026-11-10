@@ -21,3 +21,7 @@ export function sectionLink(id: SectionId): string {
 export function sectionLabel(id: SectionId): string {
   return site.sections[id];
 }
+
+export function sectionNumber(id: SectionId): string {
+  return String(ids.indexOf(id) + 1).padStart(2, "0");
+}
