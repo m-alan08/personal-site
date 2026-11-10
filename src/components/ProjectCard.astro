@@ -1,7 +1,7 @@
 ---
 import type { Project } from "../data/projects";
 import { labels, caseStudy } from "../content/site";
-import { projectAnchor, projectLink } from "../data/links";
+import { projectLink } from "../data/links";
 import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
 import ProjectImage from "./ProjectImage.astro";
@@ -9,33 +9,36 @@ import ArrowLink from "./ArrowLink.astro";
 import HyphenSafeText from "./HyphenSafeText.astro";
 interface Props {
   project: Project;
+  number: number;
 }
-const { project } = Astro.props;
+const { project, number } = Astro.props;
 const meta = [project.ownership, project.event?.name, project.status].filter(
   Boolean,
 );
 const external = externalLinks(project);
-const images = [project.image, ...(project.gallery ?? [])]
-  .filter((image) => image !== undefined)
-  .slice(0, 2);
+const image = project.image ?? project.gallery?.[0];
 ---
 
 <article
-  id={projectAnchor(project.slug)}
   class:list={[
-    "grid scroll-mt-8 gap-5 py-8 first:pt-0 last:pb-0 sm:scroll-mt-20",
-    images.length > 0 &&
-      "lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:gap-10",
+    "grid gap-6 py-10 first:pt-0 last:pb-0 sm:py-12",
+    "lg:grid-cols-[minmax(0,9fr)_minmax(0,11fr)] lg:items-center lg:gap-12 xl:gap-16",
   ]}
 >
   <div class="min-w-0">
-    <h3 class="text-lg font-medium leading-snug tracking-tight">
+    <p
+      aria-hidden="true"
+      class="text-xs tabular-nums tracking-[0.2em] text-accent"
+    >
+      {String(number).padStart(2, "0")}
+    </p>
+    <h3 class="mt-3 text-xl font-medium leading-snug tracking-tight">
       <ArrowLink href={projectLink(project.slug)} title={project.title} />
     </h3>
     <p class="mt-1.5 text-sm text-muted">
       <HyphenSafeText text={meta.join(" · ")} />
     </p>
-    <p class="mt-3 max-w-reading">
+    <p class="mt-4 max-w-reading">
       <HyphenSafeText text={project.summary} />
     </p>
     {project.technology.length > 0 && (
@@ -61,20 +64,18 @@ const images = [project.image, ...(project.gallery ?? [])]
       ))}
     </ul>
   </div>
-  {images.length > 0 && (
+  {image && (
     <a
       href={projectLink(project.slug)}
       tabindex="-1"
       aria-hidden="true"
-      class="group grid grid-cols-2 gap-3 self-start lg:order-last lg:grid-cols-1"
+      class="group block"
     >
-      {images.map((image) => (
-        <ProjectImage
-          image={image}
-          sizes="(min-width: 1280px) 22rem, (min-width: 1024px) 16rem, 50vw"
-          class="transition-colors duration-150 group-hover:border-muted motion-reduce:transition-none"
-        />
-      ))}
+      <ProjectImage
+        image={image}
+        sizes="(min-width: 1280px) 40rem, (min-width: 1024px) 52vw, 100vw"
+        class="transition-colors duration-150 group-hover:border-muted motion-reduce:transition-none"
+      />
     </a>
   )}
 </article>

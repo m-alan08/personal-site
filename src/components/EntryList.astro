@@ -2,7 +2,6 @@
 import ArrowLink from "./ArrowLink.astro";
 import HyphenSafeText from "./HyphenSafeText.astro";
 interface Entry {
-  id?: string;
   title: string;
   meta?: string;
   summary: string;
@@ -17,10 +16,7 @@ const { entries } = Astro.props;
 
 <ul class="divide-y divide-line" role="list">
   {entries.map((entry) => (
-    <li
-      id={entry.id}
-      class="scroll-mt-8 py-6 first:pt-0 last:pb-0 sm:scroll-mt-20"
-    >
+    <li class="py-6 first:pt-0 last:pb-0">
       <div>
         <h3 class="font-medium leading-snug tracking-tight">
           {entry.href && entry.internal ? (
