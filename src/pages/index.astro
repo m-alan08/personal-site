@@ -122,11 +122,15 @@ const other = orderedProjects.filter((project) => project.featured === false);
     )}
   </Section>
   <Section id="research" title={sectionLabel("research")}>
-    <p class="mb-8 max-w-reading text-muted">{researchNote}</p>
+    <p class="mb-8 max-w-reading text-muted">
+      <HyphenSafeText text={researchNote} />
+    </p>
     <InterestGrid entries={researchInterests} />
   </Section>
   <Section id="writing" title={sectionLabel("writing")}>
-    <p class="mb-8 max-w-reading text-muted">{writing.intro}</p>
+    <p class="mb-8 max-w-reading text-muted">
+      <HyphenSafeText text={writing.intro} />
+    </p>
     <EntryList
       entries={writing.links.map((link) => ({
         title: link.title,

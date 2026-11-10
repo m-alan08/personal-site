@@ -42,7 +42,9 @@ const { entries } = Astro.props;
           <p class="mt-1.5 text-sm tabular-nums text-muted">{entry.meta}</p>
         )}
       </div>
-      <p class="mt-2 max-w-reading text-muted">{entry.summary}</p>
+      <p class="mt-2 max-w-reading text-muted">
+        <HyphenSafeText text={entry.summary} />
+      </p>
     </li>
   ))}
 </ul>
