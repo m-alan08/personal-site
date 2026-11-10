@@ -6,6 +6,7 @@ import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
 import ProjectImage from "./ProjectImage.astro";
 import ArrowLink from "./ArrowLink.astro";
+import HyphenSafeText from "./HyphenSafeText.astro";
 interface Props {
   project: Project;
 }
@@ -29,7 +30,9 @@ const images = [project.image, ...(project.gallery ?? [])]
     <h3 class="text-lg font-medium leading-snug tracking-tight">
       <ArrowLink href={projectLink(project.slug)} title={project.title} />
     </h3>
-    <p class="mt-1.5 text-sm text-muted">{meta.join(" · ")}</p>
+    <p class="mt-1.5 text-sm text-muted">
+      <HyphenSafeText text={meta.join(" · ")} />
+    </p>
     <p class="mt-3 max-w-reading">{project.summary}</p>
     {project.technology.length > 0 && (
       <p class="mt-3 max-w-reading text-sm text-muted">

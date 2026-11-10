@@ -1,5 +1,6 @@
 ---
 import ArrowIcon from "./ArrowIcon.astro";
+import HyphenSafeText from "./HyphenSafeText.astro";
 interface Props {
   href: string;
   title: string;
@@ -14,7 +15,7 @@ const lastWord = words.pop();
   class="group -mx-3 -my-3 inline-flex min-h-11 items-center px-3 py-3 focus-visible:outline-offset-[-10px]! transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
 >
   <span>
-    {words.join(" ")}{" "}
+    <HyphenSafeText text={words.join(" ")} />{" "}
     <span class="whitespace-nowrap">
       {lastWord}
       <ArrowIcon class="ml-1.5 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
