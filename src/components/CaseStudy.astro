@@ -3,6 +3,7 @@ import type { Project } from "../data/projects";
 import { caseStudy, labels, site } from "../content/site";
 import { externalLinks } from "../data/projectLinks";
 import TextLink from "./TextLink.astro";
+import ProjectImage from "./ProjectImage.astro";
 import CaseStudySection from "./CaseStudySection.astro";
 interface Props {
   project: Project;
@@ -36,7 +37,7 @@ const facts = [
 
 <article class="max-w-reading">
   <p class="text-sm text-muted">{meta.join(" · ")}</p>
-  <h1 class="mt-3 text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
+  <h1 class="mt-3 font-display text-4xl leading-tight tracking-tight sm:text-4xl">
     {project.title}
   </h1>
   <p class="mt-5 text-lg text-muted">{project.summary}</p>
@@ -48,6 +49,16 @@ const facts = [
         </li>
       ))}
     </ul>
+  )}
+  {(project.figure ?? project.image) && (
+    <div class="mt-8">
+      <ProjectImage
+        image={project.figure ?? project.image!}
+        natural
+        sizes="(min-width: 768px) 68ch, 100vw"
+        eager
+      />
+    </div>
   )}
   <dl class="mt-10 grid gap-x-8 gap-y-4 border-t border-line pt-8 text-sm sm:grid-cols-[8rem_minmax(0,1fr)]">
     {facts.map((fact) => (

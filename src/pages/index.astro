@@ -1,5 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialIcons from "../components/SocialIcons.astro";
+import portrait from "../assets/portrait.jpg";
 import EntryList from "../components/EntryList.astro";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
@@ -24,13 +27,33 @@ const other = ordered.filter((project) => project.featured === false);
 
 <BaseLayout title={site.name} description={site.description}>
   <section aria-labelledby="intro-heading" class="pb-16 sm:pb-20">
-    <h1
-      id="intro-heading"
-      class="text-4xl font-medium tracking-tight sm:text-5xl"
-    >
-      {profile.name}
-    </h1>
-    <p class="mt-6 max-w-reading text-lg leading-relaxed">{profile.headline}</p>
+    <div class="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-10">
+      <Image
+        src={portrait}
+        alt={profile.portraitAlt}
+        width={176}
+        height={176}
+        densities={[1, 2]}
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        class="size-32 shrink-0 rounded-2xl border border-line object-cover sm:size-44"
+      />
+      <div class="min-w-0">
+        <h1
+          id="intro-heading"
+          class="font-display text-5xl leading-none tracking-tight sm:text-6xl"
+        >
+          {profile.name}
+        </h1>
+        <p class="mt-5 max-w-reading text-lg leading-relaxed">
+          {profile.headline}
+        </p>
+        <div class="mt-4">
+          <SocialIcons />
+        </div>
+      </div>
+    </div>
     {profile.intro.map((paragraph) => (
       <p class="mt-4 max-w-reading text-muted">{paragraph}</p>
     ))}
@@ -50,9 +73,6 @@ const other = ordered.filter((project) => project.featured === false);
         </li>
       ))}
     </ul>
-    <div class="mt-6">
-      <SocialLinks />
-    </div>
   </section>
   <Section id="about" title={sectionLabel("about")}>
     <div class="max-w-reading space-y-4">

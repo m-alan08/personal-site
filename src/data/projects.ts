@@ -1,3 +1,14 @@
+import type { ImageMetadata } from "astro";
+import quantrlFetchImage from "../assets/projects/quantrl-fetch.png";
+import quantrlFetchResults from "../assets/projects/quantrl-fetch-results.png";
+import ariAiImage from "../assets/projects/ari-ai.png";
+import constellationImage from "../assets/projects/constellation.png";
+
+export interface ProjectImage {
+  src: ImageMetadata;
+  alt: string;
+  fit: "contain" | "cover";
+}
 export interface ProjectEvent {
   name: string;
   year: number;
@@ -44,6 +55,8 @@ export interface Project {
   contribution?: string;
   featured?: boolean;
   order?: number;
+  image?: ProjectImage;
+  figure?: ProjectImage;
 }
 
 export const projects: Project[] = [
@@ -102,6 +115,16 @@ export const projects: Project[] = [
     devpost: "",
     interactive: "none",
     slug: "quantrl-fetch",
+    image: {
+      src: quantrlFetchImage,
+      alt: "FetchReach simulation of the robot arm, comparing a 4-bit post-training quantized policy with a 4-bit quantization-aware fine-tuned policy",
+      fit: "contain",
+    },
+    figure: {
+      src: quantrlFetchResults,
+      alt: "FetchReach results plot: success rate and final distance against bit width for PTQ, QAT fine-tuning, and QAT from scratch, averaged over 3 training seeds",
+      fit: "contain",
+    },
     title: "Quantization-aware RL for robotic arm control",
     summary:
       "I measure how low an RL policy's actor precision can go before a simulated Fetch robot arm stops completing its task.",
@@ -145,6 +168,11 @@ export const projects: Project[] = [
   },
   {
     slug: "ari-ai",
+    image: {
+      src: ariAiImage,
+      alt: "Ari AI RL defense study figure: paired return differences across seeds and safety tradeoffs on held-out episodes",
+      fit: "contain",
+    },
     title: "Ari AI",
     category: "Hackathon",
     event: null,
@@ -323,6 +351,11 @@ export const projects: Project[] = [
   },
   {
     slug: "constellation",
+    image: {
+      src: constellationImage,
+      alt: "Constellation app home screen with nearby discovery settings and a suggested introduction",
+      fit: "cover",
+    },
     title: "Constellation",
     category: "Hackathon",
     event: {
