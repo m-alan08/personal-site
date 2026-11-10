@@ -11,6 +11,7 @@ export const site = {
   ],
   footer: "Reinforcement learning, robotics, and efficient policies.",
   skip: "Skip to content",
+  backToTop: "Back to top",
   selectedProjects: "Selected projects",
   allProjects: "All projects",
   sections: {

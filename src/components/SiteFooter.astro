@@ -1,5 +1,7 @@
 ---
 import { site } from "../content/site";
+import { localLinks } from "../data/links";
+import ArrowIcon from "./ArrowIcon.astro";
 const year = new Date().getFullYear();
 ---
 
@@ -9,5 +11,15 @@ const year = new Date().getFullYear();
       © {year} {site.name}
     </p>
     <p>{site.footer}</p>
+    <a
+      href={localLinks.skip}
+      class="group inline-flex min-h-11 items-center text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+    >
+      {site.backToTop}
+      <ArrowIcon
+        direction="up"
+        class="ml-1.5 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
+      />
+    </a>
   </div>
 </footer>
