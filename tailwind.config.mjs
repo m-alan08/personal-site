@@ -14,6 +14,7 @@ export default {
       },
       colors: {
         canvas: "var(--canvas)",
+        chrome: "var(--chrome)",
         surface: "var(--surface)",
         ink: "var(--ink)",
         muted: "var(--muted)",
