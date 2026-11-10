@@ -13,12 +13,15 @@ const meta = [project.ownership, project.event?.name, project.status].filter(
   Boolean,
 );
 const external = externalLinks(project);
+const images = [project.image, ...(project.gallery ?? [])]
+  .filter((image) => image !== undefined)
+  .slice(0, 2);
 ---
 
 <article
   class:list={[
     "grid gap-5 py-8 first:pt-0 last:pb-0",
-    project.image && "sm:grid-cols-[minmax(0,1fr)_16rem] sm:gap-8",
+    images.length > 0 && "sm:grid-cols-[minmax(0,1fr)_16rem] sm:gap-8",
   ]}
 >
   <div class="min-w-0">
@@ -55,12 +58,11 @@ const external = externalLinks(project);
       ))}
     </ul>
   </div>
-  {project.image && (
-    <div class="sm:order-last">
-      <ProjectImage
-        image={project.image}
-        sizes="(min-width: 640px) 16rem, 100vw"
-      />
+  {images.length > 0 && (
+    <div class="grid grid-cols-2 gap-3 self-start sm:order-last sm:grid-cols-1">
+      {images.map((image) => (
+        <ProjectImage image={image} sizes="(min-width: 640px) 16rem, 50vw" />
+      ))}
     </div>
   )}
 </article>
