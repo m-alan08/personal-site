@@ -22,6 +22,14 @@ export const site = {
     experience: "Experience",
     contact: "Contact",
   },
+  navigation: {
+    about: "About",
+    projects: "Projects",
+    research: "Research",
+    writing: "Writing",
+    experience: "Experience",
+    contact: "Contact",
+  },
 };
 
 export const labels = {

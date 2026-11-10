@@ -12,7 +12,7 @@ const ids = [
 
 export type SectionId = (typeof ids)[number];
 
-export const sections = ids.map((id) => ({ id, label: site.sections[id] }));
+export const sections = ids.map((id) => ({ id, label: site.navigation[id] }));
 
 export function sectionLink(id: SectionId): string {
   return `${localPath()}#${id}`;
