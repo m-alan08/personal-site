@@ -1,5 +1,17 @@
 # Progress
 
+## Round 3: minimal redesign
+
+Round 3 replaces the Round 2 interface with a minimal single-page homepage on `redesign/integration`, for review through a pull request against main. Nothing is merged or deployed. AGENTS.md is unchanged.
+
+- Home page: introduction, About, Projects, Research interests, Writing, Experience and Contact on one page with anchor navigation. Six project case studies remain at `/projects/<slug>/`. `/about/`, `/contact/`, `/resume/` and `/projects/` redirect to home page anchors.
+- Removed: command palette, policy hero, connection graph, project filter, hackathon timeline, SVG diagrams, page transitions, gradients, glow, the blue accent, their client scripts, and `audit:interactions`. The site ships no client JavaScript.
+- Content: profile, research interests, writing, experience, social links and project updates come from the content branch `content/structured-copy`, fact-checked by a separate QA agent. quantrl-fetch now reports its completed PTQ and QAT results. Ari AI, the robot arm post-training work and the VLA fine-tuning scaling plan are added. Private or unavailable Omen AI repositories are no longer linked.
+- Tests: the smoke test covers every page, the six section anchors, navigation, case study links and the four redirects. The browser audit keeps axe, contrast, keyboard order, skip link, metadata, target size, reduced motion, print and overflow checks at 360px, 768px and 1280px.
+- Missing inputs: exact X series post URLs, resume PDF, confirmation of email display, exact Ari AI role, Ascent role and dates, and whether to link the robot arm repository. See `docs/content-open-questions.md`.
+
+## Round 2
+
 Round 2 is implemented and pushed directly to main, with documented content gaps. The dark-only static site has ten pages and nine indexable routes, four case studies in one data shape, verified hackathon roles and sources, a timeline/filter, three sourced SVG pipelines, a lazy illustrative hero and connection graph, keyboard command navigation, and Playwright tests in CI. The original solo RL and armlab facts are preserved. AGENTS.md is unchanged.
 
 Real final mobile Lighthouse 13.5.0 scores on all nine indexed pages: **Performance 100, Accessibility 100, Best Practices 100, SEO 100**. All pages measured zero CLS. These are local production-preview scores; the intentionally noindex 404 is covered by browser accessibility checks.

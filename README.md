@@ -1,6 +1,6 @@
 # Alan Mozhoor's personal website
 
-A static, dark-only Astro portfolio for reinforcement learning, robotics, matching, and cybersecurity work. It uses Tailwind CSS, strict TypeScript, and system fonts. Small local modules power keyboard navigation and illustrative interactions. No third-party scripts, embeds, analytics, tracking, or animation libraries load for visitors.
+A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and system fonts. The site ships no client JavaScript, third-party scripts, embeds, analytics, or tracking.
 
 ## Setup
 
@@ -32,18 +32,25 @@ npm test
 - `lint` requires zero warnings.
 - `format` formats source and documentation. `format:check` verifies formatting without modifying files. `AGENTS.md` is excluded to preserve the exact supplied instructions.
 
-The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All page content and ordinary links work without JavaScript. The palette search and project filter load on first use; the hero and graph modules load when their figures enter the viewport. Native CSS page transitions last 120ms and respect reduced motion.
+The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All content and links work without JavaScript. Smooth anchor scrolling is disabled under reduced motion.
 
 ## Content
 
-- `src/content/site.ts`: page copy, navigation, and shared labels.
-- `src/data/links.ts`: GitHub, optional X handle, optional email, and optional resume file.
+- `src/content/profile.ts`: introduction, about copy, research interests, writing links, experience, and the `uniqueFeature` placeholder.
+- `src/content/site.ts`: site metadata, section labels, and shared labels.
+- `src/data/sections.ts`: home page section order used by navigation.
+- `src/data/redirects.ts`: legacy `/about/`, `/contact/`, `/resume/` and `/projects/` redirects to home page anchors.
+- `src/data/links.ts`: GitHub, X, LinkedIn, email, optional resume file, and the derived `socialLinks` list.
 - `src/data/projects.ts`: the uniform project shape, categories, events, case studies, ownership, verified tools, diagrams, and sources.
 - `src/data/hosting.ts`: provisional canonical origin and base path.
 - `src/components/`: shared Astro components.
 - `src/layouts/BaseLayout.astro`: head tags and page landmarks.
 
-All project additions go in `projects.ts`. Do not invent credentials, results, or links. Case studies use the quantrl-fetch, Constellation and Omen AI READMEs and documentation plus Alan's supplied event and contribution details. armlab's undocumented fields remain empty. Missing fields are documented in `PROGRESS.md`.
+The home page is a single page with About, Projects, Research interests, Writing, Experience and Contact sections. Each project also has a case study at `/projects/<slug>/`. Projects with `featured: false` appear in a compact list below the featured ones, sorted by `order`.
+
+All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/content-open-questions.md`.
+
+`uniqueFeature` in `profile.ts` is reserved for one future interactive component. It is `null` and nothing renders it yet. Add the component as its own `Section` on the home page when it is defined.
 
 ## Static hosting
 
@@ -59,11 +66,11 @@ For GitHub Pages project hosting, keep the default base path and serve the conte
 
 ## Maintenance
 
-Work directly on main as instructed in `AGENTS.md`. Run build, lint, format and smoke tests before committing or pushing. Pull with rebase before every push and never force push. Keep changes small, log decisions in `DECISIONS.md`, and update `PROGRESS.md` at each step.
+Redesign work goes through a branch and pull request against main, not direct pushes. Run build, lint, format and smoke tests before committing or pushing. Pull with rebase before every push and never force push. Keep changes small, log decisions in `DECISIONS.md`, and update `PROGRESS.md` at each step.
 
 ## Resume
 
-When the actual PDF is available, place it at `public/resume.pdf` and set `resumeFile` to `"resume.pdf"` in `links.ts`. The resume page only shows the download link when the configured PDF exists inside public/. Otherwise it shows a clear fallback and a link to projects. Email and X remain omitted until their fields are filled.
+When the actual PDF is available, place it at `public/resume.pdf` and set `resumeFile` to `"resume.pdf"` in `links.ts`. The contact links only include the resume when the configured PDF exists inside public/. Any link field set to an empty string is omitted.
 
 ## Continuous integration
 
@@ -75,16 +82,12 @@ The Portfolio checks workflow runs `npm ci`, lint, format verification, build, a
 
 ## Browser verification
 
-After a build, start `npm run preview -- --host 127.0.0.1 --port 4322`, then run `npm run audit:browser`. The audit uses an installed Chrome browser with a fresh temporary profile; it does not download a browser or use your existing browsing profile. Set `CHROME_PATH` if Chrome is installed elsewhere, and `QA_ORIGIN` if preview uses another origin. It checks every route at 360px, 768px, and 1280px with axe, keyboard order, palette state, overflow, metadata, control sizes, reduced-motion and print assertions. The theme is always dark. Set `QA_SCHEMES=both` to verify it under both system preferences and `QA_PASS=pass-name` to retain a separate screenshot matrix. Reports and screenshots stay in ignored `reports/`. Browser tooling is development-only.
+After a build, start `npm run preview -- --host 127.0.0.1 --port 4322`, then run `npm run audit:browser`. The audit uses an installed Chrome browser with a fresh temporary profile; it does not download a browser or use your existing browsing profile. Set `CHROME_PATH` if Chrome is installed elsewhere, and `QA_ORIGIN` if preview uses another origin. It checks every route at 360px, 768px, and 1280px with axe, keyboard order, skip link, overflow, metadata, control sizes, reduced-motion and print assertions. The theme is always dark. Set `QA_SCHEMES=both` to verify it under both system preferences and `QA_PASS=pass-name` to retain a separate screenshot matrix. Reports and screenshots stay in ignored `reports/`. Browser tooling is development-only.
 
 ## Mobile Lighthouse
 
 With the production preview running, `npm run audit:lighthouse` audits every indexed route using default mobile emulation and simulated mobile throttling. It writes real JSON and HTML reports in `reports/lighthouse/`, a summary in `reports/lighthouse-summary.json`, and fails if any category scores below 95. The intentionally noindex 404 is excluded from SEO scoring and is covered by the full browser accessibility matrix. Local preview scores do not measure a deployed host. The same `CHROME_PATH` and `QA_ORIGIN` inputs apply.
 
-## Smoke tests and interaction budgets
+## Smoke tests
 
-After `npm run build`, `npm test` serves dist on an ephemeral loopback port and uses Playwright to test every generated page and the 404. It checks HTTP responses, one h1, browser errors, Ctrl/Command K, Escape and focus return. It also exercises the project filter, illustrative precision buttons, and graph selection, keyboard movement, drag and reset. An existing Chrome installation works locally. Otherwise install the pinned package's browser with `npx playwright-core install chromium`; CI also installs its system dependencies.
-
-`npm run audit:interactions` applies 4x CPU slowdown to the hero and graph in both motion preferences. It checks lazy graph loading, twenty repeated interactions, a next-frame budget below 100ms, absence of interaction long tasks, and stable idle positions. QA code never ships to visitors.
-
-Illustrations are hand-authored static examples in src/data/illustrations.ts and src/content/illustrations.ts. The graph is explicitly fictional and is not attendee or model data. Project architecture diagrams are separate and derive only from verified source documentation. armlab has no invented diagram while its README is unavailable.
+After `npm run build`, `npm test` serves dist on an ephemeral loopback port and uses Playwright to test every generated page and the 404. It checks HTTP responses, one h1, browser errors, the six section anchors and navigation, project case study links, and the four legacy redirects. An existing Chrome installation works locally. Otherwise install the pinned package's browser with `npx playwright-core install chromium`; CI also installs its system dependencies.

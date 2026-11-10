@@ -73,7 +73,7 @@ input {
     --muted: #333333;
     --line: #999999;
   }
-  header nav,
+  header,
   footer {
     display: none;
   }
