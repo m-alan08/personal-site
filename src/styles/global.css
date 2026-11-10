@@ -9,13 +9,13 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  color-scheme: dark;
-  --canvas: #0c0c0d;
-  --surface: #141416;
-  --ink: #ececea;
-  --muted: #9b9b9f;
-  --line: #242427;
-  --control: #4a4a4f;
+  color-scheme: light;
+  --canvas: #f5f4f0;
+  --surface: #ecebe6;
+  --ink: #1b1b1d;
+  --muted: #5c5c61;
+  --line: #dedcd5;
+  --control: #a8a69f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

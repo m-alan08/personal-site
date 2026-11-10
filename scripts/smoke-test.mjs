@@ -34,7 +34,7 @@ try {
   for (const path of server.paths) {
     const page = await browser.newPage({
       viewport: { width: 360, height: 800 },
-      colorScheme: "dark",
+      colorScheme: "light",
       reducedMotion: "reduce",
     });
     watch(page, path);
