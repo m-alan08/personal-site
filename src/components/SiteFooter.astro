@@ -6,14 +6,16 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="mx-auto mt-8 w-full max-w-4xl px-6 sm:px-10">
-  <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-line py-8 text-sm text-muted">
-    <p>
-      © {year} {site.name}
-    </p>
-    <p>{site.footer}</p>
+  <div class="flex items-center justify-between gap-8 border-t border-line py-8 text-sm text-muted">
+    <div class="flex flex-col gap-x-8 gap-y-1 lg:flex-row">
+      <p>
+        © {year} {site.name}
+      </p>
+      <p>{site.footer}</p>
+    </div>
     <a
       href={localLinks.skip}
-      class="group inline-flex min-h-11 items-center text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+      class="group inline-flex min-h-11 shrink-0 items-center text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
     >
       {site.backToTop}
       <ArrowIcon
