@@ -100,7 +100,7 @@ export const experience: Experience[] = [
     organization: "Ascent Math",
     period: "May 2026 to present",
     summary:
-      "A math tutoring business I co-founded. I built its operations software: scheduling, student and customer records, lead intake, and automated follow-ups.",
+      "A math tutoring business I co-founded. I built its operations software for scheduling, customer records, lead intake, and automated follow-ups. It automates 85% of administrative work with 95% session fulfillment across 150+ sessions, and the lead pipeline has handled 400+ inquiries at 35% conversion while the platform grew 3x month over month to 100+ students.",
     href: "https://www.joinascentmath.com",
   },
   {
@@ -116,7 +116,7 @@ export const experience: Experience[] = [
     organization: "The Pert Group LLC",
     period: "November 2025 to August 2026",
     summary:
-      "Built an AI voice agent with Python, Twilio, the OpenAI API, and Make that handles customer inquiries, order intake, and follow-ups, plus the pipeline that turns its output into structured order data with retries and logging.",
+      "Built an AI voice agent with Python, Twilio, the OpenAI API, and Make that handles 150+ interactions a month, automates 85% of inquiries, order intake, and follow-ups, and cut handling time by 65%. Its pipeline connects 6+ REST APIs and webhooks and turns LLM output into structured order data with 82.3% accuracy. With validation, retries, and logging, it completes 83.7% of tasks without a person and saves 25+ hours a month.",
   },
   {
     role: "Applied mathematics and machine learning research",
