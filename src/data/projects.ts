@@ -166,10 +166,10 @@ export const projects: Project[] = [
     writeup: [
       "Ari AI started at HackATL and kept going afterward. It treats a suspected vulnerability as a hypothesis: agents investigate the code, try to reproduce the exploit inside an isolated sandbox, propose a patch, and rerun the reproduction to check that the patch closes it. A developer reviews the evidence and decides whether to accept the fix.",
       "Security tooling that only flags issues leaves the hard work to developers, and a model's claim that a patch works is not evidence. Ari keeps reproduction, patching, and verification as separate steps, and testing is limited to authorized scope.",
-      "I designed a Double DQN defense policy for the simulated 10-node network defense lab; on 90 held-out simulated episodes it lowers the breach rate from 35.6% for a rule-based baseline to 5.6%. Ari AI was submitted to Y Combinator. That is an application, not an acceptance, investment, or endorsement.",
+      "I designed a Double DQN defense policy for the simulated 10-node network defense lab. In the public held-out evaluation (5 seeds, 100 episodes each, held-out scenario configs), the current policy lowers the share of episodes with a compromise from 83.0% for tuned threshold rules to 7.1%, at the cost of a 75% false disruption rate. Ari AI was submitted to Y Combinator. That is an application, not an acceptance, investment, or endorsement.",
     ],
     sourceNote:
-      "Based on the public README, Alan's description, and his resume, checked on November 10, 2026. Ari AI is a team project; this page describes only Alan's part.",
+      "Based on the public README, the rl-defense README evaluation, Alan's description, and his resume, checked on November 10, 2026. Ari AI is a team project; this page describes only Alan's part.",
     role: "I'm the CTO. I designed the Double DQN defense policy in the simulated defense lab and worked on the multi-agent security pipeline. Adam Issac and other teammates build the project with me.",
     problem:
       "Vulnerability scanners produce findings, not proof. Developers need to know whether an exploit is real and whether a proposed fix closes it before they merge anything.",
@@ -233,7 +233,7 @@ export const projects: Project[] = [
       "Comparisons between SGS and uniform resets need held-out evaluation across seeds with confidence intervals, not single runs.",
     ],
     limitations: [
-      "Team project. My post-training work is in simulation so far; distillation into SmolVLA and real-arm evaluation are planned. The team's int8 policy and FPGA results are not my work and are not claimed here.",
+      "Team project. My post-training work is in simulation so far; distillation into SmolVLA and real-arm evaluation are planned. The team's vision policy and FPGA work are not mine and are not claimed here.",
     ],
     diagram: {
       title: "SGS post-training plan",
@@ -259,13 +259,13 @@ export const projects: Project[] = [
     ownership: "Team project",
     status: "In progress: teacher pipeline built, distillation planned",
     scope:
-      "My part is the SGS sampler, PPO teacher, simulation environments, evaluation, and helping set up the SO-101 arm. The int8 vision policy and FPGA deployment belong to the team.",
+      "My part is the SGS sampler, PPO teacher, simulation environments, evaluation, and helping set up the SO-101 arm. The vision policy and FPGA work belong to the team.",
     technology: ["Python", "JAX", "MuJoCo", "MJX", "MuJoCo Warp", "SmolVLA"],
     repository: "",
     writeup: [
       "This is a team robot arm project. My part is the RL post-training pipeline for a fine-tuned SmolVLA pick-and-place policy.",
       "I implemented success-guided sampling in NumPy and JAX, reset families for a randomized pick-and-place scene, a privileged-observation teacher trained with PPO in JAX, batched MJX and MuJoCo Warp environments with CPU parity tests, and held-out evaluation comparing SGS with uniform resets across seeds.",
-      "I also helped assemble and set up the SO-101 arm. Distilling the teacher into SmolVLA with DAgger and evaluating on the arm are planned. These notes do not claim the team's int8 vision policy, the FPGA work, or the team's results.",
+      "I also helped assemble and set up the SO-101 arm. Distilling the teacher into SmolVLA with DAgger and evaluating on the arm are planned. These notes do not claim the team's vision policy, the FPGA work, or the team's results.",
     ],
     sourceNote:
       "Based on Alan's resume, his commits, and the plan documents in the team repository, checked on November 10, 2026. The repository is not linked yet at Alan's request.",
