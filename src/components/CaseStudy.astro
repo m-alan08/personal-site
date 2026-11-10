@@ -46,8 +46,17 @@ const facts = [
 
 <article class="max-w-reading">
   <p class="text-sm text-muted">{meta.join(" · ")}</p>
-  <h1 class="mt-3 font-display text-4xl leading-tight tracking-tight sm:text-4xl">
-    {project.title}
+  <h1 class="mt-3 text-balance font-display text-4xl leading-tight tracking-tight">
+    {project.title.split(" ").map((word, index) => (
+      <>
+        {index > 0 && " "}
+        {word.includes("-") ? (
+          <span class="whitespace-nowrap">{word}</span>
+        ) : (
+          word
+        )}
+      </>
+    ))}
   </h1>
   <p class="mt-5 text-lg text-muted">{project.summary}</p>
   {links.length > 0 && (
