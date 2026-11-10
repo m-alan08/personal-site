@@ -1,5 +1,6 @@
 ---
 import type { ResearchInterest } from "../content/profile";
+import HyphenSafeText from "./HyphenSafeText.astro";
 interface Props {
   entries: ResearchInterest[];
 }
@@ -13,7 +14,7 @@ const { entries } = Astro.props;
         {String(index + 1).padStart(2, "0")}
       </p>
       <h3 class="mt-2 font-medium leading-snug tracking-tight">
-        {entry.title}
+        <HyphenSafeText text={entry.title} />
       </h3>
       <p class="mt-2 text-sm leading-relaxed text-muted">{entry.summary}</p>
     </li>
