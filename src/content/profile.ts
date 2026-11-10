@@ -20,15 +20,29 @@ export interface Experience {
 export const profile = {
   name: "Alan Mozhoor",
   portraitAlt: "Headshot of Alan Mozhoor in a navy suit and tie",
+  kicker: "hey! my name is",
   headline:
-    "I study mathematics and computer science at Georgia Tech and work on reinforcement learning for robot control.",
+    "I'm a math and CS student at Georgia Tech, and I spend most of my time teaching robots things with reinforcement learning.",
   intro: [
-    "I'm interested in robot systems where a learned low-level controller and a higher-level reasoning or planning layer work together, and in what it takes for those policies to run within real latency and compute budgets.",
+    "Lately I keep thinking about one question: when a robot has a fast learned controller and a slower planner or VLA model, who should do what? I'm also into making policies small enough to run on real hardware, and I post what I'm learning on X as I go.",
+  ],
+  nowLabel: "Right now, I'm:",
+  now: [
+    "Squeezing RL policies down to a few bits in quantrl-fetch. With quantization-aware fine-tuning, a 4-bit actor gets back to 100% success on FetchReach.",
+    "CTO of Ari AI, an AI security system that finds vulnerabilities, reproduces exploits in a sandbox, and checks patches before a developer looks at them.",
+    "Building the RL post-training teacher pipeline for a SmolVLA robot arm policy with my team.",
+    "Running Ascent Math, a math tutoring business I co-founded.",
+  ],
+  previouslyLabel: "Previously, I:",
+  previously: [
+    "Built an AI voice agent at The Pert Group that handles 150+ customer interactions a month.",
+    "Trained a CNN to tell tinea from eczema in skin images at Georgia Southern University, at about 96% validation accuracy.",
+    "Built Constellation at HackGT 13 and started Ari AI at HackATL.",
   ],
   about: [
-    "Most of my independent work is reinforcement learning for manipulation. In quantrl-fetch I implemented Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch and measured how far a simulated Fetch arm's actor network can be quantized before control breaks down. On FetchReach, quantization-aware fine-tuning brings a 4-bit actor back to 100% success. On FetchPush, a 5-bit actor trained with quantization from the start reaches 96.3%, and lower precision degrades sharply.",
-    "I also work on team projects. On a robot arm project I built the success-guided sampling teacher pipeline for RL post-training of a SmolVLA policy in simulation and helped set up the SO-101 arm. I'm CTO of Ari AI, a system that investigates vulnerabilities, reproduces exploits in a sandbox, and verifies proposed patches before a developer reviews them. I also co-founded Ascent Math, a math tutoring business.",
-    "The question I keep returning to is how a hierarchical robot system should divide its work: what a fast learned controller handles, what a slower planner or vision-language-action model handles, and how inference cost, latency, and architectural complexity constrain that split. I write about what I'm learning in a public series on X.",
+    "Most of my solo work is RL for manipulation. For quantrl-fetch I wrote Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch, then kept cutting the actor's precision to see when a simulated Fetch arm stops working. On FetchPush, a 5-bit actor trained with quantization from the start still hits 96.3%. Go lower and it falls apart fast.",
+    "On the team side, I built the success-guided sampling teacher pipeline for RL post-training of a SmolVLA policy in simulation and helped set up our SO-101 arm.",
+    "The thing I keep coming back to is how a hierarchical robot should split its work: what the fast learned controller handles, what the slower planner or vision-language-action model handles, and how latency and compute cost shape that split.",
   ],
   education: {
     school: "Georgia Institute of Technology",
