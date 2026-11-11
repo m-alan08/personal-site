@@ -45,10 +45,6 @@ export const figures = {
       },
     ],
   },
-  timeline: {
-    caption: "Roles over time",
-    now: "now",
-  },
   base: [
     { label: "Based at", value: "Georgia Tech, Atlanta" },
     { label: "Studying", value: profile.education.field },

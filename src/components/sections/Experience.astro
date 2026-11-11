@@ -1,16 +1,10 @@
 ---
 import ExperienceList from "../ExperienceList.astro";
-import ExperienceTimeline from "../ExperienceTimeline.astro";
 import Section from "../Section.astro";
-import SectionFigure from "../SectionFigure.astro";
-import { figures } from "../../content/figures";
 import { experience } from "../../content/profile";
 import { sectionLabel } from "../../data/sections";
 ---
 
 <Section id="experience" title={sectionLabel("experience")} stacked>
-  <SectionFigure caption={figures.timeline.caption} class="mb-14">
-    <ExperienceTimeline />
-  </SectionFigure>
   <ExperienceList entries={experience} />
 </Section>
