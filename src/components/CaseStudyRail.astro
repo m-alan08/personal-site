@@ -1,0 +1,57 @@
+---
+import { caseStudyLabels } from "../content/caseStudyPage";
+interface Props {
+  sections: { id: string; title: string }[];
+}
+const { sections } = Astro.props;
+---
+
+<nav
+  aria-label={caseStudyLabels.onThisPage}
+  data-case-study-rail
+  class="hidden lg:sticky lg:top-24 lg:block lg:self-start"
+>
+  <p aria-hidden="true" class="font-mono text-label uppercase text-muted">
+    {caseStudyLabels.onThisPage}
+  </p>
+  <ol role="list" class="mt-3 border-l border-line">
+    {sections.map((section) => (
+      <li>
+        <a
+          href={`#${section.id}`}
+          class="-ml-px flex min-h-11 items-center border-l border-transparent pl-4 text-small text-muted transition-colors duration-150 hover:text-ink aria-[current=true]:border-accent aria-[current=true]:text-accent motion-reduce:transition-none"
+        >
+          {section.title}
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script>
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>("[data-case-study-rail] a"),
+  ];
+  const visible = new Set<Element>();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      }
+      const active = links.find((link) =>
+        [...visible].some((section) => link.hash === `#${section.id}`),
+      );
+      if (!active) return;
+      for (const link of links) {
+        if (link === active) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      }
+    },
+    { rootMargin: "-15% 0px -70% 0px" },
+  );
+  for (const link of links) {
+    const target = document.getElementById(link.hash.slice(1));
+    if (target) observer.observe(target);
+  }
+</script>
