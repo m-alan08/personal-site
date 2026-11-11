@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SocialIcons from "../components/SocialIcons.astro";
 import portrait from "../assets/portrait.jpg";
 import EntryList from "../components/EntryList.astro";
+import ExperienceList from "../components/ExperienceList.astro";
 import HyphenSafeText from "../components/HyphenSafeText.astro";
 import InterestGrid from "../components/InterestGrid.astro";
 import RobotArmElevation from "../components/RobotArmElevation.astro";
@@ -145,14 +146,7 @@ const other = orderedProjects.filter((project) => project.featured === false);
     <SectionFigure slot="aside" caption={figures.timeline.caption}>
       <ExperienceTimeline />
     </SectionFigure>
-    <EntryList
-      entries={experience.map((entry) => ({
-        title: `${entry.role}, ${entry.organization}`,
-        meta: entry.period,
-        summary: entry.summary,
-        href: entry.href,
-      }))}
-    />
+    <ExperienceList entries={experience} />
   </Section>
   <Section id="contact" title={sectionLabel("contact")}>
     <SectionFigure slot="aside">
