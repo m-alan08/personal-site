@@ -9,12 +9,18 @@ export interface WritingLink {
   note: string;
 }
 
+export interface ExperienceMetric {
+  value: string;
+  label: string;
+}
+
 export interface Experience {
   role: string;
   organization: string;
   period: string;
   summary: string;
   href?: string;
+  metrics?: ExperienceMetric[];
 }
 
 export const profile = {

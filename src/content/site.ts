@@ -39,6 +39,7 @@ export const labels = {
   linkedin: "LinkedIn",
   email: "Email me",
   resume: "Resume",
+  current: "Current",
   repository: "View repository",
   repositoryMissing: "Repository link is not available yet.",
   technology: "Tools and methods",
