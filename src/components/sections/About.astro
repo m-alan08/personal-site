@@ -1,20 +1,40 @@
 ---
+import { Image } from "astro:assets";
 import HyphenSafeText from "../HyphenSafeText.astro";
 import Section from "../Section.astro";
+import portrait from "../../assets/portrait.jpg";
 import { profile } from "../../content/profile";
 import { sectionLabel } from "../../data/sections";
+
+const { city, shortName, graduation } = profile.education;
+const caption = [
+  city,
+  shortName,
+  graduation.charAt(0).toLowerCase() + graduation.slice(1),
+].join(", ");
 ---
 
-<Section id="about" title={sectionLabel("about")}>
-  <div class="max-w-reading space-y-4">
-    {profile.about.map((paragraph) => (
-      <p>
-        <HyphenSafeText text={paragraph} />
-      </p>
-    ))}
+<Section id="about" title={sectionLabel("about")} stacked>
+  <div class="grid gap-6 sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16">
+    <figure class="max-w-44 sm:max-w-none">
+      <Image
+        src={portrait}
+        alt={profile.portraitAlt}
+        widths={[320, 640]}
+        sizes="(min-width: 1024px) 17rem, 13rem"
+        format="webp"
+        class="aspect-[4/5] w-full rounded-2xl object-cover object-[50%_30%]"
+      />
+      <figcaption class="mt-3 font-mono text-label text-muted">
+        {caption}
+      </figcaption>
+    </figure>
+    <div class="max-w-reading space-y-4">
+      {profile.about.map((paragraph) => (
+        <p>
+          <HyphenSafeText text={paragraph} />
+        </p>
+      ))}
+    </div>
   </div>
-  <p class="mt-6 text-sm text-muted">
-    {profile.education.school} · {profile.education.field} ·{" "}
-    {profile.education.graduation}
-  </p>
 </Section>

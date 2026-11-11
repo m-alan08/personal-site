@@ -1,76 +1,58 @@
 ---
 import { figures } from "../content/figures";
 
-const labels = figures.hierarchy;
-const boxWidth = 168;
-const boxHeight = 40;
-const gap = 26;
-const left = 16;
-const center = left + boxWidth / 2;
-const layers = labels.layers.map((layer, index) => ({
-  ...layer,
-  y: 12 + index * (boxHeight + gap),
-}));
-const links = layers.slice(1).map((layer) => ({
-  top: layer.y - gap,
-  bottom: layer.y,
-}));
-const splitY = layers[0].y + boxHeight + gap / 2;
-const head = 4;
+const { layers, split, caption } = figures.hierarchy;
 ---
 
-<svg
-  viewBox="0 0 260 200"
-  fill="none"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class="h-auto w-full max-w-[17rem]"
->
-  <g class="stroke-muted/70" stroke-width="1.25">
-    {layers.map((layer) => (
-      <rect
-        x={left}
-        y={layer.y}
-        width={boxWidth}
-        height={boxHeight}
-        rx="3"
-      ></rect>
+<figure class="max-w-[26rem]">
+  <ol role="list">
+    {layers.map((layer, index) => (
+      <li>
+        {index > 0 && (
+          <div class="relative flex h-7 justify-center gap-6 lg:h-10">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 12 40"
+              class="h-7 w-3 text-muted lg:h-10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 4v30M2 29l4 5 4-5" />
+            </svg>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 12 40"
+              class="h-7 w-3 text-control lg:h-10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-dasharray="3 3"
+              stroke-linecap="round"
+            >
+              <path d="M6 36V6" />
+            </svg>
+            {index === 1 && (
+              <div class="absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center gap-3">
+                <span
+                  aria-hidden="true"
+                  class="h-0 flex-1 border-t border-dashed border-accent"
+                ></span>
+                <span class="bg-canvas font-mono text-label text-accent">
+                  {split}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+        <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 rounded-xl border border-hairline bg-surface px-4 py-2 text-center">
+          <p class="font-medium text-ink">{layer.title}</p>
+          <p class="font-mono text-label text-muted">{layer.detail}</p>
+        </div>
+      </li>
     ))}
-    {links.map((link) => (
-      <path
-        d={`M${center - 14} ${link.top} V${link.bottom - 1} M${center - 14 - head} ${link.bottom - 1 - head * 1.5} L${center - 14} ${link.bottom - 1} L${center - 14 + head} ${link.bottom - 1 - head * 1.5}`}
-      ></path>
-    ))}
-  </g>
-  <g class="stroke-line" stroke-width="1.25" stroke-dasharray="3 3">
-    {links.map((link) => (
-      <path d={`M${center + 14} ${link.bottom} V${link.top + 1}`}></path>
-    ))}
-  </g>
-  <path
-    d={`M6 ${splitY} H${left + boxWidth + 12}`}
-    class="stroke-accent"
-    stroke-width="1.25"
-    stroke-dasharray="4 4"
-  ></path>
-  <text
-    x={left + boxWidth + 18}
-    y={splitY + 3.5}
-    font-size="11"
-    class="fill-accent font-display italic"
-  >
-    {labels.split}
-  </text>
-  <g text-anchor="middle">
-    {layers.map((layer) => (
-      <>
-        <text x={center} y={layer.y + 17} font-size="11" class="fill-ink">
-          {layer.title}
-        </text>
-        <text x={center} y={layer.y + 31} font-size="9.5" class="fill-muted">
-          {layer.detail}
-        </text>
-      </>
-    ))}
-  </g>
-</svg>
+  </ol>
+  <figcaption class="mt-4 text-small text-muted">{caption}</figcaption>
+</figure>

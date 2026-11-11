@@ -1,24 +1,21 @@
 ---
-import ControlLoopDiagram from "../ControlLoopDiagram.astro";
+import HierarchyDiagram from "../HierarchyDiagram.astro";
 import HyphenSafeText from "../HyphenSafeText.astro";
 import InterestGrid from "../InterestGrid.astro";
-import RobotArmElevation from "../RobotArmElevation.astro";
 import Section from "../Section.astro";
-import SectionFigure from "../SectionFigure.astro";
-import { figures } from "../../content/figures";
 import { researchInterests, researchNote } from "../../content/profile";
 import { sectionLabel } from "../../data/sections";
 ---
 
 <Section id="research" title={sectionLabel("research")}>
-  <SectionFigure slot="aside" caption={figures.arm}>
-    <RobotArmElevation />
-  </SectionFigure>
-  <SectionFigure slot="aside" caption={figures.loop.caption}>
-    <ControlLoopDiagram />
-  </SectionFigure>
-  <p class="mb-8 max-w-reading text-muted">
+  <div slot="aside" class="mt-8 hidden lg:block">
+    <HierarchyDiagram />
+  </div>
+  <p class="mb-6 max-w-reading text-muted">
     <HyphenSafeText text={researchNote} />
   </p>
   <InterestGrid entries={researchInterests} />
+  <div class="mt-6 hidden border-t border-line pt-5 sm:block lg:hidden">
+    <HierarchyDiagram />
+  </div>
 </Section>
