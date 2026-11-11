@@ -22,6 +22,9 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
 
+- Contact availability: what are you open to (for example internships, research roles or collaborations, and for when)? The Contact section shows this line above the email buttons once `availability` is set in `profile.ts`. Nothing renders until then.
+- Experience metrics: each experience entry can list its key numbers as short chips (a value plus a label) in a `metrics` field. Which numbers should each entry show? Only numbers already on the site or your resume can be used.
+
 ## Unique feature
 
 - `uniqueFeature` is `null` until it is defined.
