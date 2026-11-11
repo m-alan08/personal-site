@@ -16,7 +16,8 @@
     "check:links": "node scripts/check-links.mjs",
     "audit:browser": "node scripts/browser-audit.mjs",
     "audit:lighthouse": "node scripts/lighthouse-audit.mjs",
-    "test": "node scripts/smoke-test.mjs"
+    "test": "npm run check:seo && node scripts/smoke-test.mjs",
+    "check:seo": "node scripts/check-seo.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

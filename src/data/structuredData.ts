@@ -27,6 +27,7 @@ export function structuredData(
     "@id": `${home}#website`,
     name: site.name,
     url: home,
+    description: site.description,
     inLanguage: "en",
     author: { "@id": person["@id"] },
   };
