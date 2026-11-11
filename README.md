@@ -1,6 +1,6 @@
 # Alan Mozhoor's personal website
 
-A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and system fonts. The only client JavaScript is a small inline momentum scroll for mouse wheels and trackpads. There are no third-party scripts, embeds, analytics, or tracking.
+A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and system fonts. It ships no client JavaScript; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
 
 ## Setup
 
@@ -32,7 +32,7 @@ npm test
 - `lint` requires zero warnings.
 - `format` formats source and documentation. `format:check` verifies formatting without modifying files. `AGENTS.md` is excluded from formatting.
 
-The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All content and links work without JavaScript. Smooth anchor scrolling and wheel momentum are disabled under reduced motion, and touch, keyboard, and scrollbar input stay native.
+The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All content and links work without JavaScript. Scrolling is native for wheel, trackpad, touch, keyboard and scrollbar input. Smooth anchor scrolling applies only under `prefers-reduced-motion: no-preference`.
 
 ## Open questions for Alan
 
