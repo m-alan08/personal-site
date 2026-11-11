@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  block?: boolean;
+}
+const { href, block = false } = Astro.props;
+---
+
+<a
+  href={href}
+  data-nav-link
+  class:list={[
+    "items-center text-small text-muted transition-colors duration-150 hover:text-accent aria-[current=location]:text-accent motion-reduce:transition-none",
+    block
+      ? "flex min-h-11 w-full"
+      : "inline-flex min-h-11 min-w-11 justify-center px-2",
+  ]}
+>
+  <slot />
+</a>

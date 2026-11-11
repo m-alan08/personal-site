@@ -45,6 +45,8 @@ try {
     assert.equal(await page.locator("h1").count(), 1, `${path}: one h1`);
     assert.equal(await page.locator("dialog").count(), 0, `${path}: dialogs`);
     const navigation = page.getByRole("navigation", { name: "Main" });
+    const menu = navigation.locator("summary");
+    if (await menu.isVisible()) await menu.click();
     assert.equal(
       await navigation.getByRole("link").count(),
       sectionIds.length,

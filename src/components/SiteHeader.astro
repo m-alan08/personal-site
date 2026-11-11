@@ -1,35 +1,83 @@
 ---
-import { labels } from "../content/site";
-import { localLinks } from "../data/links";
+import NavLink from "./NavLink.astro";
+import { header } from "../content/hero";
+import { labels, site } from "../content/site";
+import { localLinks, socialLinks } from "../data/links";
 import { sections, sectionLink } from "../data/sections";
-const isHome = Astro.url.pathname === localLinks.home;
 import { containerWidth } from "../data/layout";
 interface Props {
   wide: boolean;
 }
 const { wide } = Astro.props;
+const isHome = Astro.url.pathname === localLinks.home;
+const links = sections.map((section) => ({
+  label: section.label,
+  href: isHome ? `#${section.id}` : sectionLink(section.id),
+}));
+const resume = socialLinks.find((link) => link.kind === "resume")?.href ?? "";
 ---
 
-<header class="w-full border-b border-transparent sm:sticky sm:top-0 sm:z-40 sm:border-line/60 sm:bg-chrome/85 sm:backdrop-blur-md">
+<header class="sticky top-0 z-40 w-full border-b border-line/60 bg-chrome/85 backdrop-blur-md">
   <div
     class:list={[
-      "mx-auto flex w-full flex-wrap items-center justify-start gap-x-8 gap-y-1 px-6 pt-6 sm:justify-end sm:px-10 sm:py-2",
+      "relative mx-auto flex w-full items-center gap-2 px-6 py-2 sm:px-10",
       containerWidth(wide),
     ]}
   >
-    <nav aria-label={labels.mainNavigation} class="-mx-2">
-      <ul class="flex flex-wrap" role="list">
-        {sections.map((section) => (
+    <a
+      href={localLinks.home}
+      class="mr-auto inline-flex min-h-11 items-center font-semibold tracking-tight text-ink transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+    >
+      {site.name}
+    </a>
+    <nav aria-label={labels.mainNavigation}>
+      <ul class="hidden lg:flex" role="list">
+        {links.map((link) => (
           <li>
-            <a
-              href={isHome ? `#${section.id}` : sectionLink(section.id)}
-              class="inline-flex min-h-11 min-w-11 items-center justify-center px-2 text-sm text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
-            >
-              {section.label}
-            </a>
+            <NavLink href={link.href}>{link.label}</NavLink>
           </li>
         ))}
       </ul>
+      <details class="group lg:hidden" data-nav-menu>
+        <summary class="inline-flex min-h-11 min-w-11 cursor-pointer list-none items-center gap-2 rounded-md px-3 text-small text-ink transition-colors duration-150 hover:text-accent motion-reduce:transition-none [&::-webkit-details-marker]:hidden">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            class="size-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          >
+            <path
+              class="group-open:hidden"
+              d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"
+            ></path>
+            <path class="hidden group-open:block" d="M4 4l8 8M12 4l-8 8"></path>
+          </svg>
+          <span>{header.menu}</span>
+        </summary>
+        <ul
+          class="absolute inset-x-0 top-full hidden border-b border-line bg-chrome px-6 py-2 group-open:block sm:px-10"
+          role="list"
+        >
+          {links.map((link) => (
+            <li>
+              <NavLink href={link.href} block>
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </details>
     </nav>
+    {resume && (
+      <a
+        href={resume}
+        class="inline-flex min-h-11 items-center rounded-md border border-control px-4 text-small font-medium text-ink transition-colors duration-150 hover:border-accent hover:text-accent motion-reduce:transition-none"
+      >
+        {labels.resume}
+      </a>
+    )}
   </div>
 </header>
