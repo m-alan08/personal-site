@@ -1,4 +1,5 @@
 export interface ResearchInterest {
+  label?: string;
   title: string;
   summary: string;
 }
