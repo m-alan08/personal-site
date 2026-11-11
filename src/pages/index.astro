@@ -142,8 +142,8 @@ const other = orderedProjects.filter((project) => project.featured === false);
       }))}
     />
   </Section>
-  <Section id="experience" title={sectionLabel("experience")}>
-    <SectionFigure slot="aside" caption={figures.timeline.caption}>
+  <Section id="experience" title={sectionLabel("experience")} stacked>
+    <SectionFigure caption={figures.timeline.caption} class="mb-14">
       <ExperienceTimeline />
     </SectionFigure>
     <ExperienceList entries={experience} />
