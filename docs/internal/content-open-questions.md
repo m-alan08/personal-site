@@ -29,6 +29,19 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
 
+## Currently exploring (p10-exploring)
+
+The Currently exploring section in `src/data/exploring.ts` has two threads: world action models, and agentic orchestration over learned policies. Both `readings` lists are empty on purpose, and the site shows no reading list until they have entries. Nothing was recalled or guessed.
+
+- Readings: please send the papers you are reading for each thread. For each one, give the title, authors, year, a public URL, and a one-line note on why you are reading it (as a question or direction, not a result).
+- Co-authors: before anything goes public, please confirm with your co-authors which of these threads, directions and readings may be shown on the site.
+- Status for thread 2: it is set to "Reading" because your description did not name a status. Change it to "Looking for gaps" or "Sketching" if either fits better.
+- Removed research interests not covered by the two threads, listed so you can restore any of them:
+  - "Independent projects and public notes, not published research." (the section note)
+  - RL: "Reinforcement learning for robotics. Goal-conditioned off-policy methods such as SAC with HER for manipulation, plus online RL post-training after imitation learning to win back performance lost to quantization or limited fine-tuning."
+  - VLA: "Vision-language-action models. How pretrained VLA policies such as SmolVLA and pi0 adapt to new tasks from a few demonstrations, and which parts of the model to fine-tune or freeze."
+  - Efficiency: "Efficient, hardware-aware policies. Quantization, smaller architectures and inference cost, judged by closed-loop behavior within the memory, latency and precision limits of microcontrollers and FPGAs." Thread 1's "Cut computational cost" direction covers part of this, not the microcontroller and FPGA detail.
+
 ## Unique feature
 
 - `uniqueFeature` is `null` until it is defined.
