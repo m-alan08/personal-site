@@ -6,6 +6,7 @@ import portrait from "../assets/portrait.jpg";
 import EntryList from "../components/EntryList.astro";
 import HyphenSafeText from "../components/HyphenSafeText.astro";
 import InterestGrid from "../components/InterestGrid.astro";
+import RobotWorkspaceSketch from "../components/RobotWorkspaceSketch.astro";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
 import SocialLinks from "../components/SocialLinks.astro";
@@ -108,6 +109,9 @@ const other = orderedProjects.filter((project) => project.featured === false);
     <ProjectList entries={[...featured, ...other]} />
   </Section>
   <Section id="research" title={sectionLabel("research")}>
+    <div slot="aside" aria-hidden="true" class="mt-10 hidden md:block">
+      <RobotWorkspaceSketch />
+    </div>
     <p class="mb-8 max-w-reading text-muted">
       <HyphenSafeText text={researchNote} />
     </p>

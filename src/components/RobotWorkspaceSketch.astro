@@ -1,0 +1,51 @@
+---
+const gridPoints = Array.from({ length: 11 * 17 }, (_, index) => ({
+  x: 20 + (index % 11) * 20,
+  y: 20 + Math.floor(index / 11) * 20,
+}));
+const reachRadii = [70, 140, 210];
+---
+
+<svg
+  viewBox="0 0 240 360"
+  fill="none"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="h-auto w-full max-w-[15rem]"
+>
+  <g class="fill-line">
+    {gridPoints.map((point) => (
+      <circle cx={point.x} cy={point.y} r="0.9"></circle>
+    ))}
+  </g>
+  <g class="stroke-line" stroke-width="1">
+    {reachRadii.map((radius) => (
+      <path
+        d={`M${110 - radius} 300 A${radius} ${radius} 0 0 1 ${110 + radius} 300`}
+        stroke-dasharray="2 4"
+      ></path>
+    ))}
+    <path d="M110 300 V20" stroke-dasharray="1 5"></path>
+    <path d="M140 300 A30 30 0 0 0 127.3 275.5"></path>
+  </g>
+  <g class="stroke-muted/70" stroke-width="15">
+    <path d="M110 300 L170 215 L150 128"></path>
+  </g>
+  <g class="stroke-canvas" stroke-width="12.5">
+    <path d="M110 300 L170 215 L150 128"></path>
+  </g>
+  <g class="stroke-muted/70 fill-canvas" stroke-width="1.25">
+    <circle cx="110" cy="300" r="15"></circle>
+    <circle cx="170" cy="215" r="7"></circle>
+    <circle cx="150" cy="128" r="5"></circle>
+    <path d="M153.6 121.1 l-2.2 -9.7 M143.8 123.3 l-2.2 -9.7"></path>
+  </g>
+  <g class="fill-muted/70">
+    <circle cx="110" cy="300" r="2.5"></circle>
+    <circle cx="170" cy="215" r="1.75"></circle>
+  </g>
+  <g class="stroke-accent" stroke-width="1.25">
+    <path d="M147 110 L143 96" stroke-dasharray="2 4" class="opacity-60"></path>
+    <rect x="135" y="83" width="12" height="12" rx="1.5"></rect>
+  </g>
+</svg>
