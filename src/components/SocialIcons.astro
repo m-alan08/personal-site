@@ -1,5 +1,9 @@
 ---
 import { socialLinks, type SocialLink } from "../data/links";
+interface Props {
+  kinds?: SocialLink["kind"][];
+}
+const { kinds } = Astro.props;
 const icons: Record<
   SocialLink["kind"],
   { viewBox: string; path: string; stroke?: boolean }
@@ -29,25 +33,24 @@ const icons: Record<
 };
 const entries = socialLinks.filter(
   (link, index, all) =>
-    all.findIndex((other) => other.kind === link.kind) === index,
+    all.findIndex((other) => other.kind === link.kind) === index &&
+    (!kinds || kinds.includes(link.kind)),
 );
 ---
 
-<ul class="-ml-3 flex flex-wrap items-center gap-1" role="list">
+<ul class="-ml-3 flex flex-wrap items-center gap-x-1" role="list">
   {entries.map((link) => {
     const icon = icons[link.kind];
     return (
       <li>
         <a
           href={link.href}
-          aria-label={link.label}
-          title={link.label}
-          class="inline-flex size-11 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+          class="inline-flex min-h-11 min-w-11 items-center gap-2 rounded-md px-3 text-small text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
         >
           <svg
             aria-hidden="true"
             viewBox={icon.viewBox}
-            class="size-5"
+            class="size-4 shrink-0"
             fill={icon.stroke ? "none" : "currentColor"}
             stroke={icon.stroke ? "currentColor" : "none"}
             stroke-width={icon.stroke ? 1.6 : undefined}
@@ -55,6 +58,7 @@ const entries = socialLinks.filter(
           >
             <path d={icon.path} />
           </svg>
+          <span>{link.label}</span>
         </a>
       </li>
     );
