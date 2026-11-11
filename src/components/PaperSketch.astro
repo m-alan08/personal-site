@@ -1,0 +1,44 @@
+---
+import FigureCorners from "./FigureCorners.astro";
+
+const textLines = [
+  { y: 62, end: 166 },
+  { y: 72, end: 160 },
+  { y: 82, end: 148 },
+  { y: 172, end: 166 },
+  { y: 182, end: 138 },
+];
+---
+
+<svg
+  viewBox="0 0 240 220"
+  fill="none"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="h-auto w-full max-w-[15rem]"
+>
+  <FigureCorners width={240} height={220} />
+  <path
+    d="M68 24 V16 H188 V188 H180"
+    class="stroke-line"
+    stroke-width="1"
+  ></path>
+  <g class="stroke-muted/70 fill-canvas" stroke-width="1.25">
+    <path d="M60 24 H162 L180 42 V196 H60 Z"></path>
+    <path d="M162 24 V42 H180"></path>
+    <path d="M74 48 H140"></path>
+  </g>
+  <g class="stroke-line" stroke-width="1">
+    {textLines.map((line) => (
+      <path d={`M74 ${line.y} H${line.end}`}></path>
+    ))}
+    <rect x="74" y="94" width="92" height="56" rx="1.5"></rect>
+    <path d="M82 142 H158 M82 142 V102"></path>
+  </g>
+  <path
+    d="M84 138 C100 132 108 114 124 110 S150 104 158 103"
+    class="stroke-muted/70"
+    stroke-width="1.25"
+  ></path>
+  <path d="M74 162 H130" class="stroke-accent" stroke-width="1.25"></path>
+</svg>

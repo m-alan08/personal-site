@@ -1,7 +1,7 @@
 ---
 import type { ResearchInterest } from "../content/profile";
 import HyphenSafeText from "./HyphenSafeText.astro";
-import RobotArmSketch from "./RobotArmSketch.astro";
+import NetworkSketch from "./NetworkSketch.astro";
 interface Props {
   entries: ResearchInterest[];
 }
@@ -27,7 +27,7 @@ const { entries } = Astro.props;
       aria-hidden="true"
       class="hidden items-center justify-center border-t border-line pt-5 sm:flex"
     >
-      <RobotArmSketch />
+      <NetworkSketch />
     </li>
   )}
 </ol>
