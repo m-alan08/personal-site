@@ -34,6 +34,10 @@ npm test
 
 The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All content and links work without JavaScript. Smooth anchor scrolling and wheel momentum are disabled under reduced motion, and touch, keyboard, and scrollbar input stay native.
 
+## Open questions for Alan
+
+Facts that are missing or unconfirmed are listed in [docs/internal/content-open-questions.md](docs/internal/content-open-questions.md). Check it before writing copy, and add to it instead of guessing.
+
 ## Content
 
 - `src/content/profile.ts`: introduction, about copy, research interests, writing links, experience, and the `uniqueFeature` placeholder.
@@ -48,7 +52,7 @@ The scripts disable Astro CLI telemetry and use POSIX environment syntax, suppor
 
 The home page is a single page with About, Projects, Research interests, Writing, Experience and Contact sections. Each project also has a case study at `/projects/<slug>/`. Projects with `featured: false` appear in a compact list below the featured ones, sorted by `order`.
 
-All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/content-open-questions.md`.
+All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/internal/content-open-questions.md`.
 
 `uniqueFeature` in `profile.ts` is reserved for one future interactive component. It is `null` and nothing renders it yet. Add the component as its own `Section` on the home page when it is defined.
 
@@ -64,9 +68,16 @@ SITE_URL=https://your-confirmed-host.example SITE_BASE=/ npm run build
 
 For Vercel, build with the confirmed production origin and a root base, then serve `dist/`. No backend, server functions, or database is required.
 
+## Internal docs
+
+- [AGENTS.md](AGENTS.md): rules for coding agents working in this repository.
+- [docs/internal/DECISIONS.md](docs/internal/DECISIONS.md): design and architecture decisions by round.
+- [docs/internal/PROGRESS.md](docs/internal/PROGRESS.md): running progress log.
+- [docs/internal/content-open-questions.md](docs/internal/content-open-questions.md): open content questions for Alan.
+
 ## Maintenance
 
-Redesign work goes through a branch and pull request against main, not direct pushes. Run build, lint, format and smoke tests before committing or pushing. Pull with rebase before every push and never force push. Keep changes small, log decisions in `DECISIONS.md`, and update `PROGRESS.md` at each step.
+Redesign work goes through a branch and pull request against main, not direct pushes. Run build, lint, format and smoke tests before committing or pushing. Pull with rebase before every push and never force push. Keep changes small, log decisions in `docs/internal/DECISIONS.md`, and update `docs/internal/PROGRESS.md` at each step.
 
 ## Resume
 
