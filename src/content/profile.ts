@@ -52,6 +52,8 @@ export const profile = {
   ],
   education: {
     school: "Georgia Institute of Technology",
+    shortName: "Georgia Tech",
+    city: "Atlanta",
     field: "Mathematics and Computer Science",
     graduation: "Expected May 2029",
   },
