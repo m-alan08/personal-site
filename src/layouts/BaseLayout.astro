@@ -6,7 +6,7 @@ import "../styles/global.css";
 import geistSans from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import { structuredData } from "../data/structuredData";
 import { sharePages } from "../data/routes";
-import { localPath, localLinks, shareImageLink } from "../data/links";
+import { links, localPath, localLinks, shareImageLink } from "../data/links";
 import { containerWidth } from "../data/layout";
 interface Props {
   title: string;
@@ -24,6 +24,7 @@ const canonical = new URL(
   Astro.site,
 );
 const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
+const twitterHandle = links.xHandle && `@${links.xHandle.replace(/^@/, "")}`;
 ---
 
 <!doctype html>
@@ -71,7 +72,9 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
+    {twitterHandle && <meta name="twitter:creator" content={twitterHandle} />}
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
   </head>
