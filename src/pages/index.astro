@@ -7,6 +7,10 @@ import EntryList from "../components/EntryList.astro";
 import HyphenSafeText from "../components/HyphenSafeText.astro";
 import InterestGrid from "../components/InterestGrid.astro";
 import RobotArmElevation from "../components/RobotArmElevation.astro";
+import SectionFigure from "../components/SectionFigure.astro";
+import PaperSketch from "../components/PaperSketch.astro";
+import CircuitBoardSketch from "../components/CircuitBoardSketch.astro";
+import EnvelopeSketch from "../components/EnvelopeSketch.astro";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
 import SocialLinks from "../components/SocialLinks.astro";
@@ -109,15 +113,18 @@ const other = orderedProjects.filter((project) => project.featured === false);
     <ProjectList entries={[...featured, ...other]} />
   </Section>
   <Section id="research" title={sectionLabel("research")}>
-    <div slot="aside" aria-hidden="true" class="mt-10 hidden md:block">
+    <SectionFigure slot="aside">
       <RobotArmElevation />
-    </div>
+    </SectionFigure>
     <p class="mb-8 max-w-reading text-muted">
       <HyphenSafeText text={researchNote} />
     </p>
     <InterestGrid entries={researchInterests} />
   </Section>
   <Section id="writing" title={sectionLabel("writing")}>
+    <SectionFigure slot="aside">
+      <PaperSketch />
+    </SectionFigure>
     <p class="mb-8 max-w-reading text-muted">
       <HyphenSafeText text={writing.intro} />
     </p>
@@ -130,6 +137,9 @@ const other = orderedProjects.filter((project) => project.featured === false);
     />
   </Section>
   <Section id="experience" title={sectionLabel("experience")}>
+    <SectionFigure slot="aside">
+      <CircuitBoardSketch />
+    </SectionFigure>
     <EntryList
       entries={experience.map((entry) => ({
         title: `${entry.role}, ${entry.organization}`,
@@ -140,6 +150,9 @@ const other = orderedProjects.filter((project) => project.featured === false);
     />
   </Section>
   <Section id="contact" title={sectionLabel("contact")}>
+    <SectionFigure slot="aside">
+      <EnvelopeSketch />
+    </SectionFigure>
     <SocialLinks detailed />
   </Section>
 </BaseLayout>

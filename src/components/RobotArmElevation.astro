@@ -1,4 +1,6 @@
 ---
+import FigureCorners from "./FigureCorners.astro";
+
 const shoulder = { x: 90, y: 274 };
 const elbow = { x: 124, y: 96 };
 const wrist = { x: 192, y: 184 };
@@ -17,12 +19,6 @@ const joints = [
 ];
 const crosshairReach = 20;
 const hatchMarks = Array.from({ length: 16 }, (_, index) => 20 + index * 13);
-const cornerMarks = [
-  "M8 20 V8 H20",
-  "M220 8 H232 V20",
-  "M8 340 V352 H20",
-  "M220 352 H232 V340",
-];
 ---
 
 <svg
@@ -32,10 +28,8 @@ const cornerMarks = [
   stroke-linejoin="round"
   class="h-auto w-full max-w-[15rem]"
 >
+  <FigureCorners width={240} height={360} />
   <g class="stroke-line" stroke-width="1">
-    {cornerMarks.map((mark) => (
-      <path d={mark}></path>
-    ))}
     <path d="M14 312 H226"></path>
     {hatchMarks.map((x) => (
       <path d={`M${x} 312 l-6 7`}></path>

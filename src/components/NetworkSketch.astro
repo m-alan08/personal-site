@@ -1,0 +1,60 @@
+---
+const layerSizes = [3, 5, 5, 2];
+const layerGap = 60;
+const nodeGap = 26;
+const layers = layerSizes.map((size, layer) =>
+  Array.from({ length: size }, (_, index) => ({
+    x: 40 + layer * layerGap,
+    y: 85 + (index - (size - 1) / 2) * nodeGap,
+  })),
+);
+const edges = layers
+  .slice(1)
+  .flatMap((layer, index) =>
+    layer.flatMap((to) => layers[index].map((from) => ({ from, to }))),
+  );
+const tracedPath = [layers[0][1], layers[1][1], layers[2][3], layers[3][0]];
+const tracedNodes = tracedPath.slice(0, -1);
+const output = tracedPath[tracedPath.length - 1];
+---
+
+<svg
+  viewBox="0 0 260 170"
+  fill="none"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="h-auto w-full max-w-[17rem]"
+>
+  <g class="stroke-line" stroke-width="1">
+    {edges.map(({ from, to }) => (
+      <path d={`M${from.x} ${from.y} L${to.x} ${to.y}`}></path>
+    ))}
+    {layers[0].map((node) => (
+      <path d={`M${node.x - 26} ${node.y} H${node.x - 10}`}></path>
+    ))}
+    {layers[3].map((node) => (
+      <path d={`M${node.x + 10} ${node.y} H${node.x + 26}`}></path>
+    ))}
+  </g>
+  <path
+    d={`M${tracedPath.map((node) => `${node.x} ${node.y}`).join(" L")}`}
+    class="stroke-accent opacity-60"
+    stroke-width="1.25"
+  ></path>
+  <g class="stroke-muted/70 fill-canvas" stroke-width="1.25">
+    {layers.flat().map((node) => (
+      <circle cx={node.x} cy={node.y} r="5"></circle>
+    ))}
+  </g>
+  <g class="stroke-accent fill-canvas" stroke-width="1.25">
+    {tracedNodes.map((node) => (
+      <circle cx={node.x} cy={node.y} r="5"></circle>
+    ))}
+    <circle
+      cx={output.x}
+      cy={output.y}
+      r="5"
+      class="motion-safe:animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+    ></circle>
+  </g>
+</svg>

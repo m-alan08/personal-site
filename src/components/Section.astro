@@ -8,6 +8,7 @@ interface Props {
 }
 const { id, title, stacked = false } = Astro.props;
 const headingId = `${id}-heading`;
+const pinned = !stacked && !Astro.slots.has("aside");
 ---
 
 <section
@@ -20,7 +21,7 @@ const headingId = `${id}-heading`;
       : "md:grid-cols-[10rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16",
   ]}
 >
-  <div class:list={[!stacked && "md:sticky md:top-24 md:self-start"]}>
+  <div class:list={[pinned && "md:sticky md:top-24 md:self-start"]}>
     <p
       aria-hidden="true"
       class="text-xs tabular-nums tracking-[0.2em] text-accent"
