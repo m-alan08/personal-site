@@ -21,9 +21,9 @@ export interface Experience {
 export const profile = {
   name: "Alan Mozhoor",
   portraitAlt: "Headshot of Alan Mozhoor in a navy suit and tie",
-  tagline: "Georgia Tech · RL for robot arms",
+  tagline: "Georgia Tech · RL for robotics",
   headline:
-    "I train reinforcement learning policies for robot arms and measure how few bits they need before they stop working.",
+    "I train reinforcement learning policies for robotics and measure how few bits they need before they stop working.",
   intro: [
     "I study math and computer science at Georgia Tech. The question under most of my projects: when a robot has a fast learned controller and a slower planner or VLA model, which one should make which call?",
   ],
