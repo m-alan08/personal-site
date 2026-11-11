@@ -9,7 +9,7 @@ const { href, label } = Astro.props;
 <a
   href={href}
   aria-label={label}
-  class="inline-flex min-h-11 min-w-11 items-center text-ink underline decoration-accent decoration-1 underline-offset-[5px] transition-colors duration-150 hover:decoration-ink motion-reduce:transition-none"
+  class="inline-flex min-h-11 min-w-11 items-center text-ink underline decoration-control decoration-1 underline-offset-[5px] transition-colors duration-150 hover:decoration-accent focus-visible:decoration-accent motion-reduce:transition-none print:inline print:min-h-0"
 >
   <slot />
 </a>
