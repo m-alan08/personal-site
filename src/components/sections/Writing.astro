@@ -1,26 +1,32 @@
 ---
-import EntryList from "../EntryList.astro";
+import ArrowLink from "../ArrowLink.astro";
 import HyphenSafeText from "../HyphenSafeText.astro";
-import NotesFigure from "../NotesFigure.astro";
 import Section from "../Section.astro";
-import SectionFigure from "../SectionFigure.astro";
-import { figures } from "../../content/figures";
+import WritingCard from "../WritingCard.astro";
 import { writing } from "../../content/profile";
+import { xSeriesPosts } from "../../content/xSeries";
 import { sectionLabel } from "../../data/sections";
 ---
 
 <Section id="writing" title={sectionLabel("writing")}>
-  <SectionFigure slot="aside" caption={figures.notes.caption}>
-    <NotesFigure />
-  </SectionFigure>
   <p class="mb-8 max-w-reading text-muted">
     <HyphenSafeText text={writing.intro} />
   </p>
-  <EntryList
-    entries={writing.links.map((link) => ({
-      title: link.title,
-      summary: link.note,
-      href: link.href,
-    }))}
-  />
+  <ul class="grid gap-4 sm:grid-cols-2" role="list">
+    {writing.links.map((link) => (
+      <li>
+        <WritingCard title={link.title} href={link.href} note={link.note} />
+      </li>
+    ))}
+  </ul>
+  {xSeriesPosts.length > 0 && (
+    <ul class="mt-8 divide-y divide-line" role="list">
+      {xSeriesPosts.map((post) => (
+        <li class="flex flex-wrap items-baseline justify-between gap-x-6 py-2">
+          <ArrowLink href={post.href} title={post.title} />
+          <span class="font-mono text-label text-muted">{post.date}</span>
+        </li>
+      ))}
+    </ul>
+  )}
 </Section>

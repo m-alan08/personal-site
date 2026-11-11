@@ -2,10 +2,10 @@ export const site = {
   name: "Alan Mozhoor",
   title: "Alan Mozhoor | Reinforcement learning for robotics",
   description:
-    "Alan Mozhoor, a Georgia Tech math and computer science student, trains reinforcement learning policies for robot arms and measures how few bits they need.",
+    "Alan Mozhoor, a Georgia Tech math and computer science student, trains reinforcement learning policies for robotics and measures how few bits they need.",
   introduction:
-    "Georgia Tech math and computer science student training reinforcement learning policies for robot arms.",
-  footer: "Reinforcement learning for robot arms, and how few bits they need.",
+    "Georgia Tech math and computer science student training reinforcement learning policies for robotics.",
+  footer: "Reinforcement learning for robotics, and how few bits they need.",
   skip: "Skip to content",
   backToTop: "Back to top",
   selectedProjects: "Selected projects",

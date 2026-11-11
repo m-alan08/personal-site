@@ -9,7 +9,7 @@ The personal website and project portfolio of Alan Mozhoor, a mathematics and co
 
 ## About this repository
 
-A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and two self-hosted variable fonts (Geist Sans and Geist Mono, Latin subset). It ships no client JavaScript; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
+A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and two self-hosted variable fonts (Geist Sans and Geist Mono, Latin subset). Its only client JavaScript is the small, lazy script for the bit-width explorer; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
 
 ## Setup
 
@@ -49,11 +49,12 @@ Facts that are missing or unconfirmed are listed in [docs/internal/content-open-
 
 ## Content
 
-- `src/content/profile.ts`: introduction, about copy, research interests, writing links, experience, and the `uniqueFeature` placeholder.
+- `src/content/profile.ts`: introduction, about copy, research interests, writing links, and experience.
 - `src/content/site.ts`: site metadata, section labels, and shared labels.
 - `src/data/sections.ts`: home page section order used by navigation.
 - `src/data/redirects.ts`: legacy `/about/`, `/contact/`, `/resume/` and `/projects/` redirects to home page anchors.
 - `src/data/links.ts`: GitHub, X, LinkedIn, personal and Georgia Tech email, resume file, and the derived `socialLinks` list.
+- `src/data/explorerData.ts`: quantrl-fetch success rates for the bit-width explorer, copied cell by cell from the README key results tables, with a `source` URL per dataset. Missing cells are `null` and show as "Not measured".
 - `src/data/projects.ts`: the uniform project shape, categories, events, case studies, ownership, verified tools, diagrams, and sources.
 - `src/data/hosting.ts`: provisional canonical origin and base path.
 - `src/components/`: shared Astro components.
@@ -63,7 +64,7 @@ The home page is a single page with About, Projects, Research interests, Writing
 
 All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/internal/content-open-questions.md`.
 
-`uniqueFeature` in `profile.ts` is reserved for one future interactive component. It is `null` and nothing renders it yet. Add the component as its own `Section` on the home page when it is defined.
+The home page has one interactive component, the bit-width explorer in `src/components/sections/Explorer.astro`, placed after Projects. The server renders a static table of every result, so it works without JavaScript. When the section scrolls into view, a small lazy script replaces the table with a slider, task and method toggles, and an inline SVG chart. It has no navigation entry.
 
 ## Static hosting
 

@@ -1,81 +1,85 @@
 ---
 import type { Project } from "../data/projects";
-import { labels, caseStudy } from "../content/site";
 import { projectLink } from "../data/links";
-import { externalLinks } from "../data/projectLinks";
-import TextLink from "./TextLink.astro";
-import ProjectImage from "./ProjectImage.astro";
-import ArrowLink from "./ArrowLink.astro";
+import { headlineResults, projectCardLabels } from "../content/projectCards";
 import HyphenSafeText from "./HyphenSafeText.astro";
+import ProjectBadges from "./ProjectBadges.astro";
+import ProjectFrame from "./ProjectFrame.astro";
+import ProjectLinks from "./ProjectLinks.astro";
+import ProjectTags from "./ProjectTags.astro";
 interface Props {
   project: Project;
-  number: number;
+  size: "feature" | "medium";
+  eager?: boolean;
+  accent?: boolean;
+  wide?: boolean;
 }
-const { project, number } = Astro.props;
-const meta = [project.ownership, project.event?.name, project.status].filter(
-  Boolean,
-);
-const external = externalLinks(project);
-const image = project.image ?? project.gallery?.[0];
+const {
+  project,
+  size,
+  eager = false,
+  accent = false,
+  wide = false,
+} = Astro.props;
+const headline = headlineResults[project.slug];
+const feature = size === "feature";
 ---
 
 <article
   class:list={[
-    "grid gap-6 py-10 first:pt-0 last:pb-0 sm:py-12",
-    "lg:grid-cols-[minmax(0,9fr)_minmax(0,11fr)] lg:items-center lg:gap-12 xl:gap-16",
+    "relative grid content-start gap-6 rounded-xl border border-hairline bg-surface p-5 transition-colors duration-150 hover:border-control motion-reduce:transition-none sm:p-6",
+    "has-[[data-card-link]:focus-visible]:outline-2 has-[[data-card-link]:focus-visible]:outline-offset-4 has-[[data-card-link]:focus-visible]:outline-ink",
+    feature &&
+      "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-10 lg:p-8",
+    wide && "lg:grid-cols-2 lg:items-center lg:gap-8",
   ]}
 >
-  <div class="min-w-0">
-    <p
-      aria-hidden="true"
-      class="text-xs tabular-nums tracking-[0.2em] text-accent"
-    >
-      {String(number).padStart(2, "0")}
-    </p>
-    <h3 class="mt-3 text-xl font-medium leading-snug tracking-tight">
-      <ArrowLink href={projectLink(project.slug)} title={project.title} />
+  {project.cardImage && (
+    <ProjectFrame
+      image={project.cardImage}
+      eager={eager}
+      sizes={
+        feature
+          ? "(min-width: 1248px) 40rem, (min-width: 1024px) 52vw, 100vw"
+          : wide
+            ? "(min-width: 1248px) 34rem, (min-width: 1024px) 45vw, 100vw"
+            : "(min-width: 1248px) 34rem, (min-width: 768px) 45vw, 100vw"
+      }
+    />
+  )}
+  <div class="grid min-w-0 content-start gap-4">
+    <h3 class:list={[feature ? "text-h2" : "text-h3", "m-0 text-ink"]}>
+      <a
+        href={projectLink(project.slug)}
+        data-card-link
+        class="flex min-h-11 items-center after:absolute after:inset-0 after:rounded-xl focus-visible:outline-transparent!"
+      >
+        <span>
+          <HyphenSafeText text={project.title} />
+        </span>
+      </a>
     </h3>
-    <p class="mt-1.5 text-sm text-muted">
-      <HyphenSafeText text={meta.join(" · ")} />
-    </p>
-    <p class="mt-4 max-w-reading">
+    <p class="m-0 max-w-reading text-muted">
       <HyphenSafeText text={project.summary} />
     </p>
-    {project.technology.length > 0 && (
-      <p class="mt-3 max-w-reading text-sm text-muted">
-        <span class="sr-only">{labels.technology}: </span>
-        <HyphenSafeText text={project.technology.join(" · ")} />
+    {headline && (
+      <p class="m-0 border-l border-control pl-4">
+        <span class="sr-only">{projectCardLabels.result}: </span>
+        <span
+          class:list={[
+            "block font-mono text-h2 tabular-nums",
+            accent ? "text-accent" : "text-ink",
+          ]}
+        >
+          {headline.value}
+        </span>
+        <span class="block text-small text-muted">
+          <HyphenSafeText text={headline.detail} />
+        </span>
       </p>
     )}
-    <ul class="mt-2 flex flex-wrap gap-x-6 text-sm" role="list">
-      <li>
-        <TextLink href={projectLink(project.slug)}>
-          {caseStudy.read}
-          <span class="sr-only">: {project.title}</span>
-        </TextLink>
-      </li>
-      {external.map((link) => (
-        <li>
-          <TextLink href={link.href}>
-            {link.label}
-            <span class="sr-only">: {project.title}</span>
-          </TextLink>
-        </li>
-      ))}
-    </ul>
+    <ProjectBadges project={project} />
+    <ProjectTags tags={project.technology} />
+    <ProjectLinks project={project} />
   </div>
-  {image && (
-    <a
-      href={projectLink(project.slug)}
-      tabindex="-1"
-      aria-hidden="true"
-      class="group block"
-    >
-      <ProjectImage
-        image={image}
-        sizes="(min-width: 1280px) 40rem, (min-width: 1024px) 52vw, 100vw"
-        class="transition-colors duration-150 group-hover:border-muted motion-reduce:transition-none"
-      />
-    </a>
-  )}
 </article>

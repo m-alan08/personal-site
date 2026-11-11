@@ -274,3 +274,7 @@ Final command results:
 - Authored-source audit: no code comments or em dashes; original AGENTS attachment comparison passed.
 
 Remaining limitations are source/content gaps, not failed checks. armlab cannot have a sourced architecture or learning section until its documentation is supplied. No public hosting operation was attempted. A permission-review timeout on one combined QA command was resolved by separating file edits from browser execution and retrying once; no action remains blocked.
+
+### Redesign p7: bit-width explorer
+
+Added the bit-width explorer section with data from the quantrl-fetch README key results, a static table fallback, a lazy interactive layer and smoke tests for the table, the plotted values and keyboard control. Removed the `uniqueFeature` placeholder and its references.
