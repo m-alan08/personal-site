@@ -3,12 +3,18 @@ import ProjectList from "../ProjectList.astro";
 import Section from "../Section.astro";
 import { site } from "../../content/site";
 import { orderedProjects } from "../../data/projects";
-const featured = orderedProjects.filter(
+const finished = orderedProjects.filter(
   (project) => project.featured !== false,
 );
-const other = orderedProjects.filter((project) => project.featured === false);
+const inProgress = orderedProjects.filter(
+  (project) => project.featured === false,
+);
 ---
 
 <Section id="projects" title={site.selectedProjects} stacked>
-  <ProjectList entries={[...featured, ...other]} />
+  <ProjectList
+    features={finished.slice(0, 2)}
+    standard={finished.slice(2)}
+    inProgress={inProgress}
+  />
 </Section>
