@@ -15,7 +15,7 @@ const pinned = !stacked && !Astro.slots.has("aside");
   id={id}
   aria-labelledby={headingId}
   class:list={[
-    "grid gap-6 border-t border-line py-14 sm:py-16",
+    "grid gap-6 border-t border-line py-section-compact",
     stacked
       ? "md:gap-10"
       : "md:grid-cols-[10rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16",
