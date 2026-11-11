@@ -1,0 +1,116 @@
+---
+import { experience } from "../content/profile";
+import { figures } from "../content/figures";
+
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const monthIndex = (text: string) => {
+  const [month, year] = text.split(" ");
+  return Number(year) * 12 + monthNames.indexOf(month);
+};
+const today = new Date();
+const now = today.getFullYear() * 12 + today.getMonth();
+const spans = experience.flatMap((entry) => {
+  const [start, end] = entry.period.split(" to ");
+  if (!end) return [];
+  const current = end === "present";
+  return [
+    {
+      label: entry.organization,
+      period: entry.period,
+      start: monthIndex(start),
+      end: (current ? now : monthIndex(end)) + 1,
+      current,
+    },
+  ];
+});
+const first = Math.min(...spans.map((span) => span.start));
+const last = Math.max(...spans.map((span) => span.end));
+const left = 4;
+const right = 236;
+const x = (month: number) =>
+  left + ((month - first) / (last - first)) * (right - left);
+const rowHeight = 58;
+const top = 8;
+const rows = spans.map((span, index) => ({
+  ...span,
+  y: top + index * rowHeight,
+  from: x(span.start),
+  to: x(span.end),
+}));
+const axisY = top + rows.length * rowHeight + 4;
+const firstYear = Math.floor(first / 12);
+const years = Array.from(
+  { length: Math.floor((last - 1) / 12) - firstYear + 1 },
+  (_, index) => {
+    const year = firstYear + index;
+    return { year, x: x(Math.max(year * 12, first)) };
+  },
+);
+const nowX = x(now + 1);
+---
+
+<svg
+  viewBox={`0 0 240 ${axisY + 20}`}
+  fill="none"
+  class="h-auto w-full max-w-[15rem]"
+>
+  <g class="stroke-line" stroke-width="1">
+    <path d={`M${left} ${axisY} H${right}`}></path>
+    {years.map((tick) => (
+      <path d={`M${tick.x} ${top} V${axisY + 4}`} stroke-dasharray="2 4"></path>
+    ))}
+  </g>
+  <path
+    d={`M${nowX} ${top} V${axisY + 4}`}
+    class="stroke-accent opacity-60"
+    stroke-width="1"
+    stroke-dasharray="2 3"
+  ></path>
+  {rows.map((row) => (
+    <>
+      <text x={left} y={row.y + 13} font-size="11" class="fill-ink">
+        {row.label}
+      </text>
+      <text x={left} y={row.y + 27} font-size="9.5" class="fill-muted">
+        {row.period}
+      </text>
+      <rect
+        x={row.from}
+        y={row.y + 36}
+        width={Math.max(row.to - row.from, 4)}
+        height="6"
+        rx="3"
+        class={row.current ? "fill-accent/80" : "fill-muted/50"}
+      ></rect>
+    </>
+  ))}
+  <g font-size="9.5" class="fill-muted tabular-nums">
+    {years.map((tick) => (
+      <text x={tick.x + 3} y={axisY + 15}>
+        {tick.year}
+      </text>
+    ))}
+  </g>
+  <text
+    x={nowX}
+    y={axisY + 15}
+    font-size="9.5"
+    text-anchor="end"
+    class="fill-accent"
+  >
+    {figures.timeline.now}
+  </text>
+</svg>

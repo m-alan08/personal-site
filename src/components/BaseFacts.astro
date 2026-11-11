@@ -1,0 +1,14 @@
+---
+import { figures } from "../content/figures";
+---
+
+<dl class="space-y-4 border-l-2 border-accent/60 pl-4">
+  {figures.base.map((fact) => (
+    <div>
+      <dt class="text-xs uppercase tracking-[0.2em] text-muted">
+        {fact.label}
+      </dt>
+      <dd class="mt-1 text-sm leading-relaxed text-ink">{fact.value}</dd>
+    </div>
+  ))}
+</dl>
