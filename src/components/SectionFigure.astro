@@ -1,3 +1,11 @@
-<div aria-hidden="true" class="mt-10 hidden md:block">
+---
+interface Props {
+  caption?: string;
+}
+const { caption } = Astro.props;
+---
+
+<div aria-hidden="true" class="mt-10 hidden lg:block">
   <slot />
+  {caption && <p class="mt-3 text-xs text-muted">{caption}</p>}
 </div>

@@ -1,7 +1,8 @@
 ---
 import type { ResearchInterest } from "../content/profile";
 import HyphenSafeText from "./HyphenSafeText.astro";
-import NetworkSketch from "./NetworkSketch.astro";
+import HierarchyDiagram from "./HierarchyDiagram.astro";
+import { figures } from "../content/figures";
 interface Props {
   entries: ResearchInterest[];
 }
@@ -25,9 +26,10 @@ const { entries } = Astro.props;
   {entries.length % 2 === 1 && (
     <li
       aria-hidden="true"
-      class="hidden items-center justify-center border-t border-line pt-5 sm:flex"
+      class="hidden flex-col items-center justify-center border-t border-line pt-5 sm:flex"
     >
-      <NetworkSketch />
+      <HierarchyDiagram />
+      <p class="mt-3 text-xs text-muted">{figures.hierarchy.caption}</p>
     </li>
   )}
 </ol>

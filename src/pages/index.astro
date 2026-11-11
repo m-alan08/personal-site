@@ -8,9 +8,11 @@ import HyphenSafeText from "../components/HyphenSafeText.astro";
 import InterestGrid from "../components/InterestGrid.astro";
 import RobotArmElevation from "../components/RobotArmElevation.astro";
 import SectionFigure from "../components/SectionFigure.astro";
-import PaperSketch from "../components/PaperSketch.astro";
-import CircuitBoardSketch from "../components/CircuitBoardSketch.astro";
-import EnvelopeSketch from "../components/EnvelopeSketch.astro";
+import ControlLoopDiagram from "../components/ControlLoopDiagram.astro";
+import NotesFigure from "../components/NotesFigure.astro";
+import ExperienceTimeline from "../components/ExperienceTimeline.astro";
+import BaseFacts from "../components/BaseFacts.astro";
+import { figures } from "../content/figures";
 import ProjectList from "../components/ProjectList.astro";
 import Section from "../components/Section.astro";
 import SocialLinks from "../components/SocialLinks.astro";
@@ -113,8 +115,11 @@ const other = orderedProjects.filter((project) => project.featured === false);
     <ProjectList entries={[...featured, ...other]} />
   </Section>
   <Section id="research" title={sectionLabel("research")}>
-    <SectionFigure slot="aside">
+    <SectionFigure slot="aside" caption={figures.arm}>
       <RobotArmElevation />
+    </SectionFigure>
+    <SectionFigure slot="aside" caption={figures.loop.caption}>
+      <ControlLoopDiagram />
     </SectionFigure>
     <p class="mb-8 max-w-reading text-muted">
       <HyphenSafeText text={researchNote} />
@@ -122,8 +127,8 @@ const other = orderedProjects.filter((project) => project.featured === false);
     <InterestGrid entries={researchInterests} />
   </Section>
   <Section id="writing" title={sectionLabel("writing")}>
-    <SectionFigure slot="aside">
-      <PaperSketch />
+    <SectionFigure slot="aside" caption={figures.notes.caption}>
+      <NotesFigure />
     </SectionFigure>
     <p class="mb-8 max-w-reading text-muted">
       <HyphenSafeText text={writing.intro} />
@@ -137,8 +142,8 @@ const other = orderedProjects.filter((project) => project.featured === false);
     />
   </Section>
   <Section id="experience" title={sectionLabel("experience")}>
-    <SectionFigure slot="aside">
-      <CircuitBoardSketch />
+    <SectionFigure slot="aside" caption={figures.timeline.caption}>
+      <ExperienceTimeline />
     </SectionFigure>
     <EntryList
       entries={experience.map((entry) => ({
@@ -151,7 +156,7 @@ const other = orderedProjects.filter((project) => project.featured === false);
   </Section>
   <Section id="contact" title={sectionLabel("contact")}>
     <SectionFigure slot="aside">
-      <EnvelopeSketch />
+      <BaseFacts />
     </SectionFigure>
     <SocialLinks detailed />
   </Section>
