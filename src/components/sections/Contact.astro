@@ -1,14 +1,51 @@
 ---
-import BaseFacts from "../BaseFacts.astro";
+import EmailLink from "../EmailLink.astro";
 import Section from "../Section.astro";
-import SectionFigure from "../SectionFigure.astro";
 import SocialLinks from "../SocialLinks.astro";
+import { figures } from "../../content/figures";
+import { profile } from "../../content/profile";
+import { labels } from "../../content/site";
+import { socialLinks } from "../../data/links";
 import { sectionLabel } from "../../data/sections";
+const availability =
+  "availability" in profile && typeof profile.availability === "string"
+    ? profile.availability
+    : "";
+const [personalEmail, schoolEmail] = socialLinks.filter(
+  (link) => link.kind === "email",
+);
+const location = figures.base[0];
 ---
 
 <Section id="contact" title={sectionLabel("contact")}>
-  <SectionFigure slot="aside">
-    <BaseFacts />
-  </SectionFigure>
-  <SocialLinks detailed />
+  {availability && (
+    <p class="mb-8 max-w-[28ch] text-h2 text-balance text-ink">
+      {availability}
+    </p>
+  )}
+  <div class="flex flex-col gap-5 sm:grid sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-x-5 sm:gap-y-3 print:grid print:grid-cols-[auto_minmax(0,1fr)] print:gap-x-5 print:gap-y-1">
+    {personalEmail && (
+      <EmailLink
+        href={personalEmail.href}
+        label={labels.email}
+        address={personalEmail.display}
+        primary
+      />
+    )}
+    {schoolEmail && (
+      <EmailLink
+        href={schoolEmail.href}
+        label={schoolEmail.label}
+        address={schoolEmail.display}
+      />
+    )}
+  </div>
+  <div class="mt-8 border-t border-line pt-6 print:mt-4 print:pt-3">
+    <SocialLinks />
+  </div>
+  {location && (
+    <p class="mt-6 text-small text-muted print:mt-3">
+      {location.label} {location.value}
+    </p>
+  )}
 </Section>

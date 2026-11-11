@@ -1,29 +1,25 @@
 ---
 import { socialLinks } from "../data/links";
-import TextLink from "./TextLink.astro";
-interface Props {
-  detailed?: boolean;
-}
-const { detailed = false } = Astro.props;
+import SocialIcon from "./SocialIcon.astro";
+const entries = socialLinks.filter((link) => link.kind !== "email");
 ---
 
-{detailed ? (
-  <dl class="grid gap-x-8 sm:grid-cols-[10rem_minmax(0,1fr)]">
-    {socialLinks.map((link) => (
-      <>
-        <dt class="pt-2.5 text-sm text-muted">{link.label}</dt>
-        <dd class="m-0 mb-1 min-w-0 break-words">
-          <TextLink href={link.href}>{link.display}</TextLink>
-        </dd>
-      </>
-    ))}
-  </dl>
-) : (
-  <ul class="flex flex-wrap gap-x-6" role="list">
-    {socialLinks.map((link) => (
-      <li>
-        <TextLink href={link.href}>{link.label}</TextLink>
-      </li>
-    ))}
-  </ul>
-)}
+<ul
+  class="-ml-3 flex flex-wrap gap-x-2 gap-y-1 print:ml-0 print:block"
+  role="list"
+>
+  {entries.map((link) => (
+    <li>
+      <a
+        href={link.href}
+        class="group inline-flex min-h-11 items-center gap-2 rounded-md px-3 text-ink transition-colors duration-150 hover:text-accent motion-reduce:transition-none print:inline print:min-h-0 print:px-0"
+      >
+        <SocialIcon
+          kind={link.kind}
+          class="size-4 text-muted transition-colors duration-150 group-hover:text-accent motion-reduce:transition-none print:hidden"
+        />
+        <span>{link.label}</span>
+      </a>
+    </li>
+  ))}
+</ul>

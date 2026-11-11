@@ -1,0 +1,26 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  address: string;
+  primary?: boolean;
+}
+const { href, label, address, primary = false } = Astro.props;
+---
+
+<div class="flex flex-col items-start gap-1.5 sm:contents">
+  <a
+    href={href}
+    class:list={[
+      "inline-flex min-h-11 items-center justify-center rounded-md px-5 font-medium transition-colors duration-150 motion-reduce:transition-none print:min-h-0 print:justify-start print:border-0 print:bg-transparent print:px-0 print:text-ink",
+      primary
+        ? "bg-ink text-canvas hover:bg-accent focus-visible:bg-accent"
+        : "border border-control text-ink hover:border-accent hover:text-accent",
+    ]}
+  >
+    {label}
+  </a>
+  <span class="min-w-0 break-words font-mono text-small text-muted select-all print:text-ink">
+    {address}
+  </span>
+</div>
