@@ -21,6 +21,8 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - X series: add post or thread URLs when available.
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
+- Research interests: each entry can take a short mono `label` in `profile.ts`. None is set yet, so no label shows.
+- Hierarchy diagram caption in `figures.ts` is built only from the diagram labels. Confirm or replace the wording.
 
 ## Unique feature
 
