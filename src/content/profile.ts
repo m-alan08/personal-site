@@ -67,26 +67,31 @@ export const researchNote =
 
 export const researchInterests: ResearchInterest[] = [
   {
+    label: "RL",
     title: "Reinforcement learning for robotics",
     summary:
       "Goal-conditioned off-policy methods such as SAC with HER for manipulation, plus online RL post-training after imitation learning to win back performance lost to quantization or limited fine-tuning.",
   },
   {
+    label: "Agents",
     title: "Agentic control and hierarchical robotics",
     summary:
       "Pairing learned low-level control with higher-level reasoning and planning, and deciding which layer owns which decision.",
   },
   {
+    label: "VLA",
     title: "Vision-language-action models",
     summary:
       "How pretrained VLA policies such as SmolVLA and pi0 adapt to new tasks from a few demonstrations, and which parts of the model to fine-tune or freeze.",
   },
   {
+    label: "World models",
     title: "World models and world-action models",
     summary:
       "Models that predict how a scene responds to actions, and whether that prediction helps with planning or as a training signal for a policy.",
   },
   {
+    label: "Efficiency",
     title: "Efficient, hardware-aware policies",
     summary:
       "Quantization, smaller architectures and inference cost, judged by closed-loop behavior within the memory, latency and precision limits of microcontrollers and FPGAs.",
