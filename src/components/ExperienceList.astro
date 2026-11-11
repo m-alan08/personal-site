@@ -7,6 +7,7 @@ interface Props {
   entries: Experience[];
 }
 const { entries } = Astro.props;
+const metricNumber = /(\d[\d.,]*(?:%|x|\+)?)/;
 const periodParts = (period: string) => {
   const [start, end] = period.split(" to ");
   return { start, end, current: end === "present" };
@@ -55,13 +56,18 @@ const periodParts = (period: string) => {
           {metrics.length > 0 && (
             <ul class="mt-4 flex flex-wrap gap-2" role="list">
               {metrics.map((metric) => (
-                <li class="inline-flex items-baseline gap-1.5 rounded-md border border-hairline bg-surface px-2.5 py-1 print:border-line">
-                  <span class="font-mono text-small font-medium tabular-nums text-ink">
-                    {metric.value}
-                  </span>
-                  <span class="text-small text-muted">
-                    <HyphenSafeText text={metric.label} />
-                  </span>
+                <li class="rounded-md border border-hairline bg-surface px-2.5 py-1 text-small text-muted print:border-line">
+                  {metric
+                    .split(metricNumber)
+                    .map((part, index) =>
+                      index % 2 === 1 ? (
+                        <span class="font-mono font-medium tabular-nums text-ink">
+                          {part}
+                        </span>
+                      ) : (
+                        <HyphenSafeText text={part} />
+                      ),
+                    )}
                 </li>
               ))}
             </ul>

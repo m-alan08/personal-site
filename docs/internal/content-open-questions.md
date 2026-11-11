@@ -15,15 +15,19 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - Degree: show "Mathematics and Computer Science", as Alan asked, not the resume's "Mathematics & Computing".
 - Resume metrics for Ascent Math and The Pert Group are shown on the site, as Alan asked. They are self-reported on his resume.
 
+## Answered by Alan on November 11, 2026
+
+- Hero statement: keep option 1 from `docs/internal/copy-options.md`.
+- Availability: keep "Open to research collaborations and robotics machine learning roles."
+- Ari AI node count: keep "10-node" as written on the site.
+- Ari AI HackATL event: no event label on the Ari AI card. HackATL stays in the case study text and the experience entry.
+
 ## Still open
 
 - quantrl-fetch: the resume says QAT sweeps are in progress, but the README reports them done. The site follows the README.
 - X series: add post or thread URLs when available.
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
-
-- Contact availability: what are you open to (for example internships, research roles or collaborations, and for when)? The Contact section shows this line above the email buttons once `availability` is set in `profile.ts`. Nothing renders until then.
-- Experience metrics: each experience entry can list its key numbers as short chips (a value plus a label) in a `metrics` field. Which numbers should each entry show? Only numbers already on the site or your resume can be used.
 
 ## Unique feature
 
