@@ -4,35 +4,35 @@ import { figures } from "../content/figures";
 const { layers, split, caption } = figures.hierarchy;
 ---
 
-<figure class="grid gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:items-end lg:gap-10">
-  <ol class="max-w-[26rem]" role="list">
+<figure class="max-w-[26rem]">
+  <ol role="list">
     {layers.map((layer, index) => (
       <li>
         {index > 0 && (
-          <div class="relative flex h-12 justify-center gap-6">
+          <div class="relative flex h-10 justify-center gap-6">
             <svg
               aria-hidden="true"
-              viewBox="0 0 12 48"
-              class="h-12 w-3 text-muted"
+              viewBox="0 0 12 40"
+              class="h-10 w-3 text-muted"
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path d="M6 4v38M2 37l4 5 4-5" />
+              <path d="M6 4v30M2 29l4 5 4-5" />
             </svg>
             <svg
               aria-hidden="true"
-              viewBox="0 0 12 48"
-              class="h-12 w-3 text-control"
+              viewBox="0 0 12 40"
+              class="h-10 w-3 text-control"
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
               stroke-dasharray="3 3"
               stroke-linecap="round"
             >
-              <path d="M6 44V6" />
+              <path d="M6 36V6" />
             </svg>
             {index === 1 && (
               <div class="absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center gap-3">
@@ -47,12 +47,12 @@ const { layers, split, caption } = figures.hierarchy;
             )}
           </div>
         )}
-        <div class="rounded-xl border border-hairline bg-surface px-5 py-4 text-center">
+        <div class="rounded-xl border border-hairline bg-surface px-4 py-2.5 text-center">
           <p class="font-medium text-ink">{layer.title}</p>
           <p class="mt-1 font-mono text-label text-muted">{layer.detail}</p>
         </div>
       </li>
     ))}
   </ol>
-  <figcaption class="max-w-reading text-small text-muted">{caption}</figcaption>
+  <figcaption class="mt-4 text-small text-muted">{caption}</figcaption>
 </figure>

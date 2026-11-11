@@ -8,11 +8,14 @@ import { sectionLabel } from "../../data/sections";
 ---
 
 <Section id="research" title={sectionLabel("research")}>
-  <p class="mb-8 max-w-reading text-muted">
+  <div slot="aside" class="mt-8 hidden lg:block">
+    <HierarchyDiagram />
+  </div>
+  <p class="mb-6 max-w-reading text-muted">
     <HyphenSafeText text={researchNote} />
   </p>
   <InterestGrid entries={researchInterests} />
-  <div class="mt-12 border-t border-line pt-8">
+  <div class="mt-8 border-t border-line pt-6 lg:hidden">
     <HierarchyDiagram />
   </div>
 </Section>
