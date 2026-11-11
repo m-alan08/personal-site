@@ -57,6 +57,9 @@
   --line: #242427;
   --control: #4a4a4f;
   --accent: #ef5a52;
+  --raised: #1b1b1e;
+  --hairline: rgb(236 236 234 / 0.1);
+  --text-body: 1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -70,8 +73,13 @@ body {
     var(--canvas) 42rem
   );
   background-repeat: no-repeat;
-  font-size: 1rem;
+  font-size: var(--text-body);
   line-height: 1.65;
+}
+@media (min-width: 64rem) {
+  :root {
+    --text-body: 1.0625rem;
+  }
 }
 @layer base {
   h1 {

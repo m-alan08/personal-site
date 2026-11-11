@@ -132,7 +132,7 @@ try {
             [],
             `${label}: spaces collapsed between flex items`,
           );
-          assert.equal(state.fontSize, "16px");
+          assert.equal(state.fontSize, width >= 1024 ? "17px" : "16px");
           assert.equal(state.scrollBehavior, "auto");
           assert.ok(
             state.scripts.every((source) => new URL(source).origin === origin),
