@@ -1,6 +1,6 @@
 # Alan Mozhoor's personal website
 
-A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and system fonts. It ships no client JavaScript; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
+A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and two self-hosted variable fonts (Geist Sans and Geist Mono, Latin subset). It ships no client JavaScript; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
 
 ## Setup
 

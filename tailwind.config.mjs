@@ -1,15 +1,23 @@
+const sans = [
+  '"Geist Variable"',
+  '"Geist Fallback"',
+  "ui-sans-serif",
+  "system-ui",
+  "sans-serif",
+];
+
 export default {
   theme: {
     extend: {
       maxWidth: { reading: "68ch" },
       fontFamily: {
-        display: [
-          "ui-serif",
-          '"Iowan Old Style"',
-          '"Palatino Linotype"',
-          "Palatino",
-          "Georgia",
-          "serif",
+        sans,
+        display: sans,
+        mono: [
+          '"Geist Mono Variable"',
+          '"Geist Mono Fallback"',
+          "ui-monospace",
+          "monospace",
         ],
       },
       colors: {
