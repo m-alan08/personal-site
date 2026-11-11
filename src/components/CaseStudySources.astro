@@ -1,0 +1,18 @@
+---
+import TextLink from "./TextLink.astro";
+interface Props {
+  sources: { label: string; href: string }[];
+}
+const { sources } = Astro.props;
+---
+
+<ul role="list" class="mt-5 space-y-3">
+  {sources.map((source) => (
+    <li>
+      <TextLink href={source.href}>{source.label}</TextLink>
+      <span class="block break-all font-mono text-label text-muted">
+        {source.href.replace(/^https:\/\//, "")}
+      </span>
+    </li>
+  ))}
+</ul>

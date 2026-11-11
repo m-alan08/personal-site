@@ -25,7 +25,7 @@ interface Props {
 const { project, previous, next } = Astro.props;
 ---
 
-<BaseLayout title={project.title} description={project.summary}>
+<BaseLayout title={project.title} description={project.summary} wide>
   <p class="mb-8 text-sm">
     <a
       href={sectionLink("projects")}
