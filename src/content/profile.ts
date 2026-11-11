@@ -15,23 +15,26 @@ export interface Experience {
   organization: string;
   period: string;
   summary: string;
+  metrics?: string[];
   href?: string;
 }
 
 export const profile = {
   name: "Alan Mozhoor",
   portraitAlt: "Headshot of Alan Mozhoor in a navy suit and tie",
-  tagline: "Math and CS at Georgia Tech · RL for robots",
+  tagline: "Georgia Tech · RL for robot arms",
   headline:
-    "I'm Alan. I study math and computer science at Georgia Tech, and most of my time goes into getting robots to learn things with reinforcement learning.",
+    "I train reinforcement learning policies for robot arms and measure how few bits they need before they stop working.",
   intro: [
-    "The question I keep chasing: when a robot has a fast learned controller and a slower planner or VLA model on top, which one should make which call? I also like squeezing policies small enough to run on real hardware, and I write about it on X as I go.",
+    "I study math and computer science at Georgia Tech. The question under most of my projects: when a robot has a fast learned controller and a slower planner or VLA model, which one should make which call?",
   ],
+  availability:
+    "Open to research collaborations and robotics machine learning roles.",
   currentLabel: "What I'm working on",
   current: [
     {
       label: "Research",
-      text: "quantrl-fetch, where a 4-bit RL actor gets back to 100% success on FetchReach after quantization-aware fine-tuning.",
+      text: "quantrl-fetch, my study of how few bits a robot arm policy needs. Quantization sweeps are done; post-training is next.",
     },
     {
       label: "Startup",
@@ -47,9 +50,8 @@ export const profile = {
     },
   ],
   about: [
-    "Most of my solo work is RL for manipulation. For quantrl-fetch I wrote Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch, then kept cutting the actor's precision to see when a simulated Fetch arm stops working. On FetchPush, a 5-bit actor trained with quantization from the start still hits 96.3%. Go lower and it falls apart fast.",
-    "On the team side, I built the success-guided sampling teacher pipeline for RL post-training of a SmolVLA policy in simulation and helped set up our SO-101 arm.",
-    "The thing I keep coming back to is how a hierarchical robot should split its work: what the fast learned controller handles, what the slower planner or vision-language-action model handles, and how latency and compute cost shape that split.",
+    "Most of my solo work is reinforcement learning for manipulation. For quantrl-fetch I wrote Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch, then cut the actor's precision bit by bit to find where a simulated Fetch arm stops finishing its task.",
+    "On a team robot arm project, I built the success-guided sampling teacher for RL post-training of a SmolVLA policy and helped set up our SO-101 arm. At Ari AI I designed the defense policy for its simulated network defense lab.",
   ],
   education: {
     school: "Georgia Institute of Technology",
@@ -61,13 +63,13 @@ export const profile = {
 };
 
 export const researchNote =
-  "These are directions I'm exploring through independent projects, reading, and public notes. They are not formal research appointments or published results.";
+  "Independent projects and public notes, not published research.";
 
 export const researchInterests: ResearchInterest[] = [
   {
     title: "Reinforcement learning for robotics",
     summary:
-      "Off-policy, goal-conditioned methods such as SAC with HER for manipulation, evaluated across seeds with controls that separate the effect of a method from the effect of extra training.",
+      "Goal-conditioned off-policy methods such as SAC with HER for manipulation, plus online RL post-training after imitation learning to win back performance lost to quantization or limited fine-tuning.",
   },
   {
     title: "Agentic control and hierarchical robotics",
@@ -77,33 +79,23 @@ export const researchInterests: ResearchInterest[] = [
   {
     title: "Vision-language-action models",
     summary:
-      "How pretrained VLA policies such as SmolVLA and pi0 adapt to new tasks from a small number of demonstrations, and which parts of the model to fine-tune or freeze.",
+      "How pretrained VLA policies such as SmolVLA and pi0 adapt to new tasks from a few demonstrations, and which parts of the model to fine-tune or freeze.",
   },
   {
     title: "World models and world-action models",
     summary:
-      "Models that predict how a scene responds to actions, and whether that prediction is useful for planning or as a training signal for a policy.",
+      "Models that predict how a scene responds to actions, and whether that prediction helps with planning or as a training signal for a policy.",
   },
   {
-    title: "Reinforcement learning post-training",
+    title: "Efficient, hardware-aware policies",
     summary:
-      "Online RL after imitation learning, for example to recover performance lost to quantization or to improve a fine-tuned VLA policy on a specific task.",
-  },
-  {
-    title: "Efficient machine learning systems",
-    summary:
-      "Quantization, smaller architectures, and inference cost, judged by their effect on closed-loop behavior rather than only on offline accuracy.",
-  },
-  {
-    title: "Hardware-aware policy deployment",
-    summary:
-      "Running robot policies within the memory, latency, and precision limits of embedded hardware such as microcontrollers and FPGAs.",
+      "Quantization, smaller architectures and inference cost, judged by closed-loop behavior within the memory, latency and precision limits of microcontrollers and FPGAs.",
   },
 ];
 
 export const writing: { intro: string; links: WritingLink[] } = {
   intro:
-    "I document what I'm learning in public. My ongoing X series works through reinforcement learning for robotics: RL algorithms, robot learning, vision-language-action models, world models and world-action models, agentic control, and readings of research papers.",
+    "I learn in public. My X series works through reinforcement learning for robotics: RL algorithms, robot learning, vision-language-action models, world models, agentic control and research papers.",
   links: [
     {
       title: "Learning RL for robotics, on X",
@@ -113,7 +105,7 @@ export const writing: { intro: string; links: WritingLink[] } = {
     {
       title: "quantrl-fetch results and method",
       href: "https://github.com/m-alan08/quantrl-fetch#key-results",
-      note: "Results tables, method, reproduction steps, and limitations for my quantization-aware RL experiments.",
+      note: "Results tables, method, reproduction steps and limitations for my quantization-aware RL experiments.",
     },
   ],
 };
@@ -124,7 +116,11 @@ export const experience: Experience[] = [
     organization: "Ascent Math",
     period: "May 2026 to present",
     summary:
-      "A math tutoring business I co-founded. I built its operations software for scheduling, customer records, lead intake, and automated follow-ups. It automates 85% of administrative work with 95% session fulfillment across 150+ sessions, and the lead pipeline has handled 400+ inquiries at 35% conversion while the platform grew 3x month over month to 100+ students.",
+      "I co-founded this math tutoring business and built its operations software for scheduling, customer records, lead intake and automated follow-ups.",
+    metrics: [
+      "Automates 85% of administrative work",
+      "Platform grew 3x month over month to 100+ students",
+    ],
     href: "https://www.joinascentmath.com",
   },
   {
@@ -132,7 +128,7 @@ export const experience: Experience[] = [
     organization: "Ari AI",
     period: "October 2026 to present",
     summary:
-      "An AI security engineering project that started at HackATL and kept going. I lead the technical work, including the multi-agent security pipeline and the simulated RL defense lab. Ari AI was submitted to Y Combinator.",
+      "Ari AI started at HackATL and kept going, and was submitted to Y Combinator. I lead the technical work, including the multi-agent security pipeline and the simulated RL defense lab.",
     href: "https://ari-ai-lake.vercel.app",
   },
   {
@@ -140,21 +136,20 @@ export const experience: Experience[] = [
     organization: "The Pert Group LLC",
     period: "November 2025 to August 2026",
     summary:
-      "Built an AI voice agent with Python, Twilio, the OpenAI API, and Make that handles 150+ interactions a month, automates 85% of inquiries, order intake, and follow-ups, and cut handling time by 65%. Its pipeline connects 6+ REST APIs and webhooks and turns LLM output into structured order data with 82.3% accuracy. With validation, retries, and logging, it completes 83.7% of tasks without a person and saves 25+ hours a month.",
+      "I built an AI voice agent with Python, Twilio, the OpenAI API and Make that takes inquiries, order intake and follow-ups and turns LLM output into structured order data.",
+    metrics: [
+      "Handles 150+ interactions a month",
+      "Completes 83.7% of tasks without a person",
+      "Cut handling time by 65%",
+    ],
   },
   {
     role: "Applied mathematics and machine learning research",
     organization: "Georgia Southern University",
     period: "June 2025 to July 2025",
     summary:
-      "Trained a TensorFlow CNN to tell tinea from circular eczema in skin images, reaching about 96% validation accuracy, and presented the work in a university-hosted research program.",
-  },
-  {
-    role: "Hackathon participant",
-    organization: "HackGT 13 and HackATL",
-    period: "2026",
-    summary:
-      "Built Constellation at HackGT 13, where I owned matching and ranking, and started Ari AI at HackATL.",
+      "I trained a TensorFlow CNN to tell tinea from circular eczema in skin images and presented the work in a university-hosted research program.",
+    metrics: ["About 96% validation accuracy"],
   },
 ];
 
