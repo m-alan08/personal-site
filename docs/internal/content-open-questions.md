@@ -21,6 +21,10 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - X series: add post or thread URLs when available.
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
+- Availability: `profile.availability` reads "Open to research collaborations and robotics machine learning roles." This is a placeholder. Alan needs to confirm what he is actually looking for (for example internships, research positions, or a season). The field is in the data but no component shows it yet.
+- Hero statement: Alan needs to pick one of the three options in `docs/internal/copy-options.md`.
+- Ari AI node count: the case study says "simulated 10-node network defense lab", but the public rl-defense README describes a five-node network for the protocol v1 evaluation. The site text was left as it was. Alan needs to confirm which is right.
+- Ari AI HackATL event: the Ari AI project has no event record (dates, duration, location, teammates), so no HackATL label shows on its card. HackATL is named only in the case study text and the experience entry. Add the event details if Alan wants the label.
 
 ## Unique feature
 
