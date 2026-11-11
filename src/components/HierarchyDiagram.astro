@@ -9,11 +9,11 @@ const { layers, split, caption } = figures.hierarchy;
     {layers.map((layer, index) => (
       <li>
         {index > 0 && (
-          <div class="relative flex h-10 justify-center gap-6">
+          <div class="relative flex h-7 justify-center gap-6 lg:h-10">
             <svg
               aria-hidden="true"
               viewBox="0 0 12 40"
-              class="h-10 w-3 text-muted"
+              class="h-7 w-3 text-muted lg:h-10"
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
@@ -25,7 +25,7 @@ const { layers, split, caption } = figures.hierarchy;
             <svg
               aria-hidden="true"
               viewBox="0 0 12 40"
-              class="h-10 w-3 text-control"
+              class="h-7 w-3 text-control lg:h-10"
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
@@ -47,9 +47,9 @@ const { layers, split, caption } = figures.hierarchy;
             )}
           </div>
         )}
-        <div class="rounded-xl border border-hairline bg-surface px-4 py-2.5 text-center">
+        <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 rounded-xl border border-hairline bg-surface px-4 py-2 text-center">
           <p class="font-medium text-ink">{layer.title}</p>
-          <p class="mt-1 font-mono text-label text-muted">{layer.detail}</p>
+          <p class="font-mono text-label text-muted">{layer.detail}</p>
         </div>
       </li>
     ))}

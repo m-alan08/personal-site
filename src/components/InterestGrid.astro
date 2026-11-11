@@ -7,16 +7,16 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<ul class="grid gap-x-10 gap-y-6 sm:grid-cols-2" role="list">
+<ul class="grid gap-x-10 gap-y-5 sm:grid-cols-2" role="list">
   {entries.map((entry) => (
-    <li class="border-t border-line pt-4">
+    <li class="border-t border-line pt-3">
       {entry.label && (
         <p class="font-mono text-label text-muted">{entry.label}</p>
       )}
       <h3
         class:list={[
           "font-semibold leading-snug text-ink",
-          entry.label && "mt-2",
+          entry.label && "mt-1",
         ]}
       >
         <HyphenSafeText text={entry.title} />
