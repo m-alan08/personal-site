@@ -4,6 +4,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { site } from "../content/site";
 import "../styles/global.css";
+import plexLatin from "@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url";
 import { structuredData } from "../data/structuredData";
 import { sharePages } from "../data/routes";
 import { localPath, localLinks, shareImageLink } from "../data/links";
@@ -38,6 +39,13 @@ const pageTitle = title === site.name ? site.title : `${title} | ${site.name}`;
       />
     )}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href={plexLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#161618" />

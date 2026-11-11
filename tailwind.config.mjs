@@ -4,12 +4,10 @@ export default {
       maxWidth: { reading: "68ch" },
       fontFamily: {
         display: [
-          "ui-serif",
-          '"Iowan Old Style"',
-          '"Palatino Linotype"',
-          "Palatino",
-          "Georgia",
-          "serif",
+          '"IBM Plex Sans Variable"',
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
         ],
       },
       colors: {

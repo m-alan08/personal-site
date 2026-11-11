@@ -1,8 +1,10 @@
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
+@import "@fontsource-variable/ibm-plex-sans/wght.css";
 
 :root {
   font-family:
+    "IBM Plex Sans Variable",
     ui-sans-serif,
     system-ui,
     -apple-system,
