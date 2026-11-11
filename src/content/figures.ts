@@ -11,30 +11,6 @@ export const figures = {
     ],
     split: "the split",
   },
-  notes: {
-    caption: "From my notes · soft actor-critic",
-    heading: "SOFT ACTOR-CRITIC",
-    entries: [
-      {
-        before: "J(π) = Σ E[ r + ",
-        accent: "α",
-        after: " H(π(·|s)) ]",
-        note: "reward plus an entropy bonus",
-      },
-      {
-        before: "y = r + γ ( min Q′ − ",
-        accent: "α",
-        after: " log π )",
-        note: "soft Bellman target, twin critics",
-      },
-      {
-        before: "g ← ",
-        accent: "g′",
-        after: " achieved",
-        note: "hindsight relabel for missed goals",
-      },
-    ],
-  },
   timeline: {
     caption: "Roles over time",
     now: "now",

@@ -1,0 +1,34 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+import HyphenSafeText from "./HyphenSafeText.astro";
+import { labels } from "../content/site";
+interface Props {
+  title: string;
+  href: string;
+  note: string;
+}
+const { title, href, note } = Astro.props;
+const platforms: Record<string, string> = {
+  "x.com": labels.x,
+  "github.com": labels.github,
+};
+const platform = platforms[new URL(href).hostname.replace(/^www\./, "")];
+---
+
+<a
+  href={href}
+  class="group flex h-full flex-col rounded-xl border border-hairline bg-surface p-6 transition-colors duration-150 hover:border-control motion-reduce:transition-none"
+>
+  <span class="flex items-center justify-between gap-4">
+    {platform && (
+      <span class="font-mono text-label text-muted">{platform}</span>
+    )}
+    <ArrowIcon class="ml-auto group-hover:translate-x-1 group-focus-visible:translate-x-1" />
+  </span>
+  <span class="mt-4 text-h3 text-ink transition-colors duration-150 group-hover:text-accent motion-reduce:transition-none">
+    <HyphenSafeText text={title} />
+  </span>
+  <span class="mt-2 text-small text-muted">
+    <HyphenSafeText text={note} />
+  </span>
+</a>
