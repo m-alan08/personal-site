@@ -55,7 +55,6 @@ export interface Project {
   technology: string[];
   repository: string;
   writeup: string[];
-  sourceNote: string;
   links?: ProjectLink[];
   contribution?: string;
   featured?: boolean;
@@ -68,7 +67,7 @@ export const projects: Project[] = [
   {
     category: "Research",
     event: null,
-    role: "Solo project. I implemented SAC, HER, fake quantization, and the evaluation scripts from scratch in PyTorch.",
+    role: "I built it alone: SAC, HER, fake quantization and the evaluation scripts, all from scratch in PyTorch.",
     problem:
       "Low-precision networks are cheaper to store and run, which matters for robot policies on embedded hardware. Whether a quantized actor still controls the arm well has to be measured in closed loop, not inferred from weight error.",
     approach: [
@@ -83,12 +82,12 @@ export const projects: Project[] = [
     ],
     limitations: [
       "Simulation only. Quantization is simulated in fp32 arithmetic, so no hardware latency or energy result is claimed.",
-      "Phase 5 is planned, not done: distill the fp32 policy into a quantized behavior cloning student, then test whether online RL post-training recovers low-bit performance.",
+      "Next, phase 5: distill the fp32 policy into a quantized behavior cloning student, then test whether online RL post-training recovers low-bit performance.",
     ],
     diagram: {
       title: "Actor precision pipeline",
       description:
-        "Simulation pipeline for comparing quantization methods on Fetch tasks. Post-training recovery is the planned next stage.",
+        "Simulation pipeline for comparing quantization methods on Fetch tasks. Post-training recovery is the next stage.",
       nodes: [
         { title: "Fetch simulation", detail: "MuJoCo + Gymnasium Robotics" },
         { title: "SAC + HER", detail: "PyTorch training, fp32 critics" },
@@ -105,7 +104,7 @@ export const projects: Project[] = [
           detail: "Planned: BC student, online recovery",
         },
       ],
-      note: "Derived from the quantrl-fetch README and roadmap. The last stage is planned, and no hardware deployment is shown.",
+      note: "The last stage is next on the roadmap. Everything here runs in simulation.",
     },
     sources: [
       {
@@ -134,7 +133,7 @@ export const projects: Project[] = [
     ],
     title: "Quantization-aware RL for robotic arm control",
     summary:
-      "I measure how low an RL policy's actor precision can go before a simulated Fetch robot arm stops completing its task.",
+      "How few bits does a robot arm policy need? Quantization-aware fine-tuning brings a 4-bit actor back to full FetchReach success; 3 bits breaks every method.",
     headline:
       "On FetchReach, 4-bit QAT fine-tuning recovers 100% success, where PTQ alone reaches 82.0%.",
     question: "How few bits does a robot arm policy need?",
@@ -152,12 +151,10 @@ export const projects: Project[] = [
     ],
     repository: "https://github.com/m-alan08/quantrl-fetch",
     writeup: [
-      "This project asks how far a policy's actor network can be reduced in precision before its control behavior suffers. Robot policies that run on embedded hardware have tight memory and latency budgets, and quantization is one of the simplest ways to fit them. The experiments use a simulated Fetch arm in MuJoCo.",
-      "I implemented Soft Actor-Critic with Hindsight Experience Replay, then compared post-training quantization, quantization-aware fine-tuning, and quantization-aware training from scratch at several bit widths. On FetchReach, 4-bit QAT fine-tuning recovers 100% success where PTQ alone reaches 82.0%. At 3 bits no method gets past about 50%. On FetchPush, 5-bit QAT from scratch reaches 96.3%.",
-      "The next phase tests whether a quantized student trained by behavior cloning can recover low-bit performance through online RL post-training. Quantization here is simulated in fp32 arithmetic, so these results describe policy accuracy, not hardware speed or energy.",
+      "Robot policies on embedded hardware have tight memory and latency budgets, and quantization is one of the simplest ways to fit them. I wanted to know where it starts to break a closed-loop controller, so I ran the sweep on a simulated Fetch arm in MuJoCo.",
+      "The results above show the answer depends on the task: FetchReach tolerates much lower precision than FetchPush, and the best method changes between them.",
+      "Next I test whether a quantized student trained by behavior cloning can recover low-bit performance through online RL post-training. Quantization is simulated in fp32 arithmetic, so the results describe policy accuracy, not hardware speed or energy.",
     ],
-    sourceNote:
-      "Results from the repository README and roadmap, checked on November 10, 2026.",
     links: [
       {
         label: "Repository",
@@ -171,7 +168,7 @@ export const projects: Project[] = [
       },
     ],
     contribution:
-      "Everything: algorithms, quantization, experiments, and analysis.",
+      "Everything: algorithms, quantization, experiments and analysis.",
     featured: true,
     order: 1,
   },
@@ -193,10 +190,10 @@ export const projects: Project[] = [
     category: "Hackathon",
     event: null,
     summary:
-      "An AI security engineering system that investigates suspected vulnerabilities, reproduces exploits in a sandbox, proposes patches, and verifies them before a developer reviews the fix.",
+      "Can an agent prove a fix works? Ari AI reproduces the exploit in a sandbox, proposes a patch, and reruns it before a developer decides.",
     question: "Can an agent show that a fix actually works?",
     ownership: "Team project",
-    status: "In development; submitted to Y Combinator",
+    status: "In development",
     scope: "Team project. I'm the CTO.",
     technology: [
       "Python",
@@ -210,11 +207,9 @@ export const projects: Project[] = [
     writeup: [
       "Ari AI started at HackATL and kept going afterward. It treats a suspected vulnerability as a hypothesis: agents investigate the code, try to reproduce the exploit inside an isolated sandbox, propose a patch, and rerun the reproduction to check that the patch closes it. A developer reviews the evidence and decides whether to accept the fix.",
       "Security tooling that only flags issues leaves the hard work to developers, and a model's claim that a patch works is not evidence. Ari keeps reproduction, patching, and verification as separate steps, and testing is limited to authorized scope.",
-      "I designed a Double DQN defense policy for the simulated 10-node network defense lab. In the public held-out evaluation (5 seeds, 100 episodes each, held-out scenario configs), the current policy lowers the share of episodes with a compromise from 83.0% for tuned threshold rules to 7.1%, at the cost of a 75% false disruption rate. Ari AI was submitted to Y Combinator. That is an application, not an acceptance, investment, or endorsement.",
+      "I designed a Double DQN defense policy for the simulated 10-node network defense lab. In the public held-out evaluation (5 seeds, 100 episodes each, held-out scenario configs), the current policy lowers the share of episodes with a compromise from 83.0% for tuned threshold rules to 7.1%, at the cost of a 75% false disruption rate.",
     ],
-    sourceNote:
-      "Based on the public README, the rl-defense README evaluation, Alan's description, and his resume, checked on November 10, 2026. Ari AI is a team project; this page describes only Alan's part.",
-    role: "I'm the CTO. I designed the Double DQN defense policy in the simulated defense lab and worked on the multi-agent security pipeline. Adam Issac and other teammates build the project with me.",
+    role: "I'm the CTO. I designed the Double DQN defense policy in the simulated defense lab and work on the multi-agent security pipeline. I build Ari AI with Adam Issac and other teammates.",
     problem:
       "Vulnerability scanners produce findings, not proof. Developers need to know whether an exploit is real and whether a proposed fix closes it before they merge anything.",
     approach: [
@@ -240,7 +235,7 @@ export const projects: Project[] = [
         { title: "Verify", detail: "Rerun reproduction and tests" },
         { title: "Developer review", detail: "Accept or reject the fix" },
       ],
-      note: "Simplified from the public README. This is the intended workflow, not a production record.",
+      note: "A simplified view of the intended workflow in the project README.",
     },
     sources: [
       {
@@ -277,7 +272,7 @@ export const projects: Project[] = [
       "Comparisons between SGS and uniform resets need held-out evaluation across seeds with confidence intervals, not single runs.",
     ],
     limitations: [
-      "Team project. My post-training work is in simulation so far; distillation into SmolVLA and real-arm evaluation are planned. The team's vision policy and FPGA work are not mine and are not claimed here.",
+      "My post-training work runs in simulation so far. Distillation into SmolVLA and evaluation on the real arm come next. The vision policy and FPGA work belong to my teammates.",
     ],
     diagram: {
       title: "SGS post-training plan",
@@ -290,7 +285,7 @@ export const projects: Project[] = [
         { title: "DAgger to SmolVLA", detail: "Planned" },
         { title: "SO-101 evaluation", detail: "Planned" },
       ],
-      note: "Derived from Alan's commits and plan documents in the team repository, which is not public on this site yet. The last two stages are planned.",
+      note: "The last two stages are planned.",
     },
     sources: [],
     devpost: "",
@@ -310,30 +305,28 @@ export const projects: Project[] = [
     ],
     title: "Robot arm vision policy: RL post-training",
     summary:
-      "On a team robot arm project, I built the success-guided sampling pipeline for RL post-training of a SmolVLA pick-and-place policy in simulation.",
+      "Where should RL post-training spend its effort? I built the success-guided sampling and PPO teacher pipeline for a team SmolVLA pick-and-place policy, in simulation.",
     question: "Where should post-training spend its effort?",
     ownership: "Team project",
-    status: "In progress: teacher pipeline built, distillation planned",
+    status: "Teacher pipeline built; distillation next",
     scope:
-      "My part is the SGS sampler, PPO teacher, simulation environments, evaluation, and helping set up the SO-101 arm. The vision policy and FPGA work belong to the team.",
+      "I own the SGS sampler, PPO teacher, simulation environments and evaluation, and helped set up the SO-101 arm.",
     technology: ["Python", "JAX", "MuJoCo", "MJX", "MuJoCo Warp", "SmolVLA"],
     repository: "",
     writeup: [
-      "This is a team robot arm project. My part is the RL post-training pipeline for a fine-tuned SmolVLA pick-and-place policy.",
+      "On this team robot arm project, I own the RL post-training pipeline for a fine-tuned SmolVLA pick-and-place policy.",
       "I implemented success-guided sampling in NumPy and JAX, reset families for a randomized pick-and-place scene, a privileged-observation teacher trained with PPO in JAX, batched MJX and MuJoCo Warp environments with CPU parity tests, and held-out evaluation comparing SGS with uniform resets across seeds.",
-      "I also helped assemble and set up the SO-101 arm. Distilling the teacher into SmolVLA with DAgger and evaluating on the arm are planned. These notes do not claim the team's vision policy, the FPGA work, or the team's results.",
+      "I also helped assemble and set up the SO-101 arm. Next is distilling the teacher into SmolVLA with DAgger and evaluating on the arm.",
     ],
-    sourceNote:
-      "Based on Alan's resume, his commits, and the plan documents in the team repository, checked on November 10, 2026. The repository is not linked yet at Alan's request.",
     contribution:
-      "SGS sampler, PPO teacher, simulation environments, and evaluation.",
+      "SGS sampler, PPO teacher, simulation environments and evaluation.",
     featured: true,
     order: 3,
   },
   {
     category: "Research",
     event: null,
-    role: "Solo project. I designed the experiment plan.",
+    role: "I designed the study and am setting it up on my own.",
     problem:
       "Pretrained VLA policies are often fine-tuned with little data. It is not clear how much pretraining helps or which parts of the model should stay frozen.",
     approach: [
@@ -341,7 +334,9 @@ export const projects: Project[] = [
       "Compare pretrained and from-scratch starts and different freezing choices.",
     ],
     lessons: [],
-    limitations: ["No experiments have been run yet. There are no results."],
+    limitations: [
+      "The experiments have not started, so there are no results yet.",
+    ],
     diagram: null,
     sources: [
       {
@@ -354,18 +349,16 @@ export const projects: Project[] = [
     slug: "vla-finetuning-scaling",
     title: "VLA fine-tuning scaling",
     summary:
-      "A planned study of how pretraining and freezing affect fine-tuning of vision-language-action policies on LIBERO.",
+      "How much does pretraining help a VLA policy fine-tuned on little data? A planned study of SmolVLA, pi0 and ACT on LIBERO.",
     question: "How much does VLA pretraining help with little data?",
     ownership: "Solo project",
-    status: "Planned: no experiments run yet",
-    scope: "Repository and environment setup in progress; no experiments run.",
+    status: "Environment setup; experiments next",
+    scope: "Environment setup in progress; experiments come next.",
     technology: ["Python", "PyTorch", "LIBERO", "SmolVLA", "pi0", "ACT"],
     repository: "https://github.com/m-alan08/vla-finetuning-scaling",
     writeup: [
-      "This planned study asks how pretraining and freezing choices affect fine-tuning of vision-language-action policies with small amounts of data, using SmolVLA, pi0, and ACT on the LIBERO benchmark.",
-      "No experiments have been run and there are no results yet.",
+      "I want to know how success scales with the number of demonstrations when a pretrained VLA is fine-tuned, and which parts of the model should stay trainable. SmolVLA and pi0 start pretrained; ACT trains from scratch as the no-pretraining baseline.",
     ],
-    sourceNote: "Based on the repository README, checked on November 10, 2026.",
     links: [
       {
         label: "Repository",
@@ -402,7 +395,7 @@ export const projects: Project[] = [
       teammates: ["Adam", "Arjun", "Akshar"],
     },
     summary:
-      "A proximity-verified event networking app that ranks relevant matches and connects people only after a verified in-person conversation and mutual consent.",
+      "Can a match become a real conversation? Constellation ranks relevant people at an event and connects them only after a verified in-person conversation.",
     question: "Can a match become a real conversation?",
     ownership: "Team project",
     status: "Hackathon prototype",
@@ -419,9 +412,7 @@ export const projects: Project[] = [
     ],
     repository: "https://github.com/adamissac/constellation",
     writeup: [],
-    sourceNote:
-      "Project scope, team, event details, synthetic training provenance, and the unused real-data path were supplied by Alan. The public README and ml/README.md were checked on October 12, 2026.",
-    role: "I owned the ML and algorithms layer, including pairwise matching and ranking models and the match explanation layer. Adam, Arjun, and Akshar built the project with me.",
+    role: "I owned the ML and algorithms layer: pairwise matching, ranking models and match explanations. Adam, Arjun and Akshar built the project with me.",
     problem:
       "Event networking can turn into profile collecting rather than conversation. Constellation aims to find relevant students and recruiters without public stranger browsing or public connection counts.",
     approach: [
@@ -435,7 +426,7 @@ export const projects: Project[] = [
       "Simulated outcomes can exercise the training pipeline, but they cannot establish how real attendees will connect.",
     ],
     limitations: [
-      "The real-data training path exists in the code but was never run. The reported AUC improvement is measured on simulated data only.",
+      "The real-data training path exists in the code but has not been run, so the AUC numbers above come from simulated outcomes.",
       "Bluetooth functionality requires a native development build. Prototype behavior depends on the client build and configured services.",
     ],
     diagram: {
@@ -464,7 +455,7 @@ export const projects: Project[] = [
           detail: "Mutual, silent consent",
         },
       ],
-      note: "Derived from the public README and ML documentation. ML recommendations do not establish that a conversation happened.",
+      note: "Ranking only suggests people. The in-person check is what confirms a conversation happened.",
     },
     sources: [
       {
@@ -490,7 +481,7 @@ export const projects: Project[] = [
         kind: "demo",
       },
     ],
-    contribution: "Matching, ranking models, and match explanations.",
+    contribution: "Matching, ranking models and match explanations.",
     order: 4,
   },
 ];
