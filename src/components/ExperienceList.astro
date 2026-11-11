@@ -22,7 +22,7 @@ const periodParts = (period: string) => {
         <div class="flex flex-wrap items-center gap-x-3 gap-y-2 md:flex-col md:items-start md:pt-1.5">
           <p class="font-mono text-label uppercase tabular-nums text-muted">
             <span>{period.start}</span>
-            {period.end && <span class="md:block">to {period.end}</span>}
+            {period.end && <span class="md:block">{` to ${period.end}`}</span>}
           </p>
           {period.current && (
             <span class="rounded-sm border border-hairline px-1.5 py-0.5 font-mono text-label uppercase text-ink print:border-line">
