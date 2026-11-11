@@ -15,6 +15,13 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - Degree: show "Mathematics and Computer Science", as Alan asked, not the resume's "Mathematics & Computing".
 - Resume metrics for Ascent Math and The Pert Group are shown on the site, as Alan asked. They are self-reported on his resume.
 
+## Answered by Alan on November 11, 2026
+
+- Hero statement: keep option 1 from `docs/internal/copy-options.md`.
+- Availability: keep "Open to research collaborations and robotics machine learning roles."
+- Ari AI node count: keep "10-node" as written on the site.
+- Ari AI HackATL event: no event label on the Ari AI card. HackATL stays in the case study text and the experience entry.
+
 ## Still open
 
 - quantrl-fetch: the resume says QAT sweeps are in progress, but the README reports them done. The site follows the README.
