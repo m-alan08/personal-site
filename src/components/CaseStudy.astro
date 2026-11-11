@@ -1,146 +1,111 @@
 ---
-import HyphenSafeText from "./HyphenSafeText.astro";
-import { getImage } from "astro:assets";
 import type { Project } from "../data/projects";
-import { caseStudy, labels, site } from "../content/site";
-import { externalLinks } from "../data/projectLinks";
-import TextLink from "./TextLink.astro";
-import ProjectImage from "./ProjectImage.astro";
+import { caseStudyExtras, caseStudyLabels } from "../content/caseStudyPage";
+import CaseStudyHeader from "./CaseStudyHeader.astro";
+import CaseStudyHighlight from "./CaseStudyHighlight.astro";
+import CaseStudyImage from "./CaseStudyImage.astro";
+import CaseStudyRail from "./CaseStudyRail.astro";
 import CaseStudySection from "./CaseStudySection.astro";
+import CaseStudySources from "./CaseStudySources.astro";
+import PipelineStepper from "./PipelineStepper.astro";
 interface Props {
   project: Project;
 }
 const { project } = Astro.props;
-const links = externalLinks(project);
-const images = [project.image, ...(project.gallery ?? [])].filter(
-  (image) => image !== undefined,
-);
-const fullSizeImages = await Promise.all(
-  images.map((image) =>
-    getImage({ src: image.src, format: "webp", quality: 85 }),
-  ),
-);
-const meta = [
+const extras = caseStudyExtras[project.slug];
+const enhanceImages = extras?.enhanceImages ?? false;
+const badges = [
   project.ownership,
+  project.status,
   project.event?.name,
-  project.event?.duration,
-].filter(Boolean);
-const facts = [
-  { term: caseStudy.status, detail: project.status },
-  { term: caseStudy.stack, detail: project.technology.join(", ") },
+  ...(extras?.badges ?? []),
+].filter((badge): badge is string => Boolean(badge));
+const gallery = project.gallery ?? [];
+const sections = [
   {
-    term: caseStudy.team,
-    detail: project.event?.teammates.length
-      ? [site.name, ...project.event.teammates].join(", ")
-      : "",
+    id: "problem",
+    title: caseStudyLabels.problem,
+    paragraphs: [project.problem],
+  },
+  { id: "role", title: caseStudyLabels.role, paragraphs: [project.role] },
+  {
+    id: "approach",
+    title: caseStudyLabels.approach,
+    paragraphs: project.approach,
+    extra: project.diagram !== null,
   },
   {
-    term: project.event?.name ?? "",
-    detail: [project.event?.dates, project.event?.location]
-      .filter(Boolean)
-      .join(", "),
+    id: "results",
+    title:
+      extras?.highlight.kind === "result"
+        ? caseStudyLabels.results
+        : caseStudyLabels.figures,
+    paragraphs: [],
+    extra: gallery.length > 0,
   },
-].filter((fact) => fact.term && fact.detail);
+  {
+    id: "limitations",
+    title: caseStudyLabels.limitations,
+    paragraphs: project.limitations,
+    list: true,
+  },
+  {
+    id: "lessons",
+    title: caseStudyLabels.lessons,
+    paragraphs: project.lessons,
+    list: true,
+  },
+  {
+    id: "sources",
+    title: caseStudyLabels.sources,
+    paragraphs: [],
+    extra: project.sources.length > 0,
+  },
+]
+  .map((section) => ({
+    ...section,
+    paragraphs: section.paragraphs.filter(Boolean),
+  }))
+  .filter((section) => section.paragraphs.length > 0 || section.extra);
 ---
 
-<article class="max-w-reading">
-  <p class="text-sm text-muted">
-    <HyphenSafeText text={meta.join(" · ")} />
-  </p>
-  <h1 class="mt-3 text-balance font-display text-4xl leading-tight tracking-tight">
-    <HyphenSafeText text={project.title} />
-  </h1>
-  <p class="mt-5 text-lg text-muted">
-    <HyphenSafeText text={project.summary} />
-  </p>
-  {links.length > 0 && (
-    <ul class="mt-4 flex flex-wrap gap-x-6" role="list">
-      {links.map((link) => (
-        <li>
-          <TextLink href={link.href}>{link.label}</TextLink>
-        </li>
-      ))}
-    </ul>
-  )}
-  {images.length > 0 && (
-    <ul class="mt-8 grid gap-3 sm:grid-cols-2" role="list">
-      {images.map((image, index) => (
-        <li>
-          <a
-            href={fullSizeImages[index]?.src}
-            class="group block cursor-zoom-in rounded-lg"
-          >
-            <ProjectImage
-              image={image}
-              sizes="(min-width: 640px) 34ch, 100vw"
-              eager={index === 0}
-              class="transition-colors duration-150 group-hover:border-muted motion-reduce:transition-none"
-            />
-          </a>
-        </li>
-      ))}
-    </ul>
-  )}
-  <dl class="mt-10 grid gap-x-8 gap-y-4 border-t border-line pt-8 text-sm sm:grid-cols-[8rem_minmax(0,1fr)]">
-    {facts.map((fact) => (
-      <>
-        <dt class="text-muted">{fact.term}</dt>
-        <dd class="m-0">
-          <HyphenSafeText text={fact.detail} />
-        </dd>
-      </>
-    ))}
-  </dl>
-  <CaseStudySection title={caseStudy.problem} paragraphs={[project.problem]} />
-  <CaseStudySection title={caseStudy.role} paragraphs={[project.role]} />
-  <CaseStudySection title={caseStudy.approach} paragraphs={project.approach} />
-  {project.diagram && (
-    <section class="mt-12">
-      <h2 class="font-display text-2xl italic tracking-tight">
-        <HyphenSafeText text={project.diagram.title} />
-      </h2>
-      <p class="mt-3 text-muted">
-        <HyphenSafeText text={project.diagram.description} />
-      </p>
-      <ol class="mt-5 space-y-3 border-l border-line pl-5" role="list">
-        {project.diagram.nodes.map((node, index) => (
-          <li>
-            <p>
-              <span class="mr-3 text-sm tabular-nums text-muted">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <HyphenSafeText text={node.title} />
-            </p>
-            <p class="ml-8 text-sm text-muted">
-              <HyphenSafeText text={node.detail} />
-            </p>
-          </li>
-        ))}
-      </ol>
-      <p class="mt-4 text-sm text-muted">
-        <HyphenSafeText text={project.diagram.note} />
-      </p>
-    </section>
-  )}
-  <CaseStudySection title={caseStudy.lessons} paragraphs={project.lessons} />
-  <CaseStudySection
-    title={caseStudy.limitations}
-    paragraphs={project.limitations}
+<article>
+  <CaseStudyHeader
+    project={project}
+    badges={badges}
+    enhanceImages={enhanceImages}
   />
-  <CaseStudySection title={labels.projectNotes} paragraphs={project.writeup} />
-  <section class="mt-12 border-t border-line pt-8 text-sm">
-    <h2 class="font-medium">{labels.source}</h2>
-    <p class="mt-3 text-muted">
-      <HyphenSafeText text={project.sourceNote} />
-    </p>
-    {project.sources.length > 0 && (
-      <ul class="mt-2 flex flex-wrap gap-x-6" role="list">
-        {project.sources.map((source) => (
-          <li>
-            <TextLink href={source.href}>{source.label}</TextLink>
-          </li>
-        ))}
-      </ul>
-    )}
-  </section>
+  {extras && <CaseStudyHighlight highlight={extras.highlight} />}
+  <div class="mt-16 grid gap-12 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16">
+    <CaseStudyRail sections={sections} />
+    <div class="min-w-0 space-y-14">
+      {sections.map((section, index) => (
+        <CaseStudySection
+          id={section.id}
+          number={index + 1}
+          title={section.title}
+          paragraphs={section.paragraphs}
+          list={section.list}
+        >
+          {section.id === "approach" && project.diagram && (
+            <PipelineStepper pipeline={project.diagram} />
+          )}
+          {section.id === "results" && (
+            <div class="mt-6 space-y-10">
+              {gallery.map((image) => (
+                <CaseStudyImage
+                  image={image}
+                  sizes="(min-width: 1280px) 56rem, (min-width: 1024px) 70vw, 100vw"
+                  enhance={enhanceImages}
+                />
+              ))}
+            </div>
+          )}
+          {section.id === "sources" && (
+            <CaseStudySources sources={project.sources} />
+          )}
+        </CaseStudySection>
+      ))}
+    </div>
+  </div>
 </article>
