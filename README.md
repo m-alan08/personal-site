@@ -71,6 +71,7 @@ For Vercel, build with the confirmed production origin and a root base, then ser
 ## Internal docs
 
 - [AGENTS.md](AGENTS.md): rules for coding agents working in this repository.
+- [docs/design-notes.md](docs/design-notes.md): fonts, type scale, color and spacing tokens, and the accent rule.
 - [docs/internal/DECISIONS.md](docs/internal/DECISIONS.md): design and architecture decisions by round.
 - [docs/internal/PROGRESS.md](docs/internal/PROGRESS.md): running progress log.
 - [docs/internal/content-open-questions.md](docs/internal/content-open-questions.md): open content questions for Alan.
