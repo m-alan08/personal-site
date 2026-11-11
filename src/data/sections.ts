@@ -4,7 +4,7 @@ import { localPath } from "./links";
 const ids = [
   "about",
   "projects",
-  "research",
+  "exploring",
   "writing",
   "experience",
   "contact",

@@ -3,7 +3,7 @@
 The personal website and project portfolio of Alan Mozhoor, a mathematics and computer science student at Georgia Tech working on reinforcement learning for robot control.
 
 - **Live site:** [m-alan08.github.io/personal-site](https://m-alan08.github.io/personal-site/)
-- **What is on it:** an about section, project case studies, research interests, writing, experience, and links to GitHub, X, LinkedIn, the resume and email.
+- **What is on it:** an about section, project case studies, what I'm currently exploring, writing, experience, and links to GitHub, X, LinkedIn, the resume and email.
 - **Stack:** [Astro](https://astro.build/) static output, Tailwind CSS, strict TypeScript, self-hosted Geist fonts, deployed to GitHub Pages by GitHub Actions. No backend, analytics or third-party scripts.
 - **Run it locally:** with Node 22.23.3, run `npm install` then `npm run dev`, and open the URL Astro prints.
 
@@ -49,7 +49,8 @@ Facts that are missing or unconfirmed are listed in [docs/internal/content-open-
 
 ## Content
 
-- `src/content/profile.ts`: introduction, about copy, research interests, writing links, and experience.
+- `src/content/profile.ts`: introduction, about copy, writing links, and experience.
+- `src/data/exploring.ts`: the Currently exploring threads, their status, updated date and readings.
 - `src/content/site.ts`: site metadata, section labels, and shared labels.
 - `src/data/sections.ts`: home page section order used by navigation.
 - `src/data/redirects.ts`: legacy `/about/`, `/contact/`, `/resume/` and `/projects/` redirects to home page anchors.
@@ -60,11 +61,17 @@ Facts that are missing or unconfirmed are listed in [docs/internal/content-open-
 - `src/components/`: shared Astro components.
 - `src/layouts/BaseLayout.astro`: head tags and page landmarks.
 
-The home page is a single page with About, Projects, Research interests, Writing, Experience and Contact sections. Each project also has a case study at `/projects/<slug>/`. Projects with `featured: false` appear in a compact list below the featured ones, sorted by `order`.
+The home page is a single page with About, Projects, Currently exploring, Writing, Experience and Contact sections. Each project also has a case study at `/projects/<slug>/`. Projects with `featured: false` appear in a compact list below the featured ones, sorted by `order`.
 
 All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/internal/content-open-questions.md`.
 
-The home page has one interactive component, the bit-width explorer in `src/components/sections/Explorer.astro`, placed after Projects. The server renders a static table of every result, so it works without JavaScript. When the section scrolls into view, a small lazy script replaces the table with a slider, task and method toggles, and an inline SVG chart. It has no navigation entry.
+## Currently exploring
+
+The Currently exploring section (`#exploring`) renders the threads in `src/data/exploring.ts`. Old `#research` links land on it through an invisible anchor. Each thread is an open question with a status (`Reading`, `Looking for gaps` or `Sketching`), an `updated` date and a `readings` list. A thread's reading list only appears once it has entries, and every reading needs a real title, authors, year and URL from Alan.
+
+`npm run build` fails if any thread's `updated` date is missing, not a `YYYY-MM-DD` date, in the future, or more than 120 days old. The error names the thread. To refresh it, review the thread (question, status, directions and readings), edit anything that changed, then set its `updated` field in `src/data/exploring.ts` to today's date and rebuild.
+
+The home page has one interactive component, the bit-width explorer in `src/components/sections/Explorer.astro`, placed after Currently exploring. The server renders a static table of every result, so it works without JavaScript. When the section scrolls into view, a small lazy script replaces the table with a slider, task and method toggles, and an inline SVG chart. It has no navigation entry.
 
 ## Static hosting
 
@@ -153,7 +160,7 @@ With the production preview running, `npm run audit:lighthouse` audits every ind
 
 ## Smoke tests
 
-After `npm run build`, `npm test` runs the search and sharing check described above, then serves dist on an ephemeral loopback port and uses Playwright to test every generated page and the 404. It checks HTTP responses, one h1, browser errors, the six section anchors and navigation, project case study links, and the four legacy redirects. An existing Chrome installation works locally. Otherwise install the pinned package's browser with `npx playwright-core install chromium`; CI also installs its system dependencies.
+After `npm run build`, `npm test` runs the search and sharing check described above, then serves dist on an ephemeral loopback port and uses Playwright to test every generated page and the 404. It checks HTTP responses, one h1, browser errors, the six section anchors in order (`about`, `projects`, `exploring`, `writing`, `experience`, `contact`) and navigation, the old `#research` anchor landing on `#exploring`, project case study links, and the four legacy redirects. An existing Chrome installation works locally. Otherwise install the pinned package's browser with `npx playwright-core install chromium`; CI also installs its system dependencies.
 
 ## License
 
