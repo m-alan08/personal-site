@@ -146,6 +146,7 @@ input {
     --ink: #000000;
     --muted: #333333;
     --line: #999999;
+    --accent: #000000;
   }
   header,
   footer {
