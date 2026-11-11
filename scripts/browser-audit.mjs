@@ -262,7 +262,9 @@ try {
     window.addEventListener(
       "wheel",
       (event) => {
-        window.wheelPrevented = event.defaultPrevented;
+        document.documentElement.dataset.wheelPrevented = String(
+          event.defaultPrevented,
+        );
       },
       { once: true },
     ),
@@ -270,8 +272,8 @@ try {
   await page.mouse.wheel(0, 600);
   await page.waitForFunction(() => window.scrollY === 600);
   assert.equal(
-    await page.evaluate(() => window.wheelPrevented),
-    false,
+    await page.evaluate(() => document.documentElement.dataset.wheelPrevented),
+    "false",
     "wheel scrolling stays native",
   );
   await page.emulateMedia({ media: "print", colorScheme: "dark" });
