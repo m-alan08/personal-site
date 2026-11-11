@@ -13,7 +13,6 @@ export interface StatusNote {
 
 export interface CaseStudyExtras {
   highlight: KeyResult | StatusNote;
-  badges?: string[];
   enhanceImages?: boolean;
 }
 
@@ -50,7 +49,6 @@ export const caseStudyExtras: Record<string, CaseStudyExtras> = {
     },
   },
   "ari-ai": {
-    badges: ["Started at HackATL"],
     highlight: {
       kind: "result",
       value: "7.1%",

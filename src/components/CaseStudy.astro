@@ -14,12 +14,9 @@ interface Props {
 const { project } = Astro.props;
 const extras = caseStudyExtras[project.slug];
 const enhanceImages = extras?.enhanceImages ?? false;
-const badges = [
-  project.ownership,
-  project.status,
-  project.event?.name,
-  ...(extras?.badges ?? []),
-].filter((badge): badge is string => Boolean(badge));
+const badges = [project.ownership, project.status, project.event?.name].filter(
+  (badge): badge is string => Boolean(badge),
+);
 const gallery = project.gallery ?? [];
 const sections = [
   {
