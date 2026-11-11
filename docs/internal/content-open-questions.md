@@ -15,16 +15,19 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - Degree: show "Mathematics and Computer Science", as Alan asked, not the resume's "Mathematics & Computing".
 - Resume metrics for Ascent Math and The Pert Group are shown on the site, as Alan asked. They are self-reported on his resume.
 
+## Answered by Alan on November 11, 2026
+
+- Hero statement: keep option 1 from `docs/internal/copy-options.md`.
+- Availability: keep "Open to research collaborations and robotics machine learning roles."
+- Ari AI node count: keep "10-node" as written on the site.
+- Ari AI HackATL event: no event label on the Ari AI card. HackATL stays in the case study text and the experience entry.
+
 ## Still open
 
 - quantrl-fetch: the resume says QAT sweeps are in progress, but the README reports them done. The site follows the README.
 - X series: add post or thread URLs when available.
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
-- Availability: `profile.availability` reads "Open to research collaborations and robotics machine learning roles." This is a placeholder. Alan needs to confirm what he is actually looking for (for example internships, research positions, or a season). The field is in the data but no component shows it yet.
-- Hero statement: Alan needs to pick one of the three options in `docs/internal/copy-options.md`.
-- Ari AI node count: the case study says "simulated 10-node network defense lab", but the public rl-defense README describes a five-node network for the protocol v1 evaluation. The site text was left as it was. Alan needs to confirm which is right.
-- Ari AI HackATL event: the Ari AI project has no event record (dates, duration, location, teammates), so no HackATL label shows on its card. HackATL is named only in the case study text and the experience entry. Add the event details if Alan wants the label.
 
 ## Unique feature
 
