@@ -1,5 +1,6 @@
 ---
 import NavLink from "./NavLink.astro";
+import NavScript from "./NavScript.astro";
 import { header } from "../content/hero";
 import { labels, site } from "../content/site";
 import { localLinks, socialLinks } from "../data/links";
@@ -80,4 +81,5 @@ const resume = socialLinks.find((link) => link.kind === "resume")?.href ?? "";
       </a>
     )}
   </div>
+  <NavScript />
 </header>

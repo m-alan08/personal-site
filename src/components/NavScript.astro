@@ -1,0 +1,35 @@
+<script>
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
+  ];
+  const menu = document.querySelector<HTMLDetailsElement>("[data-nav-menu]");
+  menu?.addEventListener("click", (event) => {
+    if (event.target instanceof Element && event.target.closest("a"))
+      menu.open = false;
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !menu?.open) return;
+    menu.open = false;
+    menu.querySelector("summary")?.focus();
+  });
+  const visible = new Set<string>();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target.id);
+        else visible.delete(entry.target.id);
+      }
+      const [current] = visible;
+      for (const link of links) {
+        if (current && link.hash === `#${current}`)
+          link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      }
+    },
+    { rootMargin: "-40% 0px -55% 0px" },
+  );
+  for (const link of links) {
+    const section = document.getElementById(link.hash.slice(1));
+    if (section) observer.observe(section);
+  }
+</script>
