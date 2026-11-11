@@ -17,7 +17,7 @@ const platform = platforms[new URL(href).hostname.replace(/^www\./, "")];
 
 <a
   href={href}
-  class="group flex h-full flex-col rounded-xl border border-hairline bg-surface p-6 transition-colors duration-150 hover:border-control motion-reduce:transition-none"
+  class="group flex h-full flex-col rounded-xl border border-hairline bg-surface p-5 transition-colors duration-150 hover:border-control motion-reduce:transition-none"
 >
   <span class="flex items-center justify-between gap-4">
     {platform && (
@@ -25,10 +25,10 @@ const platform = platforms[new URL(href).hostname.replace(/^www\./, "")];
     )}
     <ArrowIcon class="ml-auto group-hover:translate-x-1 group-focus-visible:translate-x-1" />
   </span>
-  <span class="mt-4 text-h3 text-ink transition-colors duration-150 group-hover:text-accent motion-reduce:transition-none">
+  <span class="mt-3 font-semibold leading-snug text-ink transition-colors duration-150 group-hover:text-accent motion-reduce:transition-none">
     <HyphenSafeText text={title} />
   </span>
-  <span class="mt-2 text-small text-muted">
+  <span class="mt-1.5 text-small text-muted">
     <HyphenSafeText text={note} />
   </span>
 </a>
