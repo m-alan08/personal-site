@@ -28,6 +28,8 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - X series: add post or thread URLs when available.
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
+- Constellation: the AUC figures (0.73 baseline, 0.82 logistic regression) are not in the public README or `ml/README.md`. Its case study shows a status band instead of a key result until there is a public source to link.
+- Robot arm project: no result exists yet, so its case study shows a status band. Add a key result when SGS against uniform resets has a held-out number Alan approves.
 
 ## Currently exploring (p10-exploring)
 

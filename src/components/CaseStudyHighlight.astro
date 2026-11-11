@@ -1,0 +1,56 @@
+---
+import type { KeyResult, StatusNote } from "../content/caseStudyPage";
+import { caseStudyLabels } from "../content/caseStudyPage";
+import HyphenSafeText from "./HyphenSafeText.astro";
+import TextLink from "./TextLink.astro";
+interface Props {
+  highlight: KeyResult | StatusNote;
+}
+const { highlight } = Astro.props;
+---
+
+<section
+  aria-labelledby="highlight-heading"
+  class="mt-12 rounded-xl border border-line bg-surface p-6 sm:p-8"
+>
+  {highlight.kind === "result" ? (
+    <div class="grid gap-4 md:grid-cols-[auto_minmax(0,1fr)] md:items-center md:gap-12">
+      <div>
+        <h2
+          id="highlight-heading"
+          class="font-mono text-label uppercase text-muted"
+        >
+          {caseStudyLabels.keyResult}
+        </h2>
+        <p class="mt-3 text-display tabular-nums text-accent">
+          {highlight.value}
+        </p>
+      </div>
+      <div class="max-w-reading">
+        <p class="text-h3 text-ink">
+          <HyphenSafeText text={highlight.label} />
+        </p>
+        <p class="mt-2 text-muted">
+          <HyphenSafeText text={highlight.context} />
+        </p>
+        <p class="mt-1 text-small">
+          <TextLink href={highlight.source.href}>
+            {highlight.source.label}
+          </TextLink>
+        </p>
+      </div>
+    </div>
+  ) : (
+    <div class="grid gap-3 md:grid-cols-[10rem_minmax(0,1fr)] md:items-baseline md:gap-12">
+      <h2
+        id="highlight-heading"
+        class="font-mono text-label uppercase text-muted"
+      >
+        {caseStudyLabels.status}
+      </h2>
+      <p class="max-w-reading text-h3 font-normal text-ink">
+        <HyphenSafeText text={highlight.text} />
+      </p>
+    </div>
+  )}
+</section>

@@ -1,0 +1,102 @@
+---
+import type { Project } from "../data/projects";
+import { caseStudy } from "../content/site";
+import { caseStudyLabels } from "../content/caseStudyPage";
+import { externalLinks } from "../data/projectLinks";
+import CaseStudyImage from "./CaseStudyImage.astro";
+import HyphenSafeText from "./HyphenSafeText.astro";
+interface Props {
+  project: Project;
+  badges: string[];
+  enhanceImages: boolean;
+}
+const { project, badges, enhanceImages } = Astro.props;
+const kindOrder = ["repository", "demo", "writeup", "source"];
+const kindRank = (href: string) => {
+  const kind = project.links?.find((link) => link.href === href)?.kind;
+  return kind ? kindOrder.indexOf(kind) : kindOrder.length;
+};
+const links = externalLinks(project).sort(
+  (a, b) => kindRank(a.href) - kindRank(b.href),
+);
+const facts = [
+  { term: caseStudy.stack, detail: project.technology.join(", ") },
+  {
+    term: project.event?.name ?? "",
+    detail: [project.event?.dates, project.event?.location]
+      .filter(Boolean)
+      .join(", "),
+  },
+].filter((fact) => fact.term && fact.detail);
+---
+
+<header
+  class:list={[
+    "grid gap-10",
+    project.image &&
+      "lg:grid-cols-[minmax(0,1fr)_minmax(0,30rem)] lg:items-start lg:gap-14",
+  ]}
+>
+  <div class="min-w-0">
+    <ul
+      role="list"
+      aria-label={caseStudyLabels.badges}
+      class="flex flex-wrap gap-2"
+    >
+      {badges.map((badge) => (
+        <li class="rounded-full border border-hairline bg-raised px-3 py-1 text-small text-muted">
+          <HyphenSafeText text={badge} />
+        </li>
+      ))}
+    </ul>
+    <h1 class="mt-6 text-balance text-h1 text-ink">
+      <HyphenSafeText text={project.title} />
+    </h1>
+    <p class="mt-5 max-w-reading text-h3 font-normal text-muted">
+      <HyphenSafeText text={project.summary} />
+    </p>
+    {links.length > 0 && (
+      <ul
+        role="list"
+        aria-label={caseStudyLabels.links}
+        class="mt-8 flex flex-wrap gap-3"
+      >
+        {links.map((link, index) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "inline-flex min-h-11 items-center rounded-md border px-5 text-small font-medium transition-colors duration-150 motion-reduce:transition-none",
+                index === 0
+                  ? "border-ink bg-ink text-canvas hover:border-accent hover:bg-accent"
+                  : "border-control text-ink hover:border-ink hover:text-accent",
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+    {facts.length > 0 && (
+      <dl class="mt-8 grid max-w-reading gap-x-6 gap-y-2 text-small sm:grid-cols-[7rem_minmax(0,1fr)]">
+        {facts.map((fact) => (
+          <>
+            <dt class="text-muted">{fact.term}</dt>
+            <dd class="m-0 text-ink">
+              <HyphenSafeText text={fact.detail} />
+            </dd>
+          </>
+        ))}
+      </dl>
+    )}
+  </div>
+  {project.image && (
+    <CaseStudyImage
+      image={project.image}
+      sizes="(min-width: 1024px) 30rem, 100vw"
+      eager
+      enhance={enhanceImages}
+    />
+  )}
+</header>
