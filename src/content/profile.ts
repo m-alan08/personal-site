@@ -154,5 +154,3 @@ export const experience: Experience[] = [
       "Built Constellation at HackGT 13, where I owned matching and ranking, and started Ari AI at HackATL.",
   },
 ];
-
-export const uniqueFeature = null;
