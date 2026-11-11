@@ -1,0 +1,50 @@
+---
+const hatchMarks = Array.from({ length: 17 }, (_, index) => 30 + index * 12);
+---
+
+<svg
+  viewBox="0 0 260 170"
+  fill="none"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="h-auto w-full max-w-[17rem]"
+>
+  <g class="stroke-line" stroke-width="1">
+    <path d="M59.8 101.7 A30 30 0 0 1 114 97" stroke-dasharray="2 4"></path>
+    <path d="M20 150 H240"></path>
+    {hatchMarks.map((x) => (
+      <path d={`M${x} 150 l-6 7`}></path>
+    ))}
+  </g>
+  <g class="stroke-muted/70" stroke-width="15">
+    <path d="M88 112 L138 58"></path>
+    <path d="M138 58 L196 74"></path>
+  </g>
+  <g class="stroke-canvas" stroke-width="12.5">
+    <path d="M88 112 L138 58"></path>
+    <path d="M138 58 L196 74"></path>
+  </g>
+  <g class="stroke-muted/70 fill-canvas" stroke-width="1.25">
+    <rect x="60" y="136" width="56" height="14" rx="2"></rect>
+    <path d="M72 136 L78 120 H98 L104 136"></path>
+    <circle cx="88" cy="112" r="8"></circle>
+    <circle cx="138" cy="58" r="7"></circle>
+    <circle cx="196" cy="74" r="5"></circle>
+    <path d="M196 79 V88 M186 88 H206 M188 88 V100 l3 3 M204 88 V100 l-3 3"></path>
+  </g>
+  <g class="fill-muted/70">
+    <circle cx="88" cy="112" r="2"></circle>
+    <circle cx="138" cy="58" r="1.75"></circle>
+  </g>
+  <g class="stroke-accent" stroke-width="1.25">
+    <path d="M196 108 V134" stroke-dasharray="2 4" class="opacity-60"></path>
+    <rect
+      x="189"
+      y="136"
+      width="14"
+      height="14"
+      rx="1.5"
+      class="motion-safe:animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+    ></rect>
+  </g>
+</svg>
