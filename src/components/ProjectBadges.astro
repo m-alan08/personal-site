@@ -1,0 +1,28 @@
+---
+import type { Project } from "../data/projects";
+import { ownershipLabels, projectCardLabels } from "../content/projectCards";
+import HyphenSafeText from "./HyphenSafeText.astro";
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const badges = [
+  {
+    term: projectCardLabels.ownership,
+    detail: ownershipLabels[project.ownership],
+  },
+  { term: projectCardLabels.event, detail: project.event?.name ?? "" },
+  { term: projectCardLabels.status, detail: project.status },
+].filter((badge) => badge.detail);
+---
+
+<dl class="m-0 flex flex-wrap gap-2">
+  {badges.map((badge) => (
+    <div class="flex items-baseline gap-2 rounded-md border border-hairline bg-raised px-2.5 py-1">
+      <dt class="font-mono text-label uppercase text-muted">{badge.term}</dt>
+      <dd class="m-0 text-small text-ink">
+        <HyphenSafeText text={badge.detail} />
+      </dd>
+    </div>
+  ))}
+</dl>
