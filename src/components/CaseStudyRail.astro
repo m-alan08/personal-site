@@ -32,26 +32,43 @@ const { sections } = Astro.props;
   const links = [
     ...document.querySelectorAll<HTMLAnchorElement>("[data-case-study-rail] a"),
   ];
-  const visible = new Set<Element>();
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) visible.add(entry.target);
-        else visible.delete(entry.target);
-      }
-      const active = links.find((link) =>
-        [...visible].some((section) => link.hash === `#${section.id}`),
+  const sections = links
+    .map((link) => document.getElementById(link.hash.slice(1)))
+    .filter((section): section is HTMLElement => section !== null);
+  const isOnScreen = (section: HTMLElement) => {
+    const { top, bottom } = section.getBoundingClientRect();
+    return top < innerHeight && bottom > 0;
+  };
+  const update = () => {
+    const passed = sections.filter(
+      (section) => section.getBoundingClientRect().top <= innerHeight * 0.25,
+    );
+    let active = passed.at(-1) ?? sections[0];
+    const root = document.documentElement;
+    if (innerHeight + scrollY >= root.scrollHeight - 4) {
+      const linked = sections.find(
+        (section) => `#${section.id}` === location.hash,
       );
-      if (!active) return;
-      for (const link of links) {
-        if (link === active) link.setAttribute("aria-current", "true");
-        else link.removeAttribute("aria-current");
-      }
-    },
-    { rootMargin: "-15% 0px -70% 0px" },
-  );
-  for (const link of links) {
-    const target = document.getElementById(link.hash.slice(1));
-    if (target) observer.observe(target);
-  }
+      active =
+        linked && isOnScreen(linked)
+          ? linked
+          : (sections.filter(isOnScreen).at(-1) ?? active);
+    }
+    for (const link of links) {
+      if (link.hash === `#${active?.id}`)
+        link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    }
+  };
+  const watch = (
+    targets: (Element | null)[],
+    options: IntersectionObserverInit,
+  ) => {
+    const observer = new IntersectionObserver(update, options);
+    for (const target of targets) if (target) observer.observe(target);
+  };
+  watch(sections, { rootMargin: "0px 0px -75% 0px" });
+  watch([document.querySelector("footer")], { threshold: 1 });
+  addEventListener("hashchange", update);
+  addEventListener("scrollend", update);
 </script>
