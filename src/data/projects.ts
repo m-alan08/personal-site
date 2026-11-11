@@ -47,6 +47,7 @@ export interface Project {
   slug: string;
   title: string;
   summary: string;
+  headline?: string;
   question: string;
   ownership: "Solo project" | "Team project";
   status: string;
@@ -133,6 +134,8 @@ export const projects: Project[] = [
     title: "Quantization-aware RL for robotic arm control",
     summary:
       "How few bits does a robot arm policy need? Quantization-aware fine-tuning brings a 4-bit actor back to full FetchReach success; 3 bits breaks every method.",
+    headline:
+      "On FetchReach, 4-bit QAT fine-tuning recovers 100% success, where PTQ alone reaches 82.0%.",
     question: "How few bits does a robot arm policy need?",
     ownership: "Solo project",
     status: "Quantization sweeps done; post-training next",
