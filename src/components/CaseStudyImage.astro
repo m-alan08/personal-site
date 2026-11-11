@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import type { ProjectImage } from "../data/projects";
+import HyphenSafeText from "./HyphenSafeText.astro";
+interface Props {
+  image: ProjectImage;
+  sizes: string;
+  eager?: boolean;
+  enhance?: boolean;
+  class?: string;
+}
+const {
+  image,
+  sizes,
+  eager = false,
+  enhance = false,
+  class: className,
+} = Astro.props;
+const candidateWidths = [480, 640, 960, 1280, 1600].filter(
+  (width) => width < image.src.width,
+);
+const widths = [...candidateWidths, image.src.width];
+const portrait = image.src.height > image.src.width;
+---
+
+<figure class:list={["m-0", className]}>
+  <div class="rounded-lg border border-line bg-surface p-2">
+    <Image
+      src={image.src}
+      alt={image.alt}
+      widths={widths}
+      sizes={sizes}
+      format="webp"
+      quality={80}
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : "auto"}
+      style={{ maxWidth: `${image.src.width}px` }}
+      class:list={[
+        "mx-auto block h-auto w-full rounded-md",
+        portrait && "sm:max-w-md!",
+        enhance && "brightness-105 contrast-125 saturate-110",
+      ]}
+    />
+  </div>
+  <figcaption class="mt-3 max-w-reading text-small text-muted">
+    <HyphenSafeText text={image.alt} />
+  </figcaption>
+</figure>
