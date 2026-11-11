@@ -21,7 +21,3 @@ Content lives in `src/content/profile.ts`, `src/content/site.ts`, `src/data/link
 - X series: add post or thread URLs when available.
 - Robot arm project: add the repository link when Alan approves.
 - LinkedIn: `https://www.linkedin.com/in/alan-mozhoor/`, from GitHub social accounts and the resume.
-
-## Unique feature
-
-- `uniqueFeature` is `null` until it is defined.
