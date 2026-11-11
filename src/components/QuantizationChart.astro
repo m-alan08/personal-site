@@ -1,0 +1,200 @@
+---
+import { figures } from "../content/figures";
+
+const chart = figures.quantization;
+const plotHeight = 196;
+const ticks = [0, 25, 50, 75, 100];
+const styles: Record<
+  string,
+  { stroke: string; fill: string; dash?: string; marker: string }
+> = {
+  ptq: {
+    stroke: "stroke-muted",
+    fill: "fill-muted",
+    dash: "2 4",
+    marker: "diamond",
+  },
+  scratch: {
+    stroke: "stroke-ink",
+    fill: "fill-ink",
+    dash: "7 4",
+    marker: "square",
+  },
+  finetune: {
+    stroke: "stroke-accent",
+    fill: "fill-accent",
+    marker: "circle",
+  },
+};
+const lastIndex = chart.bits.length - 1;
+const x = (index: number) => `${(index / lastIndex) * 100}%`;
+const y = (value: number) => (1 - value / 100) * plotHeight;
+const format = (value: number) => value.toFixed(1);
+---
+
+<figure aria-labelledby="quantization-caption" class="min-w-0">
+  <figcaption>
+    <p id="quantization-caption" class="text-small font-medium text-ink">
+      {chart.caption}
+    </p>
+    <ul class="mt-3 grid gap-1.5 text-small text-muted" role="list">
+      {[...chart.series].reverse().map((line) => {
+        const style = styles[line.id];
+        return (
+          <li class="flex items-center gap-3">
+            <svg aria-hidden="true" width="32" height="12" class="shrink-0">
+              <line
+                x1="0"
+                y1="6"
+                x2="32"
+                y2="6"
+                class={style.stroke}
+                stroke-width="2"
+                stroke-dasharray={style.dash}
+              />
+              <svg x="16" y="6" overflow="visible">
+                {style.marker === "circle" && (
+                  <circle r="4" class={style.fill} />
+                )}
+                {style.marker === "square" && (
+                  <rect
+                    x="-3.5"
+                    y="-3.5"
+                    width="7"
+                    height="7"
+                    class={style.fill}
+                  />
+                )}
+                {style.marker === "diamond" && (
+                  <rect
+                    x="-3.5"
+                    y="-3.5"
+                    width="7"
+                    height="7"
+                    transform="rotate(45)"
+                    class={style.fill}
+                  />
+                )}
+              </svg>
+            </svg>
+            <span>{line.name}</span>
+          </li>
+        );
+      })}
+    </ul>
+  </figcaption>
+  <p class="mt-5 font-mono text-label text-muted">{chart.yLabel}</p>
+  <svg
+    role="img"
+    aria-labelledby="quantization-title quantization-summary"
+    width="100%"
+    height="236"
+    class="mt-2 block overflow-visible font-mono"
+  >
+    <title id="quantization-title">{chart.caption}</title>
+    <desc id="quantization-summary">{chart.summary}</desc>
+    <svg x="11%" y="8" width="84%" height={plotHeight} overflow="visible">
+      {ticks.map((tick) => (
+        <>
+          <line
+            x1="0"
+            x2="100%"
+            y1={y(tick)}
+            y2={y(tick)}
+            class={tick === 0 ? "stroke-control" : "stroke-line"}
+            stroke-width="1"
+          />
+          <text
+            x="-10"
+            y={y(tick)}
+            dy="0.32em"
+            text-anchor="end"
+            class="fill-muted text-[12px]"
+          >
+            {tick}
+          </text>
+        </>
+      ))}
+      {chart.bits.map((bit, index) => (
+        <text
+          x={x(index)}
+          y={plotHeight + 22}
+          text-anchor="middle"
+          class="fill-muted text-[12px]"
+        >
+          {bit}
+        </text>
+      ))}
+      {chart.series.map((line) => {
+        const style = styles[line.id];
+        return (
+          <g>
+            {line.values.slice(1).map((value, index) => (
+              <line
+                x1={x(index)}
+                y1={y(line.values[index])}
+                x2={x(index + 1)}
+                y2={y(value)}
+                class={style.stroke}
+                stroke-width={style.dash ? 2 : 2.5}
+                stroke-dasharray={style.dash}
+                stroke-linecap="round"
+              />
+            ))}
+            {line.values.map((value, index) => (
+              <svg x={x(index)} y={y(value)} overflow="visible">
+                {style.marker === "circle" && (
+                  <circle r="4.5" class={style.fill} />
+                )}
+                {style.marker === "square" && (
+                  <rect x="-4" y="-4" width="8" height="8" class={style.fill} />
+                )}
+                {style.marker === "diamond" && (
+                  <rect
+                    x="-3.5"
+                    y="-3.5"
+                    width="7"
+                    height="7"
+                    transform="rotate(45)"
+                    class={style.fill}
+                  />
+                )}
+              </svg>
+            ))}
+          </g>
+        );
+      })}
+    </svg>
+  </svg>
+  <p class="font-mono text-label text-muted text-center">{chart.xLabel}</p>
+  <p class="mt-4 max-w-reading text-small text-muted">{chart.note}</p>
+  <a
+    href={chart.source.href}
+    class="inline-flex min-h-11 items-center text-small text-ink underline decoration-control underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent motion-reduce:transition-none"
+  >
+    {chart.source.label}
+  </a>
+  <div class="sr-only">
+    <table>
+      <caption>{chart.caption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{chart.bitsLabel}</th>
+          {chart.series.map((line) => (
+            <th scope="col">{line.name}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {chart.bits.map((bit, index) => (
+          <tr>
+            <th scope="row">{bit}</th>
+            {chart.series.map((line) => (
+              <td>{format(line.values[index])}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</figure>
