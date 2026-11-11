@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright-core";
 import { browserOptions, serveBuild } from "./test-server.mjs";
+import { bitWidths, datasets, methods } from "../src/data/explorerData.ts";
+import { chartY } from "../src/components/explorer/chart.ts";
 
 const sectionIds = [
   "about",
@@ -16,6 +18,101 @@ const legacyRedirects = {
   resume: "contact",
   projects: "projects",
 };
+function measured(task, method, bits) {
+  return datasets.find((set) => set.task === task)?.results[method]?.[bits];
+}
+async function testExplorer(page) {
+  const explorer = page.locator("section#explorer");
+  assert.equal(await explorer.count(), 1, "explorer: section");
+  assert.equal(await explorer.locator("h2").count(), 1, "explorer: h2");
+  const ui = explorer.locator("[data-explorer-ui]");
+  const tables = explorer.locator("[data-explorer-static] table");
+  assert.equal(await ui.isHidden(), true, "explorer: lazy before scroll");
+  assert.equal(await tables.count(), datasets.length, "explorer: tables");
+  for (let index = 0; index < datasets.length; index += 1) {
+    assert.equal(
+      await tables.nth(index).locator("tbody tr").count(),
+      bitWidths.length,
+      `explorer: ${datasets[index].task} table rows`,
+    );
+  }
+  const cells = await explorer
+    .locator("td[data-value]")
+    .evaluateAll((elements) => elements.map((element) => element.dataset));
+  assert.equal(
+    cells.length,
+    datasets.length * methods.length * bitWidths.length,
+  );
+  for (const cell of cells) {
+    const expected = measured(cell.task, cell.method, cell.bits);
+    assert.notEqual(expected, undefined, `explorer: table cell ${cell.bits}`);
+    assert.equal(cell.value, expected ? String(expected[0]) : "");
+  }
+  await explorer.scrollIntoViewIfNeeded();
+  await ui.waitFor({ state: "visible" });
+  assert.equal(
+    await tables.first().isHidden(),
+    true,
+    "explorer: table replaced",
+  );
+  const points = await explorer
+    .locator("[data-point]")
+    .evaluateAll((elements) =>
+      elements.map((element) => ({
+        ...element.dataset,
+        cy: Number(element.getAttribute("cy")),
+      })),
+    );
+  const expectedPoints = datasets.flatMap((set) =>
+    methods.flatMap((method) =>
+      bitWidths.filter((bits) => set.results[method.id][bits] !== null),
+    ),
+  );
+  assert.equal(points.length, expectedPoints.length, "explorer: plotted count");
+  for (const point of points) {
+    const expected = measured(point.task, point.method, point.bits);
+    assert.ok(expected, `explorer: plotted ${point.task} ${point.bits}`);
+    assert.equal(Number(point.value), expected[0], "explorer: plotted value");
+    assert.ok(Math.abs(point.cy - chartY(expected[0])) < 0.01);
+  }
+  const value = explorer.locator("[data-explorer-value]");
+  const status = explorer.locator("[data-explorer-status]");
+  async function expectShown(task, method, bits) {
+    const expected = measured(task, method, bits);
+    const text = expected ? `${expected[0].toFixed(1)}%` : "Not measured";
+    assert.equal(
+      await value.textContent(),
+      text,
+      `explorer: ${task} ${method} ${bits}`,
+    );
+    assert.ok(
+      (await status.textContent()).includes(text),
+      "explorer: live status",
+    );
+  }
+  assert.equal(await status.getAttribute("aria-live"), "polite");
+  await expectShown("fetch-push", "qat-scratch", "5");
+  await explorer.locator('input[type="range"]').focus();
+  await page.keyboard.press("ArrowRight");
+  await expectShown("fetch-push", "qat-scratch", "4");
+  await explorer.locator('input[name="explorer-method"]:checked').focus();
+  await page.keyboard.press("ArrowLeft");
+  await expectShown("fetch-push", "qat-finetune", "4");
+  const outline = await explorer
+    .locator('input[name="explorer-method"]:checked')
+    .evaluate((input) => getComputedStyle(input.closest("label")).outlineStyle);
+  assert.notEqual(outline, "none", "explorer: visible focus");
+  await explorer.locator('input[name="explorer-task"]:checked').focus();
+  await page.keyboard.press("ArrowLeft");
+  await expectShown("fetch-reach", "qat-finetune", "4");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("End");
+  await expectShown("fetch-reach", "qat-finetune", "2");
+  console.log(
+    `PASS explorer: ${cells.length} table cells and ${points.length} plotted points match explorerData.ts, keyboard updates the value`,
+  );
+}
 const server = await serveBuild();
 const browser = await chromium.launch(browserOptions());
 const errors = [];
@@ -51,6 +148,8 @@ try {
       `${path}: navigation`,
     );
     if (path === home) {
+      await testExplorer(page);
+      await page.evaluate(() => window.scrollTo(0, 0));
       for (const id of sectionIds) {
         const section = page.locator(`section#${id}`);
         assert.equal(await section.count(), 1, `home: #${id}`);

@@ -115,5 +115,3 @@ export const experience: Experience[] = [
     metrics: ["About 96% validation accuracy"],
   },
 ];
-
-export const uniqueFeature = null;

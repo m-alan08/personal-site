@@ -41,7 +41,3 @@ The Currently exploring section in `src/data/exploring.ts` has two threads: worl
   - RL: "Reinforcement learning for robotics. Goal-conditioned off-policy methods such as SAC with HER for manipulation, plus online RL post-training after imitation learning to win back performance lost to quantization or limited fine-tuning."
   - VLA: "Vision-language-action models. How pretrained VLA policies such as SmolVLA and pi0 adapt to new tasks from a few demonstrations, and which parts of the model to fine-tune or freeze."
   - Efficiency: "Efficient, hardware-aware policies. Quantization, smaller architectures and inference cost, judged by closed-loop behavior within the memory, latency and precision limits of microcontrollers and FPGAs." Thread 1's "Cut computational cost" direction covers part of this, not the microcontroller and FPGA detail.
-
-## Unique feature
-
-- `uniqueFeature` is `null` until it is defined.

@@ -1,0 +1,24 @@
+---
+import HyphenSafeText from "../HyphenSafeText.astro";
+
+interface Props {
+  name: string;
+  value: string;
+  label: string;
+  checked: boolean;
+}
+const { name, value, label, checked } = Astro.props;
+---
+
+<label class="relative inline-flex min-h-11 cursor-pointer items-center rounded-full border border-control px-4 text-small text-muted hover:border-ink hover:text-ink has-checked:border-ink has-checked:bg-ink has-checked:text-canvas has-focus-visible:outline-2 has-focus-visible:outline-offset-4 has-focus-visible:outline-ink">
+  <input
+    type="radio"
+    name={name}
+    value={value}
+    checked={checked}
+    class="sr-only"
+  />
+  <span>
+    <HyphenSafeText text={label} />
+  </span>
+</label>
