@@ -12,10 +12,6 @@ const steps = pipeline.nodes.map((node) => ({
   planned: plannedPrefix.test(node.detail),
   detail: node.detail.replace(plannedPrefix, ""),
 }));
-const caveat = pipeline.note
-  .split(/(?<=\.)\s+/)
-  .filter((sentence) => !/^(Derived|Simplified) from\b/.test(sentence))
-  .join(" ");
 ---
 
 <div class="mt-10">
@@ -90,9 +86,9 @@ const caveat = pipeline.note
       </li>
     ))}
   </ol>
-  {caveat && (
+  {pipeline.note && (
     <p class="mt-4 max-w-reading text-small text-muted">
-      <HyphenSafeText text={caveat} />
+      <HyphenSafeText text={pipeline.note} />
     </p>
   )}
 </div>
