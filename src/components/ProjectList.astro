@@ -1,14 +1,44 @@
 ---
-import { projects } from "../data/projects";
+import type { Project } from "../data/projects";
+import { projectCardLabels } from "../content/projectCards";
 import ProjectCard from "./ProjectCard.astro";
+import ProjectRow from "./ProjectRow.astro";
 interface Props {
-  entries?: typeof projects;
+  features: Project[];
+  standard: Project[];
+  inProgress: Project[];
 }
-const { entries = projects } = Astro.props;
+const { features, standard, inProgress } = Astro.props;
 ---
 
-<div class="divide-y divide-line">
-  {entries.map((project, index) => (
-    <ProjectCard project={project} number={index + 1} />
+<div class="grid gap-6">
+  {features.map((project, index) => (
+    <ProjectCard
+      project={project}
+      size="feature"
+      eager={index === 0}
+      accent={index === 0}
+    />
   ))}
+  {standard.length > 0 && (
+    <div class:list={["grid gap-6", standard.length > 1 && "md:grid-cols-2"]}>
+      {standard.map((project) => (
+        <ProjectCard
+          project={project}
+          size="medium"
+          wide={standard.length === 1}
+        />
+      ))}
+    </div>
+  )}
 </div>
+{inProgress.length > 0 && (
+  <div class="mt-12 grid gap-4">
+    <h3 class="m-0 font-mono text-label uppercase text-muted">
+      {projectCardLabels.inProgress}
+    </h3>
+    {inProgress.map((project) => (
+      <ProjectRow project={project} />
+    ))}
+  </div>
+)}

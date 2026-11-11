@@ -7,11 +7,19 @@ import constellationImage from "../assets/projects/constellation.png";
 import constellationPoster from "../assets/projects/constellation-poster.png";
 import armlabFront from "../assets/projects/armlab-front.jpg";
 import armlabWrist from "../assets/projects/armlab-wrist.jpg";
+import quantrlFetchCard from "../assets/projects/quantrl-fetch-results-card.png";
+import ariAiCard from "../assets/projects/ari-ai-console-card.webp";
+import constellationCard from "../assets/projects/constellation-card.png";
 
 export interface ProjectImage {
   src: ImageMetadata;
   alt: string;
   fit: "contain" | "cover";
+}
+export interface ProjectCardImage {
+  src: ImageMetadata;
+  alt: string;
+  caption: string;
 }
 export interface ProjectEvent {
   name: string;
@@ -47,6 +55,7 @@ export interface Project {
   slug: string;
   title: string;
   summary: string;
+  headline?: string;
   question: string;
   ownership: "Solo project" | "Team project";
   status: string;
@@ -58,8 +67,10 @@ export interface Project {
   contribution?: string;
   featured?: boolean;
   order?: number;
+  tier?: "in-progress";
   image?: ProjectImage;
   gallery?: ProjectImage[];
+  cardImage?: ProjectCardImage;
 }
 
 export const projects: Project[] = [
@@ -118,6 +129,11 @@ export const projects: Project[] = [
     devpost: "",
     interactive: "none",
     slug: "quantrl-fetch",
+    cardImage: {
+      src: quantrlFetchCard,
+      alt: "FetchReach results plot: success rate against actor bit width for PTQ, QAT fine-tuning, and QAT from scratch, averaged over 3 training seeds. All three stay near 1.0 down to 5 bits; at 4 bits QAT fine-tuning holds 1.0 while PTQ drops to about 0.8, and all fall to 0 at 2 bits.",
+      caption: "FetchReach success rate by actor bit width, mean of 3 seeds",
+    },
     image: {
       src: quantrlFetchImage,
       alt: "FetchReach simulation of the robot arm, comparing a 4-bit post-training quantized policy with a 4-bit quantization-aware fine-tuned policy",
@@ -133,6 +149,8 @@ export const projects: Project[] = [
     title: "Quantization-aware RL for robotic arm control",
     summary:
       "How few bits does a robot arm policy need? Quantization-aware fine-tuning brings a 4-bit actor back to full FetchReach success; 3 bits breaks every method.",
+    headline:
+      "On FetchReach, 4-bit QAT fine-tuning recovers 100% success, where PTQ alone reaches 82.0%.",
     question: "How few bits does a robot arm policy need?",
     ownership: "Solo project",
     status: "Quantization sweeps done; post-training next",
@@ -171,6 +189,11 @@ export const projects: Project[] = [
   },
   {
     slug: "ari-ai",
+    cardImage: {
+      src: ariAiCard,
+      alt: "Ari AI landing page headline, Find the flaw. Prove the fix., above an illustrated pipeline strip labeled not a recorded run",
+      caption: "Ari AI landing page; the pipeline strip is an illustration",
+    },
     image: {
       src: ariAiConsole,
       alt: "Ari AI landing page with the headline Find the flaw. Prove the fix. above its seven-stage pipeline from understand to monitor",
@@ -319,6 +342,7 @@ export const projects: Project[] = [
       "SGS sampler, PPO teacher, simulation environments and evaluation.",
     featured: true,
     order: 3,
+    tier: "in-progress",
   },
   {
     category: "Research",
@@ -369,6 +393,11 @@ export const projects: Project[] = [
   },
   {
     slug: "constellation",
+    cardImage: {
+      src: constellationCard,
+      alt: "Constellation app home screen card: Meet people here, with a Bluetooth scan for nearby matches and a toggle to let people find you",
+      caption: "Constellation app home screen, nearby discovery",
+    },
     image: {
       src: constellationPoster,
       alt: "Constellation title card: Real conversations. Real connections. Built at HackGT 13.",
