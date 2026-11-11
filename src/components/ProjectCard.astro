@@ -12,8 +12,15 @@ interface Props {
   size: "feature" | "medium";
   eager?: boolean;
   accent?: boolean;
+  wide?: boolean;
 }
-const { project, size, eager = false, accent = false } = Astro.props;
+const {
+  project,
+  size,
+  eager = false,
+  accent = false,
+  wide = false,
+} = Astro.props;
 const headline = headlineResults[project.slug];
 const feature = size === "feature";
 ---
@@ -24,6 +31,7 @@ const feature = size === "feature";
     "has-[[data-card-link]:focus-visible]:outline-2 has-[[data-card-link]:focus-visible]:outline-offset-4 has-[[data-card-link]:focus-visible]:outline-ink",
     feature &&
       "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-10 lg:p-8",
+    wide && "lg:grid-cols-2 lg:items-center lg:gap-8",
   ]}
 >
   {project.cardImage && (
@@ -33,7 +41,9 @@ const feature = size === "feature";
       sizes={
         feature
           ? "(min-width: 1248px) 40rem, (min-width: 1024px) 52vw, 100vw"
-          : "(min-width: 1248px) 34rem, (min-width: 768px) 45vw, 100vw"
+          : wide
+            ? "(min-width: 1248px) 34rem, (min-width: 1024px) 45vw, 100vw"
+            : "(min-width: 1248px) 34rem, (min-width: 768px) 45vw, 100vw"
       }
     />
   )}

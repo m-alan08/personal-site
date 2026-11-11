@@ -9,7 +9,6 @@ import armlabFront from "../assets/projects/armlab-front.jpg";
 import armlabWrist from "../assets/projects/armlab-wrist.jpg";
 import quantrlFetchCard from "../assets/projects/quantrl-fetch-results-card.png";
 import ariAiCard from "../assets/projects/ari-ai-console-card.webp";
-import armlabCard from "../assets/projects/armlab-front-card.jpg";
 import constellationCard from "../assets/projects/constellation-card.png";
 
 export interface ProjectImage {
@@ -68,6 +67,7 @@ export interface Project {
   contribution?: string;
   featured?: boolean;
   order?: number;
+  tier?: "in-progress";
   image?: ProjectImage;
   gallery?: ProjectImage[];
   cardImage?: ProjectCardImage;
@@ -313,11 +313,6 @@ export const projects: Project[] = [
     devpost: "",
     interactive: "none",
     slug: "armlab",
-    cardImage: {
-      src: armlabCard,
-      alt: "Overhead calibration frame from the team SO-101 robot arm setup: the arm at the top of a white table, a medicine bottle in the center and a paper plate on the left",
-      caption: "SO-101 overhead camera, calibration frame",
-    },
     image: {
       src: armlabFront,
       alt: "Overhead calibration frame from the team's SO-101 robot arm setup: the arm at the top of a white table, with a medicine bottle in the center and a paper plate on the left",
@@ -351,6 +346,7 @@ export const projects: Project[] = [
       "SGS sampler, PPO teacher, simulation environments, and evaluation.",
     featured: true,
     order: 3,
+    tier: "in-progress",
   },
   {
     category: "Research",

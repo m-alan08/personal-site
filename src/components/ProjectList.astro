@@ -21,9 +21,13 @@ const { features, standard, inProgress } = Astro.props;
     />
   ))}
   {standard.length > 0 && (
-    <div class="grid gap-6 md:grid-cols-2">
+    <div class:list={["grid gap-6", standard.length > 1 && "md:grid-cols-2"]}>
       {standard.map((project) => (
-        <ProjectCard project={project} size="medium" />
+        <ProjectCard
+          project={project}
+          size="medium"
+          wide={standard.length === 1}
+        />
       ))}
     </div>
   )}

@@ -2,13 +2,11 @@
 import ProjectList from "../ProjectList.astro";
 import Section from "../Section.astro";
 import { site } from "../../content/site";
-import { orderedProjects } from "../../data/projects";
-const finished = orderedProjects.filter(
-  (project) => project.featured !== false,
-);
-const inProgress = orderedProjects.filter(
-  (project) => project.featured === false,
-);
+import { orderedProjects, type Project } from "../../data/projects";
+const isInProgress = (project: Project) =>
+  project.tier === "in-progress" || project.featured === false;
+const finished = orderedProjects.filter((project) => !isInProgress(project));
+const inProgress = orderedProjects.filter(isInProgress);
 ---
 
 <Section id="projects" title={site.selectedProjects} stacked>
