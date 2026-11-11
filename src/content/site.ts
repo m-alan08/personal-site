@@ -13,7 +13,7 @@ export const site = {
   sections: {
     about: "About",
     projects: "Projects",
-    research: "Research interests",
+    exploring: "Currently exploring",
     writing: "Writing",
     experience: "Experience",
     contact: "Contact",
@@ -21,7 +21,7 @@ export const site = {
   navigation: {
     about: "About",
     projects: "Projects",
-    research: "Research",
+    exploring: "Exploring",
     writing: "Writing",
     experience: "Experience",
     contact: "Contact",

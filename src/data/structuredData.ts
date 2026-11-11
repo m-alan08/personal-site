@@ -1,5 +1,6 @@
 import { site } from "../content/site";
-import { profile, researchInterests } from "../content/profile";
+import { profile } from "../content/profile";
+import { threads } from "./exploring";
 import { links, localPath, optionalLinks } from "./links";
 
 export function structuredData(
@@ -20,7 +21,7 @@ export function structuredData(
       "@type": "CollegeOrUniversity",
       name: profile.education.school,
     },
-    knowsAbout: researchInterests.map((interest) => interest.title),
+    knowsAbout: threads.map((thread) => thread.title),
   };
   const website = {
     "@type": "WebSite",

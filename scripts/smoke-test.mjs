@@ -5,7 +5,7 @@ import { browserOptions, serveBuild } from "./test-server.mjs";
 const sectionIds = [
   "about",
   "projects",
-  "research",
+  "exploring",
   "writing",
   "experience",
   "contact",
@@ -56,6 +56,14 @@ try {
         assert.equal(await section.count(), 1, `home: #${id}`);
         assert.equal(await section.locator("h2").count(), 1, `home: #${id} h2`);
       }
+      assert.deepEqual(
+        await page
+          .locator("main section[id]")
+          .evaluateAll((elements) => elements.map((element) => element.id))
+          .then((ids) => ids.filter((id) => sectionIds.includes(id))),
+        sectionIds,
+        "home: section order",
+      );
       await navigation.getByRole("link").nth(1).click();
       await page.waitForURL((url) => url.hash === "#projects");
       const details = page.locator('#projects a[href*="/projects/"]');
@@ -79,6 +87,31 @@ try {
     );
     await page.close();
     console.log(`PASS ${path}: redirects to #${id}`);
+  }
+  {
+    const page = await browser.newPage({ reducedMotion: "reduce" });
+    watch(page, `${home}#research`);
+    await page.goto(`${server.origin}${home}#research`, {
+      waitUntil: "networkidle",
+    });
+    const gap = await page.evaluate(() => {
+      const anchor = document.getElementById("research");
+      const section = document.getElementById("exploring");
+      return Math.abs(
+        section.getBoundingClientRect().top -
+          anchor.getBoundingClientRect().bottom,
+      );
+    });
+    const top = await page
+      .locator("#exploring")
+      .evaluate((element) => element.getBoundingClientRect().top);
+    assert.ok(gap < 1, "#research anchor touches #exploring");
+    assert.ok(
+      top >= 0 && top < 120,
+      `#research scrolls to #exploring (${top})`,
+    );
+    await page.close();
+    console.log(`PASS ${home}#research: scrolls to #exploring`);
   }
   assert.deepEqual(errors, []);
   console.log(
