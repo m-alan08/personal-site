@@ -1,157 +1,25 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SocialIcons from "../components/SocialIcons.astro";
-import portrait from "../assets/portrait.jpg";
-import EntryList from "../components/EntryList.astro";
-import ExperienceList from "../components/ExperienceList.astro";
-import HyphenSafeText from "../components/HyphenSafeText.astro";
-import InterestGrid from "../components/InterestGrid.astro";
-import RobotArmElevation from "../components/RobotArmElevation.astro";
-import SectionFigure from "../components/SectionFigure.astro";
-import ControlLoopDiagram from "../components/ControlLoopDiagram.astro";
-import NotesFigure from "../components/NotesFigure.astro";
-import ExperienceTimeline from "../components/ExperienceTimeline.astro";
-import BaseFacts from "../components/BaseFacts.astro";
-import { figures } from "../content/figures";
-import ProjectList from "../components/ProjectList.astro";
-import Section from "../components/Section.astro";
-import SocialLinks from "../components/SocialLinks.astro";
+import About from "../components/sections/About.astro";
+import Contact from "../components/sections/Contact.astro";
+import Experience from "../components/sections/Experience.astro";
+import Explorer from "../components/sections/Explorer.astro";
+import Hero from "../components/sections/Hero.astro";
+import Projects from "../components/sections/Projects.astro";
+import ProofStrip from "../components/sections/ProofStrip.astro";
+import Research from "../components/sections/Research.astro";
+import Writing from "../components/sections/Writing.astro";
 import { site } from "../content/site";
-import {
-  profile,
-  researchInterests,
-  researchNote,
-  writing,
-  experience,
-} from "../content/profile";
-import { orderedProjects } from "../data/projects";
-import { sectionLabel } from "../data/sections";
-const featured = orderedProjects.filter(
-  (project) => project.featured !== false,
-);
-const other = orderedProjects.filter((project) => project.featured === false);
 ---
 
 <BaseLayout title={site.name} description={site.description} wide>
-  <section aria-labelledby="intro-heading" class="pb-16 sm:pb-20">
-    <div class="grid gap-10 sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-12 lg:grid-cols-[minmax(0,1fr)_15rem]">
-      <div class="min-w-0">
-        <p class="text-xs uppercase tracking-[0.2em] text-accent">
-          {profile.tagline.split(" · ").map((part, index) => (
-            <>
-              {index > 0 && " · "}
-              <span class="whitespace-nowrap">{part}</span>
-            </>
-          ))}
-        </p>
-        <h1
-          id="intro-heading"
-          class="mt-4 font-display text-5xl leading-none tracking-tight md:text-6xl lg:text-7xl"
-        >
-          {profile.name}
-        </h1>
-        <p class="mt-6 max-w-reading text-lg leading-relaxed">
-          <HyphenSafeText text={profile.headline} />
-        </p>
-        {profile.intro.map((paragraph) => (
-          <p class="mt-4 max-w-reading text-muted">
-            <HyphenSafeText text={paragraph} />
-          </p>
-        ))}
-        <div class="mt-5">
-          <SocialIcons />
-        </div>
-      </div>
-      <div class="relative order-first w-48 self-start sm:order-last sm:mt-3 sm:w-48 lg:w-60">
-        <div
-          aria-hidden="true"
-          class="absolute inset-0 translate-x-2.5 translate-y-2.5 rounded-xl border-2 border-accent"
-        ></div>
-        <Image
-          src={portrait}
-          alt={profile.portraitAlt}
-          width={240}
-          height={240}
-          densities={[1, 2]}
-          format="webp"
-          loading="eager"
-          fetchpriority="high"
-          class="relative aspect-square w-full rounded-xl border border-line object-cover"
-        />
-      </div>
-    </div>
-    <div class="mt-14 rounded-xl border border-line bg-surface p-6 sm:p-8">
-      <h2 class="font-display text-xl italic tracking-tight">
-        {profile.currentLabel}
-      </h2>
-      <dl class="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-x-10">
-        {profile.current.map((item) => (
-          <div class="border-l-2 border-accent pl-4">
-            <dt class="text-xs uppercase tracking-[0.2em] text-accent">
-              {item.label}
-            </dt>
-            <dd class="mt-2 text-sm leading-relaxed">
-              <HyphenSafeText text={item.text} />
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  </section>
-  <Section id="about" title={sectionLabel("about")}>
-    <div class="max-w-reading space-y-4">
-      {profile.about.map((paragraph) => (
-        <p>
-          <HyphenSafeText text={paragraph} />
-        </p>
-      ))}
-    </div>
-    <p class="mt-6 text-sm text-muted">
-      {profile.education.school} · {profile.education.field} ·{" "}
-      {profile.education.graduation}
-    </p>
-  </Section>
-  <Section id="projects" title={site.selectedProjects} stacked>
-    <ProjectList entries={[...featured, ...other]} />
-  </Section>
-  <Section id="research" title={sectionLabel("research")}>
-    <SectionFigure slot="aside" caption={figures.arm}>
-      <RobotArmElevation />
-    </SectionFigure>
-    <SectionFigure slot="aside" caption={figures.loop.caption}>
-      <ControlLoopDiagram />
-    </SectionFigure>
-    <p class="mb-8 max-w-reading text-muted">
-      <HyphenSafeText text={researchNote} />
-    </p>
-    <InterestGrid entries={researchInterests} />
-  </Section>
-  <Section id="writing" title={sectionLabel("writing")}>
-    <SectionFigure slot="aside" caption={figures.notes.caption}>
-      <NotesFigure />
-    </SectionFigure>
-    <p class="mb-8 max-w-reading text-muted">
-      <HyphenSafeText text={writing.intro} />
-    </p>
-    <EntryList
-      entries={writing.links.map((link) => ({
-        title: link.title,
-        summary: link.note,
-        href: link.href,
-      }))}
-    />
-  </Section>
-  <Section id="experience" title={sectionLabel("experience")} stacked>
-    <SectionFigure caption={figures.timeline.caption} class="mb-14">
-      <ExperienceTimeline />
-    </SectionFigure>
-    <ExperienceList entries={experience} />
-  </Section>
-  <Section id="contact" title={sectionLabel("contact")}>
-    <SectionFigure slot="aside">
-      <BaseFacts />
-    </SectionFigure>
-    <SocialLinks detailed />
-  </Section>
+  <Hero />
+  <ProofStrip />
+  <About />
+  <Projects />
+  <Explorer />
+  <Research />
+  <Writing />
+  <Experience />
+  <Contact />
 </BaseLayout>

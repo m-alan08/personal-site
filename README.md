@@ -1,6 +1,6 @@
 # Alan Mozhoor's personal website
 
-A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and system fonts. The only client JavaScript is a small inline momentum scroll for mouse wheels and trackpads. There are no third-party scripts, embeds, analytics, or tracking.
+A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and two self-hosted variable fonts (Geist Sans and Geist Mono, Latin subset). It ships no client JavaScript; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
 
 ## Setup
 
@@ -30,9 +30,13 @@ npm test
 - `build` checks Astro and TypeScript with zero errors, then emits static files to `dist/`.
 - `preview` serves the production build for verification.
 - `lint` requires zero warnings.
-- `format` formats source and documentation. `format:check` verifies formatting without modifying files. `AGENTS.md` is excluded to preserve the exact supplied instructions.
+- `format` formats source and documentation. `format:check` verifies formatting without modifying files. `AGENTS.md` is excluded from formatting.
 
-The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All content and links work without JavaScript. Smooth anchor scrolling and wheel momentum are disabled under reduced motion, and touch, keyboard, and scrollbar input stay native.
+The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All content and links work without JavaScript. Scrolling is native for wheel, trackpad, touch, keyboard and scrollbar input. Smooth anchor scrolling applies only under `prefers-reduced-motion: no-preference`.
+
+## Open questions for Alan
+
+Facts that are missing or unconfirmed are listed in [docs/internal/content-open-questions.md](docs/internal/content-open-questions.md). Check it before writing copy, and add to it instead of guessing.
 
 ## Content
 
@@ -48,7 +52,7 @@ The scripts disable Astro CLI telemetry and use POSIX environment syntax, suppor
 
 The home page is a single page with About, Projects, Research interests, Writing, Experience and Contact sections. Each project also has a case study at `/projects/<slug>/`. Projects with `featured: false` appear in a compact list below the featured ones, sorted by `order`.
 
-All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/content-open-questions.md`.
+All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/internal/content-open-questions.md`.
 
 `uniqueFeature` in `profile.ts` is reserved for one future interactive component. It is `null` and nothing renders it yet. Add the component as its own `Section` on the home page when it is defined.
 
@@ -64,9 +68,17 @@ SITE_URL=https://your-confirmed-host.example SITE_BASE=/ npm run build
 
 For Vercel, build with the confirmed production origin and a root base, then serve `dist/`. No backend, server functions, or database is required.
 
+## Internal docs
+
+- [AGENTS.md](AGENTS.md): rules for coding agents working in this repository.
+- [docs/design-notes.md](docs/design-notes.md): fonts, type scale, color and spacing tokens, and the accent rule.
+- [docs/internal/DECISIONS.md](docs/internal/DECISIONS.md): design and architecture decisions by round.
+- [docs/internal/PROGRESS.md](docs/internal/PROGRESS.md): running progress log.
+- [docs/internal/content-open-questions.md](docs/internal/content-open-questions.md): open content questions for Alan.
+
 ## Maintenance
 
-Redesign work goes through a branch and pull request against main, not direct pushes. Run build, lint, format and smoke tests before committing or pushing. Pull with rebase before every push and never force push. Keep changes small, log decisions in `DECISIONS.md`, and update `PROGRESS.md` at each step.
+Redesign work goes through a branch and pull request against main, not direct pushes. Run build, lint, format and smoke tests before committing or pushing. Pull with rebase before every push and never force push. Keep changes small, log decisions in `docs/internal/DECISIONS.md`, and update `docs/internal/PROGRESS.md` at each step.
 
 ## Resume
 

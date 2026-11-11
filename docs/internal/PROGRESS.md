@@ -8,7 +8,7 @@ Round 3 replaces the Round 2 interface with a minimal single-page homepage on `r
 - Removed: command palette, policy hero, connection graph, project filter, hackathon timeline, SVG diagrams, page transitions, gradients, glow, the blue accent, their client scripts, and `audit:interactions`. The site ships no client JavaScript.
 - Content: profile, research interests, writing, experience, social links and project updates come from the content branch `content/structured-copy`, fact-checked by a separate QA agent. quantrl-fetch now reports its completed PTQ and QAT results. Ari AI, the robot arm post-training work and the VLA fine-tuning scaling plan are added. Experience entries and the resume PDF come from Alan's resume. Omen AI and ZeroDay Arena are removed at Alan's request, so `/projects/zeroday-arena/` no longer exists. The robot arm repository is not linked until Alan approves.
 - Tests: the smoke test covers every page, the six section anchors, navigation, case study links and the four redirects. The browser audit keeps axe, contrast, keyboard order, skip link, metadata, target size, reduced motion, print and overflow checks at 360px, 768px and 1280px.
-- Missing inputs: exact X series post URLs, the degree name, the robot arm repository link, and confirmation that the resume's phone number should be public. See `docs/content-open-questions.md`.
+- Missing inputs: exact X series post URLs, the degree name, the robot arm repository link, and confirmation that the resume's phone number should be public. See `docs/internal/content-open-questions.md`.
 
 ## Round 2
 

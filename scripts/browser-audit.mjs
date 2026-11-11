@@ -132,7 +132,7 @@ try {
             [],
             `${label}: spaces collapsed between flex items`,
           );
-          assert.equal(state.fontSize, "16px");
+          assert.equal(state.fontSize, width >= 1024 ? "17px" : "16px");
           assert.equal(state.scrollBehavior, "auto");
           assert.ok(
             state.scripts.every((source) => new URL(source).origin === origin),
@@ -258,11 +258,24 @@ try {
   );
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.mouse.move(640, 400);
+  await page.evaluate(() =>
+    window.addEventListener(
+      "wheel",
+      (event) => {
+        document.documentElement.dataset.wheelPrevented = String(
+          event.defaultPrevented,
+        );
+      },
+      { once: true },
+    ),
+  );
   await page.mouse.wheel(0, 600);
-  await page.waitForTimeout(80);
-  const gliding = await page.evaluate(() => window.scrollY);
-  assert.ok(gliding > 0 && gliding < 600, `momentum scroll eases: ${gliding}`);
   await page.waitForFunction(() => window.scrollY === 600);
+  assert.equal(
+    await page.evaluate(() => document.documentElement.dataset.wheelPrevented),
+    "false",
+    "wheel scrolling stays native",
+  );
   await page.emulateMedia({ media: "print", colorScheme: "dark" });
   for (const selector of ["header", "footer"])
     assert.equal(
