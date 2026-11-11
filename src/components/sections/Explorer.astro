@@ -1,2 +1,172 @@
 ---
+import ExplorerChart from "../explorer/ExplorerChart.astro";
+import ExplorerChoice from "../explorer/ExplorerChoice.astro";
+import ExplorerTable from "../explorer/ExplorerTable.astro";
+import HyphenSafeText from "../HyphenSafeText.astro";
+import TextLink from "../TextLink.astro";
+import {
+  bitWidths,
+  datasets,
+  explorerCopy,
+  explorerDefaults,
+  methods,
+} from "../../data/explorerData";
+import { projects } from "../../data/projects";
+
+const limitation = projects.find((project) => project.slug === "quantrl-fetch")
+  ?.limitations[0];
+const source = datasets[0].source;
+const lastIndex = bitWidths.length - 1;
 ---
+
+<section
+  id="explorer"
+  aria-labelledby="explorer-heading"
+  data-explorer
+  class="grid gap-6 border-t border-line py-14 sm:py-16 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16"
+>
+  <div class="md:sticky md:top-24 md:self-start">
+    <p
+      aria-hidden="true"
+      class="font-mono text-label uppercase tracking-[0.2em] text-muted"
+    >
+      {explorerCopy.label}
+    </p>
+    <h2
+      id="explorer-heading"
+      class="mt-1.5 font-display text-2xl italic tracking-tight text-ink"
+    >
+      {explorerCopy.title}
+    </h2>
+    <span aria-hidden="true" class="mt-4 block h-px w-8 bg-accent/70"></span>
+  </div>
+  <div class="min-w-0">
+    <p class="max-w-reading text-muted">
+      <HyphenSafeText text={explorerCopy.intro} />
+    </p>
+    <div data-explorer-static class="mt-8 grid gap-10 lg:grid-cols-2">
+      {datasets.map((dataset) => (
+        <ExplorerTable dataset={dataset} />
+      ))}
+    </div>
+    <div data-explorer-ui hidden class="mt-8">
+      <form data-explorer-form class="grid gap-6">
+        <div class="grid gap-6 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-10">
+          <fieldset>
+            <legend class="font-mono text-label uppercase tracking-[0.2em] text-muted">
+              {explorerCopy.taskLegend}
+            </legend>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {datasets.map((dataset) => (
+                <ExplorerChoice
+                  name="explorer-task"
+                  value={dataset.task}
+                  label={dataset.label}
+                  checked={dataset.task === explorerDefaults.task}
+                />
+              ))}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="font-mono text-label uppercase tracking-[0.2em] text-muted">
+              {explorerCopy.methodLegend}
+            </legend>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {methods.map((method) => (
+                <ExplorerChoice
+                  name="explorer-method"
+                  value={method.id}
+                  label={method.label}
+                  checked={method.id === explorerDefaults.method}
+                />
+              ))}
+            </div>
+          </fieldset>
+        </div>
+        <div>
+          <div class="flex items-baseline justify-between gap-4">
+            <label
+              for="explorer-bits"
+              class="font-mono text-label uppercase tracking-[0.2em] text-muted"
+            >
+              {explorerCopy.bitsLabel}
+            </label>
+            <span
+              data-explorer-bits
+              class="font-mono text-small text-ink"
+            ></span>
+          </div>
+          <input
+            id="explorer-bits"
+            name="explorer-bits"
+            type="range"
+            min="0"
+            max={lastIndex}
+            step="1"
+            value={bitWidths.indexOf(explorerDefaults.bits)}
+            class="mt-2 block h-11 w-full cursor-pointer accent-ink"
+          />
+          <ol
+            aria-hidden="true"
+            class="relative h-5 font-mono text-label text-muted"
+          >
+            {bitWidths.map((bits, index) => (
+              <li
+                class="absolute top-0 -translate-x-1/2"
+                style={`left: calc(8px + (100% - 16px) * ${index / lastIndex})`}
+              >
+                {bits}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </form>
+      <div class="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
+        <div>
+          <p class="font-mono text-label uppercase tracking-[0.2em] text-muted">
+            {explorerCopy.successLabel}
+          </p>
+          <p
+            data-explorer-value
+            class="mt-3 font-mono text-display tabular-nums text-accent"
+          ></p>
+          <p data-explorer-seeds class="mt-3 min-h-6 text-small text-muted"></p>
+          <div aria-hidden="true" class="mt-5 h-2 rounded-full bg-line">
+            <div data-explorer-bar class="h-full rounded-full bg-ink"></div>
+          </div>
+          <p data-explorer-selection class="mt-4 text-small text-ink"></p>
+        </div>
+        <ExplorerChart />
+      </div>
+      <p
+        data-explorer-status
+        class="sr-only"
+        aria-live="polite"
+        aria-atomic="true"
+      ></p>
+    </div>
+    {limitation && (
+      <p class="mt-8 max-w-reading text-small text-muted">{limitation}</p>
+    )}
+    <p class="mt-2 text-small">
+      <TextLink href={source}>{explorerCopy.sourceLabel}</TextLink>
+    </p>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-explorer]");
+  if (root) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        void import("../explorer/explorer").then(({ mountExplorer }) =>
+          mountExplorer(root),
+        );
+      },
+      { rootMargin: "200px 0px" },
+    );
+    observer.observe(root);
+  }
+</script>
