@@ -1,43 +1,38 @@
 # AGENTS.md
 
-Instructions for the coding agent working in this repository. Read this file fully before every task. If anything here conflicts with a request in an issue or chat, stop and ask instead of guessing.
+Instructions for coding agents working in this repository. Read this file fully before every task. Where a task request conflicts with this file, follow the request and note the conflict in your pull request. Do not stop to ask about it.
 
 ## 1. Project overview
 
-This repository is the personal website of Alan Mozhoor, a Georgia Tech student focused on AI/ML, reinforcement learning, and research.
+This repository is the personal website of Alan Mozhoor, a Georgia Tech student working on reinforcement learning for robotics.
 
-The site has one job: show real work and make it easy for recruiters, researchers, and collaborators to find Alan's projects, GitHub, X, and resume. It is a portfolio, not a product. Fast, clear, honest, and low maintenance beat impressive and complicated.
+The site has one job: show real work and make it easy for recruiters, researchers and collaborators to find Alan's projects, GitHub, X, LinkedIn, resume and email. It is a portfolio, not a product. Fast, clear, honest and low maintenance beat impressive and complicated.
 
 Audience, in priority order:
+
 1. Recruiters and hiring managers scanning for under 60 seconds
 2. Researchers and professors deciding whether to reply to an email
 3. Peers and collaborators looking for project links
 
 ## 2. Stack and constraints
 
-- Astro with static output
-- Tailwind CSS for styling
-- TypeScript where it adds safety, plain Astro components elsewhere
+- Astro with static output, deployed to GitHub Pages at `https://m-alan08.github.io/personal-site/`
+- Tailwind CSS for styling, strict TypeScript
 - Package manager: npm, with a committed lockfile
 - Node version pinned in `.nvmrc` and the `engines` field of `package.json`
-- Deploy target: Vercel or GitHub Pages, static only
 - No backend, no database, no CMS, no server functions
-- No UI component libraries, no animation libraries, no analytics, no tracking scripts, no third-party embeds
-- Do not add a dependency without stating the name, size, and reason in the commit body. Prefer the platform and the standard library first
+- No UI, animation or charting libraries. No analytics, tracking scripts or third-party embeds
+- Do not add a dependency without stating the name, size and reason in the commit body. Prefer the platform and the standard library first
 
-## 3. Scope: definition of done for v1
+## 3. Pages
 
-Version 1 ships when all of these exist, work, and are deployed at a public URL:
+The site is one home page plus project case studies plus redirects:
 
-1. **Home**: one-line intro, a two to three sentence bio, links to GitHub, X, resume, and contact
-2. **Projects**: one card per project with title, one-sentence summary, tech used, status, and a link to the repo. Team projects are labeled as team efforts and describe only Alan's own contribution
-3. **About**: short, plain-language background, written in first person
-4. **Contact**: a `mailto:` link. No form, no backend
-5. **404 page**: simple, with a link home
-6. **SEO basics**: page titles, meta descriptions, Open Graph tags, a favicon, `sitemap.xml`, and `robots.txt`
-7. **Deployed** and reachable at a public URL
-
-Everything not on this list is out of scope until v1 ships. Do not add a blog, a theme switcher beyond system preference, a command palette, page transitions, or a design system. If an idea seems valuable, open an issue labeled `idea` and do not build it.
+- `/`: home page with the hero, About, Projects, Research interests, Writing, Experience and Contact sections. Each section has a stable anchor: `about`, `projects`, `research`, `writing`, `experience`, `contact`
+- `/projects/<slug>/`: one case study per entry in `src/data/projects.ts`
+- `/about/`, `/contact/`, `/resume/` and `/projects/`: static redirects to home page anchors, defined in `src/data/redirects.ts`
+- `/404.html`: not found page with a link home
+- `sitemap.xml`, `robots.txt`, generated Open Graph images and JSON-LD structured data
 
 ## 4. Repository layout
 
@@ -45,104 +40,106 @@ Everything not on this list is out of scope until v1 ships. Do not add a blog, a
 .
 ├── AGENTS.md
 ├── README.md
-├── LICENSE
-├── astro.config.mjs
-├── tailwind.config.mjs
-├── tsconfig.json
-├── package.json
+├── docs/
+│   ├── design-notes.md
+│   └── internal/
+│       ├── DECISIONS.md
+│       ├── PROGRESS.md
+│       └── content-open-questions.md
 ├── public/
-│   ├── favicon.svg
-│   ├── resume.pdf
-│   └── robots.txt
-└── src/
-    ├── components/
-    ├── content/
-    │   └── site.ts
-    ├── data/
-    │   ├── projects.ts
-    │   └── links.ts
-    ├── layouts/
-    │   └── BaseLayout.astro
-    ├── pages/
-    │   ├── index.astro
-    │   ├── projects.astro
-    │   ├── about.astro
-    │   ├── contact.astro
-    │   └── 404.astro
-    └── styles/
-        └── global.css
+├── scripts/
+│   ├── browser-audit.mjs
+│   ├── check-links.mjs
+│   ├── lighthouse-audit.mjs
+│   ├── smoke-test.mjs
+│   └── test-server.mjs
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   └── sections/
+│   ├── content/
+│   ├── data/
+│   ├── layouts/
+│   │   └── BaseLayout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── 404.astro
+│   │   ├── projects/[slug].astro
+│   │   ├── og/[slug].png.ts
+│   │   └── sitemap.xml.ts
+│   └── styles/
+│       └── global.css
+└── tailwind.config.mjs
 ```
 
 Rules for the layout:
+
 - All copy and links live in `src/content/` and `src/data/`, never hardcoded in markup
 - Adding a project means adding one entry to `src/data/projects.ts` and nothing else
 - One component per file, named in PascalCase
+- Each home page section is its own component in `src/components/sections/`. `src/pages/index.astro` only imports and renders them in order
 - Pages stay thin and compose components
 
 ## 5. Design direction
 
-- Minimal, readable, generous whitespace, one accent color, restrained use of it
-- System font stack, or at most one self-hosted web font with `font-display: swap`
-- Light and dark mode that follow `prefers-color-scheme`, with no flash on load
-- Mobile first, then scale up. Test at 360px, 768px, and 1280px widths
+- Dark only. There is no light mode and no theme switcher
+- Minimal, readable, generous whitespace, one accent color used with restraint. The accent rule is in `docs/design-notes.md`
+- Fonts: at most two self-hosted variable fonts, currently Geist Sans and Geist Mono. Latin subset only, `font-display: swap`, the sans font preloaded, a size-adjusted fallback so there is no layout shift. No third-party font hosts
+- Use the type scale, color, surface and spacing tokens in `tailwind.config.mjs` and `src/styles/global.css`. Do not hardcode sizes or colors that a token already covers
+- Mobile first. Test at 360px or 390px, 768px, and 1280px or 1440px widths
 - Maximum text line length around 65 to 75 characters
 - Body text at least 16px with a line height of at least 1.5
 - Interactive elements have visible focus states and a hit area of at least 44px
-- No autoplay media, no carousels, no modals, no parallax
+- Native scrolling only. No scroll hijacking. Smooth anchor scrolling only under `prefers-reduced-motion: no-preference`
+- No autoplay media, no carousels, no parallax
 
 ## 6. Quality bar
 
-Every push to `main` must meet all of these first:
+Every pull request must meet all of these before it is opened:
 
-- **Accessibility**: semantic landmarks, one `h1` per page, logical heading order, alt text on all images, color contrast of at least 4.5:1 for body text, fully keyboard navigable, respects `prefers-reduced-motion`
-- **Performance**: Lighthouse scores of 95 or higher in Performance, Accessibility, Best Practices, and SEO on mobile settings. Total page weight under 200KB excluding images. Images are sized correctly, compressed, and use modern formats with explicit width and height
+- **Accessibility**: semantic landmarks, one `h1` per page, logical heading order, alt text on all images, color contrast of at least 4.5:1 for body text, fully keyboard navigable, visible focus states, 44px touch targets, respects `prefers-reduced-motion`
+- **Performance**: Lighthouse mobile scores of 95 or higher in Performance, Accessibility, Best Practices and SEO. Total page weight under 200KB excluding images. Images are sized correctly, compressed, and use modern formats with explicit width and height
 - **SEO**: unique `title` and `meta description` per page, canonical URLs, valid Open Graph and Twitter card tags
 - **Correctness**: `npm run build` passes with zero warnings, no broken internal or external links, no console errors in the browser
 
-If a change drops any metric below the bar, fix it before pushing.
+If a change drops any metric below the bar, fix it before opening the pull request.
 
 ## 7. Content rules
 
-- Never invent facts, metrics, employers, awards, dates, or project results
-- If information is missing, leave the field out of the page and mention the gap in your final report
-- Project descriptions come from each repo's README or from Alan, never from guesses
+- Never invent facts, metrics, employers, awards, dates or project results. Every number must already exist in the site data or in a public README of Alan's repositories
+- If information is missing, leave it out of the page and add it to `docs/internal/content-open-questions.md`
+- Project descriptions come from each repository's README or from Alan, never from guesses
 - Keep copy concise and concrete. Prefer specific verbs and numbers over adjectives
-- Avoid buzzwords and filler such as "passionate", "cutting-edge", "leverage", "synergy", and "world-class"
-- Write in first person for the bio and about page
-- Never use em dashes anywhere: not in site copy, documentation, or commit messages. Use commas, periods, colons, or parentheses
+- Avoid buzzwords and filler such as "passionate", "cutting-edge", "leverage", "synergy" and "world-class"
+- Write in first person for the bio and about copy
+- Never use em dashes or en dashes anywhere: not in site copy, documentation or commit messages. Use commas, periods, colons or parentheses
 - Use sentence case for headings
-- Spell and capitalize product names correctly (GitHub, TypeScript, PyTorch)
+- Spell and capitalize product names correctly (GitHub, TypeScript, PyTorch, SmolVLA)
 
 ## 8. Code standards
 
-- Do not add comments to code. Express intent through clear names and small functions
+- Do not add comments to code. Express intent through clear names and small components
 - Prefer simple and readable over clever
-- Keep functions short and single purpose
-- No unused code, dead files, commented-out code, or leftover debug output
-- Prefer Astro components and CSS over JavaScript. Ship zero client-side JavaScript unless a feature cannot work without it, and justify any in the commit body
+- No unused code, dead files, commented-out code or leftover debug output
+- Prefer Astro components and CSS over JavaScript. Client JavaScript is allowed when a feature needs it. Keep each script small, load it lazily, and justify it in the commit body
 - Use Tailwind utility classes. Extract a component, not a custom CSS class, when markup repeats
 - Format with Prettier and lint with ESLint using the configs committed to the repo
 - TypeScript strict mode on. No `any` without a stated reason in the commit body
-- Name things by what they are: `ProjectCard`, `projects`, `socialLinks`
 
 ## 9. Git workflow
 
-Push directly to `main`. Do not open pull requests unless Alan asks for one.
+Work on a branch and open a pull request against `main`. Never push directly to `main`.
 
-- Work from a GitHub issue when one exists, and reference it in the commit body (for example `Refs #4`)
+- Name the branch after the task id, for example `redesign/p1-hero`
 - Commit messages follow Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `style:`, `test:`
 - Write commit subjects in the imperative mood, under 72 characters, with no trailing period
-- One logical change per commit. Commit early and often so history stays readable and each commit builds on its own
+- One logical change per commit. Each commit builds on its own
 - Use the commit body to explain why when it is not obvious
-- Run `git pull --rebase origin main` before every push so history stays linear
+- Rebase on `main` before opening the pull request
 - Never force push and never rewrite history on `main`
-- Never push a commit that fails the build, lint, or format checks. The site deploys from `main`, so a broken push breaks the live site
-- If a change is large, risky, or experimental, work on a branch named `feat/short-name` and ask Alan before merging it into `main`
-- Do not bundle unrelated changes into one commit
+- Stay inside the files your task owns. If you must change another file, make the smallest change possible and name it in the pull request
 
 ## 10. Commands
-
-Use these exact commands and report their results in your final report:
 
 ```
 npm install
@@ -151,49 +148,52 @@ npm run build
 npm run preview
 npm run lint
 npm run format
+npm run format:check
+npm test
+npm run audit:browser
+npm run audit:lighthouse
 ```
 
-If a script is missing, add it in a dedicated `chore:` commit rather than working around it.
+`audit:browser` and `audit:lighthouse` need `npm run preview -- --host 127.0.0.1 --port 4322` running. If a script is missing, add it in a dedicated `chore:` commit rather than working around it.
 
 ## 11. How to approach each task
 
-1. Read the issue or request and this file. Restate the goal in one sentence at the top of your work
+1. Read the request, this file, `README.md` and `docs/internal/content-open-questions.md`
 2. Inspect the existing code before writing anything. Match its conventions
-3. Make a short plan of the files you will touch. Stay inside that list
+3. List the files you will touch. Stay inside that list
 4. Implement the smallest change that satisfies the request
-5. Run build, lint, and format. Fix every failure you introduced
-6. Review your own diff line by line as if you were a stranger reviewing it. Remove anything unnecessary
-7. Commit in small logical steps, pull with rebase, then push to `main`
-8. Stop. Do not start unrelated work
-
-When requirements are ambiguous, ask a specific question and wait. Do not choose silently.
+5. Run build, lint, format check and tests. Fix every failure you introduced
+6. Review your own diff line by line. Remove anything unnecessary
+7. Take before and after screenshots of every page you changed at 1440px, 768px and 390px, saved under `reports/redesign/<task-id>/`
+8. Rebase on `main`, push the branch and open a pull request
 
 ## 12. Safety and boundaries
 
 - Do not modify or delete files outside the scope of the current request
-- Do not touch secrets, `.env` files, deployment settings, DNS, or repository settings. Ask first
-- Do not commit credentials, tokens, or personal data beyond what Alan has explicitly listed in `src/data/links.ts`
-- Do not add tracking, third-party scripts, or external embeds without written approval from Alan
+- Do not touch secrets, `.env` files, deployment settings, DNS or repository settings
+- Do not commit credentials, tokens or personal data beyond what Alan has listed in `src/data/links.ts`
+- Do not add tracking, third-party scripts or external embeds
 - Do not install global packages or modify the system
-- Do not work around a restriction in this file. If a rule blocks the task, say so and ask
-- If a tool, command, or check fails, report the failure plainly. Never claim success without evidence
+- If a tool, command or check fails, report the failure plainly. Never claim success without evidence
 
 ## 13. Reporting
 
-When finishing a task, report:
-- What was done, in two or three sentences
-- The commits pushed to `main`
-- The exact checks run and their results
-- Anything not done and why
-- One suggested next task, if there is a natural one
+Alan reads the pull request, not the code. Write it so the work can be checked without reading code:
+
+- Report the result of `npm run build`, `npm run lint`, `npm run format:check` and `npm test`
+- Attach the before and after screenshots
+- Describe in plain language what a visitor now sees that they did not before, what was removed, and what was left alone on purpose
+- State what you verified, with evidence, and what you did not verify
+- Name any file changed outside the task's owned files
+- End with any questions for Alan
 
 Be accurate over optimistic. A clear "this part is not finished" is better than a confident summary that hides a gap.
 
 ## 14. Definition of done for any task
 
-- The build, lint, and format checks pass
-- The change works at mobile and desktop widths and in light and dark mode
-- Accessibility and performance bars in section 6 still hold
+- Build, lint, format check and tests pass
+- The change works at mobile, tablet and desktop widths
+- The accessibility and performance bars in section 6 still hold
 - The change matches the request and nothing outside its scope changed
-- No comments in code, no em dashes in text, no invented content
-- Commits are small, clearly named, and pushed to `main`
+- No comments in code, no em dashes or en dashes in text, no invented content
+- Commits are small and clearly named, on a branch, with a pull request against `main`

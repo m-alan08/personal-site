@@ -30,7 +30,7 @@ npm test
 - `build` checks Astro and TypeScript with zero errors, then emits static files to `dist/`.
 - `preview` serves the production build for verification.
 - `lint` requires zero warnings.
-- `format` formats source and documentation. `format:check` verifies formatting without modifying files. `AGENTS.md` is excluded to preserve the exact supplied instructions.
+- `format` formats source and documentation. `format:check` verifies formatting without modifying files. `AGENTS.md` is excluded from formatting.
 
 The scripts disable Astro CLI telemetry and use POSIX environment syntax, supported on macOS and Linux. All content and links work without JavaScript. Smooth anchor scrolling and wheel momentum are disabled under reduced motion, and touch, keyboard, and scrollbar input stay native.
 
