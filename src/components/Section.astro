@@ -15,13 +15,18 @@ const pinned = !stacked && !Astro.slots.has("aside");
   id={id}
   aria-labelledby={headingId}
   class:list={[
-    "grid gap-6 border-t border-line py-section-compact",
+    "grid gap-6 border-t border-line py-section-compact print:block",
     stacked
       ? "md:gap-10"
       : "md:grid-cols-[10rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16",
   ]}
 >
-  <div class:list={[pinned && "md:sticky md:top-24 md:self-start"]}>
+  <div
+    class:list={[
+      "print:mb-6 print:break-after-avoid",
+      pinned && "md:sticky md:top-24 md:self-start",
+    ]}
+  >
     <h2 id={headingId} class="text-h2 text-ink">
       {title}
     </h2>
