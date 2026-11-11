@@ -2,29 +2,29 @@
 import { site } from "../content/site";
 import { localLinks } from "../data/links";
 import ArrowIcon from "./ArrowIcon.astro";
-const year = new Date().getFullYear();
+import SocialIcons from "./SocialIcons.astro";
 import { containerWidth } from "../data/layout";
 interface Props {
   wide: boolean;
 }
 const { wide } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <footer
   class:list={["mx-auto mt-8 w-full px-6 sm:px-10", containerWidth(wide)]}
 >
-  <div class="flex items-center justify-between gap-8 border-t border-line py-8 text-sm text-muted">
-    <div class="flex flex-col gap-x-8 gap-y-1 lg:flex-row">
-      <p>
-        © {year} {site.name}
-      </p>
-      <p>{site.footer}</p>
-    </div>
+  <div class="flex flex-col gap-x-8 gap-y-3 border-t border-line py-8 text-small text-muted lg:flex-row lg:items-center">
+    <p class="text-ink">
+      © {year} {site.name}
+    </p>
+    <p class="lg:mr-auto">{site.footer}</p>
+    <SocialIcons />
     <a
       href={localLinks.skip}
-      class="group inline-flex min-h-11 shrink-0 items-center text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+      class="group inline-flex min-h-11 shrink-0 items-center self-start text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none lg:self-auto"
     >
-      {site.backToTop}
+      <span>{site.backToTop}</span>
       <ArrowIcon
         direction="up"
         class="ml-1.5 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
