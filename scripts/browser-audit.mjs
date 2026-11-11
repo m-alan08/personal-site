@@ -183,9 +183,23 @@ try {
             "main-content",
           );
           await page.goto(`${origin}${path}`, { waitUntil: "networkidle" });
+          await page.evaluate(async () => {
+            for (
+              let top = 0;
+              top < document.documentElement.scrollHeight;
+              top += window.innerHeight / 2
+            ) {
+              window.scrollTo(0, top);
+              await new Promise((resolve) => requestAnimationFrame(resolve));
+              await new Promise((resolve) => requestAnimationFrame(resolve));
+            }
+          });
+          await page.waitForLoadState("networkidle");
+          await page.waitForTimeout(100);
+          await page.evaluate(() => window.scrollTo(0, 0));
           const focusables = await page
             .locator(
-              'a[href]:not([tabindex="-1"]),button:not([disabled]),input,summary',
+              'a[href]:not([tabindex="-1"]),button:not([disabled]),input:not([type="radio"]:not(:checked)),summary',
             )
             .evaluateAll((elements) =>
               elements
