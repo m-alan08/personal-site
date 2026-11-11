@@ -128,12 +128,9 @@ const facts = [
     paragraphs={project.limitations}
   />
   <CaseStudySection title={labels.projectNotes} paragraphs={project.writeup} />
-  <section class="mt-12 border-t border-line pt-8 text-sm">
-    <h2 class="font-medium">{labels.source}</h2>
-    <p class="mt-3 text-muted">
-      <HyphenSafeText text={project.sourceNote} />
-    </p>
-    {project.sources.length > 0 && (
+  {project.sources.length > 0 && (
+    <section class="mt-12 border-t border-line pt-8 text-sm">
+      <h2 class="font-medium">{labels.source}</h2>
       <ul class="mt-2 flex flex-wrap gap-x-6" role="list">
         {project.sources.map((source) => (
           <li>
@@ -141,6 +138,6 @@ const facts = [
           </li>
         ))}
       </ul>
-    )}
-  </section>
+    </section>
+  )}
 </article>
