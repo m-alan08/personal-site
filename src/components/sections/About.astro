@@ -1,0 +1,20 @@
+---
+import HyphenSafeText from "../HyphenSafeText.astro";
+import Section from "../Section.astro";
+import { profile } from "../../content/profile";
+import { sectionLabel } from "../../data/sections";
+---
+
+<Section id="about" title={sectionLabel("about")}>
+  <div class="max-w-reading space-y-4">
+    {profile.about.map((paragraph) => (
+      <p>
+        <HyphenSafeText text={paragraph} />
+      </p>
+    ))}
+  </div>
+  <p class="mt-6 text-sm text-muted">
+    {profile.education.school} · {profile.education.field} ·{" "}
+    {profile.education.graduation}
+  </p>
+</Section>

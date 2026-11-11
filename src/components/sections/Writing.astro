@@ -1,0 +1,26 @@
+---
+import EntryList from "../EntryList.astro";
+import HyphenSafeText from "../HyphenSafeText.astro";
+import NotesFigure from "../NotesFigure.astro";
+import Section from "../Section.astro";
+import SectionFigure from "../SectionFigure.astro";
+import { figures } from "../../content/figures";
+import { writing } from "../../content/profile";
+import { sectionLabel } from "../../data/sections";
+---
+
+<Section id="writing" title={sectionLabel("writing")}>
+  <SectionFigure slot="aside" caption={figures.notes.caption}>
+    <NotesFigure />
+  </SectionFigure>
+  <p class="mb-8 max-w-reading text-muted">
+    <HyphenSafeText text={writing.intro} />
+  </p>
+  <EntryList
+    entries={writing.links.map((link) => ({
+      title: link.title,
+      summary: link.note,
+      href: link.href,
+    }))}
+  />
+</Section>

@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import SocialIcons from "../SocialIcons.astro";
+import HyphenSafeText from "../HyphenSafeText.astro";
+import portrait from "../../assets/portrait.jpg";
+import { profile } from "../../content/profile";
+---
+
+<section aria-labelledby="intro-heading" class="pb-16 sm:pb-20">
+  <div class="grid gap-10 sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-12 lg:grid-cols-[minmax(0,1fr)_15rem]">
+    <div class="min-w-0">
+      <p class="text-xs uppercase tracking-[0.2em] text-accent">
+        {profile.tagline.split(" · ").map((part, index) => (
+          <>
+            {index > 0 && " · "}
+            <span class="whitespace-nowrap">{part}</span>
+          </>
+        ))}
+      </p>
+      <h1
+        id="intro-heading"
+        class="mt-4 font-display text-5xl leading-none tracking-tight md:text-6xl lg:text-7xl"
+      >
+        {profile.name}
+      </h1>
+      <p class="mt-6 max-w-reading text-lg leading-relaxed">
+        <HyphenSafeText text={profile.headline} />
+      </p>
+      {profile.intro.map((paragraph) => (
+        <p class="mt-4 max-w-reading text-muted">
+          <HyphenSafeText text={paragraph} />
+        </p>
+      ))}
+      <div class="mt-5">
+        <SocialIcons />
+      </div>
+    </div>
+    <div class="relative order-first w-48 self-start sm:order-last sm:mt-3 sm:w-48 lg:w-60">
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 translate-x-2.5 translate-y-2.5 rounded-xl border-2 border-accent"
+      ></div>
+      <Image
+        src={portrait}
+        alt={profile.portraitAlt}
+        width={240}
+        height={240}
+        densities={[1, 2]}
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        class="relative aspect-square w-full rounded-xl border border-line object-cover"
+      />
+    </div>
+  </div>
+  <div class="mt-14 rounded-xl border border-line bg-surface p-6 sm:p-8">
+    <h2 class="font-display text-xl italic tracking-tight">
+      {profile.currentLabel}
+    </h2>
+    <dl class="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-x-10">
+      {profile.current.map((item) => (
+        <div class="border-l-2 border-accent pl-4">
+          <dt class="text-xs uppercase tracking-[0.2em] text-accent">
+            {item.label}
+          </dt>
+          <dd class="mt-2 text-sm leading-relaxed">
+            <HyphenSafeText text={item.text} />
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

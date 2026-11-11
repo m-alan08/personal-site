@@ -1,0 +1,14 @@
+---
+import ProjectList from "../ProjectList.astro";
+import Section from "../Section.astro";
+import { site } from "../../content/site";
+import { orderedProjects } from "../../data/projects";
+const featured = orderedProjects.filter(
+  (project) => project.featured !== false,
+);
+const other = orderedProjects.filter((project) => project.featured === false);
+---
+
+<Section id="projects" title={site.selectedProjects} stacked>
+  <ProjectList entries={[...featured, ...other]} />
+</Section>
