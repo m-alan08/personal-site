@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import HyphenSafeText from "../HyphenSafeText.astro";
 import Section from "../Section.astro";
-import portrait from "../../assets/portrait.jpg";
+import aboutPhoto from "../../assets/about-photo.jpg";
 import { profile } from "../../content/profile";
 import { sectionLabel } from "../../data/sections";
 
@@ -18,8 +18,8 @@ const caption = [
   <div class="grid gap-6 sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16">
     <figure class="max-w-44 sm:max-w-none">
       <Image
-        src={portrait}
-        alt={profile.portraitAlt}
+        src={aboutPhoto}
+        alt={profile.aboutPhotoAlt}
         widths={[320, 640]}
         sizes="(min-width: 1024px) 17rem, 13rem"
         format="webp"
