@@ -16,6 +16,7 @@ export interface Experience {
 export const profile = {
   name: "Alan Mozhoor",
   portraitAlt: "Headshot of Alan Mozhoor in a navy suit and tie",
+  aboutPhotoAlt: "Alan Mozhoor smiling on a beach at sunset",
   tagline: "Georgia Tech · RL for robotics",
   headline:
     "I train reinforcement learning policies for robotics and measure how few bits they need before they stop working.",
