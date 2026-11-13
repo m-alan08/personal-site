@@ -19,7 +19,7 @@ const badges = [
 <dl class="m-0 flex flex-wrap gap-2">
   {badges.map((badge) => (
     <div class="flex items-baseline gap-2 rounded-md border border-hairline bg-raised px-2.5 py-1">
-      <dt class="font-mono text-label uppercase text-muted">{badge.term}</dt>
+      <dt class="text-eyebrow uppercase text-muted">{badge.term}</dt>
       <dd class="m-0 text-small text-ink">
         <HyphenSafeText text={badge.detail} />
       </dd>

@@ -40,16 +40,14 @@ const { layers, split, caption } = figures.hierarchy;
                   aria-hidden="true"
                   class="h-0 flex-1 border-t border-dashed border-accent"
                 ></span>
-                <span class="bg-canvas font-mono text-label text-accent">
-                  {split}
-                </span>
+                <span class="bg-canvas text-label text-accent">{split}</span>
               </div>
             )}
           </div>
         )}
         <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 rounded-xl border border-hairline bg-surface px-4 py-2 text-center">
           <p class="font-medium text-ink">{layer.title}</p>
-          <p class="font-mono text-label text-muted">{layer.detail}</p>
+          <p class="text-label text-muted">{layer.detail}</p>
         </div>
       </li>
     ))}

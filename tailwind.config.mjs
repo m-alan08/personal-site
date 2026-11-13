@@ -41,7 +41,11 @@ export default {
         small: ["0.875rem", { lineHeight: "1.55" }],
         label: [
           "0.75rem",
-          { lineHeight: "1rem", letterSpacing: "0.06em", fontWeight: "500" },
+          { lineHeight: "1rem", letterSpacing: "0.01em", fontWeight: "500" },
+        ],
+        eyebrow: [
+          "0.75rem",
+          { lineHeight: "1rem", letterSpacing: "0.08em", fontWeight: "500" },
         ],
       },
       spacing: {
