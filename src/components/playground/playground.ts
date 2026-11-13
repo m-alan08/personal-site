@@ -394,6 +394,7 @@ export function mountPlayground(
   handle.style.touchAction = "none";
 
   stage.addEventListener("pointerdown", (event) => {
+    pointerHandled = false;
     if (event.button !== 0) return;
     const onHandle = event.target === handle;
     if (event.pointerType === "touch" && !onHandle) return;
