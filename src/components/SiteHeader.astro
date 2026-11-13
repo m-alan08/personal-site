@@ -18,12 +18,12 @@ const { wide } = Astro.props;
     ]}
   >
     <nav aria-label={labels.mainNavigation} class="-mx-2">
-      <ul class="flex flex-wrap" role="list">
+      <ul class="grid grid-cols-3 sm:flex sm:flex-wrap" role="list">
         {sections.map((section) => (
           <li>
             <a
               href={isHome ? `#${section.id}` : sectionLink(section.id)}
-              class="inline-flex min-h-11 min-w-11 items-center justify-center px-2 text-sm text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+              class="inline-flex min-h-11 min-w-11 items-center px-2 text-sm sm:justify-center text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
             >
               {section.label}
             </a>
