@@ -278,3 +278,7 @@ Remaining limitations are source/content gaps, not failed checks. armlab cannot 
 ### Redesign p7: bit-width explorer
 
 Added the bit-width explorer section with data from the quantrl-fetch README key results, a static table fallback, a lazy interactive layer and smoke tests for the table, the plotted values and keyboard control. Removed the `uniqueFeature` placeholder and its references.
+
+### Robot playground
+
+Added the robot playground after the hero: a side view robot arm driven by the FetchReach SAC + HER actor from quantrl-fetch, running in the browser at eight precisions plus a scripted proportional baseline, with live distance, steps and decision time, a 100-target benchmark next to the Python and MuJoCo results, and plain disclosures of what is real and what is simplified. Added the export script, policy parity tests and playground smoke tests.
