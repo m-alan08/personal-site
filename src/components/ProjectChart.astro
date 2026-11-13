@@ -37,11 +37,11 @@ const dotPath = (values: number[]) =>
 <ProjectMedia caption={chart.caption}>
   <div class="absolute inset-0 flex flex-col gap-2 p-3 sm:gap-3 sm:p-5">
     <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">
-      <p class="m-0 font-mono text-label text-muted" aria-hidden="true">
+      <p class="m-0 text-label text-muted" aria-hidden="true">
         {chart.yLabel}
       </p>
       <ul
-        class="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 font-mono text-label text-ink sm:gap-x-4"
+        class="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 text-label text-ink sm:gap-x-4"
         role="list"
         aria-hidden="true"
       >
@@ -75,7 +75,7 @@ const dotPath = (values: number[]) =>
       <div class="relative" aria-hidden="true">
         {chart.yTicks.map((tick) => (
           <span
-            class="absolute right-2 -translate-y-1/2 font-mono text-label text-muted tabular-nums"
+            class="absolute right-2 -translate-y-1/2 text-label text-muted tabular-nums"
             style={{ top: percent(y(tick)) }}
           >
             {Math.round(tick * 100)}%
@@ -139,7 +139,7 @@ const dotPath = (values: number[]) =>
         {chart.ticks.map((tick, index) => (
           <span
             class:list={[
-              "absolute top-1 -translate-x-1/2 font-mono text-label whitespace-nowrap",
+              "absolute top-1 -translate-x-1/2 text-label whitespace-nowrap tabular-nums",
               index === highlightIndex ? "text-accent" : "text-muted",
             ]}
             style={{ left: percent(x(index)) }}
@@ -150,7 +150,7 @@ const dotPath = (values: number[]) =>
       </div>
     </div>
     <p
-      class="m-0 -mt-1 text-center font-mono text-label text-muted sm:-mt-2"
+      class="m-0 -mt-1 text-center text-label text-muted sm:-mt-2"
       aria-hidden="true"
     >
       {chart.xLabel}

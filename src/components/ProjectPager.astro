@@ -19,7 +19,7 @@ const cardClass =
 >
   {previous && (
     <a href={projectLink(previous.slug)} class={cardClass}>
-      <span class="font-mono text-label uppercase text-muted">
+      <span class="text-eyebrow uppercase text-muted">
         <ArrowIcon
           direction="left"
           class="mr-1.5 group-hover:-translate-x-1 group-focus-visible:-translate-x-1"
@@ -36,7 +36,7 @@ const cardClass =
       href={projectLink(next.slug)}
       class:list={[cardClass, "text-right sm:col-start-2"]}
     >
-      <span class="font-mono text-label uppercase text-muted">
+      <span class="text-eyebrow uppercase text-muted">
         {labels.nextProject}
         <ArrowIcon class="ml-1.5 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
       </span>

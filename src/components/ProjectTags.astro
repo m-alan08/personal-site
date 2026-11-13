@@ -14,7 +14,7 @@ const { tags } = Astro.props;
     role="list"
   >
     {tags.slice(0, 5).map((tag) => (
-      <li class="rounded-full border border-hairline px-2.5 py-1 font-mono text-label text-muted">
+      <li class="rounded-full border border-hairline px-2.5 py-1 text-label text-muted">
         <HyphenSafeText text={tag} />
       </li>
     ))}
