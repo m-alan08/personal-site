@@ -1,0 +1,234 @@
+---
+import { armGeometry, solveElbow } from "./arm";
+
+const rest = { x: 0, y: 0 };
+const solved = solveElbow(rest);
+const round = (point: { x: number; y: number }) => ({
+  x: Math.round(point.x * 10) / 10,
+  y: Math.round(point.y * 10) / 10,
+});
+const elbow = round(solved.elbow);
+const wrist = round(solved.wrist);
+const { shoulder } = armGeometry;
+const links = [
+  { name: "upper", from: shoulder, to: elbow, width: 74 },
+  { name: "fore", from: elbow, to: wrist, width: 60 },
+];
+---
+
+<svg
+  viewBox="-800 -660 1320 1000"
+  class="block h-auto w-full select-none"
+  aria-hidden="true"
+  data-playground-svg
+>
+  <line
+    x1="-800"
+    y1="330"
+    x2="520"
+    y2="330"
+    class="stroke-line"
+    stroke-width="4"
+  />
+  <rect
+    x="-150"
+    y="-150"
+    width="300"
+    height="300"
+    rx="12"
+    fill="none"
+    class="stroke-line"
+    stroke-width="4"
+    stroke-dasharray="12 14"
+  />
+  <g class="fill-raised stroke-line" stroke-width="4">
+    <rect x="-300" y="130" width="820" height="26" rx="6" />
+    <rect x="-260" y="156" width="24" height="174" />
+    <rect x="456" y="156" width="24" height="174" />
+  </g>
+  <polyline
+    data-playground-trail
+    points=""
+    fill="none"
+    class="stroke-muted"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-dasharray="1 16"
+  />
+  <g class="fill-raised stroke-control" stroke-width="4">
+    <rect x="-790" y="250" width="340" height="70" rx="32" />
+    <circle cx="-720" cy="320" r="12" class="fill-canvas" />
+    <circle cx="-520" cy="320" r="12" class="fill-canvas" />
+    <rect x="-680" y="-160" width="140" height="410" rx="22" />
+    <rect
+      x="-660"
+      y="-110"
+      width="100"
+      height="10"
+      rx="5"
+      class="fill-line"
+      stroke="none"
+    />
+    <rect
+      x="-622"
+      y="-200"
+      width="24"
+      height="40"
+      class="fill-control"
+      stroke="none"
+    />
+    <g data-playground-head>
+      <rect x="-700" y="-300" width="180" height="100" rx="36" />
+      <rect
+        x="-676"
+        y="-276"
+        width="132"
+        height="52"
+        rx="26"
+        class="fill-canvas"
+      />
+      <circle
+        data-playground-eye
+        cx="-610"
+        cy="-250"
+        r="12"
+        class="fill-accent"
+        stroke="none"
+      />
+    </g>
+  </g>
+  <g stroke-linecap="round">
+    {links.map((link) => (
+      <line
+        data-link={link.name}
+        x1={link.from.x}
+        y1={link.from.y}
+        x2={link.to.x}
+        y2={link.to.y}
+        class="stroke-control"
+        stroke-width={link.width + 8}
+      />
+    ))}
+    {links.map((link) => (
+      <line
+        data-link={link.name}
+        x1={link.from.x}
+        y1={link.from.y}
+        x2={link.to.x}
+        y2={link.to.y}
+        class="stroke-raised"
+        stroke-width={link.width}
+      />
+    ))}
+    <circle cx={shoulder.x} cy={shoulder.y} r="22" class="fill-ink" />
+    <circle
+      data-joint="elbow"
+      cx={elbow.x}
+      cy={elbow.y}
+      r="18"
+      class="fill-ink"
+    />
+  </g>
+  <g data-playground-hand transform={`translate(${rest.x} ${rest.y})`}>
+    <rect
+      x="-26"
+      y="-110"
+      width="52"
+      height="64"
+      rx="14"
+      class="fill-raised stroke-control"
+      stroke-width="4"
+    />
+    <circle cx="0" cy="-110" r="15" class="fill-ink" />
+    <rect x="-50" y="-52" width="100" height="22" rx="8" class="fill-control" />
+    <rect
+      data-finger="left"
+      x="-44"
+      y="-34"
+      width="16"
+      height="44"
+      rx="6"
+      class="fill-ink"
+    />
+    <rect
+      data-finger="right"
+      x="28"
+      y="-34"
+      width="16"
+      height="44"
+      rx="6"
+      class="fill-ink"
+    />
+  </g>
+  <g data-playground-target transform="translate(180 -120)" visibility="hidden">
+    <circle r="90" fill="transparent" data-playground-handle />
+    <circle
+      data-playground-pulse
+      r="34"
+      fill="none"
+      class="stroke-accent"
+      stroke-width="5"
+      opacity="0"
+    />
+    <circle
+      data-playground-ring
+      r="34"
+      fill="none"
+      class="stroke-accent"
+      stroke-width="7"
+    />
+    <circle r="9" class="fill-accent" />
+  </g>
+</svg>
+
+<style is:global>
+  @keyframes robot-blink {
+    0%,
+    95%,
+    100% {
+      transform: scaleY(1);
+    }
+    97.5% {
+      transform: scaleY(0.15);
+    }
+  }
+  @keyframes robot-pulse {
+    from {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    to {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+  @keyframes robot-clap-left {
+    50% {
+      transform: translateX(12px);
+    }
+  }
+  @keyframes robot-clap-right {
+    50% {
+      transform: translateX(-12px);
+    }
+  }
+  [data-playground-eye],
+  [data-playground-pulse],
+  [data-finger] {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  [data-playground-eye] {
+    animation: robot-blink 7s ease-in-out infinite;
+  }
+  [data-celebrate] [data-playground-pulse] {
+    animation: robot-pulse 0.9s ease-out;
+  }
+  [data-celebrate] [data-finger="left"] {
+    animation: robot-clap-left 0.3s ease-in-out 2;
+  }
+  [data-celebrate] [data-finger="right"] {
+    animation: robot-clap-right 0.3s ease-in-out 2;
+  }
+</style>

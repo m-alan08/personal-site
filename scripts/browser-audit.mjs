@@ -199,12 +199,13 @@ try {
           await page.evaluate(() => window.scrollTo(0, 0));
           const focusables = await page
             .locator(
-              'a[href]:not([tabindex="-1"]),button:not([disabled]),input:not([type="radio"]:not(:checked)),summary',
+              'a[href]:not([tabindex="-1"]),button:not([disabled]),input:not([type="radio"]:not(:checked)),summary,select:not([disabled]),[tabindex="0"]',
             )
             .evaluateAll((elements) =>
               elements
                 .filter(
                   (element) =>
+                    element.checkVisibility() &&
                     element.getBoundingClientRect().width > 0 &&
                     element.getBoundingClientRect().height > 0,
                 )
