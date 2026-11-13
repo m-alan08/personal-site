@@ -13,7 +13,7 @@ const external = (project.links ?? [])
   .filter((link) => linkOrder.includes(link.kind))
   .sort((a, b) => linkOrder.indexOf(a.kind) - linkOrder.indexOf(b.kind));
 const buttonClass =
-  "inline-flex min-h-11 items-center gap-2 rounded-md border border-control px-4 text-small text-ink transition-colors duration-150 hover:border-ink motion-reduce:transition-none";
+  "inline-flex min-h-11 items-center gap-2 rounded-md border border-control px-4 text-small text-ink transition-colors duration-150 hover:border-ink hover:bg-raised active:bg-line motion-reduce:transition-none";
 ---
 
 <ul class="relative z-10 m-0 flex list-none flex-wrap gap-2 p-0" role="list">

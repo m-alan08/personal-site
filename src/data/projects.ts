@@ -7,9 +7,7 @@ import constellationImage from "../assets/projects/constellation.png";
 import constellationPoster from "../assets/projects/constellation-poster.png";
 import armlabFront from "../assets/projects/armlab-front.jpg";
 import armlabWrist from "../assets/projects/armlab-wrist.jpg";
-import quantrlFetchCard from "../assets/projects/quantrl-fetch-results-card.png";
 import ariAiCard from "../assets/projects/ari-ai-console-card.webp";
-import constellationCard from "../assets/projects/constellation-card.png";
 
 export interface ProjectImage {
   src: ImageMetadata;
@@ -20,6 +18,23 @@ export interface ProjectCardImage {
   src: ImageMetadata;
   alt: string;
   caption: string;
+  frame?: "screen" | "phone";
+}
+export interface ProjectChartSeries {
+  label: string;
+  values: number[];
+  style: "solid" | "dashed" | "dotted";
+  tone: "accent" | "blue" | "gold";
+}
+export interface ProjectCardChart {
+  alt: string;
+  caption: string;
+  xLabel: string;
+  yLabel: string;
+  ticks: string[];
+  yTicks: number[];
+  highlight: { tick: string; label: string; series: string };
+  series: ProjectChartSeries[];
 }
 export interface ProjectEvent {
   name: string;
@@ -71,6 +86,7 @@ export interface Project {
   image?: ProjectImage;
   gallery?: ProjectImage[];
   cardImage?: ProjectCardImage;
+  cardChart?: ProjectCardChart;
 }
 
 export const projects: Project[] = [
@@ -129,10 +145,34 @@ export const projects: Project[] = [
     devpost: "",
     interactive: "none",
     slug: "quantrl-fetch",
-    cardImage: {
-      src: quantrlFetchCard,
-      alt: "FetchReach results plot: success rate against actor bit width for PTQ, QAT fine-tuning, and QAT from scratch, averaged over 3 training seeds. All three stay near 1.0 down to 5 bits; at 4 bits QAT fine-tuning holds 1.0 while PTQ drops to about 0.8, and all fall to 0 at 2 bits.",
+    cardChart: {
+      alt: "FetchReach results chart: success rate against actor bit width for PTQ, QAT fine-tuning, and QAT from scratch, mean of 3 training seeds. All three stay near 100% down to 5 bits. At 4 bits QAT fine-tuning holds 100%, QAT from scratch reaches 96%, and PTQ drops to 82%. At 3 bits all three fall to between 32% and 50%, and at 2 bits all reach 0%.",
       caption: "FetchReach success rate by actor bit width, mean of 3 seeds",
+      xLabel: "Actor bit width",
+      yLabel: "Success rate",
+      ticks: ["fp32", "8", "6", "5", "4", "3", "2"],
+      yTicks: [0, 0.25, 0.5, 0.75, 1],
+      highlight: { tick: "4", label: "4-bit", series: "QAT fine-tune" },
+      series: [
+        {
+          label: "PTQ",
+          values: [1, 1, 1, 0.977, 0.82, 0.43, 0],
+          style: "dashed",
+          tone: "blue",
+        },
+        {
+          label: "QAT fine-tune",
+          values: [1, 1, 1, 1, 1, 0.503, 0.003],
+          style: "solid",
+          tone: "accent",
+        },
+        {
+          label: "QAT from scratch",
+          values: [1, 1, 1, 1, 0.96, 0.323, 0.007],
+          style: "dotted",
+          tone: "gold",
+        },
+      ],
     },
     image: {
       src: quantrlFetchImage,
@@ -394,9 +434,10 @@ export const projects: Project[] = [
   {
     slug: "constellation",
     cardImage: {
-      src: constellationCard,
-      alt: "Constellation app home screen card: Meet people here, with a Bluetooth scan for nearby matches and a toggle to let people find you",
+      src: constellationImage,
+      alt: "Constellation app home screen for HackGT 13: Meet people here, with a Bluetooth scan for nearby matches, a toggle to let people find you, and a suggested introduction",
       caption: "Constellation app home screen, nearby discovery",
+      frame: "phone",
     },
     image: {
       src: constellationPoster,

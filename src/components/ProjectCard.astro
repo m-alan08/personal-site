@@ -4,51 +4,39 @@ import { projectLink } from "../data/links";
 import { headlineResults, projectCardLabels } from "../content/projectCards";
 import HyphenSafeText from "./HyphenSafeText.astro";
 import ProjectBadges from "./ProjectBadges.astro";
+import ProjectChart from "./ProjectChart.astro";
 import ProjectFrame from "./ProjectFrame.astro";
 import ProjectLinks from "./ProjectLinks.astro";
 import ProjectTags from "./ProjectTags.astro";
 interface Props {
   project: Project;
-  size: "feature" | "medium";
   eager?: boolean;
   accent?: boolean;
-  wide?: boolean;
 }
-const {
-  project,
-  size,
-  eager = false,
-  accent = false,
-  wide = false,
-} = Astro.props;
+const { project, eager = false, accent = false } = Astro.props;
 const headline = headlineResults[project.slug];
-const feature = size === "feature";
 ---
 
 <article
   class:list={[
     "relative grid content-start gap-6 rounded-xl border border-hairline bg-surface p-5 transition-colors duration-150 hover:border-control motion-reduce:transition-none sm:p-6",
     "has-[[data-card-link]:focus-visible]:outline-2 has-[[data-card-link]:focus-visible]:outline-offset-4 has-[[data-card-link]:focus-visible]:outline-ink",
-    feature &&
-      "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-10 lg:p-8",
-    wide && "lg:grid-cols-2 lg:items-center lg:gap-8",
+    "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-start lg:gap-10 lg:p-8",
   ]}
 >
-  {project.cardImage && (
-    <ProjectFrame
-      image={project.cardImage}
-      eager={eager}
-      sizes={
-        feature
-          ? "(min-width: 1248px) 40rem, (min-width: 1024px) 52vw, 100vw"
-          : wide
-            ? "(min-width: 1248px) 34rem, (min-width: 1024px) 45vw, 100vw"
-            : "(min-width: 1248px) 34rem, (min-width: 768px) 45vw, 100vw"
-      }
-    />
+  {project.cardChart ? (
+    <ProjectChart chart={project.cardChart} />
+  ) : (
+    project.cardImage && (
+      <ProjectFrame
+        image={project.cardImage}
+        eager={eager}
+        sizes="(min-width: 1248px) 40rem, (min-width: 1024px) 52vw, 100vw"
+      />
+    )
   )}
   <div class="grid min-w-0 content-start gap-4">
-    <h3 class:list={[feature ? "text-h2" : "text-h3", "m-0 text-ink"]}>
+    <h3 class="m-0 text-h2 text-ink">
       <a
         href={projectLink(project.slug)}
         data-card-link

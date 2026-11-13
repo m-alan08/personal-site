@@ -5,32 +5,15 @@ import ProjectCard from "./ProjectCard.astro";
 import ProjectRow from "./ProjectRow.astro";
 interface Props {
   features: Project[];
-  standard: Project[];
   inProgress: Project[];
 }
-const { features, standard, inProgress } = Astro.props;
+const { features, inProgress } = Astro.props;
 ---
 
 <div class="grid gap-6">
   {features.map((project, index) => (
-    <ProjectCard
-      project={project}
-      size="feature"
-      eager={index === 0}
-      accent={index === 0}
-    />
+    <ProjectCard project={project} eager={index === 0} accent={index === 0} />
   ))}
-  {standard.length > 0 && (
-    <div class:list={["grid gap-6", standard.length > 1 && "md:grid-cols-2"]}>
-      {standard.map((project) => (
-        <ProjectCard
-          project={project}
-          size="medium"
-          wide={standard.length === 1}
-        />
-      ))}
-    </div>
-  )}
 </div>
 {inProgress.length > 0 && (
   <div class="mt-12 grid gap-4">
