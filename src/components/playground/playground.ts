@@ -357,8 +357,20 @@ export function mountPlayground(
       goalPoint,
       loaded.origin[1] + Number(depthInput.value) / 100,
     );
+    if (goal[2] < loaded.origin[2] + loaded.workspace.low[2]) {
+      refuse();
+      return;
+    }
     if (restart || !running) beginAttempt();
     else updateMetrics();
+  }
+
+  function refuse(): void {
+    running = false;
+    reachedAt = null;
+    setPhase("table");
+    updateMetrics();
+    schedule();
   }
 
   function replay(): void {

@@ -161,7 +161,12 @@ async function testPlayground(page) {
     (text) =>
       document.querySelector("[data-playground-status]").textContent === text,
     playgroundCopy.status.table,
-    { timeout: 5000 },
+    { timeout: 1000 },
+  );
+  assert.equal(
+    await section.locator('[data-metric="steps"]').textContent(),
+    playgroundCopy.notYet,
+    "playground: table target not attempted",
   );
   await section.locator("[data-playground-details] summary").click();
   const manifest = JSON.parse(
