@@ -9,7 +9,7 @@ const sans = [
 export default {
   theme: {
     extend: {
-      maxWidth: { reading: "68ch" },
+      maxWidth: { reading: "52ch" },
       fontFamily: {
         sans,
         display: sans,
