@@ -9,7 +9,7 @@ Dark only. There is no light mode. Print styles switch to black on white.
 ## Fonts
 
 - Geist Sans (`font-sans`, also `font-display`) for all text. Self-hosted from `@fontsource-variable/geist`, Latin subset, preloaded, `font-display: swap`.
-- Geist Mono (`font-mono`) for data labels, numbers and small captions. Self-hosted from `@fontsource-variable/geist-mono`, Latin subset, `font-display: swap`, not preloaded. The browser only downloads it on pages that use `font-mono`.
+- Geist Mono (`font-mono`) only for genuinely technical text: data tables and source URLs. Labels, tags, captions, chart axes and metrics use Geist Sans with `tabular-nums` where digits need to line up. Self-hosted from `@fontsource-variable/geist-mono`, Latin subset, `font-display: swap`, not preloaded. The browser only downloads it on pages that use `font-mono`.
 - Size-adjusted fallbacks (`Geist Fallback`, `Geist Mono Fallback`) keep text from shifting while the fonts load.
 - No italic face ships. `font-synthesis-style: none` keeps text upright, so do not rely on `italic` for emphasis.
 - No more than two font families. No third-party font hosts.
@@ -24,7 +24,8 @@ Dark only. There is no light mode. Print styles switch to black on white.
 | `text-h3`      | Entry headings               | 20px                   | 1.35        | -0.015em | 600     |
 | `text-body`    | Body copy                    | 16px, 17px from 1024px | 1.65        | normal   | 400     |
 | `text-small`   | Secondary copy and metadata  | 14px                   | 1.55        | normal   | inherit |
-| `text-label`   | Data labels with `font-mono` | 12px                   | 16px        | 0.06em   | 500     |
+| `text-label`   | Tags, chips and chart labels | 12px                   | 16px        | 0.01em   | 500     |
+| `text-eyebrow` | Uppercase labels and kickers | 12px                   | 16px        | 0.08em   | 500     |
 
 The page body uses the `text-body` size by default. Body text never drops below 16px.
 

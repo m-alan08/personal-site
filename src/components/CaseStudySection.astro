@@ -15,7 +15,7 @@ const { id, number, title, paragraphs, list = false } = Astro.props;
   aria-labelledby={`${id}-heading`}
   class="border-t border-line pt-10 first:border-t-0 first:pt-0"
 >
-  <p aria-hidden="true" class="font-mono text-label tabular-nums text-muted">
+  <p aria-hidden="true" class="text-label tabular-nums text-muted">
     {String(number).padStart(2, "0")}
   </p>
   <h2 id={`${id}-heading`} class="mt-2 text-h2 text-ink">
