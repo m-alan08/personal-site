@@ -46,8 +46,11 @@ const updatedLabel = (date: string) =>
           </h3>
           <div
             class:list={[
-              (thread.id === figureThread || thread.directions?.length) &&
+              thread.id === figureThread &&
                 "lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-10",
+              thread.id !== figureThread &&
+                thread.directions?.length &&
+                "xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,16rem)] xl:gap-10",
             ]}
           >
             <div class="max-w-reading">
@@ -81,7 +84,7 @@ const updatedLabel = (date: string) =>
               )}
             </div>
             {thread.directions && thread.directions.length > 0 && (
-              <div class="mt-5 lg:mt-3 lg:border-l lg:border-line lg:pl-8">
+              <div class="mt-5 xl:mt-3 xl:border-l xl:border-line xl:pl-8">
                 <h4 class="text-label text-muted">
                   {exploringLabels.directions}
                 </h4>
