@@ -5,6 +5,7 @@ import ariAiConsole from "../assets/projects/ari-ai-console.png";
 import ariAiDefenseLab from "../assets/projects/ari-ai-defense-lab.png";
 import constellationImage from "../assets/projects/constellation.png";
 import constellationPoster from "../assets/projects/constellation-poster.png";
+import constellationShowcase from "../assets/projects/constellation-showcase.png";
 import armlabFront from "../assets/projects/armlab-front.jpg";
 import armlabWrist from "../assets/projects/armlab-wrist.jpg";
 import ariAiCard from "../assets/projects/ari-ai-console-card.webp";
@@ -18,7 +19,7 @@ export interface ProjectCardImage {
   src: ImageMetadata;
   alt: string;
   caption: string;
-  frame?: "screen" | "phone";
+  frame?: "screen" | "bleed";
 }
 export interface ProjectChartSeries {
   label: string;
@@ -434,10 +435,11 @@ export const projects: Project[] = [
   {
     slug: "constellation",
     cardImage: {
-      src: constellationImage,
-      alt: "Constellation app home screen for HackGT 13: Meet people here, with a Bluetooth scan for nearby matches, a toggle to let people find you, and a suggested introduction",
-      caption: "Constellation app home screen, nearby discovery",
-      frame: "phone",
+      src: constellationShowcase,
+      alt: "Three Constellation app screens side by side: a match profile with the reasons to talk and a suggested icebreaker; the HackGT 13 home screen with a Bluetooth scan for nearby matches, a suggested introduction and ranked best matches; and the network view with in-person verification and a star map of connections",
+      caption:
+        "Constellation app screens: match details, nearby discovery and your network",
+      frame: "bleed",
     },
     image: {
       src: constellationPoster,
