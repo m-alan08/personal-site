@@ -32,6 +32,8 @@ export async function serveBuild() {
     ".png": "image/png",
     ".xml": "application/xml",
     ".pdf": "application/pdf",
+    ".json": "application/json",
+    ".bin": "application/octet-stream",
   };
   const server = createServer(async (request, response) => {
     try {

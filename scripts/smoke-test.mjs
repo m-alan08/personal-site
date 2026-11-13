@@ -3,6 +3,8 @@ import { chromium } from "playwright-core";
 import { browserOptions, serveBuild } from "./test-server.mjs";
 import { bitWidths, datasets, methods } from "../src/data/explorerData.ts";
 import { chartY } from "../src/components/explorer/chart.ts";
+import { playgroundCopy } from "../src/content/playground.ts";
+import { readFile } from "node:fs/promises";
 
 const sectionIds = [
   "about",
@@ -113,6 +115,90 @@ async function testExplorer(page) {
     `PASS explorer: ${cells.length} table cells and ${points.length} plotted points match explorerData.ts, keyboard updates the value`,
   );
 }
+async function testPlayground(page) {
+  const section = page.locator("section#playground");
+  assert.equal(await section.count(), 1, "playground: section");
+  assert.equal(await section.locator("h2").count(), 1, "playground: h2");
+  const weights = [];
+  page.on("request", (request) => {
+    if (request.url().includes("/models/fetch-reach/"))
+      weights.push(request.url());
+  });
+  await section.scrollIntoViewIfNeeded();
+  await page.waitForLoadState("networkidle");
+  assert.deepEqual(weights, [], "playground: policy waits for intent");
+  assert.equal(
+    await section.evaluate((element) => "playgroundReady" in element.dataset),
+    false,
+    "playground: script waits for intent",
+  );
+  const status = section.locator("[data-playground-status]");
+  assert.equal(await status.textContent(), playgroundCopy.hint);
+  const stage = section.locator("[data-playground-stage]");
+  const box = await stage.boundingBox();
+  await page.mouse.click(box.x + box.width * 0.72, box.y + box.height * 0.5);
+  await page.waitForFunction(
+    (text) =>
+      document.querySelector("[data-playground-status]").textContent === text,
+    playgroundCopy.status.reached,
+    { timeout: 5000 },
+  );
+  const reached = await section.locator('[data-metric="steps"]').textContent();
+  assert.match(reached, /^\d+ \/ 50$/, "playground: steps to reach");
+  assert.ok(weights.some((url) => url.endsWith("actor-fp32.bin")));
+  await stage.focus();
+  const before = await section
+    .locator("[data-playground-target]")
+    .getAttribute("transform");
+  await page.keyboard.press("ArrowUp");
+  assert.notEqual(
+    await section.locator("[data-playground-target]").getAttribute("transform"),
+    before,
+    "playground: keyboard moves target",
+  );
+  await page.mouse.click(box.x + box.width * 0.75, box.y + box.height * 0.88);
+  await page.waitForFunction(
+    (text) =>
+      document.querySelector("[data-playground-status]").textContent === text,
+    playgroundCopy.status.table,
+    { timeout: 1000 },
+  );
+  assert.equal(
+    await section.locator('[data-metric="steps"]').textContent(),
+    playgroundCopy.notYet,
+    "playground: table target not attempted",
+  );
+  await section.locator("[data-playground-details] summary").click();
+  const manifest = JSON.parse(
+    await readFile("public/models/fetch-reach/policy.json", "utf8"),
+  );
+  const fp32 = manifest.variants.find((variant) => variant.id === "fp32");
+  await section.locator("[data-playground-benchmark]").click();
+  await page.waitForFunction(
+    () => !document.querySelector("[data-playground-benchmark]").disabled,
+    null,
+    { timeout: 30000 },
+  );
+  const success = await section
+    .locator('[data-benchmark-row="browser"] [data-cell="success"]')
+    .textContent();
+  assert.equal(
+    success,
+    `${Math.round(fp32.validation.surrogate.successRate * 100)}%`,
+    "playground: browser benchmark matches export",
+  );
+  await section.locator('label:has(input[value="proportional"])').click();
+  assert.equal(
+    await section
+      .locator("[data-playground-precision]")
+      .evaluate((fieldset) => fieldset.disabled),
+    true,
+    "playground: precision off for scripted controller",
+  );
+  console.log(
+    `PASS playground: lazy weights, reach in ${reached} steps, table target refused, browser benchmark ${success}`,
+  );
+}
 const server = await serveBuild();
 const browser = await chromium.launch(browserOptions());
 const errors = [];
@@ -148,6 +234,7 @@ try {
       `${path}: navigation`,
     );
     if (path === home) {
+      await testPlayground(page);
       await testExplorer(page);
       await page.evaluate(() => window.scrollTo(0, 0));
       for (const id of sectionIds) {

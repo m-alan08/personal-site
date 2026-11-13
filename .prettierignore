@@ -4,3 +4,5 @@ dist/
 reports/
 AGENTS.md
 package-lock.json
+public/models/
+scripts/policy/*.json
