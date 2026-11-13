@@ -10,9 +10,5 @@ const inProgress = orderedProjects.filter(isInProgress);
 ---
 
 <Section id="projects" title={site.selectedProjects} stacked>
-  <ProjectList
-    features={finished.slice(0, 2)}
-    standard={finished.slice(2)}
-    inProgress={inProgress}
-  />
+  <ProjectList features={finished} inProgress={inProgress} />
 </Section>

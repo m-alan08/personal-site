@@ -48,6 +48,16 @@ export const profile = {
     "Most of my solo work is reinforcement learning for manipulation. For quantrl-fetch I wrote Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch, then cut the actor's precision bit by bit to find where a simulated Fetch arm stops finishing its task.",
     "On a team robot arm project, I built the success-guided sampling teacher for RL post-training of a SmolVLA policy and helped set up our SO-101 arm. At Ari AI I designed the defense policy for its simulated network defense lab.",
   ],
+  aboutCurrentLabel: "Currently",
+  aboutCurrent:
+    "Starting RL post-training for quantrl-fetch now that the quantization sweeps are done, and leading the technical work at Ari AI as CTO.",
+  focusLabel: "Focus areas",
+  focus: [
+    "RL for manipulation",
+    "VLA fine-tuning",
+    "Quantization",
+    "Security agents",
+  ],
   education: {
     school: "Georgia Institute of Technology",
     shortName: "Georgia Tech",

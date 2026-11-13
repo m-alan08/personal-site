@@ -1,0 +1,159 @@
+---
+import type { ProjectCardChart } from "../data/projects";
+import ProjectMedia from "./ProjectMedia.astro";
+interface Props {
+  chart: ProjectCardChart;
+}
+const { chart } = Astro.props;
+const inset = 4;
+const span = 100 - inset * 2;
+const step = span / (chart.ticks.length - 1);
+const x = (index: number) => inset + index * step;
+const y = (value: number) => inset + (1 - value) * span;
+const percent = (value: number) => `${value}%`;
+const tones = {
+  accent: "var(--accent)",
+  blue: "var(--chart-blue)",
+  gold: "var(--chart-gold)",
+};
+const dashes = { solid: undefined, dashed: "6 4", dotted: "1.5 4" };
+const highlightIndex = chart.ticks.indexOf(chart.highlight.tick);
+const highlightSeries = chart.series.find(
+  (series) => series.label === chart.highlight.series,
+);
+const highlightValue = highlightSeries?.values[highlightIndex] ?? 0;
+const ordered = [
+  ...chart.series.filter((series) => series !== highlightSeries),
+  ...(highlightSeries ? [highlightSeries] : []),
+];
+const linePath = (values: number[]) =>
+  values
+    .map((value, index) => `${index ? "L" : "M"}${x(index)} ${y(value)}`)
+    .join(" ");
+const dotPath = (values: number[]) =>
+  values.map((value, index) => `M${x(index)} ${y(value)}h0`).join(" ");
+---
+
+<ProjectMedia caption={chart.caption}>
+  <div class="absolute inset-0 flex flex-col gap-2 p-3 sm:gap-3 sm:p-5">
+    <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">
+      <p class="m-0 font-mono text-label text-muted" aria-hidden="true">
+        {chart.yLabel}
+      </p>
+      <ul
+        class="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 font-mono text-label text-ink sm:gap-x-4"
+        role="list"
+        aria-hidden="true"
+      >
+        {chart.series.map((series) => (
+          <li class="flex items-center gap-1.5">
+            <svg viewBox="0 0 20 6" class="h-1.5 w-5" aria-hidden="true">
+              <path
+                d="M1 3h18"
+                stroke={tones[series.tone]}
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-dasharray={
+                  series.style === "solid"
+                    ? undefined
+                    : series.style === "dashed"
+                      ? "5 3"
+                      : "0.5 3.5"
+                }
+              />
+            </svg>
+            {series.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div
+      class="grid min-h-0 flex-1 grid-cols-[2.25rem_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_auto]"
+      role="img"
+      aria-label={chart.alt}
+    >
+      <div class="relative" aria-hidden="true">
+        {chart.yTicks.map((tick) => (
+          <span
+            class="absolute right-2 -translate-y-1/2 font-mono text-label text-muted tabular-nums"
+            style={{ top: percent(y(tick)) }}
+          >
+            {Math.round(tick * 100)}%
+          </span>
+        ))}
+      </div>
+      <div class="relative" aria-hidden="true">
+        <span
+          class="absolute inset-y-0 rounded-sm bg-accent/10"
+          style={{
+            left: percent(x(highlightIndex) - step * 0.4),
+            width: percent(step * 0.8),
+          }}
+        ></span>
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          class="absolute inset-0 size-full overflow-visible"
+        >
+          {chart.yTicks.map((tick) => (
+            <path
+              d={`M0 ${y(tick)}H100`}
+              stroke="var(--ink)"
+              stroke-opacity={tick === 0 ? 0.3 : 0.1}
+              stroke-width="1"
+              vector-effect="non-scaling-stroke"
+            />
+          ))}
+          {ordered.map((series) => (
+            <g stroke={tones[series.tone]} fill="none">
+              <path
+                d={linePath(series.values)}
+                stroke-width="2.25"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-dasharray={dashes[series.style]}
+                vector-effect="non-scaling-stroke"
+              />
+              <path
+                d={dotPath(series.values)}
+                stroke-width="6"
+                stroke-linecap="round"
+                vector-effect="non-scaling-stroke"
+              />
+            </g>
+          ))}
+          {highlightSeries && (
+            <path
+              d={`M${x(highlightIndex)} ${y(highlightValue)}h0`}
+              stroke={tones[highlightSeries.tone]}
+              stroke-opacity="0.35"
+              stroke-width="16"
+              stroke-linecap="round"
+              vector-effect="non-scaling-stroke"
+            />
+          )}
+        </svg>
+      </div>
+      <div></div>
+      <div class="relative h-5" aria-hidden="true">
+        {chart.ticks.map((tick, index) => (
+          <span
+            class:list={[
+              "absolute top-1 -translate-x-1/2 font-mono text-label whitespace-nowrap",
+              index === highlightIndex ? "text-accent" : "text-muted",
+            ]}
+            style={{ left: percent(x(index)) }}
+          >
+            {index === highlightIndex ? chart.highlight.label : tick}
+          </span>
+        ))}
+      </div>
+    </div>
+    <p
+      class="m-0 -mt-1 text-center font-mono text-label text-muted sm:-mt-2"
+      aria-hidden="true"
+    >
+      {chart.xLabel}
+    </p>
+  </div>
+</ProjectMedia>

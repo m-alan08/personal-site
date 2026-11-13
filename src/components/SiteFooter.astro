@@ -2,6 +2,7 @@
 import { site } from "../content/site";
 import { localLinks } from "../data/links";
 import ArrowIcon from "./ArrowIcon.astro";
+import SocialIcons from "./SocialIcons.astro";
 const year = new Date().getFullYear();
 import { containerWidth } from "../data/layout";
 interface Props {
@@ -13,22 +14,25 @@ const { wide } = Astro.props;
 <footer
   class:list={["mx-auto mt-8 w-full px-6 sm:px-10", containerWidth(wide)]}
 >
-  <div class="flex items-center justify-between gap-8 border-t border-line py-8 text-sm text-muted">
+  <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-t border-line py-8 text-sm text-muted">
     <div class="flex flex-col gap-x-8 gap-y-1 lg:flex-row">
       <p>
         © {year} {site.name}
       </p>
       <p>{site.footer}</p>
     </div>
-    <a
-      href={localLinks.skip}
-      class="group inline-flex min-h-11 shrink-0 items-center text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
-    >
-      {site.backToTop}
-      <ArrowIcon
-        direction="up"
-        class="ml-1.5 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
-      />
-    </a>
+    <div class="flex items-center gap-4">
+      <SocialIcons kinds={["github", "x", "linkedin", "email"]} />
+      <a
+        href={localLinks.skip}
+        class="group inline-flex min-h-11 shrink-0 items-center text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+      >
+        {site.backToTop}
+        <ArrowIcon
+          direction="up"
+          class="ml-1.5 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
+        />
+      </a>
+    </div>
   </div>
 </footer>

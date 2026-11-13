@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import HyphenSafeText from "../HyphenSafeText.astro";
 import Section from "../Section.astro";
+import SocialIcons from "../SocialIcons.astro";
 import aboutPhoto from "../../assets/about-photo.jpg";
 import { profile } from "../../content/profile";
 import { sectionLabel } from "../../data/sections";
@@ -15,13 +16,13 @@ const caption = [
 ---
 
 <Section id="about" title={sectionLabel("about")} stacked>
-  <div class="grid gap-6 sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16">
+  <div class="grid gap-6 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16">
     <figure class="max-w-44 sm:max-w-none">
       <Image
         src={aboutPhoto}
         alt={profile.aboutPhotoAlt}
-        widths={[320, 640]}
-        sizes="(min-width: 1024px) 17rem, 13rem"
+        widths={[320, 480, 640]}
+        sizes="(min-width: 1024px) 15rem, 12rem"
         format="webp"
         class="aspect-[4/5] w-full rounded-2xl object-cover object-[50%_30%]"
       />
@@ -29,12 +30,32 @@ const caption = [
         {caption}
       </figcaption>
     </figure>
-    <div class="max-w-reading space-y-4">
-      {profile.about.map((paragraph) => (
-        <p>
-          <HyphenSafeText text={paragraph} />
-        </p>
-      ))}
+    <div class="grid max-w-reading content-start gap-6">
+      <div class="space-y-4">
+        {profile.about.map((paragraph) => (
+          <p>
+            <HyphenSafeText text={paragraph} />
+          </p>
+        ))}
+      </div>
+      <p class="m-0 border-l border-control pl-4 text-small text-muted">
+        <span class="block font-mono text-label uppercase text-ink">
+          {profile.aboutCurrentLabel}
+        </span>
+        <HyphenSafeText text={profile.aboutCurrent} />
+      </p>
+      <ul
+        class="m-0 flex list-none flex-wrap gap-1.5 p-0"
+        aria-label={profile.focusLabel}
+        role="list"
+      >
+        {profile.focus.map((item) => (
+          <li class="rounded-full border border-hairline px-2.5 py-1 font-mono text-label text-muted">
+            {item}
+          </li>
+        ))}
+      </ul>
+      <SocialIcons kinds={["github", "x", "linkedin"]} labeled />
     </div>
   </div>
 </Section>

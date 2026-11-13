@@ -1,32 +1,42 @@
 ---
 import { Image } from "astro:assets";
 import type { ProjectCardImage } from "../data/projects";
+import ProjectMedia from "./ProjectMedia.astro";
 interface Props {
   image: ProjectCardImage;
   sizes: string;
   eager?: boolean;
 }
 const { image, sizes, eager = false } = Astro.props;
+const phone = image.frame === "phone";
 ---
 
-<figure class="m-0 min-w-0">
-  <div class="relative overflow-hidden rounded-lg border border-hairline bg-raised">
-    <Image
-      src={image.src}
-      alt={image.alt}
-      widths={[320, 640, 960, 1280]}
-      sizes={sizes}
-      format="webp"
-      quality={78}
-      loading={eager ? "eager" : "lazy"}
-      class="block aspect-[16/10] w-full object-cover"
-    />
-    <span
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0 bg-canvas/10 shadow-[inset_0_0_28px_rgb(0_0_0/0.4)]"
-    ></span>
-  </div>
-  <figcaption class="mt-2.5 font-mono text-label text-muted">
-    {image.caption}
-  </figcaption>
-</figure>
+<ProjectMedia caption={image.caption}>
+  {phone ? (
+    <div class="absolute top-[8%] left-1/2 w-[52%] -translate-x-1/2 overflow-hidden rounded-t-[1.75rem] border-x-[6px] border-t-[6px] border-canvas bg-canvas shadow-[0_0_0_1px_var(--hairline)] sm:w-[46%]">
+      <Image
+        src={image.src}
+        alt={image.alt}
+        widths={[240, 360, 480, 640]}
+        sizes="(min-width: 1248px) 17rem, (min-width: 640px) 24vw, 52vw"
+        format="webp"
+        quality={82}
+        loading={eager ? "eager" : "lazy"}
+        class="block h-auto w-full rounded-t-[1.35rem]"
+      />
+    </div>
+  ) : (
+    <div class="absolute inset-3 overflow-hidden rounded-md border border-hairline sm:inset-4">
+      <Image
+        src={image.src}
+        alt={image.alt}
+        widths={[320, 640, 960, 1280]}
+        sizes={sizes}
+        format="webp"
+        quality={78}
+        loading={eager ? "eager" : "lazy"}
+        class="block size-full object-cover object-top"
+      />
+    </div>
+  )}
+</ProjectMedia>

@@ -60,6 +60,8 @@ export default {
         hairline: "var(--hairline)",
         control: "var(--control)",
         accent: "var(--accent)",
+        "chart-blue": "var(--chart-blue)",
+        "chart-gold": "var(--chart-gold)",
       },
     },
   },
