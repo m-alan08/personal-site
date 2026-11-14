@@ -1,0 +1,32 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary";
+  arrow?: boolean;
+  class?: string;
+}
+const {
+  href,
+  variant = "secondary",
+  arrow = false,
+  class: className,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "group inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 text-small font-medium transition duration-150 motion-reduce:transition-none",
+    variant === "primary" &&
+      "bg-ink text-canvas hover:bg-accent active:brightness-90",
+    variant === "secondary" &&
+      "border border-control text-ink hover:border-ink hover:bg-raised active:bg-line",
+    className,
+  ]}
+>
+  <slot />
+  {arrow && (
+    <ArrowIcon class="group-hover:translate-x-1 group-focus-visible:translate-x-1" />
+  )}
+</a>

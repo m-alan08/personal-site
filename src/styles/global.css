@@ -53,7 +53,7 @@
   --chrome: #161618;
   --surface: #141416;
   --ink: #ececea;
-  --muted: #9b9b9f;
+  --muted: #a3a3a8;
   --line: #242427;
   --control: #4a4a4f;
   --accent: #ef5a52;
@@ -61,6 +61,8 @@
   --chart-gold: #e8c468;
   --raised: #1b1b1e;
   --hairline: rgb(236 236 234 / 0.1);
+  --paper: #f2efe9;
+  --paper-ink: #1d1c1a;
   --text-body: 1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -70,19 +72,6 @@
 body {
   margin: 0;
   background-color: var(--canvas);
-  background-image:
-    radial-gradient(
-      ellipse 58% 26rem at 50% -7rem,
-      rgb(239 90 82 / 0.09),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 85% 44rem at 50% -18rem,
-      rgb(236 236 234 / 0.1),
-      transparent
-    ),
-    linear-gradient(to bottom, var(--chrome), var(--canvas) 46rem);
-  background-repeat: no-repeat;
   font-size: var(--text-body);
   line-height: 1.65;
 }
@@ -133,6 +122,18 @@ input {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+  html.js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.55s ease-out,
+      transform 0.55s cubic-bezier(0.22, 0.61, 0.24, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js-reveal [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

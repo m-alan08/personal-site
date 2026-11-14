@@ -66,6 +66,8 @@ export default {
         accent: "var(--accent)",
         "chart-blue": "var(--chart-blue)",
         "chart-gold": "var(--chart-gold)",
+        paper: "var(--paper)",
+        "paper-ink": "var(--paper-ink)",
       },
     },
   },
