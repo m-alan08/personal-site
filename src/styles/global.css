@@ -85,27 +85,45 @@ body {
   height: clamp(38rem, 95svh, 60rem);
   overflow: hidden;
   pointer-events: none;
-  --glow-x: 50%;
-  --glow-y: -9rem;
 }
 .atmosphere-core {
   position: absolute;
   inset: -3% 0;
   background-image:
     radial-gradient(
-      ellipse 32% 14rem at var(--glow-x) calc(var(--glow-y) + 5rem),
-      rgb(var(--glow) / 0.34),
-      transparent 68%
+      ellipse 46% 16rem at 50% -4rem,
+      rgb(var(--glow) / 0.4) 0%,
+      rgb(var(--glow) / 0.3) 14%,
+      rgb(var(--glow) / 0.21) 28%,
+      rgb(var(--glow) / 0.14) 42%,
+      rgb(var(--glow) / 0.085) 55%,
+      rgb(var(--glow) / 0.045) 67%,
+      rgb(var(--glow) / 0.02) 78%,
+      rgb(var(--glow) / 0.007) 88%,
+      transparent 100%
     ),
     radial-gradient(
-      ellipse 56% 26rem at var(--glow-x) var(--glow-y),
-      rgb(var(--glow) / 0.2),
-      transparent 70%
+      ellipse 82% 30rem at 50% -9rem,
+      rgb(var(--glow) / 0.22) 0%,
+      rgb(var(--glow) / 0.16) 15%,
+      rgb(var(--glow) / 0.11) 30%,
+      rgb(var(--glow) / 0.07) 44%,
+      rgb(var(--glow) / 0.04) 57%,
+      rgb(var(--glow) / 0.02) 69%,
+      rgb(var(--glow) / 0.009) 80%,
+      rgb(var(--glow) / 0.003) 90%,
+      transparent 100%
     ),
     radial-gradient(
-      ellipse 84% 40rem at var(--glow-x) calc(var(--glow-y) - 7rem),
-      rgb(168 52 34 / 0.15),
-      transparent 72%
+      ellipse 115% 46rem at 50% -14rem,
+      rgb(168 52 34 / 0.16) 0%,
+      rgb(168 52 34 / 0.11) 16%,
+      rgb(168 52 34 / 0.07) 32%,
+      rgb(168 52 34 / 0.045) 47%,
+      rgb(168 52 34 / 0.026) 60%,
+      rgb(168 52 34 / 0.013) 72%,
+      rgb(168 52 34 / 0.005) 84%,
+      transparent 94%
     ),
     radial-gradient(
       ellipse 120% 52rem at 50% -16rem,
@@ -113,24 +131,6 @@ body {
       transparent 70%
     ),
     linear-gradient(to bottom, var(--chrome), transparent);
-}
-.atmosphere-steps {
-  position: absolute;
-  inset: 0;
-  background-image: repeating-radial-gradient(
-    ellipse 96% 46rem at 50% -20rem,
-    rgb(var(--glow) / 0.04) 0rem,
-    rgb(var(--glow) / 0.04) 1.7rem,
-    rgb(var(--glow) / 0.015) 1.7rem,
-    rgb(var(--glow) / 0.015) 3.4rem
-  );
-  mask-image: radial-gradient(
-    ellipse 96% 46rem at 50% -20rem,
-    transparent 54%,
-    black 66%,
-    black 78%,
-    transparent 96%
-  );
 }
 .atmosphere-grain {
   position: absolute;
