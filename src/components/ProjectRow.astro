@@ -12,7 +12,7 @@ const { project } = Astro.props;
 
 <article
   class:list={[
-    "relative grid gap-4 rounded-lg border border-hairline px-5 py-4 transition-colors duration-150 hover:border-control motion-reduce:transition-none md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-8",
+    "relative grid gap-4 rounded-lg border border-hairline px-5 py-4 transition duration-200 ease-out hover:border-control motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[0_14px_40px_-14px_rgb(0_0_0/0.7)] motion-reduce:transition-none md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-8",
     "has-[[data-card-link]:focus-visible]:outline-2 has-[[data-card-link]:focus-visible]:outline-offset-4 has-[[data-card-link]:focus-visible]:outline-ink",
   ]}
 >
