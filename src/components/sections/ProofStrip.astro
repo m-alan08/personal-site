@@ -1,2 +1,24 @@
 ---
+import HyphenSafeText from "../HyphenSafeText.astro";
+import { profile } from "../../content/profile";
 ---
+
+<section
+  aria-labelledby="current-heading"
+  class="border-y border-line py-8 sm:py-10"
+  data-reveal
+>
+  <h2 id="current-heading" class="text-eyebrow uppercase text-muted">
+    {profile.currentLabel}
+  </h2>
+  <dl class="mt-6 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
+    {profile.current.map((item) => (
+      <div>
+        <dt class="text-label uppercase text-muted">{item.label}</dt>
+        <dd class="mt-2 text-small leading-relaxed text-ink">
+          <HyphenSafeText text={item.text} />
+        </dd>
+      </div>
+    ))}
+  </dl>
+</section>

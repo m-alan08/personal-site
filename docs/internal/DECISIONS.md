@@ -77,8 +77,8 @@
 
 ## Redesign f1: foundation
 
-- One visual idea for the whole site: an editorial lab notebook on a flat canvas field. Sections open with a hairline rule, a two digit index and the bit ladder motif, a short row of stepped ticks that descend like quantization levels (32 bits to 2). The motif appears only at section markers, the header wordmark and the footer.
-- The layered top glow added in the polish pass is removed. Under the ruled editorial system it read as a startup style gradient rather than lab paper, so the page returns to flat canvas. This reverses part of pull request 70 deliberately.
+- One visual idea for the whole site: an editorial lab notebook on a dark canvas field. Sections open with a hairline rule, a two digit index and the bit ladder motif, a short row of stepped ticks that descend like quantization levels (32 bits to 2). The motif appears only at section markers, the header wordmark and the footer.
+- The layered top glow from the polish pass was removed in this branch, then restored at Alan's request before merge of the follow on work. The faint warm radial and neutral radial over a short chrome to canvas fade stay.
 - `muted` lifts from #9b9b9f to #a3a3a8 for a little more secondary contrast. New `paper` (#f2efe9) and `paper-ink` (#1d1c1a) tokens reserve a light panel for framed pale charts on later tasks.
 - One `Section` component owns every home page section header: hairline top rule, index plus ticks or an uppercase eyebrow, an `text-h2` title and an optional aside slot. The old stacked and left column variants are gone.
 - The header gains a hand drawn AM monogram wordmark, a native details disclosure menu on small screens with numbered links and 44px rows, and an IntersectionObserver scroll spy that sets `aria-current` on the active item. The menu closes on link pick, Escape (focus returns to the summary) and outside pointerdown.

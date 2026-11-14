@@ -4,7 +4,7 @@ Shared design foundation for every redesign task. Tokens live in `tailwind.confi
 
 ## Design idea
 
-A calm, editorial lab notebook. The page is a uniform dark field ruled by hairlines: every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes. The signature motif is the bit ladder, a short row of stepped ticks that descend like quantization levels (32 bits to 2). It appears only at section markers, the header wordmark and the footer (`Ticks.astro`).
+A calm, editorial lab notebook. The page is a dark field ruled by hairlines, with a soft warm glow pooled above the fold that fades into the canvas (a faint accent radial and a broader neutral radial over a short chrome to canvas linear fade). Every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes. The signature motif is the bit ladder, a short row of stepped ticks that descend like quantization levels (32 bits to 2). It appears only at section markers, the header wordmark and the footer (`Ticks.astro`).
 
 Structure carries the hierarchy: index numbers, rules, whitespace and type contrast. Boxes, chips and color are reserved for things that need them.
 
@@ -39,7 +39,7 @@ The page body uses the `text-body` size by default. Body text never drops below 
 
 | Token       | Value                    | Use                                          |
 | ----------- | ------------------------ | -------------------------------------------- |
-| `canvas`    | `#0c0c0d`                | Page background, flat field                  |
+| `canvas`    | `#0c0c0d`                | Page background field                        |
 | `chrome`    | `#161618`                | Reserved for elevated chrome such as dialogs |
 | `surface`   | `#141416`                | Cards and panels                             |
 | `raised`    | `#1b1b1e`                | A surface that sits above `surface`          |
