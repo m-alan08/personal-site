@@ -326,3 +326,7 @@ The soft warm glow became a deliberate visual identity. A dedicated `Atmosphere`
 ### Redesign g2: robot eye glow
 
 The playground robot's eye returned to a warm ember dot, now using the `glow` token instead of ink: a solid glow pupil plus a radial halo gradient behind it, grouped under `data-playground-eye` so the blink animation squashes pupil and halo together. Design notes list it as the sixth permitted glow location.
+
+### Redesign g2: atmosphere fix
+
+The stepped contour ring from g1 read as visible arcs and stripes, so the whole `.atmosphere-steps` layer was deleted, element, CSS and docs. The core is now three radials each built from eight to ten eased alpha stops, a smooth ember that fades through red orange into near black with no edge. Grain stays at 0.05 to kill residual banding; boosted-contrast captures show a clean falloff at 1440px and 390px. The pointer follow script and its custom properties were removed. The sticky header is now transparent at the top of the page when JavaScript is available (gated on a new unconditional `js` marker plus a `data-scrolled` attribute set past 8px of scroll), regaining its translucent background, blur and hairline on scroll; without JavaScript it keeps the always-on background. Three strengths were compared at 390px, 768px and 1440px against the pre-g1 original; the medium scale shipped.

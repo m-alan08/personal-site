@@ -101,3 +101,10 @@
 
 - The eye uses the `glow` token, not `accent`: it is decorative warm light, part of the same ember source as the atmosphere, and keeps accent reserved for interactive state.
 - The halo is an SVG radialGradient rather than blur or box-shadow, so it costs one extra circle of paint and no filter pass.
+
+## Redesign g2: smooth ember, transparent header
+
+- The bit ladder contour idea failed in practice: hard stops in a low opacity radial read as rendering artifacts, not design. The atmosphere now forbids hard stops and repeating gradients entirely; every radial uses eight to ten eased alpha stops so no edge can form. The motif stays with `Ticks` alone.
+- Banding is handled by the static SVG grain at 0.05 opacity, verified with heavily boosted contrast captures rather than visible steps.
+- The pointer response was removed rather than tuned: it moved the gradient layer's origin on pointermove, which risks visible swimming on the very effect meant to feel still, and it was the only script in the layer. Removing it makes the atmosphere pure CSS.
+- `js` is a new unconditional marker class on `html` (alongside the motion-gated `js-reveal`) so the header can be transparent at the top whenever scripting runs; without it the header keeps its always-on chrome. `backdrop-filter: none` needs `!important` to beat the blur utility.
