@@ -1,0 +1,20 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const heights = [12, 10, 8, 6, 5, 4, 2];
+const step = 4;
+const width = heights.length * step - (step - 2);
+---
+
+<svg
+  viewBox={`0 0 ${width} 12`}
+  class:list={["inline-block h-3 w-auto", className]}
+  aria-hidden="true"
+  fill="currentColor"
+>
+  {heights.map((height, index) => (
+    <rect x={index * step} y={12 - height} width="2" height={height} />
+  ))}
+</svg>

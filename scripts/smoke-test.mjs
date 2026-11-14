@@ -228,6 +228,9 @@ try {
     assert.equal(await page.locator("h1").count(), 1, `${path}: one h1`);
     assert.equal(await page.locator("dialog").count(), 0, `${path}: dialogs`);
     const navigation = page.getByRole("navigation", { name: "Main" });
+    const menuToggle = navigation.locator("summary");
+    assert.ok(await menuToggle.count(), `${path}: menu disclosure`);
+    await menuToggle.click();
     assert.equal(
       await navigation.getByRole("link").count(),
       sectionIds.length,
@@ -250,6 +253,10 @@ try {
         sectionIds,
         "home: section order",
       );
+      const menu = navigation.locator("details[data-nav-menu]");
+      if (!(await menu.evaluate((details) => details.open))) {
+        await menuToggle.click();
+      }
       await navigation.getByRole("link").nth(1).click();
       await page.waitForURL((url) => url.hash === "#projects");
       const details = page.locator('#projects a[href*="/projects/"]');

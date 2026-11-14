@@ -30,6 +30,7 @@ export const site = {
 
 export const labels = {
   mainNavigation: "Main",
+  menu: "Menu",
   github: "GitHub",
   x: "X",
   linkedin: "LinkedIn",

@@ -2,6 +2,12 @@
 
 Shared design foundation for every redesign task. Tokens live in `tailwind.config.mjs` and `src/styles/global.css`. Use a token whenever one covers the value.
 
+## Design idea
+
+A calm, editorial lab notebook. The page is a uniform dark field ruled by hairlines: every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes. The signature motif is the bit ladder, a short row of stepped ticks that descend like quantization levels (32 bits to 2). It appears only at section markers, the header wordmark and the footer (`Ticks.astro`).
+
+Structure carries the hierarchy: index numbers, rules, whitespace and type contrast. Boxes, chips and color are reserved for things that need them.
+
 ## Theme
 
 Dark only. There is no light mode. Print styles switch to black on white.
@@ -9,7 +15,7 @@ Dark only. There is no light mode. Print styles switch to black on white.
 ## Fonts
 
 - Geist Sans (`font-sans`, also `font-display`) for all text. Self-hosted from `@fontsource-variable/geist`, Latin subset, preloaded, `font-display: swap`.
-- Geist Mono (`font-mono`) only for genuinely technical text: data tables and source URLs. Labels, tags, captions, chart axes and metrics use Geist Sans with `tabular-nums` where digits need to line up. Self-hosted from `@fontsource-variable/geist-mono`, Latin subset, `font-display: swap`, not preloaded. The browser only downloads it on pages that use `font-mono`.
+- Geist Mono (`font-mono`) only for genuinely technical text: data tables, numeric readouts and source URLs. Labels, tags, captions, chart axes and metrics use Geist Sans with `tabular-nums` where digits need to line up. Self-hosted from `@fontsource-variable/geist-mono`, Latin subset, `font-display: swap`, not preloaded. The browser only downloads it on pages that use `font-mono`.
 - Size-adjusted fallbacks (`Geist Fallback`, `Geist Mono Fallback`) keep text from shifting while the fonts load.
 - No italic face ships. `font-synthesis-style: none` keeps text upright, so do not rely on `italic` for emphasis.
 - No more than two font families. No third-party font hosts.
@@ -31,18 +37,20 @@ The page body uses the `text-body` size by default. Body text never drops below 
 
 ## Color
 
-| Token      | Value                    | Use                                     |
-| ---------- | ------------------------ | --------------------------------------- |
-| `canvas`   | `#0c0c0d`                | Page background                         |
-| `chrome`   | `#161618`                | Header and top of page gradient         |
-| `surface`  | `#141416`                | Cards and panels                        |
-| `raised`   | `#1b1b1e`                | A surface that sits above `surface`     |
-| `ink`      | `#ececea`                | Primary text                            |
-| `muted`    | `#9b9b9f`                | Secondary text                          |
-| `line`     | `#242427`                | Dividers between sections and entries   |
-| `hairline` | `rgb(236 236 234 / 0.1)` | Thin borders on cards and figures       |
-| `control`  | `#4a4a4f`                | Control outlines that need 3:1 contrast |
-| `accent`   | `#ef5a52`                | See the accent rule below               |
+| Token       | Value                    | Use                                          |
+| ----------- | ------------------------ | -------------------------------------------- |
+| `canvas`    | `#0c0c0d`                | Page background, flat field                  |
+| `chrome`    | `#161618`                | Reserved for elevated chrome such as dialogs |
+| `surface`   | `#141416`                | Cards and panels                             |
+| `raised`    | `#1b1b1e`                | A surface that sits above `surface`          |
+| `ink`       | `#ececea`                | Primary text                                 |
+| `muted`     | `#a3a3a8`                | Secondary text                               |
+| `line`      | `#242427`                | Dividers between sections and entries        |
+| `hairline`  | `rgb(236 236 234 / 0.1)` | Thin borders on cards and figures            |
+| `control`   | `#4a4a4f`                | Control outlines that need 3:1 contrast      |
+| `accent`    | `#ef5a52`                | See the accent rule below                    |
+| `paper`     | `#f2efe9`                | Light panel for framed pale charts           |
+| `paper-ink` | `#1d1c1a`                | Text and captions on `paper`                 |
 
 ### Accent rule
 
@@ -52,7 +60,18 @@ The accent color is allowed only on:
 2. The active navigation item
 3. One key number or phrase per section
 
-Everything else uses `ink`, `muted`, `line` or `hairline`. This rule is not yet enforced across existing components; later tasks bring each section into line with it.
+Everything else uses `ink`, `muted`, `line` or `hairline`. This rule is enforced across the site; check every new component against it.
+
+## Section system
+
+Every home page section uses `Section.astro`: a hairline top rule, a header row (two-digit index plus bit ladder ticks for the six documented sections, or an uppercase eyebrow for feature sections, above an `text-h2` title), then full-width content. An optional `aside` slot sits on the right of the header row. Sections never stack headings in a side rail or use one-off header styles.
+
+## Interactive states
+
+- Hover on links: accent text or fuller accent underline. Hover on clickable cards: slightly brighter border, a small rise and a soft shadow.
+- Focus: `2px` ink outline offset `4px`, always visible.
+- Pressed: buttons darken one step (`active:bg-line` or `active:brightness-90`).
+- All transitions are 150ms to 200ms and removed under `prefers-reduced-motion`.
 
 ## Spacing rhythm
 
@@ -67,3 +86,5 @@ Section padding tokens, used as `py-section-compact`, `py-section-normal` or `py
 ## Motion
 
 Native scrolling only. Smooth anchor scrolling applies only under `prefers-reduced-motion: no-preference`. Under reduced motion, animations and transitions are off.
+
+`data-reveal` elements fade and rise once on first view. The hidden state only exists when the script has marked the document `js-reveal`, so content is fully visible without JavaScript and under reduced motion.

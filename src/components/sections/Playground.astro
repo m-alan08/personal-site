@@ -1,6 +1,7 @@
 ---
 import ExplorerChoice from "../explorer/ExplorerChoice.astro";
 import HyphenSafeText from "../HyphenSafeText.astro";
+import Section from "../Section.astro";
 import TextLink from "../TextLink.astro";
 import RobotFigure from "../playground/RobotFigure.astro";
 import { playgroundCopy as copy } from "../../content/playground";
@@ -20,25 +21,16 @@ const rows = Object.entries(copy.benchmarkRows);
 const legend = "font-mono text-label uppercase tracking-[0.2em] text-muted";
 ---
 
-<section
+<Section
   id="playground"
-  aria-labelledby="playground-heading"
+  title={copy.title}
+  eyebrow={copy.label}
   data-playground
   data-model-base={localPath(playgroundModelPath)}
-  class="grid gap-6 border-t border-line py-section-compact md:gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16"
 >
-  <div class="lg:sticky lg:top-24 lg:self-start">
-    <p aria-hidden="true" class={legend}>
-      {copy.label}
-    </p>
-    <h2 id="playground-heading" class="mt-1.5 text-h2 text-ink">
-      {copy.title}
-    </h2>
-    <span aria-hidden="true" class="mt-4 block h-px w-8 bg-accent/70"></span>
-    <p class="mt-6 max-w-reading text-muted lg:text-small">
-      <HyphenSafeText text={copy.intro} />
-    </p>
-  </div>
+  <p slot="aside" class="max-w-[26rem] text-muted lg:text-small">
+    <HyphenSafeText text={copy.intro} />
+  </p>
   <div class="min-w-0">
     <div class="overflow-hidden rounded-xl border border-line bg-surface">
       <div
@@ -248,7 +240,7 @@ const legend = "font-mono text-label uppercase tracking-[0.2em] text-muted";
       </p>
     </details>
   </div>
-</section>
+</Section>
 
 <script>
   const root = document.querySelector<HTMLElement>("[data-playground]");

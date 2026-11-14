@@ -39,6 +39,11 @@ const twitterHandle = links.xHandle && `@${links.xHandle.replace(/^@/, "")}`;
       />
     )}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("js-reveal");
+      }
+    </script>
     <link
       rel="preload"
       href={geistSans}
@@ -97,5 +102,25 @@ const twitterHandle = links.xHandle && `@${links.xHandle.replace(/^@/, "")}`;
       <slot />
     </main>
     <SiteFooter wide={wide} />
+    <script>
+      const revealables = document.querySelectorAll("[data-reveal]");
+      if (
+        document.documentElement.classList.contains("js-reveal") &&
+        revealables.length > 0
+      ) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px" },
+        );
+        for (const element of revealables) observer.observe(element);
+      }
+    </script>
   </body>
 </html>

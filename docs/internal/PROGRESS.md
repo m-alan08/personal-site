@@ -286,3 +286,7 @@ Added the robot playground after the hero: a side view robot arm driven by the F
 ### Polish pass: ambient gradient and active navigation
 
 Added a layered top glow to the dark background, scroll aware section highlighting in the navigation with `aria-current`, a small lift and shadow on hoverable cards, fuller link underlines on hover and a small icon nudge. Build, lint, format check, smoke tests and the 21 combination browser audit all pass. Before and after captures are under `reports/redesign/polish-gradient/` at 1440px, 768px and 390px.
+
+### Redesign f1: foundation
+
+Established the redesign foundation: flat canvas background (the polish pass glow is removed), a unified `Section` component with numbered headers and the bit ladder tick motif, a redesigned header with an AM wordmark, details disclosure menu and IntersectionObserver scroll spy, a matching footer, scroll reveal that is inert without JavaScript, and shared primitives (`Ticks`, `Eyebrow`, `ButtonLink`, `Chip`, `Stat`, `Card`). Migrated all eight home page sections to the new section API and extended the smoke test for the mobile menu. Build, lint, format check, smoke tests and the 21 combination browser audit pass; before and after captures are under `reports/redesign/f1-foundation/` at 1440px, 768px and 390px.

@@ -1,0 +1,18 @@
+---
+interface Props {
+  interactive?: boolean;
+  class?: string;
+}
+const { interactive = false, class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    "rounded-xl border border-hairline bg-surface",
+    interactive &&
+      "transition duration-200 ease-out hover:border-control motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-[0_18px_50px_-16px_rgb(0_0_0/0.7)] motion-reduce:transition-none",
+    className,
+  ]}
+>
+  <slot />
+</div>

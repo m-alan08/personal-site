@@ -74,3 +74,13 @@
 - A small bundled header script marks the matching nav link with `aria-current="location"` while scrolling. The active item takes the accent color, a use the accent rule already allows. Scroll work is coalesced through animation frames, the last section activates at the page foot, and the script does nothing on pages without the section anchors.
 - Clickable cards lift slightly and gain a soft shadow on hover so they read as pressable. The motion is gated behind `prefers-reduced-motion` and removed entirely under reduced motion.
 - Text links keep the accent underline but start quieter and reach full strength on hover. Icon links nudge upward on hover.
+
+## Redesign f1: foundation
+
+- One visual idea for the whole site: an editorial lab notebook on a flat canvas field. Sections open with a hairline rule, a two digit index and the bit ladder motif, a short row of stepped ticks that descend like quantization levels (32 bits to 2). The motif appears only at section markers, the header wordmark and the footer.
+- The layered top glow added in the polish pass is removed. Under the ruled editorial system it read as a startup style gradient rather than lab paper, so the page returns to flat canvas. This reverses part of pull request 70 deliberately.
+- `muted` lifts from #9b9b9f to #a3a3a8 for a little more secondary contrast. New `paper` (#f2efe9) and `paper-ink` (#1d1c1a) tokens reserve a light panel for framed pale charts on later tasks.
+- One `Section` component owns every home page section header: hairline top rule, index plus ticks or an uppercase eyebrow, an `text-h2` title and an optional aside slot. The old stacked and left column variants are gone.
+- The header gains a hand drawn AM monogram wordmark, a native details disclosure menu on small screens with numbered links and 44px rows, and an IntersectionObserver scroll spy that sets `aria-current` on the active item. The menu closes on link pick, Escape (focus returns to the summary) and outside pointerdown.
+- `data-reveal` elements fade and rise once on first view through a tiny bundled observer. The hidden state only exists after a synchronous head script marks the document `js-reveal`, so content is fully visible without JavaScript, under reduced motion and if the script never runs.
+- Shared primitives for later tasks: `Ticks`, `Eyebrow`, `ButtonLink`, `Chip`, `Stat` and `Card`. The accent rule now applies to every new component.
