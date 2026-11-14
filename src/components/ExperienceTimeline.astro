@@ -78,8 +78,8 @@ const nowX = x(now + 1);
   </g>
   <path
     d={`M${nowX} ${top} V${axisY + 6}`}
-    class="stroke-accent opacity-60"
-    stroke-width="1"
+    class="stroke-accent"
+    stroke-width="1.5"
     stroke-dasharray="2 3"
   ></path>
   {rows.map((row) => (
@@ -93,7 +93,7 @@ const nowX = x(now + 1);
         width={Math.max(row.to - row.from, 6)}
         height="8"
         rx="4"
-        class={row.current ? "fill-accent/80" : "fill-muted/50"}
+        class={row.current ? "fill-ink/70" : "fill-muted/40"}
       ></rect>
     </>
   ))}

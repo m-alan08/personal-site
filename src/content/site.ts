@@ -45,6 +45,8 @@ export const labels = {
   previousProject: "Previous",
   nextProject: "Next",
   source: "Sources",
+  copy: "Copy",
+  copied: "Copied",
 };
 
 export const pages = {

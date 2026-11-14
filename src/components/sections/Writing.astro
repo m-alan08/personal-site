@@ -1,9 +1,9 @@
 ---
-import ArrowLink from "../ArrowLink.astro";
 import HyphenSafeText from "../HyphenSafeText.astro";
 import Section from "../Section.astro";
 import WritingCard from "../WritingCard.astro";
 import { writing } from "../../content/profile";
+import { labels } from "../../content/site";
 import { xSeriesPosts } from "../../content/xSeries";
 import { sectionIndex, sectionLabel } from "../../data/sections";
 ---
@@ -16,21 +16,17 @@ import { sectionIndex, sectionLabel } from "../../data/sections";
   <p class="mb-8 max-w-reading text-muted">
     <HyphenSafeText text={writing.intro} />
   </p>
-  <ul class="grid gap-4 sm:grid-cols-2" role="list">
+  <ul class="divide-y divide-line border-y border-line" role="list">
     {writing.links.map((link) => (
-      <li>
-        <WritingCard title={link.title} href={link.href} note={link.note} />
-      </li>
+      <WritingCard title={link.title} href={link.href} note={link.note} />
+    ))}
+    {xSeriesPosts.map((post) => (
+      <WritingCard
+        title={post.title}
+        href={post.href}
+        date={post.date}
+        source={labels.x}
+      />
     ))}
   </ul>
-  {xSeriesPosts.length > 0 && (
-    <ul class="mt-8 divide-y divide-line" role="list">
-      {xSeriesPosts.map((post) => (
-        <li class="flex flex-wrap items-baseline justify-between gap-x-6 py-2">
-          <ArrowLink href={post.href} title={post.title} />
-          <span class="text-label tabular-nums text-muted">{post.date}</span>
-        </li>
-      ))}
-    </ul>
-  )}
 </Section>

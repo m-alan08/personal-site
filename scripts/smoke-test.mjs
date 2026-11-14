@@ -219,6 +219,7 @@ try {
       viewport: { width: 360, height: 800 },
       colorScheme: "dark",
       reducedMotion: "reduce",
+      permissions: ["clipboard-read", "clipboard-write"],
     });
     watch(page, path);
     const response = await page.goto(`${server.origin}${path}`, {
@@ -239,6 +240,27 @@ try {
     if (path === home) {
       await testPlayground(page);
       await testExplorer(page);
+      const copy = page.locator("[data-copy]").first();
+      assert.equal(await copy.isVisible(), true, "contact: copy revealed");
+      await copy.click();
+      await page
+        .waitForFunction(
+          (button) =>
+            button.querySelector("[data-copy-label]").textContent === "Copied",
+          await copy.elementHandle(),
+          { timeout: 3000 },
+        )
+        .catch(() => {});
+      assert.equal(
+        await copy.locator("[data-copy-label]").textContent(),
+        "Copied",
+        "contact: copy feedback",
+      );
+      assert.equal(
+        await page.evaluate(() => globalThis.navigator.clipboard.readText()),
+        await copy.getAttribute("data-copy"),
+        "contact: clipboard value",
+      );
       await page.evaluate(() => window.scrollTo(0, 0));
       for (const id of sectionIds) {
         const section = page.locator(`section#${id}`);

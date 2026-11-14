@@ -1,9 +1,15 @@
 ---
+import ArrowIcon from "../ArrowIcon.astro";
 import BaseFacts from "../BaseFacts.astro";
 import Section from "../Section.astro";
-import SectionFigure from "../SectionFigure.astro";
-import SocialLinks from "../SocialLinks.astro";
+import { labels } from "../../content/site";
+import { profile } from "../../content/profile";
+import { socialLinks } from "../../data/links";
+import { socialIcons } from "../../data/socialIcons";
 import { sectionIndex, sectionLabel } from "../../data/sections";
+
+const emailLinks = socialLinks.filter((link) => link.kind === "email");
+const otherLinks = socialLinks.filter((link) => link.kind !== "email");
 ---
 
 <Section
@@ -11,8 +17,104 @@ import { sectionIndex, sectionLabel } from "../../data/sections";
   title={sectionLabel("contact")}
   index={sectionIndex("contact")}
 >
-  <SectionFigure slot="aside">
+  <p class="mb-8 max-w-reading text-muted">{profile.availability}</p>
+  <ul class="divide-y divide-line border-y border-line" role="list">
+    {emailLinks.map((link) => (
+      <li class="flex flex-wrap items-center gap-x-6 gap-y-2 py-4">
+        <span class="w-36 shrink-0 text-label text-muted">{link.label}</span>
+        <a
+          href={link.href}
+          class="inline-flex min-h-11 items-center font-medium text-ink transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+        >
+          {link.display}
+        </a>
+        <button
+          type="button"
+          hidden
+          data-copy={link.display}
+          data-mailto={link.href}
+          data-copied={labels.copied}
+          class="ml-auto inline-flex h-11 items-center rounded-lg border border-hairline px-4 text-small text-muted transition-colors duration-150 hover:border-control hover:text-ink motion-reduce:transition-none"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            class="mr-1.5 size-3.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+            <path d="M5 15V6a2 2 0 0 1 2-2h9"></path>
+          </svg>
+          <span data-copy-label>{labels.copy}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+  <ul class="mt-6 grid gap-3 sm:grid-cols-2" role="list">
+    {otherLinks.map((link) => {
+      const icon = socialIcons[link.kind];
+      return (
+        <li>
+          <a
+            href={link.href}
+            class="group flex min-h-11 items-center gap-3 rounded-lg border border-hairline px-4 py-3 transition-colors duration-150 hover:border-control motion-reduce:transition-none"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox={icon.viewBox}
+              class:list={[
+                "size-4 shrink-0 text-muted",
+                icon.stroke ? "fill-none" : "fill-current",
+              ]}
+              {...(icon.stroke
+                ? { stroke: "currentColor", "stroke-width": 1.5 }
+                : {})}
+            >
+              <path d={icon.path}></path>
+            </svg>
+            <span class="min-w-0">
+              <span class="block text-small font-medium text-ink">
+                {link.label}
+              </span>
+              <span class="block truncate text-label text-muted">
+                {link.display}
+              </span>
+            </span>
+            <ArrowIcon class="ml-auto shrink-0 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+  <div class="mt-10">
     <BaseFacts />
-  </SectionFigure>
-  <SocialLinks detailed />
+  </div>
 </Section>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-copy]");
+  buttons.forEach((button) => {
+    button.hidden = false;
+    const label = button.querySelector("[data-copy-label]");
+    const original = label?.textContent ?? "";
+    let timer: number | undefined;
+    button.addEventListener("click", async () => {
+      const value = button.dataset.copy ?? "";
+      try {
+        await navigator.clipboard.writeText(value);
+        if (label) {
+          window.clearTimeout(timer);
+          label.textContent = button.dataset.copied ?? original;
+          timer = window.setTimeout(() => {
+            label.textContent = original;
+          }, 1600);
+        }
+      } catch {
+        const mailto = button.dataset.mailto;
+        if (mailto) window.location.href = mailto;
+      }
+    });
+  });
+</script>
