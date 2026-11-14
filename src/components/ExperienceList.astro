@@ -22,7 +22,7 @@ const periodParts = (period: string) => {
           {period.end && (
             <span class="md:block">
               {" to "}
-              <span class:list={[period.current && "text-accent"]}>
+              <span class:list={[period.current && "text-ink"]}>
                 {period.end}
               </span>
             </span>
@@ -47,12 +47,9 @@ const periodParts = (period: string) => {
             <HyphenSafeText text={entry.summary} />
           </p>
           {entry.metrics && (
-            <ul
-              class="mt-3 list-disc space-y-1 pl-5 text-sm text-muted"
-              role="list"
-            >
+            <ul class="mt-4 flex flex-wrap gap-1.5" role="list">
               {entry.metrics.map((metric) => (
-                <li>
+                <li class="rounded-full border border-hairline px-3 py-1 text-small tabular-nums text-muted">
                   <HyphenSafeText text={metric} />
                 </li>
               ))}
