@@ -48,7 +48,7 @@ const headline = headlineResults[project.slug];
       </a>
     </h3>
     <p class="m-0 max-w-reading text-muted">
-      <HyphenSafeText text={project.summary} />
+      <HyphenSafeText text={project.question} />
     </p>
     {headline && (
       <p class="m-0 border-l border-control pl-4">
@@ -66,8 +66,10 @@ const headline = headlineResults[project.slug];
         </span>
       </p>
     )}
-    <ProjectBadges project={project} />
-    <ProjectTags tags={project.technology} />
+    <div class="grid gap-1.5 border-t border-hairline pt-4">
+      <ProjectBadges project={project} />
+      <ProjectTags tags={project.technology} />
+    </div>
     <ProjectLinks project={project} />
   </div>
 </article>
