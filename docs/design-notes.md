@@ -4,7 +4,7 @@ Shared design foundation for every redesign task. Tokens live in `tailwind.confi
 
 ## Design idea
 
-A calm, editorial lab notebook. The page is a dark field ruled by hairlines, lit by a warm ember glow that rises from above the fold and fades into the canvas (see the Atmosphere section below). Every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes. The signature motif is the bit ladder, a short row of stepped ticks that descend like quantization levels (32 bits to 2). It appears only at section markers, the header wordmark and the footer (`Ticks.astro`).
+A calm, editorial lab notebook. The page is a dark field ruled by hairlines, lit by a warm ember glow that rises from above the fold and fades into the canvas (see the Atmosphere section below). Every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes.
 
 Structure carries the hierarchy: index numbers, rules, whitespace and type contrast. Boxes, chips and color are reserved for things that need them.
 
@@ -82,7 +82,7 @@ Nothing else may use `glow` or any other warm decorative tint. The layer is `ari
 
 ## Section system
 
-Every home page section uses `Section.astro`: a hairline top rule, a header row (two-digit index plus bit ladder ticks for the six documented sections, or an uppercase eyebrow for feature sections, above an `text-h2` title), then full-width content. An optional `aside` slot sits on the right of the header row. Sections never stack headings in a side rail or use one-off header styles.
+Every home page section uses `Section.astro`: a hairline top rule, a header row (two-digit index for the six documented sections, or an uppercase eyebrow for feature sections, above an `text-h2` title), then full-width content. An optional `aside` slot sits on the right of the header row. Sections never stack headings in a side rail or use one-off header styles.
 
 ## Interactive states
 

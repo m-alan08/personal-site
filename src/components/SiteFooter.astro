@@ -3,7 +3,6 @@ import { site } from "../content/site";
 import { localLinks } from "../data/links";
 import ArrowIcon from "./ArrowIcon.astro";
 import SocialIcons from "./SocialIcons.astro";
-import Ticks from "./Ticks.astro";
 const year = new Date().getFullYear();
 import { containerWidth } from "../data/layout";
 interface Props {
@@ -20,10 +19,7 @@ const { wide } = Astro.props;
 >
   <div class="flex flex-wrap items-start justify-between gap-x-10 gap-y-6 border-t border-line py-10">
     <div class="min-w-0">
-      <p class="flex items-center gap-2.5 text-small font-semibold text-ink">
-        <Ticks class="h-2.5 text-control" />
-        {site.name}
-      </p>
+      <p class="text-small font-semibold text-ink">{site.name}</p>
       <p class="mt-2 max-w-reading text-small text-muted">{site.footer}</p>
       <p class="mt-4 text-label text-muted">
         © {year} {site.name}

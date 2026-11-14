@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import ButtonLink from "../ButtonLink.astro";
 import HyphenSafeText from "../HyphenSafeText.astro";
-import Ticks from "../Ticks.astro";
 import portrait from "../../assets/portrait.jpg";
 import { profile } from "../../content/profile";
 import { socialLinks } from "../../data/links";
@@ -21,10 +20,7 @@ const ctas = ctaKinds
 >
   <div class="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
     <div class="min-w-0">
-      <p class="flex items-center gap-2.5 text-eyebrow uppercase text-muted">
-        <Ticks class="text-control" />
-        {profile.tagline}
-      </p>
+      <p class="text-eyebrow uppercase text-muted">{profile.tagline}</p>
       <h1 id="intro-heading" class="mt-6 font-display text-display text-ink">
         {profile.name}
       </h1>
