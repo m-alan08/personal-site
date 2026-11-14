@@ -4,7 +4,7 @@ Shared design foundation for every redesign task. Tokens live in `tailwind.confi
 
 ## Design idea
 
-A calm, editorial lab notebook. The page is a dark field ruled by hairlines, with a soft warm glow pooled above the fold that fades into the canvas (a faint accent radial and a broader neutral radial over a short chrome to canvas linear fade). Every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes. The signature motif is the bit ladder, a short row of stepped ticks that descend like quantization levels (32 bits to 2). It appears only at section markers, the header wordmark and the footer (`Ticks.astro`).
+A calm, editorial lab notebook. The page is a dark field ruled by hairlines, lit by a warm ember glow that rises from above the fold and fades into the canvas (see the Atmosphere section below). Every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes. The signature motif is the bit ladder, a short row of stepped ticks that descend like quantization levels (32 bits to 2). It appears only at section markers, the header wordmark and the footer (`Ticks.astro`).
 
 Structure carries the hierarchy: index numbers, rules, whitespace and type contrast. Boxes, chips and color are reserved for things that need them.
 
@@ -49,6 +49,7 @@ The page body uses the `text-body` size by default. Body text never drops below 
 | `hairline`  | `rgb(236 236 234 / 0.1)` | Thin borders on cards and figures            |
 | `control`   | `#4a4a4f`                | Control outlines that need 3:1 contrast      |
 | `accent`    | `#ef5a52`                | See the accent rule below                    |
+| `glow`      | `rgb(255 110 60)`        | Atmosphere light only, see below             |
 | `paper`     | `#f2efe9`                | Light panel for framed pale charts           |
 | `paper-ink` | `#1d1c1a`                | Text and captions on `paper`                 |
 
@@ -63,6 +64,20 @@ The accent color is allowed only on:
 Everything else uses `ink`, `muted`, `line` or `hairline`. This rule is enforced across the site; check every new component against it.
 
 In practice the one accent element per section is: the hero availability line (hover states only), the playground target, the first project card's headline number, the explorer's selected success rate (big number plus its chart marker), the experience "now" marker and each case study's key result. Chart series never use accent: the emphasized series is `ink`, the others are `chart-blue` and `chart-gold`. Arrows and icons inherit their parent's color rather than carrying accent on their own.
+
+## Atmosphere
+
+The ember glow is the one permitted decorative use of warm color. It uses the `glow` token (a warmer orange than `accent`), rendered by `Atmosphere.astro`: a fixed-height, absolute layer behind all content, painted once per page. The core is three stacked radials (tight core around 0.34 opacity, wider falloff around 0.2, deep red to umber fringe around 0.15) over a faint neutral lift and the chrome to canvas fade. `atmosphere-steps` adds a repeating radial with hard stops, a quantization contour ring that echoes the bit ladder, masked to an annulus at roughly 0.015 to 0.04 opacity. `atmosphere-grain` adds a fine inline-SVG noise tile at 0.05 opacity.
+
+The glow may appear in exactly five places:
+
+1. The hero atmosphere layer (the strongest, roughly 0.13 to 0.34 layer opacity)
+2. A faint warm pool behind the playground stage (`atmo-pool`, around 0.11)
+3. The warm left segment of numbered section rules (`atmo-rule`, up to 0.5 at the tip fading to transparent)
+4. A low warm horizon at the footer (`atmo-footer`, around 0.13)
+5. A warm shadow on the primary button hover and focus state
+
+Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, footer and rule echoes dim or disappear. A lazy script shifts the core a few percent toward fine pointers in the hero only; it arms on the first pointer movement and does nothing on touch devices or without JavaScript.
 
 ## Section system
 

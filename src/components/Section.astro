@@ -15,7 +15,10 @@ const headingId = `${id}-heading`;
 <section
   id={id}
   aria-labelledby={headingId}
-  class="border-t border-line py-section-normal"
+  class:list={[
+    "relative border-t border-line py-section-normal",
+    index && "atmo-rule",
+  ]}
   {...rest}
 >
   <div
