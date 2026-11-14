@@ -18,7 +18,9 @@ const metrics = [
   { key: "latency", label: copy.metrics.latency },
 ];
 const rows = Object.entries(copy.benchmarkRows);
-const legend = "font-mono text-label uppercase tracking-[0.2em] text-muted";
+const legend = "text-label uppercase text-muted";
+const pillButton =
+  "inline-flex min-h-11 items-center rounded-full border border-control px-4 text-small text-ink transition-colors duration-150 hover:border-ink hover:bg-raised active:bg-line disabled:cursor-not-allowed disabled:text-muted disabled:hover:border-control disabled:hover:bg-transparent motion-reduce:transition-none";
 ---
 
 <Section
@@ -33,69 +35,31 @@ const legend = "font-mono text-label uppercase tracking-[0.2em] text-muted";
   </p>
   <div class="min-w-0">
     <div class="overflow-hidden rounded-xl border border-line bg-surface">
-      <div
-        data-playground-stage
-        tabindex="0"
-        role="group"
-        aria-label={copy.stageLabel}
-        aria-describedby="playground-status"
-        class="relative mx-auto max-w-[46rem] cursor-crosshair touch-pan-y outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-ink"
-      >
-        <RobotFigure />
-        <p
-          data-playground-bubble
-          hidden
-          class="pointer-events-none absolute top-[12%] left-[4%] rounded-full border border-control bg-canvas px-3 py-1.5 font-mono text-label text-ink"
-        >
-          {copy.hint}
-        </p>
-        <noscript>
-          <p class="absolute top-[12%] left-[4%] text-small text-muted">
-            {copy.noScript}
-          </p>
-        </noscript>
-      </div>
-      <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-line px-4 py-3 sm:px-6">
-        <p
-          id="playground-status"
-          data-playground-status
-          aria-live="polite"
-          aria-atomic="true"
-          class="min-h-6 font-mono text-small text-ink"
-        >
-          {copy.hint}
-        </p>
-        <dl class="flex flex-wrap gap-x-6 gap-y-1 font-mono text-label">
-          {metrics.map((metric) => (
-            <div class="flex gap-2">
-              <dt class="uppercase tracking-[0.12em] text-muted">
-                {metric.label}
-              </dt>
-              <dd data-metric={metric.key} class="tabular-nums text-ink">
-                {copy.notYet}
-              </dd>
+      <form data-playground-form>
+        <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-line px-4 py-3 sm:px-6">
+          <div class="flex flex-wrap items-center gap-x-7 gap-y-3">
+            <div class="flex items-center gap-3">
+              <label for="playground-variant" class={legend}>
+                {copy.precisionLegend}
+              </label>
+              <select
+                id="playground-variant"
+                name="playground-variant"
+                data-playground-precision
+                class="block min-h-11 rounded-md border border-control bg-canvas px-3 text-small text-ink transition-colors duration-150 hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink disabled:cursor-not-allowed disabled:text-muted motion-reduce:transition-none"
+              >
+                {playgroundVariants.map((variant) => (
+                  <option
+                    value={variant.id}
+                    selected={variant.id === playgroundDefaults.variant}
+                  >
+                    {variant.label}
+                  </option>
+                ))}
+              </select>
             </div>
-          ))}
-        </dl>
-      </div>
-    </div>
-    <details data-playground-details class="group mt-3">
-      <summary class="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 text-small text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink [&::-webkit-details-marker]:hidden">
-        <span class="underline decoration-accent decoration-1 underline-offset-[5px] hover:decoration-ink">
-          {copy.explore}
-        </span>
-        <span
-          aria-hidden="true"
-          class="font-mono text-muted group-open:rotate-90"
-        >
-          &gt;
-        </span>
-      </summary>
-      <form data-playground-form class="mt-4 grid gap-8">
-        <div class="grid gap-6 xl:grid-cols-[auto_minmax(0,1fr)] xl:gap-10">
-          <fieldset>
-            <legend class={legend}>{copy.controllerLegend}</legend>
-            <div class="mt-3 flex flex-wrap gap-2">
+            <fieldset class="flex flex-wrap items-center gap-2">
+              <legend class="sr-only">{copy.controllerLegend}</legend>
               {Object.entries(copy.controllers).map(([value, label]) => (
                 <ExplorerChoice
                   name="playground-controller"
@@ -104,141 +68,192 @@ const legend = "font-mono text-label uppercase tracking-[0.2em] text-muted";
                   checked={value === playgroundDefaults.controller}
                 />
               ))}
-            </div>
-          </fieldset>
-          <div>
-            <label for="playground-variant" class={legend}>
-              {copy.precisionLegend}
-            </label>
-            <select
-              id="playground-variant"
-              name="playground-variant"
-              data-playground-precision
-              class="mt-3 block min-h-11 rounded-full border border-control bg-canvas px-4 text-small text-ink hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink disabled:cursor-not-allowed disabled:text-muted"
-            >
-              {playgroundVariants.map((variant) => (
-                <option
-                  value={variant.id}
-                  selected={variant.id === playgroundDefaults.variant}
-                >
-                  {variant.label}
-                </option>
-              ))}
-            </select>
+            </fieldset>
           </div>
-        </div>
-        <div class="grid gap-6 md:grid-cols-2 md:gap-10">
-          <div>
-            <div class="flex items-baseline justify-between gap-4">
-              <label for="playground-depth" class={legend}>
-                {copy.depthLabel}
-              </label>
-              <output
-                data-playground-depth
-                for="playground-depth"
-                class="font-mono text-small text-ink"
-              ></output>
-            </div>
-            <input
-              id="playground-depth"
-              name="playground-depth"
-              type="range"
-              min="-15"
-              max="15"
-              step="1"
-              value="0"
-              class="mt-2 block h-11 w-full cursor-pointer accent-ink"
-            />
-            <p class="text-small text-muted">{copy.depthNote}</p>
-          </div>
-          <div class="flex flex-wrap items-start gap-3">
-            <button
-              type="button"
-              data-playground-replay
-              class="min-h-11 rounded-full border border-control px-4 text-small text-ink hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink disabled:cursor-not-allowed disabled:text-muted"
-            >
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" data-playground-replay class={pillButton}>
               {copy.replay}
             </button>
-            <button
-              type="button"
-              data-playground-benchmark
-              class="min-h-11 rounded-full border border-control px-4 text-small text-ink hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink disabled:cursor-not-allowed disabled:text-muted"
-            >
+            <button type="button" data-playground-benchmark class={pillButton}>
               {copy.benchmark}
             </button>
           </div>
         </div>
-      </form>
-      <div class="mt-8 overflow-x-auto">
-        <table class="w-full min-w-[22rem] text-left text-small">
-          <thead class="font-mono text-label uppercase tracking-[0.12em] text-muted">
-            <tr>
-              {copy.benchmarkHeaders.map((header) => (
-                <th
-                  scope="col"
-                  class="border-b border-line py-2 pr-4 font-medium"
-                >
-                  {header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody class="font-mono tabular-nums">
-            {rows.map(([key, label]) => (
-              <tr data-benchmark-row={key}>
-                <th
-                  scope="row"
-                  class="border-b border-line py-2 pr-4 font-sans font-normal text-muted"
-                >
-                  {label}
-                </th>
-                <td
-                  data-cell="success"
-                  class="border-b border-line py-2 pr-4 text-ink"
+        <div
+          data-playground-stage
+          tabindex="0"
+          role="group"
+          aria-label={copy.stageLabel}
+          aria-describedby="playground-status"
+          class="relative mx-auto w-full max-w-[46rem] cursor-crosshair touch-pan-y outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-ink"
+        >
+          <RobotFigure />
+          <p
+            data-playground-bubble
+            hidden
+            class="pointer-events-none absolute top-[14%] left-1/2 flex -translate-x-1/2 items-center gap-2.5 rounded-full border border-control bg-canvas py-2 pr-4 pl-3 text-small whitespace-nowrap text-ink shadow-[0_12px_36px_-12px_rgb(0_0_0/0.7)]"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 16 16"
+              class="size-4 shrink-0 text-accent"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <circle cx="8" cy="8" r="4.5" stroke-dasharray="2.5 2" />
+              <circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none" />
+            </svg>
+            {copy.hint}
+          </p>
+          <noscript>
+            <p class="absolute top-[12%] left-[4%] text-small text-muted">
+              {copy.noScript}
+            </p>
+          </noscript>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-line px-4 py-3 sm:px-6">
+          <p
+            id="playground-status"
+            data-playground-status
+            aria-live="polite"
+            aria-atomic="true"
+            class="min-h-6 text-small text-ink"
+          >
+            {copy.hint}
+          </p>
+          <dl class="flex flex-wrap gap-x-8 gap-y-1">
+            {metrics.map((metric) => (
+              <div class="flex items-baseline gap-2.5">
+                <dt class="text-label uppercase text-muted">{metric.label}</dt>
+                <dd
+                  data-metric={metric.key}
+                  class="font-mono text-small tabular-nums text-ink"
                 >
                   {copy.notYet}
-                </td>
-                <td
-                  data-cell="distance"
-                  class="border-b border-line py-2 pr-4 text-ink"
-                >
-                  {copy.notYet}
-                </td>
-              </tr>
+                </dd>
+              </div>
             ))}
-          </tbody>
-        </table>
-        <p
-          data-playground-benchmark-note
-          class="mt-3 min-h-6 text-small text-muted"
-        ></p>
-      </div>
-      <div class="mt-6 grid gap-6 md:grid-cols-2 md:gap-10">
-        <div>
-          <h3 class="text-small font-semibold text-ink">{copy.realTitle}</h3>
-          <p class="mt-2 text-small text-muted">
-            <HyphenSafeText text={copy.real} />
-          </p>
+          </dl>
         </div>
-        <div>
-          <h3 class="text-small font-semibold text-ink">
-            {copy.simplifiedTitle}
-          </h3>
-          <p class="mt-2 text-small text-muted">
-            <HyphenSafeText text={copy.simplified} />
-          </p>
-        </div>
-      </div>
-      <p
-        data-playground-mode-note
-        class="mt-6 max-w-reading text-small text-muted"
-      >
-        <HyphenSafeText text={copy.quantNote} />
-      </p>
-      <p class="mt-2 text-small">
-        <TextLink href={copy.source}>{copy.sourceLabel}</TextLink>
-      </p>
-    </details>
+        <details data-playground-details class="group border-t border-line">
+          <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 text-small text-muted transition-colors duration-150 hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-ink sm:px-6 motion-reduce:transition-none [&::-webkit-details-marker]:hidden">
+            {copy.explore}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 16 16"
+              class="size-3.5 transition-transform duration-150 group-open:rotate-180 motion-reduce:transition-none"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 6.5 8 10l4-3.5" />
+            </svg>
+          </summary>
+          <div class="grid gap-8 px-4 pt-2 pb-6 sm:px-6">
+            <div class="max-w-[28rem]">
+              <div class="flex items-baseline justify-between gap-4">
+                <label for="playground-depth" class={legend}>
+                  {copy.depthLabel}
+                </label>
+                <output
+                  data-playground-depth
+                  for="playground-depth"
+                  class="font-mono text-small tabular-nums text-ink"
+                ></output>
+              </div>
+              <input
+                id="playground-depth"
+                name="playground-depth"
+                type="range"
+                min="-15"
+                max="15"
+                step="1"
+                value="0"
+                class="mt-2 block h-11 w-full cursor-pointer accent-ink"
+              />
+              <p class="text-small text-muted">{copy.depthNote}</p>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[22rem] text-left text-small">
+                <thead class="text-label uppercase text-muted">
+                  <tr>
+                    {copy.benchmarkHeaders.map((header) => (
+                      <th
+                        scope="col"
+                        class="border-b border-line py-2 pr-4 font-medium"
+                      >
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody class="font-mono tabular-nums">
+                  {rows.map(([key, label]) => (
+                    <tr
+                      data-benchmark-row={key}
+                      class="transition-colors duration-150 motion-reduce:transition-none"
+                    >
+                      <th
+                        scope="row"
+                        class="border-b border-line py-2 pr-4 font-sans font-normal text-muted"
+                      >
+                        {label}
+                      </th>
+                      <td
+                        data-cell="success"
+                        class="border-b border-line py-2 pr-4 text-ink"
+                      >
+                        {copy.notYet}
+                      </td>
+                      <td
+                        data-cell="distance"
+                        class="border-b border-line py-2 pr-4 text-ink"
+                      >
+                        {copy.notYet}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p
+                data-playground-benchmark-note
+                class="mt-3 min-h-6 text-small text-muted"
+              ></p>
+            </div>
+            <div class="grid gap-6 border-t border-hairline pt-6 md:grid-cols-2 md:gap-10">
+              <div>
+                <h3 class="text-small font-semibold text-ink">
+                  {copy.realTitle}
+                </h3>
+                <p class="mt-2 text-small text-muted">
+                  <HyphenSafeText text={copy.real} />
+                </p>
+              </div>
+              <div>
+                <h3 class="text-small font-semibold text-ink">
+                  {copy.simplifiedTitle}
+                </h3>
+                <p class="mt-2 text-small text-muted">
+                  <HyphenSafeText text={copy.simplified} />
+                </p>
+              </div>
+            </div>
+            <p
+              data-playground-mode-note
+              class="max-w-reading text-small text-muted"
+            >
+              <HyphenSafeText text={copy.quantNote} />
+            </p>
+            <p class="text-small">
+              <TextLink href={copy.source}>{copy.sourceLabel}</TextLink>
+            </p>
+          </div>
+        </details>
+      </form>
+    </div>
   </div>
 </Section>
 

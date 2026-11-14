@@ -294,3 +294,7 @@ Established the redesign foundation: the warm top glow from the polish pass stay
 ### Redesign p1: hero
 
 Rebuilt the hero around the one line statement: muted eyebrow with bit ladder ticks, large name, the headline as the focal text, a quiet availability line and GitHub, Resume and Email as labeled icon buttons. The offset accent frame on the portrait is gone in favor of a plain hairline bordered image, and the accent eyebrow and item labels now use muted text. The "What I'm working on" card became ProofStrip, an open ruled strip between the playground and About. Social icon paths moved to `src/data/socialIcons.ts` so the hero buttons share them. The warm top gradient was restored at Alan's request. The beach photo stays in About where it gives the section a personal note; the headshot stays in the hero as the identity image.
+
+### Redesign p2: playground presentation
+
+Rebuilt the playground as an instrument panel. The precision selector, controller pills, replay and benchmark run live in a control header above the stage; the stage now has a faint measurement grid, edge ticks and a dashed reach radius arc; the empty state is a centered prompt pill; status and tabular numeric readouts sit in a bar below the stage; and the depth control, benchmark table and disclosures moved into a quieter disclosure row. Labels use sans (mono only on numeric readouts per the updated notes). The arm figure keeps its geometry and hooks: stroked joint rings and consistent stroke weights. No policy, simulation or copy changes; `playground.ts` and `arm.ts` untouched.
