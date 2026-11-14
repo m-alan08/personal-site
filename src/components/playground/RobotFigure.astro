@@ -25,6 +25,12 @@ const gridY = [-600, -400, -200, 0, 200];
   aria-hidden="true"
   data-playground-svg
 >
+  <defs>
+    <radialGradient id="eye-halo">
+      <stop offset="0%" style="stop-color: rgb(var(--glow)); stop-opacity: 0.5" />
+      <stop offset="100%" style="stop-color: rgb(var(--glow)); stop-opacity: 0" />
+    </radialGradient>
+  </defs>
   <g class="stroke-hairline" stroke-width="2">
     {gridX.map((x) => (
       <line x1={x} y1="-660" x2={x} y2="330" />
@@ -113,14 +119,10 @@ const gridY = [-600, -400, -200, 0, 200];
         rx="26"
         class="fill-canvas"
       />
-      <circle
-        data-playground-eye
-        cx="-610"
-        cy="-250"
-        r="12"
-        class="fill-ink"
-        stroke="none"
-      />
+      <g data-playground-eye>
+        <circle cx="-610" cy="-250" r="42" fill="url(#eye-halo)" />
+        <circle cx="-610" cy="-250" r="12" class="fill-glow" stroke="none" />
+      </g>
     </g>
   </g>
   <g stroke-linecap="round">
