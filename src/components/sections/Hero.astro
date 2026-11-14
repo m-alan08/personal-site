@@ -8,7 +8,7 @@ import { profile } from "../../content/profile";
 import { socialLinks } from "../../data/links";
 import { socialIcons } from "../../data/socialIcons";
 
-const ctaKinds = ["github", "resume", "email"] as const;
+const ctaKinds = ["github", "x", "resume", "email"] as const;
 const ctas = ctaKinds
   .map((kind) => socialLinks.find((link) => link.kind === kind))
   .filter((link) => link !== undefined);
