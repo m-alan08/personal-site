@@ -152,9 +152,10 @@ npm run format:check
 npm test
 npm run audit:browser
 npm run audit:lighthouse
+npm run audit:contrast
 ```
 
-`audit:browser` and `audit:lighthouse` need `npm run preview -- --host 127.0.0.1 --port 4322` running. If a script is missing, add it in a dedicated `chore:` commit rather than working around it.
+`audit:browser`, `audit:lighthouse` and `audit:contrast` need `npm run preview -- --host 127.0.0.1 --port 4322` running. If a script is missing, add it in a dedicated `chore:` commit rather than working around it.
 
 ## 11. How to approach each task
 

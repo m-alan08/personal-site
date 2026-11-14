@@ -89,3 +89,10 @@
 
 - Chart series encode emphasis with `ink` rather than accent, matching the explorer's selected series convention; `chart-blue` and `chart-gold` stay for the other series. This keeps accent rare enough to mean something while keeping the key series readable.
 - Each section's single accent element is fixed and documented in design-notes.md. Arrows and icons always inherit the parent color so accent appears only through real hover, focus and active states.
+
+## Redesign g1: ember atmosphere
+
+- The glow moved off `body` into `Atmosphere.astro` so it sizes with the viewport (clamp 38rem to 60rem against 95svh), covers the hero and fades before the playground instead of cutting off at a fixed rem, and never repaints on long pages. `z-index: -1` on a `relative` body keeps it behind all content without affecting stacking.
+- A separate `glow` token (255 110 60) carries the warm light so `accent` keeps its interactive meaning. The accent rule is unchanged; the glow is the one permitted decorative warm color and design notes enumerate its five locations.
+- The banding artifact of low opacity dark gradients is used on purpose: the outer falloff ring is a repeating radial with hard stops, a quantization contour that echoes the bit ladder, masked to an annulus so the core stays smooth. Three strengths were compared at 390px, 768px and 1440px; the medium scale shipped because subtle read as the old layer and strong made the rings dominate the hero.
+- Motion is compositor only: one 18s transform plus opacity breathe on the core, gated behind `prefers-reduced-motion`. The pointer response is a lazy listener that arms on first pointermove, sets two custom properties through rAF, and only runs with a fine pointer and no reduced motion preference. Nothing moves without JavaScript.
