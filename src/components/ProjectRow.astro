@@ -1,9 +1,9 @@
 ---
 import type { Project } from "../data/projects";
 import { projectLink } from "../data/links";
+import ArrowIcon from "./ArrowIcon.astro";
 import HyphenSafeText from "./HyphenSafeText.astro";
 import ProjectBadges from "./ProjectBadges.astro";
-import ProjectLinks from "./ProjectLinks.astro";
 interface Props {
   project: Project;
 }
@@ -12,26 +12,27 @@ const { project } = Astro.props;
 
 <article
   class:list={[
-    "relative grid gap-4 rounded-lg border border-hairline px-5 py-4 transition duration-200 ease-out hover:border-control motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[0_14px_40px_-14px_rgb(0_0_0/0.7)] motion-reduce:transition-none md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-8",
+    "group relative grid gap-x-10 gap-y-3 border-t border-hairline px-1 py-6 first:border-t-0 first:pt-0",
     "has-[[data-card-link]:focus-visible]:outline-2 has-[[data-card-link]:focus-visible]:outline-offset-4 has-[[data-card-link]:focus-visible]:outline-ink",
+    "lg:grid-cols-[minmax(0,16rem)_minmax(0,1fr)_auto] lg:items-baseline",
   ]}
 >
-  <div class="grid min-w-0 gap-2">
-    <h4 class="m-0 text-body font-semibold text-ink">
-      <a
-        href={projectLink(project.slug)}
-        data-card-link
-        class="flex min-h-11 items-center after:absolute after:inset-0 after:rounded-lg focus-visible:outline-transparent!"
-      >
-        <span>
-          <HyphenSafeText text={project.title} />
-        </span>
-      </a>
-    </h4>
-    <p class="m-0 max-w-reading text-small text-muted">
-      <HyphenSafeText text={project.summary} />
-    </p>
+  <h4 class="m-0 text-h3 text-ink">
+    <a
+      href={projectLink(project.slug)}
+      data-card-link
+      class="inline-flex min-h-11 items-center gap-2 after:absolute after:inset-0 focus-visible:outline-transparent!"
+    >
+      <span>
+        <HyphenSafeText text={project.title} />
+      </span>
+      <ArrowIcon class="text-muted transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none" />
+    </a>
+  </h4>
+  <p class="m-0 max-w-reading text-small text-muted">
+    <HyphenSafeText text={project.summary} />
+  </p>
+  <div class="m-0 lg:max-w-[14rem] lg:justify-self-end">
     <ProjectBadges project={project} />
   </div>
-  <ProjectLinks project={project} caseStudy={false} />
 </article>

@@ -298,3 +298,7 @@ Rebuilt the hero around the one line statement: muted eyebrow with bit ladder ti
 ### Redesign p2: playground presentation
 
 Rebuilt the playground as an instrument panel. The precision selector, controller pills, replay and benchmark run live in a control header above the stage; the stage now has a faint measurement grid, edge ticks and a dashed reach radius arc; the empty state is a centered prompt pill; status and tabular numeric readouts sit in a bar below the stage; and the depth control, benchmark table and disclosures moved into a quieter disclosure row. Labels use sans (mono only on numeric readouts per the updated notes). The arm figure keeps its geometry and hooks: stroked joint rings and consistent stroke weights. No policy, simulation or copy changes; `playground.ts` and `arm.ts` untouched.
+
+### Redesign p3: project cards
+
+Featured cards now read as case study previews: media, title, the one sentence question, the headline result, then a quiet metadata line (status dot, status, ownership, event) and a muted tools line, then two actions (Case study, Repository). Chip badges and chip tags are gone; status carries a small dot. In progress items are open ruled rows using the full width (title, summary, metadata). Key numbers and wording unchanged. The card Demo link is dropped because the case study page lists it.

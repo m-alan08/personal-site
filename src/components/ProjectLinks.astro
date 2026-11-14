@@ -2,7 +2,7 @@
 import type { Project } from "../data/projects";
 import { projectLink } from "../data/links";
 import { projectCardLabels } from "../content/projectCards";
-import ArrowIcon from "./ArrowIcon.astro";
+import ButtonLink from "./ButtonLink.astro";
 interface Props {
   project: Project;
   caseStudy?: boolean;
@@ -11,27 +11,25 @@ const { project, caseStudy = true } = Astro.props;
 const linkOrder = ["repository", "demo"];
 const external = (project.links ?? [])
   .filter((link) => linkOrder.includes(link.kind))
-  .sort((a, b) => linkOrder.indexOf(a.kind) - linkOrder.indexOf(b.kind));
-const buttonClass =
-  "inline-flex min-h-11 items-center gap-2 rounded-md border border-control px-3 text-small text-ink transition-colors duration-150 hover:border-ink hover:bg-raised active:bg-line motion-reduce:transition-none sm:px-4";
+  .sort((a, b) => linkOrder.indexOf(a.kind) - linkOrder.indexOf(b.kind))
+  .slice(0, 1);
 ---
 
 <ul class="relative z-10 m-0 flex list-none flex-wrap gap-2 p-0" role="list">
   {caseStudy && (
     <li>
-      <a href={projectLink(project.slug)} class={buttonClass}>
+      <ButtonLink href={projectLink(project.slug)} arrow>
         {projectCardLabels.caseStudy}
         <span class="sr-only">: {project.title}</span>
-        <ArrowIcon />
-      </a>
+      </ButtonLink>
     </li>
   )}
   {external.map((link) => (
     <li>
-      <a href={link.href} class={buttonClass}>
+      <ButtonLink href={link.href}>
         {link.label}
         <span class="sr-only">: {project.title}</span>
-      </a>
+      </ButtonLink>
     </li>
   ))}
 </ul>

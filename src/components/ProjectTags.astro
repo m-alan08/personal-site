@@ -8,15 +8,8 @@ const { tags } = Astro.props;
 ---
 
 {tags.length > 0 && (
-  <ul
-    class="m-0 flex list-none flex-wrap gap-1.5 p-0"
-    aria-label={labels.technology}
-    role="list"
-  >
-    {tags.slice(0, 5).map((tag) => (
-      <li class="rounded-full border border-hairline px-2.5 py-1 text-label text-muted">
-        <HyphenSafeText text={tag} />
-      </li>
-    ))}
-  </ul>
+  <p class="m-0 text-small text-muted">
+    <span class="sr-only">{labels.technology}: </span>
+    <HyphenSafeText text={tags.join(" · ")} />
+  </p>
 )}
