@@ -64,6 +64,7 @@ export default {
         hairline: "var(--hairline)",
         control: "var(--control)",
         accent: "var(--accent)",
+        glow: "rgb(var(--glow) / <alpha-value>)",
         "chart-blue": "var(--chart-blue)",
         "chart-gold": "var(--chart-gold)",
         paper: "var(--paper)",
