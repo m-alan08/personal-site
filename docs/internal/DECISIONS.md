@@ -112,4 +112,4 @@
 ## Hero X link, no bit ladder
 
 - The bit ladder ticks (`Ticks.astro`) are gone everywhere at Alan's request: hero eyebrow, section headers, footer and 404. Section headers keep the two digit index alone.
-- The hero buttons are now GitHub, X, Resume and Email, in that order. X uses the same secondary button as Resume and Email.
+- The hero buttons are now GitHub, X, LinkedIn and Email, in that order. LinkedIn replaced Resume at Alan's request; the resume stays in the Contact section and at `/resume/`. X and LinkedIn use the same secondary button as Email.
