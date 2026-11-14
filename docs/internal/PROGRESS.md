@@ -282,3 +282,7 @@ Added the bit-width explorer section with data from the quantrl-fetch README key
 ### Robot playground
 
 Added the robot playground after the hero: a side view robot arm driven by the FetchReach SAC + HER actor from quantrl-fetch, running in the browser at eight precisions plus a scripted proportional baseline, with live distance, steps and decision time, a 100-target benchmark next to the Python and MuJoCo results, and plain disclosures of what is real and what is simplified. Added the export script, policy parity tests and playground smoke tests.
+
+### Polish pass: ambient gradient and active navigation
+
+Added a layered top glow to the dark background, scroll aware section highlighting in the navigation with `aria-current`, a small lift and shadow on hoverable cards, fuller link underlines on hover and a small icon nudge. Build, lint, format check, smoke tests and the 21 combination browser audit all pass. Before and after captures are under `reports/redesign/polish-gradient/` at 1440px, 768px and 390px.
