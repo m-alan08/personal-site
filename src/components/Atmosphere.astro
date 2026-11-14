@@ -1,34 +1,4 @@
 <div class="atmosphere" aria-hidden="true">
   <div class="atmosphere-core"></div>
-  <div class="atmosphere-steps"></div>
   <div class="atmosphere-grain"></div>
 </div>
-
-<script>
-  const layer = document.querySelector<HTMLElement>(".atmosphere");
-  const hero = document.querySelector<HTMLElement>("main > section");
-  const fine = matchMedia("(hover: hover) and (pointer: fine)");
-  const calm = matchMedia("(prefers-reduced-motion: no-preference)");
-  if (layer && hero && fine.matches && calm.matches) {
-    let frame = 0;
-    const arm = () =>
-      hero.addEventListener(
-        "pointermove",
-        (event) => {
-          if (frame) return;
-          frame = requestAnimationFrame(() => {
-            frame = 0;
-            const x = (event.clientX / innerWidth - 0.5) * 7;
-            const y = (event.clientY / innerHeight - 0.5) * 3;
-            layer.style.setProperty("--glow-x", `${50 + x}%`);
-            layer.style.setProperty("--glow-y", `${-9 + y}rem`);
-          });
-        },
-        { passive: true },
-      );
-    document.addEventListener("pointermove", arm, {
-      once: true,
-      passive: true,
-    });
-  }
-</script>

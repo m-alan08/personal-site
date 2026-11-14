@@ -67,7 +67,7 @@ In practice the one accent element per section is: the hero availability line (h
 
 ## Atmosphere
 
-The ember glow is the one permitted decorative use of warm color. It uses the `glow` token (a warmer orange than `accent`), rendered by `Atmosphere.astro`: a fixed-height, absolute layer behind all content, painted once per page. The core is three stacked radials (tight core around 0.34 opacity, wider falloff around 0.2, deep red to umber fringe around 0.15) over a faint neutral lift and the chrome to canvas fade. `atmosphere-steps` adds a repeating radial with hard stops, a quantization contour ring that echoes the bit ladder, masked to an annulus at roughly 0.015 to 0.04 opacity. `atmosphere-grain` adds a fine inline-SVG noise tile at 0.05 opacity.
+The ember glow is the one permitted decorative use of warm color. It uses the `glow` token (a warmer orange than `accent`), rendered by `Atmosphere.astro`: a fixed-height, absolute layer behind all content, painted once per page. The core is three stacked radials, each built from eight to ten eased alpha stops so every edge fades perfectly smoothly (tight core peaking near 0.4, wider falloff near 0.22, deep red to umber fringe near 0.16) over a faint neutral lift and the chrome to canvas fade. There are no hard stops or repeating gradients anywhere in the atmosphere; `atmosphere-grain` adds a fine inline-SVG noise tile at 0.05 opacity to prevent banding.
 
 The glow may appear in exactly six places:
 
@@ -78,7 +78,7 @@ The glow may appear in exactly six places:
 5. A low warm horizon at the footer (`atmo-footer`, around 0.13)
 6. A warm shadow on the primary button hover and focus state
 
-Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, footer and rule echoes dim or disappear. A lazy script shifts the core a few percent toward fine pointers in the hero only; it arms on the first pointer movement and does nothing on touch devices or without JavaScript.
+Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, footer and rule echoes dim or disappear.
 
 ## Section system
 
