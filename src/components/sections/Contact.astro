@@ -3,10 +3,14 @@ import BaseFacts from "../BaseFacts.astro";
 import Section from "../Section.astro";
 import SectionFigure from "../SectionFigure.astro";
 import SocialLinks from "../SocialLinks.astro";
-import { sectionLabel } from "../../data/sections";
+import { sectionIndex, sectionLabel } from "../../data/sections";
 ---
 
-<Section id="contact" title={sectionLabel("contact")}>
+<Section
+  id="contact"
+  title={sectionLabel("contact")}
+  index={sectionIndex("contact")}
+>
   <SectionFigure slot="aside">
     <BaseFacts />
   </SectionFigure>

@@ -3,12 +3,17 @@ import ProjectList from "../ProjectList.astro";
 import Section from "../Section.astro";
 import { site } from "../../content/site";
 import { orderedProjects, type Project } from "../../data/projects";
+import { sectionIndex } from "../../data/sections";
 const isInProgress = (project: Project) =>
   project.tier === "in-progress" || project.featured === false;
 const finished = orderedProjects.filter((project) => !isInProgress(project));
 const inProgress = orderedProjects.filter(isInProgress);
 ---
 
-<Section id="projects" title={site.selectedProjects} stacked>
+<Section
+  id="projects"
+  title={site.selectedProjects}
+  index={sectionIndex("projects")}
+>
   <ProjectList features={finished} inProgress={inProgress} />
 </Section>

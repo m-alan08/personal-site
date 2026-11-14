@@ -3,6 +3,7 @@ import ExplorerChart from "../explorer/ExplorerChart.astro";
 import ExplorerChoice from "../explorer/ExplorerChoice.astro";
 import ExplorerTable from "../explorer/ExplorerTable.astro";
 import HyphenSafeText from "../HyphenSafeText.astro";
+import Section from "../Section.astro";
 import TextLink from "../TextLink.astro";
 import {
   bitWidths,
@@ -19,21 +20,12 @@ const source = datasets[0].source;
 const lastIndex = bitWidths.length - 1;
 ---
 
-<section
+<Section
   id="explorer"
-  aria-labelledby="explorer-heading"
+  title={explorerCopy.title}
+  eyebrow={explorerCopy.label}
   data-explorer
-  class="grid gap-6 border-t border-line py-section-compact md:gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16"
 >
-  <div class="lg:sticky lg:top-24 lg:self-start">
-    <p aria-hidden="true" class="text-eyebrow uppercase text-muted">
-      {explorerCopy.label}
-    </p>
-    <h2 id="explorer-heading" class="mt-1.5 text-h2 text-ink">
-      {explorerCopy.title}
-    </h2>
-    <span aria-hidden="true" class="mt-4 block h-px w-8 bg-accent/70"></span>
-  </div>
   <div class="min-w-0">
     <p class="max-w-reading text-muted">
       <HyphenSafeText text={explorerCopy.intro} />
@@ -146,7 +138,7 @@ const lastIndex = bitWidths.length - 1;
       <TextLink href={source}>{explorerCopy.sourceLabel}</TextLink>
     </p>
   </div>
-</section>
+</Section>
 
 <script>
   const root = document.querySelector<HTMLElement>("[data-explorer]");

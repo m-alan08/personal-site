@@ -5,10 +5,14 @@ import Section from "../Section.astro";
 import WritingCard from "../WritingCard.astro";
 import { writing } from "../../content/profile";
 import { xSeriesPosts } from "../../content/xSeries";
-import { sectionLabel } from "../../data/sections";
+import { sectionIndex, sectionLabel } from "../../data/sections";
 ---
 
-<Section id="writing" title={sectionLabel("writing")}>
+<Section
+  id="writing"
+  title={sectionLabel("writing")}
+  index={sectionIndex("writing")}
+>
   <p class="mb-8 max-w-reading text-muted">
     <HyphenSafeText text={writing.intro} />
   </p>

@@ -9,7 +9,7 @@ import {
   exploringLabels,
   threads,
 } from "../../data/exploring";
-import { sectionLabel } from "../../data/sections";
+import { sectionIndex, sectionLabel } from "../../data/sections";
 
 assertThreadsFresh();
 
@@ -28,7 +28,11 @@ const updatedLabel = (date: string) =>
   aria-hidden="true"
   class="block scroll-mt-8 sm:scroll-mt-20"
 ></span>
-<Section id="exploring" title={sectionLabel("exploring")}>
+<Section
+  id="exploring"
+  title={sectionLabel("exploring")}
+  index={sectionIndex("exploring")}
+>
   <p class="mb-8 max-w-reading text-muted">{exploringIntro}</p>
   <ol class="grid gap-6" role="list">
     {threads.map((thread) => (

@@ -5,7 +5,7 @@ import Section from "../Section.astro";
 import SocialIcons from "../SocialIcons.astro";
 import aboutPhoto from "../../assets/about-photo.jpg";
 import { profile } from "../../content/profile";
-import { sectionLabel } from "../../data/sections";
+import { sectionIndex, sectionLabel } from "../../data/sections";
 
 const { city, shortName, graduation } = profile.education;
 const caption = [
@@ -15,7 +15,7 @@ const caption = [
 ].join(", ");
 ---
 
-<Section id="about" title={sectionLabel("about")} stacked>
+<Section id="about" title={sectionLabel("about")} index={sectionIndex("about")}>
   <div class="grid gap-8 sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-10 lg:grid-cols-[14rem_minmax(0,1fr)_minmax(0,15rem)] xl:grid-cols-[17rem_minmax(0,1fr)_minmax(0,16rem)] xl:gap-14">
     <figure class="max-w-48 sm:row-span-2 sm:max-w-none lg:row-span-1">
       <Image
