@@ -302,3 +302,19 @@ Rebuilt the playground as an instrument panel. The precision selector, controlle
 ### Redesign p3: project cards
 
 Featured cards now read as case study previews: media, title, the one sentence question, the headline result, then a quiet metadata line (status dot, status, ownership, event) and a muted tools line, then two actions (Case study, Repository). Chip badges and chip tags are gone; status carries a small dot. In progress items are open ruled rows using the full width (title, summary, metadata). Key numbers and wording unchanged. The card Demo link is dropped because the case study page lists it.
+
+### Redesign p4: exploring and explorer
+
+Exploring threads use the shared metadata line (dot, status, updated) and Chip directions; the hierarchy diagram split went neutral. The explorer is one framed panel: control bar for task and method, result column beside the chart, and the bit width slider aligned to the chart axis. The no JS table fallback got matching panel styling. Data, controls, lazy mount and live status unchanged.
+
+### Redesign p5: writing, experience and contact
+
+Writing is a single ruled link list (source label, title, note, arrow) ready for future X thread rows. Experience bars went neutral with accent kept only on the now marker; metrics render as small tabular stat chips. Contact leads with the availability line, email rows with copy buttons that fall back to mailto, then an icon grid for the remaining links. The unused SocialLinks component was removed.
+
+### Redesign p6: case study pages and 404
+
+White chart figures render on a light paper panel via a new optional image tone flag. The on this page rail shows section numbers, pipeline steps are more legible, and the 404 page uses the bit ladder motif, display type and shared buttons.
+
+### Redesign q1: integration polish
+
+Enforced the accent rule in the remaining places: arrows inherit parent color, the robot eye and the playground target icon went neutral, chart series use ink plus blue plus gold instead of accent, and the project chart highlight band went neutral. Removed three dead components (Eyebrow, ProjectImage, Stat). Documented the concrete accent allocation per section in design notes.

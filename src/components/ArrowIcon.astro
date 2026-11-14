@@ -10,7 +10,7 @@ const { direction = "right", class: className } = Astro.props;
   aria-hidden="true"
   viewBox="0 0 16 16"
   class:list={[
-    "inline-block size-3.5 -translate-y-px text-accent transition-transform duration-200 motion-reduce:transition-none",
+    "inline-block size-3.5 -translate-y-px transition-transform duration-200 motion-reduce:transition-none",
     direction === "left" && "rotate-180",
     direction === "up" && "-rotate-90",
     className,

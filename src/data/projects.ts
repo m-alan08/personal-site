@@ -26,7 +26,7 @@ export interface ProjectChartSeries {
   label: string;
   values: number[];
   style: "solid" | "dashed" | "dotted";
-  tone: "accent" | "blue" | "gold";
+  tone: "ink" | "blue" | "gold";
 }
 export interface ProjectCardChart {
   alt: string;
@@ -166,7 +166,7 @@ export const projects: Project[] = [
           label: "QAT fine-tune",
           values: [1, 1, 1, 1, 1, 0.503, 0.003],
           style: "solid",
-          tone: "accent",
+          tone: "ink",
         },
         {
           label: "QAT from scratch",

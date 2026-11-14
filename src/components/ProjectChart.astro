@@ -12,7 +12,7 @@ const x = (index: number) => inset + index * step;
 const y = (value: number) => inset + (1 - value) * span;
 const percent = (value: number) => `${value}%`;
 const tones = {
-  accent: "var(--accent)",
+  ink: "var(--ink)",
   blue: "var(--chart-blue)",
   gold: "var(--chart-gold)",
 };
@@ -84,7 +84,7 @@ const dotPath = (values: number[]) =>
       </div>
       <div class="relative" aria-hidden="true">
         <span
-          class="absolute inset-y-0 rounded-sm bg-accent/10"
+          class="absolute inset-y-0 rounded-sm bg-ink/10"
           style={{
             left: percent(x(highlightIndex) - step * 0.4),
             width: percent(step * 0.8),
@@ -140,7 +140,7 @@ const dotPath = (values: number[]) =>
           <span
             class:list={[
               "absolute top-1 -translate-x-1/2 text-label whitespace-nowrap tabular-nums",
-              index === highlightIndex ? "text-accent" : "text-muted",
+              index === highlightIndex ? "text-ink" : "text-muted",
             ]}
             style={{ left: percent(x(index)) }}
           >
