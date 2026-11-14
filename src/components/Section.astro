@@ -1,6 +1,4 @@
 ---
-import Ticks from "./Ticks.astro";
-
 interface Props {
   id: string;
   title: string;
@@ -28,12 +26,7 @@ const headingId = `${id}-heading`;
     <div>
       {(index || eyebrow) && (
         <p aria-hidden="true" class="flex items-center gap-2.5 text-muted">
-          {index && (
-            <>
-              <Ticks class="h-2.5 text-control" />
-              <span class="text-label tabular-nums">{index}</span>
-            </>
-          )}
+          {index && <span class="text-label tabular-nums">{index}</span>}
           {eyebrow && <span class="text-eyebrow uppercase">{eyebrow}</span>}
         </p>
       )}

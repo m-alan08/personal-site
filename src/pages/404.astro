@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ButtonLink from "../components/ButtonLink.astro";
-import Ticks from "../components/Ticks.astro";
 import { pages } from "../content/site";
 import { localLinks } from "../data/links";
 import { sectionLink } from "../data/sections";
@@ -13,10 +12,7 @@ import { sectionLink } from "../data/sections";
   noindex
 >
   <section class="border-t border-line py-16 sm:py-24">
-    <div class="flex items-center gap-3 text-muted">
-      <Ticks />
-      <span class="text-label tabular-nums">404</span>
-    </div>
+    <p class="text-label tabular-nums text-muted">404</p>
     <h1 class="mt-5 text-display text-ink">{pages.notFound.title}</h1>
     <p class="mt-5 max-w-reading text-muted">{pages.notFound.description}</p>
     <ul class="mt-8 flex flex-wrap gap-3" role="list">

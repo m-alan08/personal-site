@@ -108,3 +108,8 @@
 - Banding is handled by the static SVG grain at 0.05 opacity, verified with heavily boosted contrast captures rather than visible steps.
 - The pointer response was removed rather than tuned: it moved the gradient layer's origin on pointermove, which risks visible swimming on the very effect meant to feel still, and it was the only script in the layer. Removing it makes the atmosphere pure CSS.
 - `js` is a new unconditional marker class on `html` (alongside the motion-gated `js-reveal`) so the header can be transparent at the top whenever scripting runs; without it the header keeps its always-on chrome. `backdrop-filter: none` needs `!important` to beat the blur utility.
+
+## Hero X link, no bit ladder
+
+- The bit ladder ticks (`Ticks.astro`) are gone everywhere at Alan's request: hero eyebrow, section headers, footer and 404. Section headers keep the two digit index alone.
+- The hero buttons are now GitHub, X, Resume and Email, in that order. X uses the same secondary button as Resume and Email.
