@@ -49,7 +49,7 @@ The page body uses the `text-body` size by default. Body text never drops below 
 | `hairline`  | `rgb(236 236 234 / 0.1)` | Thin borders on cards and figures            |
 | `control`   | `#4a4a4f`                | Control outlines that need 3:1 contrast      |
 | `accent`    | `#ef5a52`                | See the accent rule below                    |
-| `glow`      | `rgb(255 110 60)`        | Atmosphere light only, see below             |
+| `glow`      | `rgb(212 44 40)`         | Atmosphere light only, see below             |
 | `paper`     | `#f2efe9`                | Light panel for framed pale charts           |
 | `paper-ink` | `#1d1c1a`                | Text and captions on `paper`                 |
 
@@ -67,7 +67,7 @@ In practice the one accent element per section is: the hero availability line (h
 
 ## Atmosphere
 
-The ember glow is the one permitted decorative use of warm color. It uses the `glow` token (a warmer orange than `accent`), rendered by `Atmosphere.astro`: a fixed-height, absolute layer behind all content, painted once per page. The core is three stacked radials, each built from eight to ten eased alpha stops so every edge fades perfectly smoothly (tight core peaking near 0.4, wider falloff near 0.22, deep red to umber fringe near 0.16) over a faint neutral lift and the chrome to canvas fade. There are no hard stops or repeating gradients anywhere in the atmosphere; `atmosphere-grain` adds a fine inline-SVG noise tile at 0.05 opacity to prevent banding.
+The ember glow is the one permitted decorative use of warm color. It uses the `glow` token (a deep crimson, darker than `accent`), rendered by `Atmosphere.astro`: a fixed-height, absolute layer behind all content, painted once per page. The core is three stacked radials, each built from eight to ten eased alpha stops so every edge fades perfectly smoothly (tight core peaking near 0.4, wider falloff near 0.22, faint outer fringe near 0.09), all in the same `glow` color, over the chrome to canvas fade. There are no hard stops or repeating gradients anywhere in the atmosphere; `atmosphere-grain` adds a fine inline-SVG noise tile at 0.05 opacity to prevent banding.
 
 The glow may appear in exactly six places:
 

@@ -57,7 +57,7 @@
   --line: #242427;
   --control: #4a4a4f;
   --accent: #ef5a52;
-  --glow: 255 110 60;
+  --glow: 212 44 40;
   --chart-blue: #8ab4f8;
   --chart-gold: #e8c468;
   --raised: #1b1b1e;
@@ -116,19 +116,14 @@ body {
     ),
     radial-gradient(
       ellipse 115% 46rem at 50% -14rem,
-      rgb(168 52 34 / 0.16) 0%,
-      rgb(168 52 34 / 0.11) 16%,
-      rgb(168 52 34 / 0.07) 32%,
-      rgb(168 52 34 / 0.045) 47%,
-      rgb(168 52 34 / 0.026) 60%,
-      rgb(168 52 34 / 0.013) 72%,
-      rgb(168 52 34 / 0.005) 84%,
+      rgb(var(--glow) / 0.088) 0%,
+      rgb(var(--glow) / 0.0605) 16%,
+      rgb(var(--glow) / 0.0385) 32%,
+      rgb(var(--glow) / 0.0248) 47%,
+      rgb(var(--glow) / 0.0143) 60%,
+      rgb(var(--glow) / 0.0072) 72%,
+      rgb(var(--glow) / 0.0028) 84%,
       transparent 94%
-    ),
-    radial-gradient(
-      ellipse 120% 52rem at 50% -16rem,
-      rgb(236 236 234 / 0.05),
-      transparent 70%
     ),
     linear-gradient(to bottom, var(--chrome), transparent);
 }
