@@ -76,7 +76,7 @@ The glow may appear in exactly six places:
 3. The playground robot's eye and its halo (solid `glow` pupil, radial halo fading to transparent)
 4. The warm left segment of numbered section rules (`atmo-rule`, up to 0.5 at the tip fading to transparent)
 5. A low warm horizon at the footer (`atmo-footer`, around 0.13)
-6. A warm shadow on the primary button hover and focus state
+6. A warm shadow on the hover and focus state of primary buttons and the hero buttons
 
 Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, footer and rule echoes dim or disappear.
 
