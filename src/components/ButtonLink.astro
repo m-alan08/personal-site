@@ -4,24 +4,34 @@ interface Props {
   href: string;
   variant?: "primary" | "secondary";
   arrow?: boolean;
+  glow?: boolean;
+  newTab?: boolean;
   class?: string;
 }
 const {
   href,
   variant = "secondary",
   arrow = false,
+  glow = false,
+  newTab = false,
   class: className,
 } = Astro.props;
 ---
 
 <a
   href={href}
+  target={newTab ? "_blank" : undefined}
+  rel={newTab ? "noopener noreferrer" : undefined}
   class:list={[
     "group inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 text-small font-medium transition duration-150 motion-reduce:transition-none",
     variant === "primary" &&
       "bg-ink text-canvas hover:bg-accent hover:shadow-[0_8px_32px_-10px_rgb(var(--glow)/0.6)] focus-visible:shadow-[0_8px_32px_-10px_rgb(var(--glow)/0.6)] active:brightness-90",
     variant === "secondary" &&
+      !glow &&
       "border border-control text-ink hover:border-ink hover:bg-raised active:bg-line",
+    variant === "secondary" &&
+      glow &&
+      "border border-control text-ink hover:border-accent hover:bg-accent hover:text-canvas hover:shadow-[0_8px_32px_-10px_rgb(var(--glow)/0.6)] focus-visible:shadow-[0_8px_32px_-10px_rgb(var(--glow)/0.6)] active:brightness-90",
     className,
   ]}
 >

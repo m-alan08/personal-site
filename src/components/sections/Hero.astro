@@ -37,12 +37,14 @@ const ctas = ctaKinds
         {profile.availability}
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        {ctas.map((link, index) => {
+        {ctas.map((link) => {
           const icon = socialIcons[link.kind];
           return (
             <ButtonLink
               href={link.href}
-              variant={index === 0 ? "primary" : "secondary"}
+              variant="secondary"
+              glow
+              newTab={link.kind !== "email"}
             >
               <svg
                 aria-hidden="true"

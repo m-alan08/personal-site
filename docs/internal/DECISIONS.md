@@ -118,3 +118,8 @@
 
 - An amber glow centered behind the headline was tried and rejected by Alan: too yellow, and moving the glow off the top made it worse. The glow stays at the top.
 - `glow` changes from orange (255 110 60) to a deeper crimson (212 44 40), chosen by Alan from two red options. The brown umber fringe (168 52 34) and the faint neutral lift are gone because they muddied the color; the outer fringe now uses `glow` at lower strength, so every warm tint comes from the one token. The pool, section rule tip, footer horizon, robot eye and primary button shadow follow the token.
+
+## Hero buttons
+
+- All four hero buttons (GitHub, X, LinkedIn, Email) share one dark outlined style, chosen by Alan over an all white set. Each turns accent red with the warm `glow` shadow on hover and focus, the same treatment GitHub had as the primary button. `ButtonLink` gains a `glow` option for this, so other secondary buttons keep their neutral hover.
+- GitHub, X and LinkedIn open in a new tab (`target="_blank"`, `rel="noopener noreferrer"`). Email stays a plain `mailto:` link because it opens a mail app, not a page.
