@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ArrowLink from "../components/ArrowLink.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import Ticks from "../components/Ticks.astro";
 import { pages } from "../content/site";
 import { localLinks } from "../data/links";
 import { sectionLink } from "../data/sections";
@@ -11,19 +12,24 @@ import { sectionLink } from "../data/sections";
   description={pages.notFound.meta}
   noindex
 >
-  <h1 class="font-display text-4xl tracking-tight sm:text-5xl">
-    {pages.notFound.title}
-  </h1>
-  <p class="mt-5 max-w-reading text-muted">{pages.notFound.description}</p>
-  <ul class="mt-4 flex flex-wrap gap-x-6" role="list">
-    <li>
-      <ArrowLink href={localLinks.home} title={pages.notFound.home} />
-    </li>
-    <li>
-      <ArrowLink
-        href={sectionLink("projects")}
-        title={pages.notFound.projects}
-      />
-    </li>
-  </ul>
+  <section class="border-t border-line py-16 sm:py-24">
+    <div class="flex items-center gap-3 text-muted">
+      <Ticks />
+      <span class="text-label tabular-nums">404</span>
+    </div>
+    <h1 class="mt-5 text-display text-ink">{pages.notFound.title}</h1>
+    <p class="mt-5 max-w-reading text-muted">{pages.notFound.description}</p>
+    <ul class="mt-8 flex flex-wrap gap-3" role="list">
+      <li>
+        <ButtonLink href={localLinks.home} variant="primary">
+          {pages.notFound.home}
+        </ButtonLink>
+      </li>
+      <li>
+        <ButtonLink href={sectionLink("projects")} arrow>
+          {pages.notFound.projects}
+        </ButtonLink>
+      </li>
+    </ul>
+  </section>
 </BaseLayout>
