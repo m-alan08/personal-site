@@ -38,15 +38,15 @@ const { layers, split, caption } = figures.hierarchy;
               <div class="absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center gap-3">
                 <span
                   aria-hidden="true"
-                  class="h-0 flex-1 border-t border-dashed border-accent"
+                  class="h-0 flex-1 border-t border-dashed border-control"
                 ></span>
-                <span class="bg-canvas text-label text-accent">{split}</span>
+                <span class="bg-canvas text-label text-muted">{split}</span>
               </div>
             )}
           </div>
         )}
-        <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 rounded-xl border border-hairline bg-surface px-4 py-2 text-center">
-          <p class="font-medium text-ink">{layer.title}</p>
+        <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 rounded-lg border border-hairline bg-surface px-4 py-2.5 text-center">
+          <p class="text-small font-medium text-ink">{layer.title}</p>
           <p class="text-label text-muted">{layer.detail}</p>
         </div>
       </li>

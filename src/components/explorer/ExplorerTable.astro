@@ -15,53 +15,57 @@ interface Props {
 const { dataset } = Astro.props;
 ---
 
-<table class="w-full border-collapse text-left text-small tabular-nums">
-  <caption class="mb-3 text-left text-muted">
-    <span class="font-semibold text-ink">{`${dataset.label}.`}</span>{" "}
-    {explorerCopy.tableNote}
-  </caption>
-  <thead>
-    <tr class="border-b border-line align-bottom text-muted">
-      <th scope="col" class="py-2 pr-3 font-medium">
-        {explorerCopy.bitsHeading}
-      </th>
-      {methods.map((method) => (
+<div class="rounded-xl border border-hairline bg-surface p-5 sm:p-6">
+  <table class="w-full border-collapse text-left text-small tabular-nums">
+    <caption class="mb-4 text-left text-muted">
+      <span class="text-eyebrow uppercase text-muted">{dataset.label}</span>
+      <span class="mt-1 block text-small">{explorerCopy.tableNote}</span>
+    </caption>
+    <thead>
+      <tr class="border-b border-line align-bottom text-muted">
         <th scope="col" class="py-2 pr-3 font-medium">
-          <HyphenSafeText text={method.label} />
+          {explorerCopy.bitsHeading}
         </th>
-      ))}
-    </tr>
-  </thead>
-  <tbody>
-    {bitWidths.map((bits) => (
-      <tr class="border-b border-line">
-        <th scope="row" class="py-2 pr-3 font-mono font-medium text-muted">
-          {bits}
-        </th>
-        {methods.map((method) => {
-          const measurement = dataset.results[method.id][bits];
-          return (
-            <td
-              class="py-2 pr-3"
-              data-task={dataset.task}
-              data-method={method.id}
-              data-bits={bits}
-              data-value={measurement ? measurement[0] : ""}
-            >
-              {measurement ? (
-                <>
-                  <span class="block font-mono text-ink">
-                    {formatMean(measurement)}
-                  </span>
-                  <span class="block text-muted">{seedRange(measurement)}</span>
-                </>
-              ) : (
-                <span class="text-muted">{explorerLabels.notMeasured}</span>
-              )}
-            </td>
-          );
-        })}
+        {methods.map((method) => (
+          <th scope="col" class="py-2 pr-3 font-medium">
+            <HyphenSafeText text={method.label} />
+          </th>
+        ))}
       </tr>
-    ))}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {bitWidths.map((bits) => (
+        <tr class="border-b border-line">
+          <th scope="row" class="py-2 pr-3 font-mono font-medium text-muted">
+            {bits}
+          </th>
+          {methods.map((method) => {
+            const measurement = dataset.results[method.id][bits];
+            return (
+              <td
+                class="py-2 pr-3"
+                data-task={dataset.task}
+                data-method={method.id}
+                data-bits={bits}
+                data-value={measurement ? measurement[0] : ""}
+              >
+                {measurement ? (
+                  <>
+                    <span class="block font-mono text-ink">
+                      {formatMean(measurement)}
+                    </span>
+                    <span class="block text-muted">
+                      {seedRange(measurement)}
+                    </span>
+                  </>
+                ) : (
+                  <span class="text-muted">{explorerLabels.notMeasured}</span>
+                )}
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
