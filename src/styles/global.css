@@ -72,6 +72,19 @@
 body {
   margin: 0;
   background-color: var(--canvas);
+  background-image:
+    radial-gradient(
+      ellipse 58% 26rem at 50% -7rem,
+      rgb(239 90 82 / 0.09),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 85% 44rem at 50% -18rem,
+      rgb(236 236 234 / 0.1),
+      transparent
+    ),
+    linear-gradient(to bottom, var(--chrome), var(--canvas) 46rem);
+  background-repeat: no-repeat;
   font-size: var(--text-body);
   line-height: 1.65;
 }
