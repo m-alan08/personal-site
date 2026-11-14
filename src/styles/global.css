@@ -183,6 +183,13 @@ body {
     transparent 72%
   );
 }
+@media (min-width: 40rem) {
+  html.js header[data-header]:not([data-scrolled]) {
+    border-color: transparent;
+    background-color: transparent;
+    backdrop-filter: none !important;
+  }
+}
 @media (prefers-contrast: more) {
   .atmosphere {
     opacity: 0.45;

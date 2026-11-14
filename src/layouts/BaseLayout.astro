@@ -41,6 +41,7 @@ const twitterHandle = links.xHandle && `@${links.xHandle.replace(/^@/, "")}`;
     )}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
+      document.documentElement.classList.add("js");
       if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
         document.documentElement.classList.add("js-reveal");
       }
