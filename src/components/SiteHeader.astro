@@ -23,7 +23,8 @@ const { wide } = Astro.props;
           <li>
             <a
               href={isHome ? `#${section.id}` : sectionLink(section.id)}
-              class="inline-flex min-h-11 min-w-11 items-center px-2 text-sm sm:justify-center text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+              data-section-link={section.id}
+              class="inline-flex min-h-11 min-w-11 items-center px-2 text-sm sm:justify-center text-muted decoration-accent decoration-2 underline-offset-8 transition-colors duration-150 hover:text-accent motion-reduce:transition-none aria-[current]:text-accent aria-[current]:underline"
             >
               {section.label}
             </a>
@@ -33,3 +34,51 @@ const { wide } = Astro.props;
     </nav>
   </div>
 </header>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>(
+    "a[data-section-link]",
+  );
+  const pairs = Array.from(links)
+    .map((link) => ({
+      link,
+      section: document.getElementById(link.dataset.sectionLink ?? ""),
+    }))
+    .filter(
+      (pair): pair is { link: HTMLAnchorElement; section: HTMLElement } =>
+        pair.section !== null,
+    );
+  if (pairs.length > 0) {
+    let current: HTMLAnchorElement | null = null;
+    let scheduled = false;
+    const update = () => {
+      scheduled = false;
+      const threshold = window.innerHeight * 0.32;
+      const atBottom =
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 8;
+      let next: HTMLAnchorElement | null = null;
+      for (const { link, section } of pairs) {
+        if (section.getBoundingClientRect().top <= threshold) {
+          next = link;
+        }
+      }
+      if (atBottom) {
+        next = pairs[pairs.length - 1].link;
+      }
+      if (next === current) return;
+      current?.removeAttribute("aria-current");
+      next?.setAttribute("aria-current", "location");
+      current = next;
+    };
+    const onScroll = () => {
+      if (!scheduled) {
+        scheduled = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+</script>

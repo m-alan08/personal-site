@@ -67,3 +67,10 @@
 - Post-training quantization is computed in the browser from the FP32 weights and exported activation ranges, the same per-channel symmetric fake quantization as quantrl-fetch. QAT 4-bit ships integer weights and scales. Nothing claims integer hardware speed; latency is a JavaScript forward pass in the visitor's tab.
 - The proportional controller is labeled scripted and runs on the same dynamics model, so it is a baseline, not a learned result.
 - No dependency is added. ONNX Runtime Web would add megabytes for a 13 by 256 by 256 by 8 network. The section module loads on first intent (pointer, tap or focus) and the weights with it, so visitors who only scroll download 610 bytes of script for it. The precision control is a native select, which keeps the home page under 200KB before compression, excluding images.
+
+## Polish pass: ambient gradient and active navigation
+
+- The page background replaces the single flat linear fade with a layered treatment: a faint warm radial glow and a broader neutral light centered above the fold over the existing chrome to canvas linear fade. The light is visible but soft, and print styles still remove every background image.
+- A small bundled header script marks the matching nav link with `aria-current="location"` while scrolling. The active item takes the accent color, a use the accent rule already allows. Scroll work is coalesced through animation frames, the last section activates at the page foot, and the script does nothing on pages without the section anchors.
+- Clickable cards lift slightly and gain a soft shadow on hover so they read as pressable. The motion is gated behind `prefers-reduced-motion` and removed entirely under reduced motion.
+- Text links keep the accent underline but start quieter and reach full strength on hover. Icon links nudge upward on hover.

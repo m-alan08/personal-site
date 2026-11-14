@@ -55,10 +55,10 @@ const entries = socialLinks.filter(
           aria-label={labeled ? undefined : link.label}
           title={labeled ? undefined : link.label}
           class:list={[
-            "inline-flex items-center rounded-md transition-colors duration-150 motion-reduce:transition-none",
+            "inline-flex items-center rounded-md transition duration-200 motion-reduce:transition-none",
             labeled
               ? "min-h-11 gap-2 border border-control px-4 text-small text-ink hover:border-ink hover:bg-raised active:bg-line"
-              : "size-11 justify-center text-muted hover:text-accent",
+              : "size-11 justify-center text-muted hover:text-accent motion-safe:hover:-translate-y-0.5",
           ]}
         >
           <svg

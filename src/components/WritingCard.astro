@@ -17,7 +17,7 @@ const platform = platforms[new URL(href).hostname.replace(/^www\./, "")];
 
 <a
   href={href}
-  class="group flex h-full flex-col rounded-xl border border-hairline bg-surface p-5 transition-colors duration-150 hover:border-control motion-reduce:transition-none"
+  class="group flex h-full flex-col rounded-xl border border-hairline bg-surface p-5 transition duration-200 ease-out hover:border-control motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-[0_18px_50px_-16px_rgb(0_0_0/0.7)] motion-reduce:transition-none"
 >
   <span class="flex items-center justify-between gap-4">
     {platform && <span class="text-label text-muted">{platform}</span>}
