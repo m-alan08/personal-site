@@ -113,3 +113,8 @@
 
 - The bit ladder ticks (`Ticks.astro`) are gone everywhere at Alan's request: hero eyebrow, section headers, footer and 404. Section headers keep the two digit index alone.
 - The hero buttons are now GitHub, X, LinkedIn and Email, in that order. LinkedIn replaced Resume at Alan's request; the resume stays in the Contact section and at `/resume/`. X and LinkedIn use the same secondary button as Email.
+
+## Crimson ember
+
+- An amber glow centered behind the headline was tried and rejected by Alan: too yellow, and moving the glow off the top made it worse. The glow stays at the top.
+- `glow` changes from orange (255 110 60) to a deeper crimson (212 44 40), chosen by Alan from two red options. The brown umber fringe (168 52 34) and the faint neutral lift are gone because they muddied the color; the outer fringe now uses `glow` at lower strength, so every warm tint comes from the one token. The pool, section rule tip, footer horizon, robot eye and primary button shadow follow the token.
