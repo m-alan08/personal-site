@@ -62,6 +62,8 @@ The accent color is allowed only on:
 
 Everything else uses `ink`, `muted`, `line` or `hairline`. This rule is enforced across the site; check every new component against it.
 
+In practice the one accent element per section is: the hero availability line (hover states only), the playground target, the first project card's headline number, the explorer's selected success rate (big number plus its chart marker), the experience "now" marker and each case study's key result. Chart series never use accent: the emphasized series is `ink`, the others are `chart-blue` and `chart-gold`. Arrows and icons inherit their parent's color rather than carrying accent on their own.
+
 ## Section system
 
 Every home page section uses `Section.astro`: a hairline top rule, a header row (two-digit index plus bit ladder ticks for the six documented sections, or an uppercase eyebrow for feature sections, above an `text-h2` title), then full-width content. An optional `aside` slot sits on the right of the header row. Sections never stack headings in a side rail or use one-off header styles.

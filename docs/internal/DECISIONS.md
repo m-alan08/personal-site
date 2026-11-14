@@ -84,3 +84,8 @@
 - The header gains a hand drawn AM monogram wordmark, a native details disclosure menu on small screens with numbered links and 44px rows, and an IntersectionObserver scroll spy that sets `aria-current` on the active item. The menu closes on link pick, Escape (focus returns to the summary) and outside pointerdown.
 - `data-reveal` elements fade and rise once on first view through a tiny bundled observer. The hidden state only exists after a synchronous head script marks the document `js-reveal`, so content is fully visible without JavaScript, under reduced motion and if the script never runs.
 - Shared primitives for later tasks: `Ticks`, `Eyebrow`, `ButtonLink`, `Chip`, `Stat` and `Card`. The accent rule now applies to every new component.
+
+## Redesign q1: accent allocation
+
+- Chart series encode emphasis with `ink` rather than accent, matching the explorer's selected series convention; `chart-blue` and `chart-gold` stay for the other series. This keeps accent rare enough to mean something while keeping the key series readable.
+- Each section's single accent element is fixed and documented in design-notes.md. Arrows and icons always inherit the parent color so accent appears only through real hover, focus and active states.
