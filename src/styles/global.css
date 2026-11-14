@@ -292,6 +292,10 @@ input {
   footer {
     display: none;
   }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   body {
     background-image: none;
     font-size: 11pt;
