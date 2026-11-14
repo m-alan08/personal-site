@@ -96,3 +96,8 @@
 - A separate `glow` token (255 110 60) carries the warm light so `accent` keeps its interactive meaning. The accent rule is unchanged; the glow is the one permitted decorative warm color and design notes enumerate its five locations.
 - The banding artifact of low opacity dark gradients is used on purpose: the outer falloff ring is a repeating radial with hard stops, a quantization contour that echoes the bit ladder, masked to an annulus so the core stays smooth. Three strengths were compared at 390px, 768px and 1440px; the medium scale shipped because subtle read as the old layer and strong made the rings dominate the hero.
 - Motion is compositor only: one 18s transform plus opacity breathe on the core, gated behind `prefers-reduced-motion`. The pointer response is a lazy listener that arms on first pointermove, sets two custom properties through rAF, and only runs with a fine pointer and no reduced motion preference. Nothing moves without JavaScript.
+
+## Redesign g2: robot eye glow
+
+- The eye uses the `glow` token, not `accent`: it is decorative warm light, part of the same ember source as the atmosphere, and keeps accent reserved for interactive state.
+- The halo is an SVG radialGradient rather than blur or box-shadow, so it costs one extra circle of paint and no filter pass.
