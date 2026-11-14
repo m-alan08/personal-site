@@ -15,12 +15,15 @@ const { sections } = Astro.props;
     {caseStudyLabels.onThisPage}
   </p>
   <ol role="list" class="mt-3 border-l border-line">
-    {sections.map((section) => (
+    {sections.map((section, index) => (
       <li>
         <a
           href={`#${section.id}`}
-          class="-ml-px flex min-h-11 items-center border-l border-transparent pl-4 text-small text-muted transition-colors duration-150 hover:text-ink aria-[current=true]:border-accent aria-[current=true]:text-accent motion-reduce:transition-none"
+          class="-ml-px flex min-h-11 items-baseline gap-3 border-l border-transparent pl-4 text-small text-muted transition-colors duration-150 hover:text-ink aria-[current=true]:border-accent aria-[current=true]:text-accent motion-reduce:transition-none"
         >
+          <span class="text-label tabular-nums opacity-60">
+            {String(index + 1).padStart(2, "0")}
+          </span>
           {section.title}
         </a>
       </li>

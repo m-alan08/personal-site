@@ -14,6 +14,7 @@ export interface ProjectImage {
   src: ImageMetadata;
   alt: string;
   fit: "contain" | "cover";
+  tone?: "paper";
 }
 export interface ProjectCardImage {
   src: ImageMetadata;
@@ -185,6 +186,7 @@ export const projects: Project[] = [
         src: quantrlFetchResults,
         alt: "FetchReach results plot: success rate and final distance against bit width for PTQ, QAT fine-tuning, and QAT from scratch, averaged over 3 training seeds",
         fit: "contain",
+        tone: "paper",
       },
     ],
     title: "Quantization-aware RL for robotic arm control",

@@ -29,7 +29,7 @@ const steps = pipeline.nodes.map((node) => ({
       <li class="relative">
         <div
           class:list={[
-            "flex h-full flex-col rounded-lg border p-4",
+            "flex h-full flex-col rounded-lg border p-5",
             step.planned
               ? "border-dashed border-control"
               : "border-line bg-surface",
@@ -46,7 +46,7 @@ const steps = pipeline.nodes.map((node) => ({
               </span>
             )}
           </p>
-          <p class="mt-3 font-semibold leading-snug text-ink">
+          <p class="mt-3 text-lg font-semibold leading-snug text-ink">
             <HyphenSafeText text={step.title} />
           </p>
           {step.detail && (

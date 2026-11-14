@@ -24,7 +24,12 @@ const portrait = image.src.height > image.src.width;
 ---
 
 <figure class:list={["m-0", className]}>
-  <div class="rounded-lg border border-line bg-surface p-2">
+  <div
+    class:list={[
+      "rounded-lg border border-line",
+      image.tone === "paper" ? "bg-paper p-4 sm:p-6" : "bg-surface p-2",
+    ]}
+  >
     <Image
       src={image.src}
       alt={image.alt}
