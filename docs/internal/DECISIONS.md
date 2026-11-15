@@ -130,3 +130,8 @@
 - Instrument Serif is narrower than Geist, so body text moves from 16/17px to 18/19px, `text-small` and `text-sm` from 14px to 16px, `text-label` to 14px and `text-eyebrow` to 13px. Headings grow because Soria is condensed. Both fonts have one weight, so headings and weight classes render at 400.
 - This makes three font families (Soria, Instrument Serif, Geist Mono), above the two family limit in `AGENTS.md`, at Alan's request.
 - The stroked AM monogram in the header is gone. Alan chose the name alone, set in Soria, over four monogram options. The favicon is the AM monogram set in Soria. Share images still use the Geist TTF files.
+
+## Explorer mounting
+
+- The Explorer used to mount when it scrolled within 200px of the viewport. Swapping the static tables for the interactive chart shrinks the section by about 530px at 390px, so a smooth anchor jump from the menu to Writing, Experience or Contact passed through it, triggered the swap mid-scroll and overshot the heading by about 500px. A first Tab pass also skipped its controls, which were still `hidden`.
+- The Explorer now mounts in an idle callback after load (a 2 second timeout, `setTimeout` where `requestIdleCallback` is missing). The chart module is still a lazy dynamic import, the static tables stay as the no JavaScript fallback, and the swap finishes before a visitor can navigate.
