@@ -18,7 +18,7 @@ const ctas = ctaKinds
   class="py-section-spacious"
   data-reveal
 >
-  <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-16">
+  <div class="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
     <div class="min-w-0">
       <p class="text-eyebrow uppercase text-muted">{profile.tagline}</p>
       <h1 id="intro-heading" class="mt-6 font-display text-display text-ink">
@@ -63,23 +63,21 @@ const ctas = ctaKinds
         })}
       </div>
     </div>
-    <div class="relative isolate w-56 sm:w-64 lg:w-full">
+    <div class="relative isolate w-44 lg:w-full">
       <div
         aria-hidden="true"
-        class="atmo-portrait pointer-events-none absolute -inset-12 -z-10 lg:-inset-x-10 lg:-inset-y-20 xl:-inset-x-14"
+        class="atmo-portrait pointer-events-none absolute -inset-10 -z-10 lg:-inset-y-14 xl:-inset-x-14"
       ></div>
       <Image
         src={portrait}
         alt={profile.portraitAlt}
-        width={368}
-        height={460}
-        fit="cover"
-        position="center"
+        width={240}
+        height={240}
         densities={[1, 2]}
         format="webp"
         loading="eager"
         fetchpriority="high"
-        class="aspect-[4/5] w-full rounded-2xl border border-hairline object-cover object-[48%_50%] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
+        class="aspect-square w-full rounded-2xl border border-hairline object-cover"
       />
     </div>
   </div>
