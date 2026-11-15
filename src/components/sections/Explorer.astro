@@ -146,16 +146,14 @@ const legend = "text-label uppercase text-muted";
 <script>
   const root = document.querySelector<HTMLElement>("[data-explorer]");
   if (root) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        void import("../explorer/explorer").then(({ mountExplorer }) =>
-          mountExplorer(root),
-        );
-      },
-      { rootMargin: "200px 0px" },
-    );
-    observer.observe(root);
+    const mount = () =>
+      void import("../explorer/explorer").then(({ mountExplorer }) =>
+        mountExplorer(root),
+      );
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(mount, { timeout: 2000 });
+    } else {
+      setTimeout(mount, 1);
+    }
   }
 </script>

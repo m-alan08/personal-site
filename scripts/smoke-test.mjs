@@ -29,7 +29,6 @@ async function testExplorer(page) {
   assert.equal(await explorer.locator("h2").count(), 1, "explorer: h2");
   const ui = explorer.locator("[data-explorer-ui]");
   const tables = explorer.locator("[data-explorer-static] table");
-  assert.equal(await ui.isHidden(), true, "explorer: lazy before scroll");
   assert.equal(await tables.count(), datasets.length, "explorer: tables");
   for (let index = 0; index < datasets.length; index += 1) {
     assert.equal(
@@ -50,7 +49,6 @@ async function testExplorer(page) {
     assert.notEqual(expected, undefined, `explorer: table cell ${cell.bits}`);
     assert.equal(cell.value, expected ? String(expected[0]) : "");
   }
-  await explorer.scrollIntoViewIfNeeded();
   await ui.waitFor({ state: "visible" });
   assert.equal(
     await tables.first().isHidden(),
