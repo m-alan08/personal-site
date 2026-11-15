@@ -2,7 +2,7 @@
 
 The personal website and project portfolio of Alan Mozhoor, a mathematics and computer science student at Georgia Tech working on reinforcement learning for robot control.
 
-- **Live site:** [m-alan08.github.io/personal-site](https://m-alan08.github.io/personal-site/)
+- **Live site:** [example.com](https://example.com/)
 - **What is on it:** an about section, project case studies, what I'm currently exploring, writing, experience, and links to GitHub, X, LinkedIn, the resume and email.
 - **Stack:** [Astro](https://astro.build/) static output, Tailwind CSS, strict TypeScript, self-hosted Soria, Instrument Serif and Geist Mono fonts, deployed to GitHub Pages by GitHub Actions. No backend, analytics or third-party scripts.
 - **Run it locally:** with Node 22.23.3, run `npm install` then `npm run dev`, and open the URL Astro prints.
@@ -75,7 +75,7 @@ The home page has one interactive component, the bit-width explorer in `src/comp
 
 ## Static hosting
 
-The site is hosted on GitHub Pages at `https://m-alan08.github.io/personal-site/`. The Deploy to GitHub Pages workflow builds `dist/` with the default base path and publishes it on every push to main. It can also be started by hand through workflow dispatch, but both jobs skip unless the selected branch is main. In the repository settings, Pages must use GitHub Actions as its source.
+The site is hosted on GitHub Pages at `https://example.com/`. The Deploy to GitHub Pages workflow builds `dist/` with the default base path and publishes it on every push to main. It can also be started by hand through workflow dispatch, but both jobs skip unless the selected branch is main. In the repository settings, Pages must use GitHub Actions as its source.
 
 The origin and base path come from `src/data/hosting.ts`, which reads two build-time inputs: `SITE_URL` (default `https://m-alan08.github.io`) and `SITE_BASE` (default `/personal-site`). Canonical URLs, Open Graph and Twitter tags, JSON-LD, `sitemap.xml` and `robots.txt` are all generated from them, so nothing needs hand editing when the host changes. To build for a different host with a root path:
 

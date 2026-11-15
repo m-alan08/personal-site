@@ -16,7 +16,7 @@ Audience, in priority order:
 
 ## 2. Stack and constraints
 
-- Astro with static output, deployed to GitHub Pages at `https://m-alan08.github.io/personal-site/`
+- Astro with static output, deployed to GitHub Pages at `https://example.com/`
 - Tailwind CSS for styling, strict TypeScript
 - Package manager: npm, with a committed lockfile
 - Node version pinned in `.nvmrc` and the `engines` field of `package.json`
