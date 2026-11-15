@@ -123,3 +123,10 @@
 
 - All four hero buttons (GitHub, X, LinkedIn, Email) share one dark outlined style, chosen by Alan over an all white set. Each turns accent red with the warm `glow` shadow on hover and focus, the same treatment GitHub had as the primary button. `ButtonLink` gains a `glow` option for this, so other secondary buttons keep their neutral hover.
 - GitHub, X and LinkedIn open in a new tab (`target="_blank"`, `rel="noopener noreferrer"`). Email stays a plain `mailto:` link because it opens a mail app, not a page.
+
+## Soria and Instrument Serif
+
+- Alan asked for Soria across the site. Soria everywhere was hard to read at small sizes and lacks the hyphen, percent sign, middle dot and brackets, so Alan chose Soria for headings and Instrument Serif for all other text after comparing both against Soria headings with Geist text.
+- Instrument Serif is narrower than Geist, so body text moves from 16/17px to 18/19px, `text-small` and `text-sm` from 14px to 16px, `text-label` to 14px and `text-eyebrow` to 13px. Headings grow because Soria is condensed. Both fonts have one weight, so headings and weight classes render at 400.
+- This makes three font families (Soria, Instrument Serif, Geist Mono), above the two family limit in `AGENTS.md`, at Alan's request.
+- The stroked AM monogram in the header is gone. Alan chose the name alone, set in Soria, over four monogram options. The favicon is the AM monogram set in Soria. Share images still use the Geist TTF files.

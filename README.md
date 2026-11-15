@@ -4,12 +4,12 @@ The personal website and project portfolio of Alan Mozhoor, a mathematics and co
 
 - **Live site:** [m-alan08.github.io/personal-site](https://m-alan08.github.io/personal-site/)
 - **What is on it:** an about section, project case studies, what I'm currently exploring, writing, experience, and links to GitHub, X, LinkedIn, the resume and email.
-- **Stack:** [Astro](https://astro.build/) static output, Tailwind CSS, strict TypeScript, self-hosted Geist fonts, deployed to GitHub Pages by GitHub Actions. No backend, analytics or third-party scripts.
+- **Stack:** [Astro](https://astro.build/) static output, Tailwind CSS, strict TypeScript, self-hosted Soria, Instrument Serif and Geist Mono fonts, deployed to GitHub Pages by GitHub Actions. No backend, analytics or third-party scripts.
 - **Run it locally:** with Node 22.23.3, run `npm install` then `npm run dev`, and open the URL Astro prints.
 
 ## About this repository
 
-A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and two self-hosted variable fonts (Geist Sans and Geist Mono, Latin subset). Its only client JavaScript is the small, lazy script for the bit-width explorer; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
+A static, dark-only Astro personal homepage for my work on reinforcement learning for robotics, efficient policy deployment, and related projects. It uses Tailwind CSS, strict TypeScript, and three self-hosted fonts (Soria for headings, Instrument Serif for text and Geist Mono for technical text). Its only client JavaScript is the small, lazy script for the bit-width explorer; small, lazy scripts are allowed when a feature needs one. There are no third-party scripts, embeds, analytics, or tracking.
 
 ## Setup
 
@@ -168,4 +168,4 @@ The playground section runs the FetchReach SAC + HER actor from [quantrl-fetch](
 
 ## License
 
-The code is released under the [MIT License](LICENSE). The Geist fonts are under the SIL Open Font License, included in `src/assets/fonts/`.
+The code is released under the [MIT License](LICENSE). Soria, Instrument Serif and the Geist fonts are under the SIL Open Font License; the Soria and Geist licenses are in `src/assets/fonts/`, and Instrument Serif ships its license in `@fontsource/instrument-serif`.
