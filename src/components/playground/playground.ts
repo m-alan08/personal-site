@@ -443,7 +443,7 @@ export function mountPlayground(
   function syncForm(): void {
     const data = new FormData(form);
     controllerKind = data.get("playground-controller") as ControllerKind;
-    variantId = String(data.get("playground-variant"));
+    variantId = precision.value;
     precision.disabled = controllerKind === "proportional";
     depthOutput.value = `${depthInput.value} cm`;
   }
