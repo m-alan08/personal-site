@@ -334,3 +334,7 @@ The stepped contour ring from g1 read as visible arcs and stripes, so the whole 
 ### Overnight: audit, guard tests and domain prep
 
 Audited `main` after PR #90 at 390, 768, 1440 and 1920px with reduced motion on and off: no overflow, no console errors, every image loads, Lighthouse 99 to 100 on all indexed pages. Findings are in `docs/internal/OVERNIGHT-AUDIT.md`. Added `scripts/test-guards.mjs` to `npm test` (hero right third, nav anchors, external link shape, no dashes, no comments). Wrote `docs/internal/DOMAIN-CUTOVER.md` and opened the placeholder domain pull request, labeled DO NOT MERGE. Summary in `docs/internal/OVERNIGHT-REPORT.md`.
+
+### About trim and seventh glow location
+
+Removed About's "Currently" box and its two profile fields, since the "What I'm working on" strip covers the same facts. Design notes now list the portrait halo as the seventh allowed glow location.
