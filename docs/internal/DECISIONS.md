@@ -135,3 +135,10 @@
 
 - The Explorer used to mount when it scrolled within 200px of the viewport. Swapping the static tables for the interactive chart shrinks the section by about 530px at 390px, so a smooth anchor jump from the menu to Writing, Experience or Contact passed through it, triggered the swap mid-scroll and overshot the heading by about 500px. A first Tab pass also skipped its controls, which were still `hidden`.
 - The Explorer now mounts in an idle callback after load (a 2 second timeout, `setTimeout` where `requestIdleCallback` is missing). The chart module is still a lazy dynamic import, the static tables stay as the no JavaScript fallback, and the swap finishes before a visitor can navigate.
+
+## Overnight run
+
+- No visual or copy pull request was opened because the audit found no defect to fix; the remaining first impression issues (Experience timeline, repeated "currently" content, share image font) need Alan's decision because they delete or restyle content.
+- The hero's empty right third is now enforced by `scripts/test-guards.mjs`: at 1440px only the portrait and its glow may sit there.
+- The portrait glow from PR #90 is a seventh glow location; the six item list in design notes was left as written and the mismatch reported.
+- The custom domain move keeps apex as the main address with `www` as a `CNAME`, and is staged as a placeholder pull request so no URL changes until a domain is owned.
