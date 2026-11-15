@@ -4,7 +4,8 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { site } from "../content/site";
 import "../styles/global.css";
-import geistSans from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
+import instrumentSerif from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url";
+import soria from "../assets/fonts/Soria.woff2?url";
 import { structuredData } from "../data/structuredData";
 import { sharePages } from "../data/routes";
 import { links, localPath, localLinks, shareImageLink } from "../data/links";
@@ -48,11 +49,12 @@ const twitterHandle = links.xHandle && `@${links.xHandle.replace(/^@/, "")}`;
     </script>
     <link
       rel="preload"
-      href={geistSans}
+      href={instrumentSerif}
       as="font"
       type="font/woff2"
       crossorigin
     />
+    <link rel="preload" href={soria} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#161618" />
