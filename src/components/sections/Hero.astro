@@ -28,7 +28,7 @@ const ctas = ctaKinds
         <HyphenSafeText text={profile.headline} />
       </p>
       {profile.intro.map((paragraph) => (
-        <p class="mt-5 max-w-reading text-muted">
+        <p class="mt-5 max-w-[36rem] text-muted">
           <HyphenSafeText text={paragraph} />
         </p>
       ))}
@@ -63,16 +63,22 @@ const ctas = ctaKinds
         })}
       </div>
     </div>
-    <Image
-      src={portrait}
-      alt={profile.portraitAlt}
-      width={240}
-      height={240}
-      densities={[1, 2]}
-      format="webp"
-      loading="eager"
-      fetchpriority="high"
-      class="aspect-square w-44 rounded-2xl border border-hairline object-cover lg:w-full"
-    />
+    <div class="relative isolate w-44 lg:w-full">
+      <div
+        aria-hidden="true"
+        class="atmo-portrait pointer-events-none absolute -inset-10 -z-10 lg:-inset-y-14 xl:-inset-x-14"
+      ></div>
+      <Image
+        src={portrait}
+        alt={profile.portraitAlt}
+        width={240}
+        height={240}
+        densities={[1, 2]}
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        class="aspect-square w-full rounded-2xl border border-hairline object-cover"
+      />
+    </div>
   </div>
 </section>
