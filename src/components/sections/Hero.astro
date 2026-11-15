@@ -18,7 +18,7 @@ const ctas = ctaKinds
   class="py-section-spacious"
   data-reveal
 >
-  <div class="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-16">
     <div class="min-w-0">
       <p class="text-eyebrow uppercase text-muted">{profile.tagline}</p>
       <h1 id="intro-heading" class="mt-6 font-display text-display text-ink">
@@ -28,7 +28,7 @@ const ctas = ctaKinds
         <HyphenSafeText text={profile.headline} />
       </p>
       {profile.intro.map((paragraph) => (
-        <p class="mt-5 max-w-reading text-muted">
+        <p class="mt-5 max-w-[36rem] text-muted">
           <HyphenSafeText text={paragraph} />
         </p>
       ))}
@@ -63,16 +63,24 @@ const ctas = ctaKinds
         })}
       </div>
     </div>
-    <Image
-      src={portrait}
-      alt={profile.portraitAlt}
-      width={240}
-      height={240}
-      densities={[1, 2]}
-      format="webp"
-      loading="eager"
-      fetchpriority="high"
-      class="aspect-square w-44 rounded-2xl border border-hairline object-cover lg:w-full"
-    />
+    <div class="relative isolate w-56 sm:w-64 lg:w-full">
+      <div
+        aria-hidden="true"
+        class="atmo-portrait pointer-events-none absolute -inset-12 -z-10 lg:-inset-x-10 lg:-inset-y-20 xl:-inset-x-14"
+      ></div>
+      <Image
+        src={portrait}
+        alt={profile.portraitAlt}
+        width={368}
+        height={460}
+        fit="cover"
+        position="center"
+        densities={[1, 2]}
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        class="aspect-[4/5] w-full rounded-2xl border border-hairline object-cover object-[48%_50%] lg:aspect-auto lg:h-full"
+      />
+    </div>
   </div>
 </section>

@@ -188,6 +188,19 @@ body {
     transparent
   );
 }
+.atmo-portrait {
+  background-image: radial-gradient(
+    closest-side,
+    rgb(var(--glow) / 0.42) 0%,
+    rgb(var(--glow) / 0.36) 40%,
+    rgb(var(--glow) / 0.27) 54%,
+    rgb(var(--glow) / 0.18) 65%,
+    rgb(var(--glow) / 0.11) 75%,
+    rgb(var(--glow) / 0.055) 84%,
+    rgb(var(--glow) / 0.02) 92%,
+    transparent 100%
+  );
+}
 .atmo-footer {
   background-image: radial-gradient(
     ellipse 66% 9rem at 50% 116%,
@@ -207,6 +220,7 @@ body {
     opacity: 0.45;
   }
   .atmo-pool,
+  .atmo-portrait,
   .atmo-footer {
     background-image: none;
   }
@@ -220,6 +234,7 @@ body {
     display: none;
   }
   .atmo-pool,
+  .atmo-portrait,
   .atmo-footer {
     background-image: none;
   }
