@@ -25,20 +25,9 @@ const linkClass =
   >
     <a
       href={localLinks.home}
-      class="group inline-flex min-h-11 items-center gap-2.5 text-ink transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+      class="group inline-flex min-h-11 items-center text-ink transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
     >
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 32 32"
-        class="size-6 shrink-0"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="3.5"
-        stroke-linejoin="round"
-      >
-        <path d="M3 26 9 6l6 20M5.5 19h7M19 26V6l5 11 5-11v20" />
-      </svg>
-      <span class="text-sm font-semibold tracking-tight">{site.name}</span>
+      <span class="font-display text-2xl leading-none">{site.name}</span>
     </a>
     <nav aria-label={labels.mainNavigation} class="flex items-center">
       <ul class="hidden sm:flex sm:items-center" role="list">

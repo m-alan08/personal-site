@@ -2,16 +2,24 @@
 @config "../../tailwind.config.mjs";
 
 @font-face {
-  font-family: "Geist Variable";
+  font-family: "Instrument Serif";
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url("@fontsource-variable/geist/files/geist-latin-wght-normal.woff2")
-    format("woff2-variations");
+  font-weight: 400;
+  src: url("@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2")
+    format("woff2");
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
     U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
     U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Soria";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("../assets/fonts/Soria.woff2") format("woff2");
 }
 
 @font-face {
@@ -28,11 +36,20 @@
 }
 
 @font-face {
-  font-family: "Geist Fallback";
-  src: local("Arial"), local("Helvetica"), local("Liberation Sans");
-  size-adjust: 104.97%;
-  ascent-override: 95.74%;
-  descent-override: 28.1%;
+  font-family: "Instrument Serif Fallback";
+  src: local("Times New Roman"), local("Liberation Serif");
+  size-adjust: 83.43%;
+  ascent-override: 118.66%;
+  descent-override: 37.16%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Soria Fallback";
+  src: local("Times New Roman"), local("Liberation Serif");
+  size-adjust: 87.88%;
+  ascent-override: 85.34%;
+  descent-override: 28.45%;
   line-gap-override: 0%;
 }
 
@@ -46,7 +63,7 @@
 }
 
 :root {
-  font-synthesis-style: none;
+  font-synthesis: none;
   color-scheme: dark;
   scrollbar-color: var(--control) var(--canvas);
   --canvas: #0c0c0d;
@@ -64,7 +81,7 @@
   --hairline: rgb(236 236 234 / 0.1);
   --paper: #f2efe9;
   --paper-ink: #1d1c1a;
-  --text-body: 1rem;
+  --text-body: 1.125rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -209,16 +226,16 @@ body {
 }
 @media (min-width: 64rem) {
   :root {
-    --text-body: 1.0625rem;
+    --text-body: 1.1875rem;
   }
 }
 @layer base {
-  h1 {
-    font-weight: 700;
-  }
+  h1,
   h2,
   h3 {
-    font-weight: 600;
+    @apply font-display;
+    font-weight: 400;
+    text-wrap: balance;
   }
 }
 :focus-visible {

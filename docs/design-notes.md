@@ -14,26 +14,27 @@ Dark only. There is no light mode. Print styles switch to black on white.
 
 ## Fonts
 
-- Geist Sans (`font-sans`, also `font-display`) for all text. Self-hosted from `@fontsource-variable/geist`, Latin subset, preloaded, `font-display: swap`.
-- Geist Mono (`font-mono`) only for genuinely technical text: data tables, numeric readouts and source URLs. Labels, tags, captions, chart axes and metrics use Geist Sans with `tabular-nums` where digits need to line up. Self-hosted from `@fontsource-variable/geist-mono`, Latin subset, `font-display: swap`, not preloaded. The browser only downloads it on pages that use `font-mono`.
-- Size-adjusted fallbacks (`Geist Fallback`, `Geist Mono Fallback`) keep text from shifting while the fonts load.
-- No italic face ships. `font-synthesis-style: none` keeps text upright, so do not rely on `italic` for emphasis.
-- No more than two font families. No third-party font hosts.
+- Soria (`font-display`) for every `h1`, `h2` and `h3` and the header wordmark. Self-hosted from `src/assets/fonts/Soria.woff2` (SIL Open Font License), preloaded, `font-display: swap`. It has one weight and no hyphen, percent sign, middle dot or brackets, so those characters fall back to Instrument Serif.
+- Instrument Serif (`font-sans`) for all other text. Self-hosted from `@fontsource/instrument-serif`, Latin subset, preloaded, `font-display: swap`. It has one weight, so `font-synthesis: none` keeps text from being faux bolded and weight classes render at 400.
+- Geist Mono (`font-mono`) only for genuinely technical text: data tables, numeric readouts and source URLs. Labels, tags, captions, chart axes and metrics use Instrument Serif with `tabular-nums` where digits need to line up. Self-hosted from `@fontsource-variable/geist-mono`, Latin subset, `font-display: swap`, not preloaded. The browser only downloads it on pages that use `font-mono`.
+- Size-adjusted fallbacks (`Soria Fallback`, `Instrument Serif Fallback`, `Geist Mono Fallback`) keep text from shifting while the fonts load.
+- No italic face ships. `font-synthesis: none` keeps text upright, so do not rely on `italic` for emphasis.
+- Three font families, chosen by Alan. No third-party font hosts.
 
 ## Type scale
 
 | Token          | Use                          | Size                   | Line height | Tracking | Weight  |
 | -------------- | ---------------------------- | ---------------------- | ----------- | -------- | ------- |
-| `text-display` | Name and hero statement      | 48px to 72px, fluid    | 1           | -0.035em | 700     |
-| `text-h1`      | Page titles                  | 36px to 44px, fluid    | 1.1         | -0.03em  | 700     |
-| `text-h2`      | Section headings             | 24px to 30px, fluid    | 1.2         | -0.02em  | 600     |
-| `text-h3`      | Entry headings               | 20px                   | 1.35        | -0.015em | 600     |
-| `text-body`    | Body copy                    | 16px, 17px from 1024px | 1.65        | normal   | 400     |
-| `text-small`   | Secondary copy and metadata  | 14px                   | 1.55        | normal   | inherit |
-| `text-label`   | Tags, chips and chart labels | 12px                   | 16px        | 0.01em   | 500     |
-| `text-eyebrow` | Uppercase labels and kickers | 12px                   | 16px        | 0.08em   | 500     |
+| `text-display` | Name and hero statement      | 56px to 92px, fluid    | 0.95        | 0        | 400     |
+| `text-h1`      | Page titles                  | 44px to 56px, fluid    | 1.05        | 0        | 400     |
+| `text-h2`      | Section headings             | 32px to 42px, fluid    | 1.1         | 0        | 400     |
+| `text-h3`      | Entry headings               | 24px                   | 1.25        | 0        | 400     |
+| `text-body`    | Body copy                    | 18px, 19px from 1024px | 1.65        | normal   | 400     |
+| `text-small`   | Secondary copy and metadata  | 16px                   | 1.5         | normal   | inherit |
+| `text-label`   | Tags, chips and chart labels | 14px                   | 18px        | 0.01em   | 400     |
+| `text-eyebrow` | Uppercase labels and kickers | 13px                   | 18px        | 0.08em   | 400     |
 
-The page body uses the `text-body` size by default. Body text never drops below 16px.
+The page body uses the `text-body` size by default. Body text never drops below 18px. Tailwind `text-sm` is raised to 16px to match `text-small`.
 
 ## Color
 

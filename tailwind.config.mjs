@@ -1,9 +1,18 @@
 const sans = [
-  '"Geist Variable"',
-  '"Geist Fallback"',
-  "ui-sans-serif",
-  "system-ui",
-  "sans-serif",
+  '"Instrument Serif"',
+  '"Instrument Serif Fallback"',
+  "ui-serif",
+  "Georgia",
+  "serif",
+];
+
+const display = [
+  '"Soria"',
+  '"Instrument Serif"',
+  '"Soria Fallback"',
+  "ui-serif",
+  "Georgia",
+  "serif",
 ];
 
 export default {
@@ -12,7 +21,7 @@ export default {
       maxWidth: { reading: "52ch" },
       fontFamily: {
         sans,
-        display: sans,
+        display,
         mono: [
           '"Geist Mono Variable"',
           '"Geist Mono Fallback"',
@@ -22,30 +31,39 @@ export default {
       },
       fontSize: {
         display: [
-          "clamp(3rem, 1.6rem + 4.4vw, 4.5rem)",
-          { lineHeight: "1", letterSpacing: "-0.035em", fontWeight: "700" },
+          "clamp(3.5rem, 2rem + 5vw, 5.75rem)",
+          { lineHeight: "0.95", letterSpacing: "0", fontWeight: "400" },
         ],
         h1: [
-          "clamp(2.25rem, 1.8rem + 1.6vw, 2.75rem)",
-          { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "700" },
+          "clamp(2.75rem, 2.1rem + 2.2vw, 3.5rem)",
+          { lineHeight: "1.05", letterSpacing: "0", fontWeight: "400" },
         ],
         h2: [
-          "clamp(1.5rem, 1.3rem + 0.8vw, 1.875rem)",
-          { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600" },
+          "clamp(2rem, 1.6rem + 1.2vw, 2.625rem)",
+          { lineHeight: "1.1", letterSpacing: "0", fontWeight: "400" },
         ],
         h3: [
-          "1.25rem",
-          { lineHeight: "1.35", letterSpacing: "-0.015em", fontWeight: "600" },
+          "1.5rem",
+          { lineHeight: "1.25", letterSpacing: "0", fontWeight: "400" },
         ],
         body: ["var(--text-body)", { lineHeight: "1.65", fontWeight: "400" }],
-        small: ["0.875rem", { lineHeight: "1.55" }],
+        small: ["1rem", { lineHeight: "1.5" }],
+        sm: ["1rem", { lineHeight: "1.5" }],
         label: [
-          "0.75rem",
-          { lineHeight: "1rem", letterSpacing: "0.01em", fontWeight: "500" },
+          "0.875rem",
+          {
+            lineHeight: "1.125rem",
+            letterSpacing: "0.01em",
+            fontWeight: "400",
+          },
         ],
         eyebrow: [
-          "0.75rem",
-          { lineHeight: "1rem", letterSpacing: "0.08em", fontWeight: "500" },
+          "0.8125rem",
+          {
+            lineHeight: "1.125rem",
+            letterSpacing: "0.08em",
+            fontWeight: "400",
+          },
         ],
       },
       spacing: {
