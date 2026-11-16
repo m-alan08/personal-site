@@ -32,6 +32,10 @@ export const caseStudyLabels = {
   links: "Project links",
   badges: "Project facts",
   step: "Step",
+  atAGlance: "At a glance",
+  question: "Question",
+  scope: "Scope",
+  contribution: "My part",
 };
 
 export const caseStudyExtras: Record<string, CaseStudyExtras> = {

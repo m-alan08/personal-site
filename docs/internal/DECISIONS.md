@@ -142,3 +142,8 @@
 - The hero's empty right third is now enforced by `scripts/test-guards.mjs`: at 1440px only the portrait and its glow may sit there.
 - The portrait glow from PR #90 is a seventh glow location; the six item list in design notes was left as written and the mismatch reported.
 - The custom domain move keeps apex as the main address with `www` as a `CNAME`, and is staged as a placeholder pull request so no URL changes until a domain is owned.
+
+## Case study at a glance card
+
+- Case study pages get a third column from 1024px: a sticky "At a glance" card built only from existing project data. It leads with the key result (or the status line when there is no result yet), then the question, scope, my part, stack and links. Alan picked this over a facts-only card after side by side previews, because the right side of every project page was empty.
+- Results figures and the pipeline stepper now sit in the narrower middle column on desktop (about 478px wide at 1440px instead of 846px). Alan saw this tradeoff before choosing. Below 1024px the card is hidden and pages are unchanged.
