@@ -338,7 +338,7 @@ input {
     max-width: none;
     padding: 0;
   }
-  article,
+  article:not(main > article),
   li {
     break-inside: avoid;
   }
