@@ -26,8 +26,14 @@ const colors = {
   accent: "#ef5a52",
 };
 const fonts = {
-  sans: resolve("src/assets/fonts/Geist-latin.ttf"),
+  display: resolve("src/assets/fonts/Soria.ttf"),
+  serif: resolve("src/assets/fonts/InstrumentSerif-latin.ttf"),
   mono: resolve("src/assets/fonts/GeistMono-latin.ttf"),
+};
+const families = {
+  display: "Soria, Instrument Serif",
+  serif: "Instrument Serif",
+  mono: "Geist Mono",
 };
 
 interface TextStyle {
@@ -36,7 +42,7 @@ interface TextStyle {
   color: string;
   lineHeight: number;
   tracking?: number;
-  mono?: boolean;
+  family: keyof typeof families;
 }
 
 function escapeMarkup(value: string): string {
@@ -55,8 +61,8 @@ async function textLayer(text: string, style: TextStyle) {
   const { data, info } = await sharp({
     text: {
       text: markup,
-      font: `${style.mono ? "Geist Mono" : "Geist"} ${style.size}px`,
-      fontfile: style.mono ? fonts.mono : fonts.sans,
+      font: `${families[style.family]} ${style.size}px`,
+      fontfile: fonts[style.family],
       width: textWidth,
       dpi: 72,
       rgba: true,
@@ -70,48 +76,62 @@ async function textLayer(text: string, style: TextStyle) {
 
 const styles = {
   name: {
-    size: 104,
-    weight: 700,
+    size: 132,
+    weight: 400,
     color: colors.ink,
     lineHeight: 1,
-    tracking: -0.035,
+    tracking: -0.01,
+    family: "display",
   },
-  oneLiner: { size: 34, weight: 400, color: colors.muted, lineHeight: 1.2 },
-  byline: {
-    size: 30,
-    weight: 600,
-    color: colors.ink,
-    lineHeight: 1.2,
-    tracking: -0.015,
-  },
-  bylineDetail: {
-    size: 22,
+  oneLiner: {
+    size: 38,
     weight: 400,
     color: colors.muted,
-    lineHeight: 1.1,
+    lineHeight: 1.2,
+    family: "serif",
+  },
+  byline: {
+    size: 34,
+    weight: 400,
+    color: colors.ink,
+    lineHeight: 1.2,
+    family: "display",
+  },
+  bylineDetail: {
+    size: 24,
+    weight: 400,
+    color: colors.muted,
+    lineHeight: 1.15,
+    family: "serif",
   },
   title: {
-    size: 64,
-    weight: 700,
+    size: 66,
+    weight: 400,
     color: colors.ink,
-    lineHeight: 0.95,
-    tracking: -0.03,
+    lineHeight: 1,
+    family: "display",
   },
   result: {
-    size: 32,
-    weight: 500,
+    size: 34,
+    weight: 400,
     color: colors.accent,
-    lineHeight: 1.1,
-    tracking: -0.01,
+    lineHeight: 1.15,
+    family: "serif",
   },
-  summary: { size: 30, weight: 400, color: colors.muted, lineHeight: 1.1 },
+  summary: {
+    size: 32,
+    weight: 400,
+    color: colors.muted,
+    lineHeight: 1.15,
+    family: "serif",
+  },
   label: {
     size: 20,
     weight: 500,
     color: colors.muted,
     lineHeight: 1,
     tracking: 0.06,
-    mono: true,
+    family: "mono",
   },
 } satisfies Record<string, TextStyle>;
 
@@ -141,7 +161,20 @@ function background(): Buffer {
   );
 }
 
+const fontsReady = Promise.all(
+  (["serif", "display", "mono"] as const).map((family) =>
+    textLayer("a", {
+      size: 10,
+      weight: 400,
+      color: colors.ink,
+      lineHeight: 1,
+      family,
+    }),
+  ),
+);
+
 export const GET: APIRoute = async ({ props, site: origin }) => {
+  await fontsReady;
   const page = props.page as SharePage;
   const top = page.project ? inset + 16 : 184;
   const layers: OverlayOptions[] = [];
