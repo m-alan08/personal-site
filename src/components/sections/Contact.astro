@@ -4,7 +4,7 @@ import BaseFacts from "../BaseFacts.astro";
 import Section from "../Section.astro";
 import { labels } from "../../content/site";
 import { profile } from "../../content/profile";
-import { socialLinks } from "../../data/links";
+import { newTabAttrs, socialLinks } from "../../data/links";
 import { socialIcons } from "../../data/socialIcons";
 import { sectionIndex, sectionLabel } from "../../data/sections";
 
@@ -59,6 +59,7 @@ const otherLinks = socialLinks.filter((link) => link.kind !== "email");
         <li>
           <a
             href={link.href}
+            {...newTabAttrs(link.href)}
             class="group flex min-h-11 items-center gap-3 rounded-lg border border-hairline px-4 py-3 transition-colors duration-150 hover:border-control motion-reduce:transition-none"
           >
             <svg
