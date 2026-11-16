@@ -142,3 +142,8 @@
 - The hero's empty right third is now enforced by `scripts/test-guards.mjs`: at 1440px only the portrait and its glow may sit there.
 - The portrait glow from PR #90 is a seventh glow location; the six item list in design notes was left as written and the mismatch reported.
 - The custom domain move keeps apex as the main address with `www` as a `CNAME`, and is staged as a placeholder pull request so no URL changes until a domain is owned.
+
+## About trim and portrait glow
+
+- About's "Currently" box is removed at Alan's request because "What I'm working on" under the Playground already says the same thing. The Focus areas chips stay in About's right column.
+- The crimson halo behind the hero portrait (`atmo-portrait`, PR #90) is now the seventh allowed glow location in `docs/design-notes.md`, at Alan's request.
