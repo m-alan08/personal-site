@@ -47,6 +47,6 @@ The Currently exploring section in `src/data/exploring.ts` has two threads: worl
 ## Overnight audit (November 15, 2026)
 
 - Experience: keep the timeline chart above the list, or remove it so the list stands alone? PR #58 removed it and was closed without merging.
-- Home page: "What I'm working on" and About's "Currently" both say the quantization sweeps are done and that you are CTO of Ari AI. Keep both, or drop one? The Agentic orchestration card also repeats the hero intro sentence word for word.
+- Home page: "What I'm working on" and About's "Currently" both say the quantization sweeps are done and that you are CTO of Ari AI. Keep both, or drop one? The Agentic orchestration card also repeats the hero intro sentence word for word. Answered: Alan chose to remove About's "Currently" box.
 - Share images: move them to Soria and Instrument Serif to match the site, or keep Geist? Soria has no hyphen, so titles with hyphens would need a fallback.
-- Design notes: add the portrait glow from PR #90 as a seventh allowed glow location?
+- Design notes: add the portrait glow from PR #90 as a seventh allowed glow location? Answered: yes, added as the seventh.
