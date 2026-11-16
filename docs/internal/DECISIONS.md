@@ -142,3 +142,7 @@
 - The hero's empty right third is now enforced by `scripts/test-guards.mjs`: at 1440px only the portrait and its glow may sit there.
 - The portrait glow from PR #90 is a seventh glow location; the six item list in design notes was left as written and the mismatch reported.
 - The custom domain move keeps apex as the main address with `www` as a `CNAME`, and is staged as a placeholder pull request so no URL changes until a domain is owned.
+
+## Share image fonts
+
+- Share images now match the site: Soria for the name and project titles, Instrument Serif for descriptions and results, Geist Mono for the address. Alan picked this after seeing side by side previews of all six images. Sizes went up slightly because both fonts are narrow, and every image still fits above the footer rule.
