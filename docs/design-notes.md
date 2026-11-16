@@ -70,7 +70,7 @@ In practice the one accent element per section is: the hero availability line (h
 
 The ember glow is the one permitted decorative use of warm color. It uses the `glow` token (a deep crimson, darker than `accent`), rendered by `Atmosphere.astro`: a fixed-height, absolute layer behind all content, painted once per page. The core is three stacked radials, each built from eight to ten eased alpha stops so every edge fades perfectly smoothly (tight core peaking near 0.4, wider falloff near 0.22, faint outer fringe near 0.09), all in the same `glow` color, over the chrome to canvas fade. There are no hard stops or repeating gradients anywhere in the atmosphere; `atmosphere-grain` adds a fine inline-SVG noise tile at 0.05 opacity to prevent banding.
 
-The glow may appear in exactly six places:
+The glow may appear in exactly seven places:
 
 1. The hero atmosphere layer (the strongest, roughly 0.13 to 0.34 layer opacity)
 2. A faint warm pool behind the playground stage (`atmo-pool`, around 0.11)
@@ -78,8 +78,9 @@ The glow may appear in exactly six places:
 4. The warm left segment of numbered section rules (`atmo-rule`, up to 0.5 at the tip fading to transparent)
 5. A low warm horizon at the footer (`atmo-footer`, around 0.13)
 6. A warm shadow on the hover and focus state of primary buttons and the hero buttons
+7. A soft radial halo behind the hero portrait (`atmo-portrait`, around 0.42 at the center fading to transparent)
 
-Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, footer and rule echoes dim or disappear.
+Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, portrait, footer and rule echoes dim or disappear.
 
 ## Section system
 
