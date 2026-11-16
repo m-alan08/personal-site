@@ -4,6 +4,7 @@ import { caseStudyExtras, caseStudyLabels } from "../content/caseStudyPage";
 import CaseStudyHeader from "./CaseStudyHeader.astro";
 import CaseStudyHighlight from "./CaseStudyHighlight.astro";
 import CaseStudyImage from "./CaseStudyImage.astro";
+import CaseStudyAside from "./CaseStudyAside.astro";
 import CaseStudyRail from "./CaseStudyRail.astro";
 import CaseStudySection from "./CaseStudySection.astro";
 import CaseStudySources from "./CaseStudySources.astro";
@@ -73,7 +74,7 @@ const sections = [
     enhanceImages={enhanceImages}
   />
   {extras && <CaseStudyHighlight highlight={extras.highlight} />}
-  <div class="mt-16 grid gap-12 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16">
+  <div class="mt-16 grid gap-12 lg:grid-cols-[11rem_minmax(0,1fr)_17rem] lg:gap-12 xl:grid-cols-[12rem_minmax(0,1fr)_19rem] xl:gap-16">
     <CaseStudyRail sections={sections} />
     <div class="min-w-0 space-y-14">
       {sections.map((section, index) => (
@@ -92,7 +93,7 @@ const sections = [
               {gallery.map((image) => (
                 <CaseStudyImage
                   image={image}
-                  sizes="(min-width: 1280px) 56rem, (min-width: 1024px) 70vw, 100vw"
+                  sizes="(min-width: 1280px) 45rem, (min-width: 1024px) 40vw, 100vw"
                   enhance={enhanceImages}
                 />
               ))}
@@ -104,5 +105,6 @@ const sections = [
         </CaseStudySection>
       ))}
     </div>
+    <CaseStudyAside project={project} />
   </div>
 </article>

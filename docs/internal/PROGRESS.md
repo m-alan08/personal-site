@@ -338,3 +338,7 @@ Audited `main` after PR #90 at 390, 768, 1440 and 1920px with reduced motion on 
 ### About trim and seventh glow location
 
 Removed About's "Currently" box and its two profile fields, since the "What I'm working on" strip covers the same facts. Design notes now list the portrait halo as the seventh allowed glow location.
+
+### Case study at a glance card
+
+Added `CaseStudyAside.astro`, a sticky right column card on case study pages from 1024px, showing the key result or status, question, scope, my part, stack and links from `projects.ts` and `caseStudyPage.ts`.

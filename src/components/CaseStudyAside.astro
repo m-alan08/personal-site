@@ -1,0 +1,67 @@
+---
+import type { Project } from "../data/projects";
+import { caseStudyExtras, caseStudyLabels } from "../content/caseStudyPage";
+import { caseStudy } from "../content/site";
+import { externalLinks } from "../data/projectLinks";
+import HyphenSafeText from "./HyphenSafeText.astro";
+import TextLink from "./TextLink.astro";
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const facts = [
+  { term: caseStudyLabels.question, detail: project.question },
+  { term: caseStudyLabels.scope, detail: project.scope },
+  { term: caseStudyLabels.contribution, detail: project.contribution ?? "" },
+  { term: caseStudy.stack, detail: project.technology.join(", ") },
+].filter((fact) => fact.detail);
+const links = externalLinks(project);
+const highlight = caseStudyExtras[project.slug]?.highlight;
+---
+
+<aside
+  aria-label={caseStudyLabels.atAGlance}
+  class="hidden lg:top-24 lg:block lg:self-start lg:[@media(min-height:54rem)]:sticky"
+>
+  <div class="rounded-xl border border-line bg-surface p-6">
+    <p class="text-eyebrow uppercase text-muted">{caseStudyLabels.atAGlance}</p>
+    {highlight?.kind === "result" && (
+      <div class="mt-4 border-b border-line pb-5">
+        <p class="text-h1 tabular-nums text-accent">{highlight.value}</p>
+        <p class="mt-2 text-small text-ink">
+          <HyphenSafeText text={highlight.label} />
+        </p>
+      </div>
+    )}
+    {highlight?.kind === "status" && (
+      <div class="mt-4 border-b border-line pb-5">
+        <p class="text-label uppercase text-muted">{caseStudyLabels.status}</p>
+        <p class="mt-1 text-ink">
+          <HyphenSafeText text={highlight.text} />
+        </p>
+      </div>
+    )}
+    <dl class="mt-4 space-y-4 text-small">
+      {facts.map((fact) => (
+        <div>
+          <dt class="text-label uppercase text-muted">{fact.term}</dt>
+          <dd class="m-0 mt-1 text-ink">
+            <HyphenSafeText text={fact.detail} />
+          </dd>
+        </div>
+      ))}
+    </dl>
+    {links.length > 0 && (
+      <ul
+        role="list"
+        class="mt-5 space-y-1 border-t border-line pt-4 text-small"
+      >
+        {links.map((link) => (
+          <li>
+            <TextLink href={link.href}>{link.label}</TextLink>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</aside>

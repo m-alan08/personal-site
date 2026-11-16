@@ -151,3 +151,8 @@
 ## Share image fonts
 
 - Share images now match the site: Soria for the name and project titles, Instrument Serif for descriptions and results, Geist Mono for the address. Alan picked this after seeing side by side previews of all six images. Sizes went up slightly because both fonts are narrow, and every image still fits above the footer rule.
+
+## Case study at a glance card
+
+- Case study pages get a third column from 1024px: a sticky "At a glance" card built only from existing project data. It leads with the key result (or the status line when there is no result yet), then the question, scope, my part, stack and links. Alan picked this over a facts-only card after side by side previews, because the right side of every project page was empty.
+- Results figures and the pipeline stepper now sit in the narrower middle column on desktop (about 478px wide at 1440px instead of 846px). Alan saw this tradeoff before choosing. Below 1024px the card is hidden and pages are unchanged.

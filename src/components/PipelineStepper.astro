@@ -21,10 +21,7 @@ const steps = pipeline.nodes.map((node) => ({
   <p class="mt-2 max-w-reading text-muted">
     <HyphenSafeText text={pipeline.description} />
   </p>
-  <ol
-    role="list"
-    class="mt-6 grid gap-6 lg:auto-cols-fr lg:grid-flow-col lg:gap-8"
-  >
+  <ol role="list" class="mt-6 grid gap-6">
     {steps.map((step, index) => (
       <li class="relative">
         <div
@@ -56,32 +53,18 @@ const steps = pipeline.nodes.map((node) => ({
           )}
         </div>
         {index < steps.length - 1 && (
-          <>
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 12 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="absolute left-6 top-full h-6 w-3 -translate-x-1/2 text-control lg:hidden"
-            >
-              <path d="M6 2v19M2.5 17.5 6 21l3.5-3.5" />
-            </svg>
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 32 12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="absolute left-full top-1/2 hidden h-3 w-8 -translate-y-1/2 text-control lg:block"
-            >
-              <path d="M3 6h26M25.5 2.5 29 6l-3.5 3.5" />
-            </svg>
-          </>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 12 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="absolute left-6 top-full h-6 w-3 -translate-x-1/2 text-control"
+          >
+            <path d="M6 2v19M2.5 17.5 6 21l3.5-3.5" />
+          </svg>
         )}
       </li>
     ))}
