@@ -156,3 +156,8 @@
 
 - Case study pages get a third column from 1024px: a sticky "At a glance" card built only from existing project data. It leads with the key result (or the status line when there is no result yet), then the question, scope, my part, stack and links. Alan picked this over a facts-only card after side by side previews, because the right side of every project page was empty.
 - Results figures and the pipeline stepper now sit in the narrower middle column on desktop (about 478px wide at 1440px instead of 846px). Alan saw this tradeoff before choosing. Below 1024px the card is hidden and pages are unchanged.
+
+## External links and print
+
+- Every link that leaves the site now opens in a new tab with `rel="noopener noreferrer"`, at Alan's request, through one helper (`newTabAttrs` in `src/data/links.ts`). Email links and links within the site still open in place. `npm test` fails if a built page has an external link without it.
+- The whole case study is one `article`, and the print rule that keeps articles on one page pushed it past a nearly blank first page. The rule now skips the top level `main > article`, so printing starts with the case study on page one. Cards and list items still stay together.
