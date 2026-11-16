@@ -113,6 +113,24 @@ async function checkExternalLinks() {
   }
 }
 
+async function checkNewTabLinks() {
+  for (const file of await filesUnder("dist", [".html"])) {
+    const text = await readFile(file, "utf8");
+    for (const match of text.matchAll(/<a\b[^>]*>/g)) {
+      const tag = match[0];
+      const href = tag.match(/href="(https?:[^"]*)"/)?.[1];
+      if (!href) continue;
+      if (
+        !/target="_blank"/.test(tag) ||
+        !/rel="noopener noreferrer"/.test(tag)
+      )
+        fail(
+          `${file} links to ${href} without opening a new tab. Use newTabAttrs from src/data/links.ts.`,
+        );
+    }
+  }
+}
+
 async function checkHeroAndAnchors() {
   const server = await serveBuild();
   const browser = await chromium.launch(browserOptions());
@@ -273,6 +291,7 @@ async function checkHeroAndAnchors() {
 await checkDashes();
 await checkComments();
 await checkExternalLinks();
+await checkNewTabLinks();
 await checkHeroAndAnchors();
 
 if (failures.length) {
@@ -281,5 +300,5 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  "Guard tests passed: no em or en dashes in src or docs, no code comments, external links well formed, hero left column and portrait intact with the right third empty at 1440px, and every nav anchor resolves.",
+  "Guard tests passed: no em or en dashes in src or docs, no code comments, external links well formed and opening in a new tab, hero left column and portrait intact with the right third empty at 1440px, and every nav anchor resolves.",
 );

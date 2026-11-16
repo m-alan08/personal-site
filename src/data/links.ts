@@ -7,6 +7,12 @@ export const links = {
   resumeFile: "resume.pdf",
 };
 
+export function newTabAttrs(href: string) {
+  return /^https?:\/\//.test(href)
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
+}
+
 export function localPath(path = ""): string {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 }

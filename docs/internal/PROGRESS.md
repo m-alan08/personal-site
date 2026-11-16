@@ -342,3 +342,7 @@ Removed About's "Currently" box and its two profile fields, since the "What I'm 
 ### Case study at a glance card
 
 Added `CaseStudyAside.astro`, a sticky right column card on case study pages from 1024px, showing the key result or status, question, scope, my part, stack and links from `projects.ts` and `caseStudyPage.ts`.
+
+### External links in new tabs and print first page
+
+External links in buttons, text links, social icons, Contact, Writing and case study headers open in a new tab, guarded by a new `npm test` check over the built HTML. Printed case studies no longer start with a mostly blank page.

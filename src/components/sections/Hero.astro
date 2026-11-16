@@ -40,12 +40,7 @@ const ctas = ctaKinds
         {ctas.map((link) => {
           const icon = socialIcons[link.kind];
           return (
-            <ButtonLink
-              href={link.href}
-              variant="secondary"
-              glow
-              newTab={link.kind !== "email"}
-            >
+            <ButtonLink href={link.href} variant="secondary" glow>
               <svg
                 aria-hidden="true"
                 viewBox={icon.viewBox}

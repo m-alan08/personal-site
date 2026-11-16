@@ -2,6 +2,7 @@
 import ArrowIcon from "./ArrowIcon.astro";
 import HyphenSafeText from "./HyphenSafeText.astro";
 import { labels } from "../content/site";
+import { newTabAttrs } from "../data/links";
 interface Props {
   title: string;
   href: string;
@@ -21,6 +22,7 @@ const platform =
 <li>
   <a
     href={href}
+    {...newTabAttrs(href)}
     class="group grid min-h-11 gap-x-6 gap-y-1 py-4 sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] sm:items-baseline"
   >
     <span class="text-label text-muted">{platform}</span>
