@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectEntry from "../../components/ProjectEntry.astro";
+import { site } from "../../content/site";
+import { orderedProjects } from "../../data/projects";
+---
+
+<BaseLayout
+  title={site.allProjects}
+  description={site.allProjectsDescription}
+  wide
+>
+  <h1 class="text-h1 text-ink">{site.allProjects}</h1>
+  <div class="mt-12" data-project-list>
+    {orderedProjects.map((project, index) => (
+      <ProjectEntry project={project} eager={index === 0} />
+    ))}
+  </div>
+</BaseLayout>

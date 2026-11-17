@@ -1,0 +1,18 @@
+---
+import PlusIcon from "./PlusIcon.astro";
+interface Props {
+  summary: string;
+  [attribute: string]: unknown;
+}
+const { summary, ...attributes } = Astro.props;
+---
+
+<details class="group border-t border-line" {...attributes}>
+  <summary class="flex min-h-11 cursor-pointer list-none items-center gap-2.5 text-small text-muted transition-colors duration-150 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-reduce:transition-none [&::-webkit-details-marker]:hidden">
+    <PlusIcon />
+    {summary}
+  </summary>
+  <div class="pt-2 pb-6">
+    <slot />
+  </div>
+</details>

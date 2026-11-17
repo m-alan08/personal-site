@@ -3,7 +3,7 @@ import type { GetStaticPaths } from "astro";
 import { orderedProjects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { labels } from "../../content/site";
-import { sectionLink } from "../../data/sections";
+import { localLinks } from "../../data/links";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CaseStudy from "../../components/CaseStudy.astro";
 import ArrowIcon from "../../components/ArrowIcon.astro";
@@ -28,7 +28,7 @@ const { project, previous, next } = Astro.props;
 <BaseLayout title={project.title} description={project.summary} wide>
   <p class="mb-8 text-sm">
     <a
-      href={sectionLink("projects")}
+      href={localLinks.projects}
       class="group inline-flex min-h-11 items-center text-muted transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
     >
       <ArrowIcon

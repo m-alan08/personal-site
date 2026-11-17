@@ -10,6 +10,8 @@ export const site = {
   backToTop: "Back to top",
   selectedProjects: "Selected projects",
   allProjects: "All projects",
+  allProjectsDescription:
+    "Every project, finished and in progress, with links to each case study.",
   sections: {
     about: "About",
     projects: "Projects",

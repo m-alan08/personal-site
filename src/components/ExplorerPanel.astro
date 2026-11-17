@@ -1,18 +1,17 @@
 ---
-import ExplorerChart from "../explorer/ExplorerChart.astro";
-import ExplorerChoice from "../explorer/ExplorerChoice.astro";
-import ExplorerTable from "../explorer/ExplorerTable.astro";
-import HyphenSafeText from "../HyphenSafeText.astro";
-import Section from "../Section.astro";
-import TextLink from "../TextLink.astro";
+import ExplorerChart from "./explorer/ExplorerChart.astro";
+import ExplorerChoice from "./explorer/ExplorerChoice.astro";
+import ExplorerTable from "./explorer/ExplorerTable.astro";
+import HyphenSafeText from "./HyphenSafeText.astro";
+import TextLink from "./TextLink.astro";
 import {
   bitWidths,
   datasets,
   explorerCopy,
   explorerDefaults,
   methods,
-} from "../../data/explorerData";
-import { projects } from "../../data/projects";
+} from "../data/explorerData";
+import { projects } from "../data/projects";
 
 const limitation = projects.find((project) => project.slug === "quantrl-fetch")
   ?.limitations[0];
@@ -21,12 +20,7 @@ const lastIndex = bitWidths.length - 1;
 const legend = "text-label uppercase text-muted";
 ---
 
-<Section
-  id="explorer"
-  title={explorerCopy.title}
-  eyebrow={explorerCopy.label}
-  data-explorer
->
+<div data-explorer>
   <div class="min-w-0">
     <p class="max-w-reading text-muted">
       <HyphenSafeText text={explorerCopy.intro} />
@@ -141,13 +135,13 @@ const legend = "text-label uppercase text-muted";
       <TextLink href={source}>{explorerCopy.sourceLabel}</TextLink>
     </p>
   </div>
-</Section>
+</div>
 
 <script>
   const root = document.querySelector<HTMLElement>("[data-explorer]");
   if (root) {
     const mount = () =>
-      void import("../explorer/explorer").then(({ mountExplorer }) =>
+      void import("./explorer/explorer").then(({ mountExplorer }) =>
         mountExplorer(root),
       );
     if ("requestIdleCallback" in window) {
