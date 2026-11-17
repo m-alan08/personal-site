@@ -73,14 +73,11 @@ const legend = "text-label uppercase text-muted";
               data-explorer-value
               class="mt-3 text-display tabular-nums text-accent"
             ></p>
-            <p
-              data-explorer-seeds
-              class="mt-3 min-h-6 text-small text-muted"
-            ></p>
+            <p data-explorer-seeds class="mt-3 min-h-6 text-muted"></p>
             <div aria-hidden="true" class="mt-5 h-1.5 rounded-full bg-line">
               <div data-explorer-bar class="h-full rounded-full bg-ink"></div>
             </div>
-            <p data-explorer-selection class="mt-4 text-small text-ink"></p>
+            <p data-explorer-selection class="mt-4 text-ink"></p>
           </div>
           <div class="min-w-0">
             <ExplorerChart />
@@ -128,9 +125,7 @@ const legend = "text-label uppercase text-muted";
         aria-atomic="true"
       ></p>
     </div>
-    {limitation && (
-      <p class="mt-8 max-w-reading text-small text-muted">{limitation}</p>
-    )}
+    {limitation && <p class="mt-8 max-w-reading text-muted">{limitation}</p>}
     <p class="mt-2 text-small">
       <TextLink href={source}>{explorerCopy.sourceLabel}</TextLink>
     </p>

@@ -29,11 +29,11 @@ assertThreadsFresh();
     ))}
     {threads.map((thread) => (
       <li class="grid min-h-11 gap-x-6 gap-y-1 py-4 sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] sm:items-baseline">
-        <span class="text-label text-muted">{labels.exploring}</span>
+        <span class="text-label uppercase text-muted">{labels.exploring}</span>
         <span class="min-w-0 text-ink">
           <HyphenSafeText text={thread.title} />
         </span>
-        <span class="text-label text-muted">{thread.status}</span>
+        <span class="text-label uppercase text-muted">{thread.status}</span>
       </li>
     ))}
   </ul>
