@@ -51,12 +51,10 @@ const { dataset } = Astro.props;
               >
                 {measurement ? (
                   <>
-                    <span class="block font-mono text-ink">
+                    <span class="font-mono text-ink">
                       {formatMean(measurement)}
-                    </span>
-                    <span class="block text-muted">
-                      {seedRange(measurement)}
-                    </span>
+                    </span>{" "}
+                    <span class="text-muted">({seedRange(measurement)})</span>
                   </>
                 ) : (
                   <span class="text-muted">{explorerLabels.notMeasured}</span>
