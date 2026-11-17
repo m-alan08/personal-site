@@ -28,9 +28,10 @@ Audience, in priority order:
 
 The site is one home page plus project case studies plus redirects:
 
-- `/`: home page with the hero, About, Projects, Research interests, Writing, Experience and Contact sections. Each section has a stable anchor: `about`, `projects`, `research`, `writing`, `experience`, `contact`
+- `/`: home page with the hero, the robot playground, Now and previously (`experience`), Selected projects (`projects`), Writing (`writing`) and a footer that holds contact (`contact`). The old `about`, `exploring` and `research` anchors still resolve: `about` lands on `experience`, and `exploring` and `research` land on `writing`
+- `/projects/`: every project, with a closed How it works toggle per row
 - `/projects/<slug>/`: one case study per entry in `src/data/projects.ts`
-- `/about/`, `/contact/`, `/resume/` and `/projects/`: static redirects to home page anchors, defined in `src/data/redirects.ts`
+- `/about/`, `/contact/` and `/resume/`: static redirects to home page anchors, defined in `src/data/redirects.ts`
 - `/404.html`: not found page with a link home
 - `sitemap.xml`, `robots.txt`, generated Open Graph images and JSON-LD structured data
 
