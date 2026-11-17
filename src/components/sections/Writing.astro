@@ -1,24 +1,23 @@
 ---
 import HyphenSafeText from "../HyphenSafeText.astro";
+import LegacyAnchor from "../LegacyAnchor.astro";
 import Section from "../Section.astro";
 import WritingCard from "../WritingCard.astro";
 import { writing } from "../../content/profile";
-import { labels } from "../../content/site";
+import { labels, site } from "../../content/site";
 import { xSeriesPosts } from "../../content/xSeries";
-import { sectionIndex, sectionLabel } from "../../data/sections";
+import { assertThreadsFresh, threads } from "../../data/exploring";
+import { sectionLabel } from "../../data/sections";
+
+assertThreadsFresh();
 ---
 
-<Section
-  id="writing"
-  title={sectionLabel("writing")}
-  index={sectionIndex("writing")}
->
-  <p class="mb-8 max-w-reading text-muted">
-    <HyphenSafeText text={writing.intro} />
-  </p>
+<LegacyAnchor id="research" />
+<LegacyAnchor id="exploring" />
+<Section id="writing" title={sectionLabel("writing")}>
   <ul class="divide-y divide-line border-y border-line" role="list">
     {writing.links.map((link) => (
-      <WritingCard title={link.title} href={link.href} note={link.note} />
+      <WritingCard title={link.title} href={link.href} />
     ))}
     {xSeriesPosts.map((post) => (
       <WritingCard
@@ -27,6 +26,15 @@ import { sectionIndex, sectionLabel } from "../../data/sections";
         date={post.date}
         source={labels.x}
       />
+    ))}
+    {threads.map((thread) => (
+      <li class="grid min-h-11 gap-x-6 gap-y-1 py-4 sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] sm:items-baseline">
+        <span class="text-label text-muted">{site.navigation.exploring}</span>
+        <span class="min-w-0 text-ink">
+          <HyphenSafeText text={thread.title} />
+        </span>
+        <span class="text-label text-muted">{thread.status}</span>
+      </li>
     ))}
   </ul>
 </Section>
