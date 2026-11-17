@@ -174,20 +174,6 @@ body {
     transparent 72%
   );
 }
-.atmo-rule::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: min(16rem, 36%);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    rgb(var(--glow) / 0.5),
-    rgb(var(--glow) / 0.16) 45%,
-    transparent
-  );
-}
 .atmo-portrait {
   background-image: radial-gradient(
     closest-side,
@@ -224,13 +210,9 @@ body {
   .atmo-footer {
     background-image: none;
   }
-  .atmo-rule::before {
-    opacity: 0.4;
-  }
 }
 @media print {
-  .atmosphere,
-  .atmo-rule::before {
+  .atmosphere {
     display: none;
   }
   .atmo-pool,

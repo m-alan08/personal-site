@@ -13,17 +13,13 @@ export const site = {
   allProjectsDescription:
     "Every project, finished and in progress, with links to each case study.",
   sections: {
-    about: "About",
     projects: "Projects",
-    exploring: "Currently exploring",
     writing: "Writing",
     experience: "Now and previously",
     contact: "Contact",
   },
   navigation: {
-    about: "About",
     projects: "Projects",
-    exploring: "Exploring",
     writing: "Writing",
     experience: "Experience",
     contact: "Contact",
@@ -38,6 +34,7 @@ export const labels = {
   linkedin: "LinkedIn",
   email: "Email me",
   resume: "Resume",
+  exploring: "Exploring",
   repository: "View repository",
   repositoryMissing: "Repository link is not available yet.",
   technology: "Tools and methods",

@@ -2,21 +2,17 @@
 interface Props {
   id: string;
   title: string;
-  index?: string;
   eyebrow?: string;
   [attribute: string]: unknown;
 }
-const { id, title, index, eyebrow, ...rest } = Astro.props;
+const { id, title, eyebrow, ...rest } = Astro.props;
 const headingId = `${id}-heading`;
 ---
 
 <section
   id={id}
   aria-labelledby={headingId}
-  class:list={[
-    "relative border-t border-line py-section-normal",
-    index && "atmo-rule",
-  ]}
+  class="relative border-t border-line py-section-normal"
   {...rest}
 >
   <div
@@ -24,10 +20,9 @@ const headingId = `${id}-heading`;
     class="flex flex-wrap items-end justify-between gap-x-10 gap-y-3"
   >
     <div>
-      {(index || eyebrow) && (
-        <p aria-hidden="true" class="flex items-center gap-2.5 text-muted">
-          {index && <span class="text-label tabular-nums">{index}</span>}
-          {eyebrow && <span class="text-eyebrow uppercase">{eyebrow}</span>}
+      {eyebrow && (
+        <p aria-hidden="true" class="text-eyebrow uppercase text-muted">
+          {eyebrow}
         </p>
       )}
       <h2 id={headingId} class="mt-3 text-h2 text-ink">

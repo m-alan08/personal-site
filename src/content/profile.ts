@@ -16,7 +16,6 @@ export interface Experience {
 export const profile = {
   name: "Alan Mozhoor",
   portraitAlt: "Headshot of Alan Mozhoor in a navy suit and tie",
-  aboutPhotoAlt: "Alan Mozhoor smiling on a beach at sunset",
   tagline: "Georgia Tech · RL for robotics",
   headline:
     "I train reinforcement learning policies for robotics and measure how few bits they need before they stop working.",
@@ -45,17 +44,6 @@ export const profile = {
       text: "Ascent Math, a math tutoring business I co-founded.",
     },
   ],
-  about: [
-    "Most of my solo work is reinforcement learning for manipulation. For quantrl-fetch I wrote Soft Actor-Critic and Hindsight Experience Replay from scratch in PyTorch, then cut the actor's precision bit by bit to find where a simulated Fetch arm stops finishing its task.",
-    "On a team robot arm project, I built the success-guided sampling teacher for RL post-training of a SmolVLA policy and helped set up our SO-101 arm. At Ari AI I designed the defense policy for its simulated network defense lab.",
-  ],
-  focusLabel: "Focus areas",
-  focus: [
-    "RL for manipulation",
-    "VLA fine-tuning",
-    "Quantization",
-    "Security agents",
-  ],
   education: {
     school: "Georgia Institute of Technology",
     shortName: "Georgia Tech",
@@ -65,9 +53,7 @@ export const profile = {
   },
 };
 
-export const writing: { intro: string; links: WritingLink[] } = {
-  intro:
-    "I learn in public. My X series works through reinforcement learning for robotics: RL algorithms, robot learning, vision-language-action models, world models, agentic control and research papers.",
+export const writing: { links: WritingLink[] } = {
   links: [
     {
       title: "Learning RL for robotics, on X",

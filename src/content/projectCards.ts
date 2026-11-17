@@ -1,17 +1,6 @@
-import type { Project } from "../data/projects";
-
 export const projectCardLabels = {
   caseStudy: "Case study",
-  inProgress: "In progress",
-  ownership: "Ownership",
-  status: "Status",
-  event: "Event",
   result: "Headline result",
-};
-
-export const ownershipLabels: Record<Project["ownership"], string> = {
-  "Solo project": "Solo",
-  "Team project": "Team",
 };
 
 export interface HeadlineResult {

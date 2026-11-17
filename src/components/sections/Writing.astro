@@ -4,7 +4,7 @@ import LegacyAnchor from "../LegacyAnchor.astro";
 import Section from "../Section.astro";
 import WritingCard from "../WritingCard.astro";
 import { writing } from "../../content/profile";
-import { labels, site } from "../../content/site";
+import { labels } from "../../content/site";
 import { xSeriesPosts } from "../../content/xSeries";
 import { assertThreadsFresh, threads } from "../../data/exploring";
 import { sectionLabel } from "../../data/sections";
@@ -29,7 +29,7 @@ assertThreadsFresh();
     ))}
     {threads.map((thread) => (
       <li class="grid min-h-11 gap-x-6 gap-y-1 py-4 sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] sm:items-baseline">
-        <span class="text-label text-muted">{site.navigation.exploring}</span>
+        <span class="text-label text-muted">{labels.exploring}</span>
         <span class="min-w-0 text-ink">
           <HyphenSafeText text={thread.title} />
         </span>
