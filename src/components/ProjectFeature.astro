@@ -1,0 +1,51 @@
+---
+import type { Project } from "../data/projects";
+import { projectLink } from "../data/links";
+import { headlineResults, projectCardLabels } from "../content/projectCards";
+import HyphenSafeText from "./HyphenSafeText.astro";
+import ProjectLinks from "./ProjectLinks.astro";
+import ProjectThumb from "./ProjectThumb.astro";
+interface Props {
+  project: Project;
+  eager?: boolean;
+  accent?: boolean;
+}
+const { project, eager = false, accent = false } = Astro.props;
+const headline = headlineResults[project.slug];
+---
+
+<article class="grid gap-6 border-t border-hairline py-8 first:border-t-0 first:pt-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-start lg:gap-12">
+  <div class="grid min-w-0 content-start gap-3">
+    <h3 class="m-0 text-h3 text-ink">
+      <a
+        href={projectLink(project.slug)}
+        class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+      >
+        <HyphenSafeText text={project.title} />
+      </a>
+    </h3>
+    <p class="m-0 max-w-reading text-muted">
+      <HyphenSafeText text={project.question} />
+    </p>
+    {headline && (
+      <p class="m-0 flex flex-wrap items-baseline gap-x-3">
+        <span class="sr-only">{projectCardLabels.result}: </span>
+        <span
+          class:list={[
+            "font-display text-h3 tabular-nums",
+            accent ? "text-accent" : "text-ink",
+          ]}
+        >
+          {headline.value}
+        </span>
+        <span class="text-small text-muted">
+          <HyphenSafeText text={headline.detail} />
+        </span>
+      </p>
+    )}
+    <div class="mt-2">
+      <ProjectLinks project={project} />
+    </div>
+  </div>
+  <ProjectThumb project={project} eager={eager} />
+</article>

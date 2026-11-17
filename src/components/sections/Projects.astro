@@ -1,19 +1,26 @@
 ---
-import ProjectList from "../ProjectList.astro";
+import ArrowLink from "../ArrowLink.astro";
+import ProjectFeature from "../ProjectFeature.astro";
 import Section from "../Section.astro";
 import { site } from "../../content/site";
-import { orderedProjects, type Project } from "../../data/projects";
-import { sectionIndex } from "../../data/sections";
-const isInProgress = (project: Project) =>
-  project.tier === "in-progress" || project.featured === false;
-const finished = orderedProjects.filter((project) => !isInProgress(project));
-const inProgress = orderedProjects.filter(isInProgress);
+import { localLinks } from "../../data/links";
+import { orderedProjects } from "../../data/projects";
+const selected = orderedProjects.filter(
+  (project) => project.tier !== "in-progress" && project.featured !== false,
+);
 ---
 
-<Section
-  id="projects"
-  title={site.selectedProjects}
-  index={sectionIndex("projects")}
->
-  <ProjectList features={finished} inProgress={inProgress} />
+<Section id="projects" title={site.selectedProjects}>
+  <div>
+    {selected.map((project, index) => (
+      <ProjectFeature
+        project={project}
+        eager={index === 0}
+        accent={index === 0}
+      />
+    ))}
+  </div>
+  <p class="mt-6">
+    <ArrowLink href={localLinks.projects} title={site.allProjects} />
+  </p>
 </Section>
