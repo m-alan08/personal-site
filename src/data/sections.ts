@@ -12,10 +12,16 @@ const ids = [
 
 export type SectionId = (typeof ids)[number];
 
-export const sections = ids.map((id, position) => ({
+const navigationIds: SectionId[] = [
+  "projects",
+  "writing",
+  "experience",
+  "contact",
+];
+
+export const sections = navigationIds.map((id) => ({
   id,
   label: site.navigation[id],
-  index: String(position + 1).padStart(2, "0"),
 }));
 
 export function sectionLink(id: SectionId): string {

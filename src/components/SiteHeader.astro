@@ -70,12 +70,7 @@ const linkClass =
                 data-section-link={section.id}
                 class="group flex min-h-11 items-center justify-between rounded-md px-3 text-sm text-muted transition-colors duration-150 hover:bg-raised hover:text-ink motion-reduce:transition-none aria-[current]:text-accent"
               >
-                <span class="flex items-baseline gap-3">
-                  <span class="text-label tabular-nums text-muted/70">
-                    {section.index}
-                  </span>
-                  {section.label}
-                </span>
+                {section.label}
                 <ArrowIcon class="opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100" />
               </a>
             </li>
@@ -107,7 +102,9 @@ const linkClass =
     }
   }
   if (bySection.size > 0) {
-    const ordered = [...bySection.keys()];
+    const ordered = [...bySection.keys()].sort((a, b) =>
+      a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1,
+    );
     const first = ordered[0];
     const last = ordered[ordered.length - 1];
     let current: HTMLElement | null = null;
