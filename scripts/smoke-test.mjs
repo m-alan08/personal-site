@@ -358,6 +358,12 @@ async function testHomeStructure(page) {
     .locator('footer a[href^="mailto:"]')
     .evaluateAll((links) => links.map((link) => link.href));
   assert.equal(emails.length, 1, "footer: one email");
+  await page.emulateMedia({ media: "print" });
+  assert.ok(
+    await page.locator('footer a[href^="mailto:"]').isVisible(),
+    "print: the footer email still prints",
+  );
+  await page.emulateMedia({ media: "screen" });
   for (const name of ["GitHub", "X", "LinkedIn", "Resume"])
     assert.equal(
       await page.locator("footer").getByRole("link", { name }).count(),

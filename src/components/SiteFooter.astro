@@ -45,7 +45,7 @@ const email = socialLinks.find((link) => link.kind === "email");
       <SocialIcons kinds={["github", "x", "linkedin", "resume"]} labeled />
       <a
         href={localLinks.skip}
-        class="group inline-flex min-h-11 items-center text-small text-muted transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+        class="group inline-flex min-h-11 items-center text-small text-muted transition-colors print:hidden duration-150 hover:text-accent motion-reduce:transition-none"
       >
         {site.backToTop}
         <ArrowIcon
