@@ -1,0 +1,12 @@
+---
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+---
+
+<span
+  id={id}
+  aria-hidden="true"
+  class="block scroll-mt-8 sm:scroll-mt-20"
+></span>

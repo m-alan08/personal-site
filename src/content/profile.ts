@@ -25,7 +25,8 @@ export const profile = {
   ],
   availability:
     "Open to research collaborations and robotics machine learning roles.",
-  currentLabel: "What I'm working on",
+  nowLabel: "Now",
+  previouslyLabel: "Previously",
   current: [
     {
       label: "Research",

@@ -15,7 +15,7 @@ export const site = {
     projects: "Projects",
     exploring: "Currently exploring",
     writing: "Writing",
-    experience: "Experience",
+    experience: "Now and previously",
     contact: "Contact",
   },
   navigation: {

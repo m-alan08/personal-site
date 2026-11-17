@@ -1,20 +1,56 @@
 ---
-import ExperienceList from "../ExperienceList.astro";
-import ExperienceTimeline from "../ExperienceTimeline.astro";
+import HyphenSafeText from "../HyphenSafeText.astro";
+import LegacyAnchor from "../LegacyAnchor.astro";
 import Section from "../Section.astro";
-import SectionFigure from "../SectionFigure.astro";
-import { figures } from "../../content/figures";
-import { experience } from "../../content/profile";
-import { sectionIndex, sectionLabel } from "../../data/sections";
+import TextLink from "../TextLink.astro";
+import { experience, profile } from "../../content/profile";
+import { labels } from "../../content/site";
+import { resumeHref } from "../../data/resume";
+import { sectionLabel } from "../../data/sections";
+
+const previous = experience.filter(
+  (entry) => !entry.period.endsWith("present"),
+);
+const groups = [
+  {
+    label: profile.nowLabel,
+    lines: profile.current.map((item) => ({
+      label: item.label,
+      text: item.text,
+    })),
+  },
+  {
+    label: profile.previouslyLabel,
+    lines: previous.map((entry) => ({
+      label: entry.period,
+      text: `${entry.role}, ${entry.organization}`,
+    })),
+  },
+];
 ---
 
-<Section
-  id="experience"
-  title={sectionLabel("experience")}
-  index={sectionIndex("experience")}
->
-  <SectionFigure caption={figures.timeline.caption} class="mb-14">
-    <ExperienceTimeline />
-  </SectionFigure>
-  <ExperienceList entries={experience} />
+<LegacyAnchor id="about" />
+<Section id="experience" title={sectionLabel("experience")}>
+  <div class="grid gap-10">
+    {groups.map((group) => (
+      <div>
+        <h3 class="text-eyebrow uppercase text-muted">{group.label}</h3>
+        <ul class="mt-3 divide-y divide-line border-y border-line" role="list">
+          {group.lines.map((line) => (
+            <li class="grid gap-x-8 gap-y-1 py-3 sm:grid-cols-[13rem_minmax(0,1fr)]">
+              <span class="text-small text-muted">{line.label}</span>
+              <span class="max-w-reading text-ink">
+                <HyphenSafeText text={line.text} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+  {resumeHref && (
+    <p class="mt-6">
+      <TextLink href={resumeHref}>{labels.resume}</TextLink>
+    </p>
+  )}
 </Section>
