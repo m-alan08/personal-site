@@ -11,7 +11,7 @@ const selected = orderedProjects.filter(
 ---
 
 <Section id="projects" title={site.selectedProjects}>
-  <div>
+  <div class="grid gap-6 lg:grid-cols-3">
     {selected.map((project, index) => (
       <ProjectFeature
         project={project}

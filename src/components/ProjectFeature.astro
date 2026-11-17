@@ -14,8 +14,14 @@ const { project, eager = false, accent = false } = Astro.props;
 const headline = headlineResults[project.slug];
 ---
 
-<article class="grid gap-6 border-t border-hairline py-8 first:border-t-0 first:pt-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-start lg:gap-12">
-  <div class="grid min-w-0 content-start gap-3">
+<article class="flex flex-col overflow-hidden rounded-lg border border-hairline bg-raised/30">
+  <ProjectThumb
+    project={project}
+    eager={eager}
+    flush
+    sizes="(min-width: 1024px) 23rem, 100vw"
+  />
+  <div class="flex flex-1 flex-col gap-3 p-6">
     <h3 class="m-0 text-h3 text-ink">
       <a
         href={projectLink(project.slug)}
@@ -24,28 +30,27 @@ const headline = headlineResults[project.slug];
         <HyphenSafeText text={project.title} />
       </a>
     </h3>
-    <p class="m-0 max-w-reading text-muted">
+    <p class="m-0 text-muted">
       <HyphenSafeText text={project.question} />
     </p>
     {headline && (
-      <p class="m-0 flex flex-wrap items-baseline gap-x-3">
+      <p class="m-0 mt-auto pt-4">
         <span class="sr-only">{projectCardLabels.result}: </span>
         <span
           class:list={[
-            "font-display text-h3 tabular-nums",
+            "block font-display text-h1 tabular-nums",
             accent ? "text-accent" : "text-ink",
           ]}
         >
           {headline.value}
         </span>
-        <span class="text-muted">
+        <span class="mt-1 block text-muted">
           <HyphenSafeText text={headline.detail} />
         </span>
       </p>
     )}
-    <div class="mt-2">
+    <div class="mt-4">
       <ProjectLinks project={project} />
     </div>
   </div>
-  <ProjectThumb project={project} eager={eager} />
 </article>
