@@ -159,5 +159,5 @@
 
 ## External links and print
 
-- Every link that leaves the site now opens in a new tab with `rel="noopener noreferrer"`, at Alan's request, through one helper (`newTabAttrs` in `src/data/links.ts`). Email links and links within the site still open in place. `npm test` fails if a built page has an external link without it.
+- Every link that leaves the site now opens in a new tab with `rel="noopener noreferrer"`, at Alan's request, through one helper (`newTabAttrs` in `src/data/links.ts`). The resume PDF opens in a new tab too, at Alan's request. Email links and other links within the site still open in place. `npm test` fails if a built page has an external link without it.
 - The whole case study is one `article`, and the print rule that keeps articles on one page pushed it past a nearly blank first page. The rule now skips the top level `main > article`, so printing starts with the case study on page one. Cards and list items still stay together.

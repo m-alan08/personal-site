@@ -8,7 +8,7 @@ export const links = {
 };
 
 export function newTabAttrs(href: string) {
-  return /^https?:\/\//.test(href)
+  return /^https?:\/\/|\.pdf$/.test(href)
     ? { target: "_blank", rel: "noopener noreferrer" }
     : {};
 }
