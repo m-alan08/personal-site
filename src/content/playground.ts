@@ -23,7 +23,7 @@ export const playgroundCopy = {
     latency: "Decision time",
     running: "Running",
   },
-  explore: "Explore the controller",
+  explore: "How it works",
   controllerLegend: "Controller",
   controllers: {
     policy: "Learned policy (SAC + HER)",
