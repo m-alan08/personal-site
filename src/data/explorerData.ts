@@ -122,7 +122,7 @@ export const explorerCopy = {
   bitsLabel: "Bit width",
   bitsHeading: "Bits",
   successLabel: "Success rate",
-  tableNote: "Mean over 3 seeds, lowest and highest seed below each value.",
+  tableNote: "Mean over 3 seeds, lowest and highest seed in parentheses.",
   chartCaption:
     "Success rate at every bit width for the selected task. The bright line is the selected method and the grey lines are the other two.",
   sourceLabel: "Source: quantrl-fetch key results on GitHub",

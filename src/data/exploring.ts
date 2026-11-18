@@ -19,14 +19,6 @@ export interface Thread {
   readings: Reading[];
 }
 
-export const exploringIntro = "What I'm reading and working through right now.";
-
-export const exploringLabels = {
-  updated: "Updated",
-  directions: "Directions",
-  reading: "Reading",
-};
-
 export const staleAfterDays = 120;
 
 export const threads: Thread[] = [

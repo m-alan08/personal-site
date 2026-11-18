@@ -267,6 +267,7 @@ async function checkHeroAndAnchors() {
     for (const id of [
       "about",
       "projects",
+      "exploring",
       "research",
       "writing",
       "experience",

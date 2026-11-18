@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import type { Project } from "../data/projects";
+interface Props {
+  project: Project;
+  eager?: boolean;
+  flush?: boolean;
+  sizes?: string;
+}
+const {
+  project,
+  eager = false,
+  flush = false,
+  sizes = "(min-width: 1024px) 24rem, 100vw",
+} = Astro.props;
+const media = project.cardImage
+  ? { src: project.cardImage.src, alt: project.cardImage.alt, fit: "cover" }
+  : project.image;
+const paper = !project.cardImage && project.image?.tone === "paper";
+---
+
+{media && (
+  <div
+    class:list={[
+      "relative aspect-[16/10] overflow-hidden",
+      flush ? "border-b border-hairline" : "rounded-lg border border-hairline",
+      paper ? "bg-paper" : "bg-raised",
+    ]}
+  >
+    <Image
+      src={media.src}
+      alt={media.alt}
+      widths={[320, 480, 640, 960]}
+      sizes={sizes}
+      format="webp"
+      quality={78}
+      loading={eager ? "eager" : "lazy"}
+      class:list={[
+        "block size-full",
+        media.fit === "contain" ? "object-contain" : "object-cover object-top",
+      ]}
+    />
+  </div>
+)}

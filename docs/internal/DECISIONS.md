@@ -161,3 +161,11 @@
 
 - Every link that leaves the site now opens in a new tab with `rel="noopener noreferrer"`, at Alan's request, through one helper (`newTabAttrs` in `src/data/links.ts`). The resume PDF opens in a new tab too, at Alan's request. Email links and other links within the site still open in place. `npm test` fails if a built page has an external link without it.
 - The whole case study is one `article`, and the print rule that keeps articles on one page pushed it past a nearly blank first page. The rule now skips the top level `main > article`, so printing starts with the case study on page one. Cards and list items still stay together.
+
+## Simpler home page
+
+- After the hero the home page keeps four blocks and the footer: the playground, Now and previously, Selected projects and Writing. About, the current work strip, Experience, Currently exploring, the explorer and the Contact section are gone from it. Their facts live in Now and previously, Writing, the footer and `/projects/`.
+- `playground.ts` stays untouched, so the controls it needs (controller toggle, replay, the 100 target run, depth slider, steps and decision time readouts, comparison table) stay in the page inside the closed How it works toggle.
+- `/projects/` becomes a real page instead of a redirect. Old `#about`, `#exploring` and `#research` links resolve through invisible anchors.
+- Body copy after the hero is 18px or more, and no text on any page is under 13px. The hero keeps its smaller label and availability sizes because it must not change.
+- Experience summaries and metrics, thread questions and readings, and writing notes stay in the data files even though the home page no longer shows them, since they are source facts rather than layout.

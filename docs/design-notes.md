@@ -4,9 +4,9 @@ Shared design foundation for every redesign task. Tokens live in `tailwind.confi
 
 ## Design idea
 
-A calm, editorial lab notebook. The page is a dark field ruled by hairlines, lit by a warm ember glow that rises from above the fold and fades into the canvas (see the Atmosphere section below). Every section opens with a numbered header (`01` to `06`), and content sits in open space rather than nested boxes.
+A calm, editorial lab notebook. The page is a dark field ruled by hairlines, lit by a warm ember glow that rises from above the fold and fades into the canvas (see the Atmosphere section below). Every section opens with a plain heading, and content sits in open space rather than nested boxes.
 
-Structure carries the hierarchy: index numbers, rules, whitespace and type contrast. Boxes, chips and color are reserved for things that need them.
+Structure carries the hierarchy: rules, whitespace and type contrast. Boxes, chips and color are reserved for things that need them.
 
 ## Theme
 
@@ -70,21 +70,20 @@ In practice the one accent element per section is: the hero availability line (h
 
 The ember glow is the one permitted decorative use of warm color. It uses the `glow` token (a deep crimson, darker than `accent`), rendered by `Atmosphere.astro`: a fixed-height, absolute layer behind all content, painted once per page. The core is three stacked radials, each built from eight to ten eased alpha stops so every edge fades perfectly smoothly (tight core peaking near 0.4, wider falloff near 0.22, faint outer fringe near 0.09), all in the same `glow` color, over the chrome to canvas fade. There are no hard stops or repeating gradients anywhere in the atmosphere; `atmosphere-grain` adds a fine inline-SVG noise tile at 0.05 opacity to prevent banding.
 
-The glow may appear in exactly seven places:
+The glow may appear in exactly six places:
 
 1. The hero atmosphere layer (the strongest, roughly 0.13 to 0.34 layer opacity)
 2. A faint warm pool behind the playground stage (`atmo-pool`, around 0.11)
 3. The playground robot's eye and its halo (solid `glow` pupil, radial halo fading to transparent)
-4. The warm left segment of numbered section rules (`atmo-rule`, up to 0.5 at the tip fading to transparent)
-5. A low warm horizon at the footer (`atmo-footer`, around 0.13)
-6. A warm shadow on the hover and focus state of primary buttons and the hero buttons
-7. A soft radial halo behind the hero portrait (`atmo-portrait`, around 0.42 at the center fading to transparent)
+4. A low warm horizon at the footer (`atmo-footer`, around 0.13)
+5. A warm shadow on the hover and focus state of primary buttons and the hero buttons
+6. A soft radial halo behind the hero portrait (`atmo-portrait`, around 0.42 at the center fading to transparent)
 
-Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, portrait, footer and rule echoes dim or disappear.
+Nothing else may use `glow` or any other warm decorative tint. The layer is `aria-hidden`, `pointer-events: none`, never prints, and renders fully without JavaScript. Under `prefers-reduced-motion` the breathing animation is off. Under `prefers-contrast: more` the whole layer drops to 0.45 opacity and the pool, portrait and footer echoes dim or disappear.
 
 ## Section system
 
-Every home page section uses `Section.astro`: a hairline top rule, a header row (two-digit index for the six documented sections, or an uppercase eyebrow for feature sections, above an `text-h2` title), then full-width content. An optional `aside` slot sits on the right of the header row. Sections never stack headings in a side rail or use one-off header styles.
+Every home page section uses `Section.astro`: a hairline top rule, a header row (an optional uppercase eyebrow above a `text-h2` title, with no section numbers), then full-width content. Contact lives in the footer, which carries the `contact` anchor. Detail that most visitors skip sits in a closed native `details` toggle labelled How it works. An optional `aside` slot sits on the right of the header row. Sections never stack headings in a side rail or use one-off header styles.
 
 ## Interactive states
 

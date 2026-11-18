@@ -346,3 +346,7 @@ Added `CaseStudyAside.astro`, a sticky right column card on case study pages fro
 ### External links in new tabs and print first page
 
 External links in buttons, text links, social icons, Contact, Writing and case study headers open in a new tab, guarded by a new `npm test` check over the built HTML. Printed case studies no longer start with a mostly blank page.
+
+### Simpler home page and projects page
+
+The home page drops from nine blocks after the hero to four plus the footer, and from 1,241 to 341 visible words after the hero. Selected projects are single rows, Writing absorbs Currently exploring, and contact moves into the footer with one email and four links. `/projects/` lists all five projects with closed How it works toggles that hold the approach steps, the FetchReach bit width chart and the explorer. Explorer cells now read `100.0 (100 to 100)`. The navigation has four links and the phone menu has no numbers.

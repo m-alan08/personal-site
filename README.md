@@ -50,10 +50,10 @@ Facts that are missing or unconfirmed are listed in [docs/internal/content-open-
 ## Content
 
 - `src/content/profile.ts`: introduction, about copy, writing links, and experience.
-- `src/data/exploring.ts`: the Currently exploring threads, their status, updated date and readings.
+- `src/data/exploring.ts`: the exploring threads listed under Writing, their status, updated date and readings.
 - `src/content/site.ts`: site metadata, section labels, and shared labels.
 - `src/data/sections.ts`: home page section order used by navigation.
-- `src/data/redirects.ts`: legacy `/about/`, `/contact/`, `/resume/` and `/projects/` redirects to home page anchors.
+- `src/data/redirects.ts`: legacy `/about/`, `/contact/` and `/resume/` redirects to home page anchors.
 - `src/data/links.ts`: GitHub, X, LinkedIn, personal and Georgia Tech email, resume file, and the derived `socialLinks` list.
 - `src/data/explorerData.ts`: quantrl-fetch success rates for the bit-width explorer, copied cell by cell from the README key results tables, with a `source` URL per dataset. Missing cells are `null` and show as "Not measured".
 - `src/data/projects.ts`: the uniform project shape, categories, events, case studies, ownership, verified tools, diagrams, and sources.
@@ -61,17 +61,17 @@ Facts that are missing or unconfirmed are listed in [docs/internal/content-open-
 - `src/components/`: shared Astro components.
 - `src/layouts/BaseLayout.astro`: head tags and page landmarks.
 
-The home page is a single page with About, Projects, Currently exploring, Writing, Experience and Contact sections. Each project also has a case study at `/projects/<slug>/`. Projects with `featured: false` appear in a compact list below the featured ones, sorted by `order`.
+After the hero, the home page has the robot playground, Now and previously, Selected projects, Writing and a footer with contact. Selected projects shows the three finished featured projects as single rows. `/projects/` lists every project, each with a closed How it works toggle, and each project also has a case study at `/projects/<slug>/`.
 
 All project additions go in `projects.ts`. Do not invent credentials, results, or links. Unconfirmed content is tracked in `docs/internal/content-open-questions.md`.
 
 ## Currently exploring
 
-The Currently exploring section (`#exploring`) renders the threads in `src/data/exploring.ts`. Old `#research` links land on it through an invisible anchor. Each thread is an open question with a status (`Reading`, `Looking for gaps` or `Sketching`), an `updated` date and a `readings` list. A thread's reading list only appears once it has entries, and every reading needs a real title, authors, year and URL from Alan.
+The Writing section (`#writing`) lists each thread in `src/data/exploring.ts` as one line after the writing links. Old `#exploring` and `#research` links land on it through invisible anchors. Each thread is an open question with a status (`Reading`, `Looking for gaps` or `Sketching`), an `updated` date and a `readings` list. A thread's reading list only appears once it has entries, and every reading needs a real title, authors, year and URL from Alan.
 
 `npm run build` fails if any thread's `updated` date is missing, not a `YYYY-MM-DD` date, in the future, or more than 120 days old. The error names the thread. To refresh it, review the thread (question, status, directions and readings), edit anything that changed, then set its `updated` field in `src/data/exploring.ts` to today's date and rebuild.
 
-The home page has one interactive component, the bit-width explorer in `src/components/sections/Explorer.astro`, placed after Currently exploring. The server renders a static table of every result, so it works without JavaScript. When the section scrolls into view, a small lazy script replaces the table with a slider, task and method toggles, and an inline SVG chart. It has no navigation entry.
+The bit-width explorer in `src/components/ExplorerPanel.astro` sits inside a closed toggle on the quantrl-fetch row of `/projects/`. The server renders a static table of every result, each cell reading mean then lowest to highest seed in parentheses, so it works without JavaScript. Once the browser is idle, a small lazy script replaces the table with a slider, task and method toggles, and an inline SVG chart. On the home page, the robot playground shows only the stage, the precision menu and the distance readout. Its other controls and the comparison table sit in a closed How it works toggle.
 
 ## Static hosting
 
@@ -160,7 +160,7 @@ With the production preview running, `npm run audit:lighthouse` audits every ind
 
 ## Smoke tests
 
-After `npm run build`, `npm test` runs the search and sharing check described above, then serves dist on an ephemeral loopback port and uses Playwright to test every generated page and the 404. It checks HTTP responses, one h1, browser errors, the six section anchors in order (`about`, `projects`, `exploring`, `writing`, `experience`, `contact`) and navigation, the old `#research` anchor landing on `#exploring`, project case study links, and the four legacy redirects. It also drives the robot playground: the policy weights must not load before a visitor shows intent, a click must end in a reach, a target under the table must be refused, and the 100-target benchmark in the browser must match the exported result. Before the browser tests, `scripts/test-policy.mjs` checks the browser actor against PyTorch reference actions for every precision. An existing Chrome installation works locally. Otherwise install the pinned package's browser with `npx playwright-core install chromium`; CI also installs its system dependencies.
+After `npm run build`, `npm test` runs the search and sharing check described above, then serves dist on an ephemeral loopback port and uses Playwright to test every generated page and the 404. It checks HTTP responses, one h1, browser errors, the four navigation links, the home section order after the hero with the removed sections absent, at most one h2 per block, fewer words after the hero than the recorded baseline, every project on `/projects/`, every How it works toggle closed by default and showing its chart, table or steps when opened, the old anchors (`about`, `exploring`, `research` and the rest) landing on the nearest section, the three legacy redirects, body copy on the home page and `/projects/` at 18px or more, no text under 13px on any page, and the hero HTML and computed styles matching `scripts/fixtures/home-baseline.json`. It also drives the robot playground: the policy weights must not load before a visitor shows intent, a click must end in a reach, a target under the table must be refused, and the 100-target benchmark in the browser must match the exported result. Before the browser tests, `scripts/test-policy.mjs` checks the browser actor against PyTorch reference actions for every precision. An existing Chrome installation works locally. Otherwise install the pinned package's browser with `npx playwright-core install chromium`; CI also installs its system dependencies.
 
 Last, `scripts/test-guards.mjs` fails with a plain-English message when an em or en dash appears in `src` or `docs`, when authored source gains a code comment, when an external link in `src/data` or `src/content` is malformed, when the hero loses its name, intro, buttons or portrait, when anything other than the portrait enters the right third of the hero at 1440px, or when a header section link points to a missing anchor.
 

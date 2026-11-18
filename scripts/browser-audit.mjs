@@ -292,13 +292,16 @@ try {
     "wheel scrolling stays native",
   );
   await page.emulateMedia({ media: "print", colorScheme: "dark" });
-  for (const selector of ["header", "footer"])
-    assert.equal(
-      await page
-        .locator(selector)
-        .evaluate((element) => getComputedStyle(element).display),
-      "none",
-    );
+  assert.equal(
+    await page
+      .locator("header")
+      .evaluate((element) => getComputedStyle(element).display),
+    "none",
+  );
+  assert.ok(
+    await page.locator('footer a[href^="mailto:"]').isVisible(),
+    "the printed page keeps the contact email",
+  );
   assert.equal(
     await page
       .locator("body")

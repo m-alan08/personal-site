@@ -11,6 +11,12 @@ export interface SharePage {
 
 export const sharePages: SharePage[] = [
   { path: "", slug: "home", title: site.name, description: site.description },
+  {
+    path: "projects/",
+    slug: "projects",
+    title: site.allProjects,
+    description: site.allProjectsDescription,
+  },
   ...projects.map((project) => ({
     path: `projects/${project.slug}/`,
     slug: `projects-${project.slug}`,

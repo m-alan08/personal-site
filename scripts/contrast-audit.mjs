@@ -4,7 +4,11 @@ import { browserOptions } from "./test-server.mjs";
 
 const origin = process.env.QA_ORIGIN || "http://127.0.0.1:4322";
 const scanHeight = 1400;
-const pages = ["/personal-site/", "/personal-site/projects/quantrl-fetch/"];
+const pages = [
+  "/personal-site/",
+  "/personal-site/projects/",
+  "/personal-site/projects/quantrl-fetch/",
+];
 const widths = [390, 1440];
 const minimum = 4.5;
 

@@ -6,3 +6,4 @@ AGENTS.md
 package-lock.json
 public/models/
 scripts/policy/*.json
+scripts/fixtures/

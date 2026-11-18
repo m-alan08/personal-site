@@ -1,0 +1,65 @@
+---
+import type { Project } from "../data/projects";
+import { projectLink } from "../data/links";
+import { playgroundCopy } from "../content/playground";
+import { explorerCopy } from "../data/explorerData";
+import ExplorerPanel from "./ExplorerPanel.astro";
+import HowItWorks from "./HowItWorks.astro";
+import HyphenSafeText from "./HyphenSafeText.astro";
+import ProjectChart from "./ProjectChart.astro";
+import ProjectLinks from "./ProjectLinks.astro";
+import ProjectThumb from "./ProjectThumb.astro";
+interface Props {
+  project: Project;
+  eager?: boolean;
+}
+const { project, eager = false } = Astro.props;
+const meta = [project.status, project.event?.dates].filter(Boolean).join(", ");
+const hasExplorer = project.slug === "quantrl-fetch";
+---
+
+<article
+  id={project.slug}
+  data-project-entry
+  class="grid scroll-mt-8 gap-6 border-t border-hairline py-10 first:border-t-0 first:pt-0 sm:scroll-mt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-12"
+>
+  <div class="grid min-w-0 content-start gap-3">
+    <h2 class="m-0 text-h3 text-ink">
+      <a
+        href={projectLink(project.slug)}
+        class="inline-block py-2 transition-colors duration-150 hover:text-accent motion-reduce:transition-none"
+      >
+        <HyphenSafeText text={project.title} />
+      </a>
+    </h2>
+    <p class="m-0 text-label uppercase text-muted">{meta}</p>
+    <p class="m-0 max-w-reading text-muted">
+      <HyphenSafeText text={project.summary} />
+    </p>
+    <div class="mt-2">
+      <ProjectLinks project={project} />
+    </div>
+  </div>
+  <ProjectThumb project={project} eager={eager} />
+  <div class="grid lg:col-span-2">
+    <HowItWorks summary={playgroundCopy.explore} data-how-it-works>
+      <ol class="grid max-w-reading list-decimal gap-3 pl-6 text-muted">
+        {project.approach.map((step) => (
+          <li>
+            <HyphenSafeText text={step} />
+          </li>
+        ))}
+      </ol>
+      {project.cardChart && (
+        <div data-how-chart class="mt-6 max-w-[40rem]">
+          <ProjectChart chart={project.cardChart} />
+        </div>
+      )}
+    </HowItWorks>
+    {hasExplorer && (
+      <HowItWorks summary={explorerCopy.title} data-how-it-works>
+        <ExplorerPanel />
+      </HowItWorks>
+    )}
+  </div>
+</article>

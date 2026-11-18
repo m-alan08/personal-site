@@ -1,7 +1,7 @@
 export const chartFrame = {
   width: 360,
   height: 196,
-  left: 44,
+  left: 52,
   right: 16,
   top: 12,
   bottom: 164,

@@ -1,0 +1,21 @@
+---
+import { playgroundCopy as copy } from "../../content/playground";
+interface Props {
+  metrics: { key: string; label: string }[];
+}
+const { metrics } = Astro.props;
+---
+
+<dl class="flex flex-wrap gap-x-8 gap-y-1">
+  {metrics.map((metric) => (
+    <div class="flex items-baseline gap-2.5">
+      <dt class="text-label uppercase text-muted">{metric.label}</dt>
+      <dd
+        data-metric={metric.key}
+        class="font-mono text-small tabular-nums text-ink"
+      >
+        {copy.notYet}
+      </dd>
+    </div>
+  ))}
+</dl>
